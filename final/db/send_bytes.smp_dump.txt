@@ -1,0 +1,8 @@
+
+State Machine - |send_bytes|state
+Name state.T1L state.T0L state.T1H state.T0H state.R 
+state.T0H 0 0 0 0 0 
+state.T1H 0 0 1 1 0 
+state.T0L 0 1 0 1 0 
+state.T1L 1 0 0 1 0 
+state.R 0 0 0 1 1 

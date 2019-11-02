@@ -1,0 +1,78 @@
+module send_bytes(input logic clk, done, reset,
+                  input logic [1535:0] data,
+                  output logic datastream);
+
+  // counter logic
+  logic [11:0] counterval;
+  logic [1535:0] bitcounter;
+  logic [11:0] count;
+
+  // control logic
+  logic currentbit;
+  logic [2:0] s;
+  logic reset_counter;
+
+  // state type
+  typedef enum [2:0] {T0H, T1H, TOL, T1L, R} state, nextstate;
+
+  // register for main counter
+  always_ff @(posedge clk)
+    if (reset | resetcounter) count <= 0;
+    else if (~done) <= count+1;
+
+  // register for bitcounter
+  always_ff @(posedge clk)
+    if (reset) bitcounter <= 0;
+    else if (resetcounter & ~done) bitcounter <= bitcounter+1;
+
+  // register for FSM
+  always_ff @(posedge clk)
+    if (reset) begin
+      if (currentbit) state <= T1H;
+      else (state <= T0H);
+    end
+    else state <= nextstate;
+
+  // nextstate logic
+  always_comb
+    case (state)
+      T0H: if (reset_counter) nextstate = T0H;
+           else nextstate = T0L;
+      T1H: if (reset_counter) nextstate = T1H;
+           else nextstate = T1L;
+      T0L: if (!reset_counter) nextstate = T0L;
+           else if (currentbit) nextstate = T1H;
+           else nextstate = T0H;
+      T1L: if (!reset_counter) nextstate = T1L;
+           else if (currentbit) nextstate = T1H;
+           else nextstate = T0H;
+      R:   if (!reset_counter) nextstate = R;
+           else if (bitcounter == 11d'1536) nextstate = R;
+           else if (currentbit) nextstate = T1H;
+           else nextstate = T0H;
+      default: nextstate = R;
+    endcase
+
+  assign currentbit = data[bitcounter];
+  assign reset_counter = (count == counterval)
+  assign datastream = (state == T1H)|(state == T0H);
+  assign s = {{state==R},(state==T0L)|(state==T1L), (state==T0H)|(state==T1H)};
+  countervalmux cntrvalmux(s, counter);
+
+endmodule
+
+
+
+module countervalmux(input  logic  [2:0] s,
+                     output logic [10:0] out);
+
+  always_comb
+    case (s)
+      2'b000: out = 11'd16;
+      2'b001: out = 11'd32;
+      2'b010: out = 11'd34;
+      2'b011: out = 11'd18;
+      2'b100: out = 11'd2000;
+    endcase
+
+endmodule

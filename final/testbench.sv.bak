@@ -1,0 +1,63 @@
+/////////////////////////////////////////////
+// aes.sv
+// HMC E155 16 September 2015
+// bchasnov@hmc.edu, David_Harris@hmc.edu
+/////////////////////////////////////////////
+
+/////////////////////////////////////////////
+// testbench
+//   Tests AES with cases from FIPS-197 appendix
+/////////////////////////////////////////////
+
+module testbench();
+    logic clk, load, done, sck, sdi, sdo;
+    logic [127:0] key, plaintext, cyphertext, expected;
+	 logic [255:0] comb;
+    logic [8:0] i;
+    
+    // device under test
+    aes dut(clk, sck, sdi, sdo, load, done);
+    
+    // test case
+    initial begin   
+// Test case from FIPS-197 Appendix A.1, B
+        data   <= 24'b001100110011001100110011;
+		  reset  <= 1'b1;
+    end
+    
+    // generate clock and load signals
+    initial 
+        forever begin
+            clk = 1'b0; #5;
+            clk = 1'b1; #5;
+        end
+        
+    initial begin
+      i = 0;
+      load = 1'b1;
+    end 
+    
+	assign comb = {plaintext, key};
+    // shift in test vectors, wait until done, and shift out result
+    always @(posedge clk) begin
+      if (i == 256) load = 1'b0;
+      if (i<256) begin
+        #1; sdi = comb[255-i];
+        #1; sck = 1; #5; sck = 0;
+        i = i + 1;
+      end else if (done && i < 384) begin
+        #1; sck = 1; 
+        #1; cyphertext[383-i] = sdo;
+        #4; sck = 0;
+        i = i + 1;
+      end else if (i == 384) begin
+            if (cyphertext == expected)
+                $display("Testbench ran successfully");
+            else $display("Error: cyphertext = %h, expected %h",
+                cyphertext, expected);
+            $stop();
+      
+      end
+    end
+    
+endmodule
