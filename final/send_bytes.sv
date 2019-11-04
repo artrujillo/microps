@@ -3,28 +3,28 @@ module aes_spi(input  logic sck,
                input  logic sdi,
                output logic sdo,
                input  logic done,
-               output logic [23:0] key, plaintext,
-               input  logic [127:0] cyphertext);
+               output logic [23:0] orientation
+               input  logic [23:0] finished);
 
     logic         sdodelayed, wasdone;
-    logic [127:0] cyphertextcaptured;
+    logic [23:0] finishedcaptured;
                
     // assert load
-    // apply 256 sclks to shift in key and plaintext, starting with plaintext[0]
+    // apply 256 sclks to shift in key and plaintext, starting with orientation[0]
     // then deassert load, wait until done
-    // then apply 128 sclks to shift out cyphertext, starting with cyphertext[0]
+    // then apply 24 sclks to shift out cyphertext, starting with cyphertext[0]
     always_ff @(posedge sck)
-        if (!wasdone)  {plaintext, key} = {plaintext[126:0], key, sdi};
-        else           {plaintext, key} = {plaintext, key, sdi}; 
+        if (!wasdone)  {orientation} = {orientation[22:0], sdi};
+        else           {orientation} = {orientation, sdi}; 
     
     // sdo should change on the negative edge of sck
     always_ff @(negedge sck) begin
         wasdone = done;
-        sdodelayed = cyphertextcaptured[126];
+        sdodelayed = finishedcaptured[22];
     end
     
     // when done is first asserted, shift out msb before clock edge
-    assign sdo = (done & !wasdone) ? cyphertext[127] : sdodelayed;
+    assign sdo = (done & !wasdone) ? finished[23] : sdodelayed;
 endmodule
 */
 
