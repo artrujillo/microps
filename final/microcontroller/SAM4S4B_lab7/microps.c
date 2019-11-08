@@ -29,22 +29,24 @@ int setup_rot_encoder() {
 int main(void) {
 	uint16_t CW;
 	uint16_t CCW;
+	uint16_t pinCWLast;
+	uint16_t rotCW;
+	uint16_t rot;
 	samInit();
 	pioInit();
 	
-  CW = setup_rot_encoder();
+  pinCWLast = setup_rot_encoder();
 	
 	pioPinMode(ledCW, PIO_OUTPUT);
 	pioPinMode(ledCCW, PIO_OUTPUT);
 	pioDigitalWrite(ledCW, 0);
 	pioDigitalWrite(ledCCW, 0);
   while(1){
-      CW = pioDigitalRead(pinCW);
-		  CCW = pioDigitalRead(pinCCW);
-      if (CW != CCW){ // Means the knob is rotating
+      rot = pioDigitalRead(pinCW);
+      if (rot != pinCWLast){ // Means the knob is rotating
           // if the knob is rotating, we need to determine direction
             // We do that by reading pin B.
-          if (CW == 0) { // Means pin A Changed first ­ We're Rotating Clockwise
+          if (pioDigitalRead(pinCCW) != rot) { // Means pin A Changed first ­ We're Rotating Clockwise
 						pioDigitalWrite(ledCW, 1);
 						pioDigitalWrite(ledCCW, 0);
           } else { // Otherwise B changed first and we're moving CCW
