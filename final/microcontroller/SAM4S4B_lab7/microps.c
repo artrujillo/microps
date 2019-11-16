@@ -54,5 +54,6 @@ int main(void) {
 						pioDigitalWrite(ledCCW, 1);
           }
         }
+			pinCWLast = rot;
     }
 }
