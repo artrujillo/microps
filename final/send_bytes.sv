@@ -1,3 +1,153 @@
+module send_bytes(input logic clk, reset,
+			         output logic datastream);
+		
+	typedef enum logic [1:0] {switching, sending, over} statetype;
+	statetype state, nextstate;
+	
+	logic resetsb, done, red;
+	logic [23:0] data;
+	logic [8:0] count;
+	
+	make_data_stream mds(clk, resetsb, data, datastream, done);
+	
+	always_ff @(posedge clk)
+		if (reset) begin
+			state <= switching;
+			red <= 0;
+			count <= 0;
+		end
+		else begin
+			state <= nextstate;
+			if (state == sending) red <= ~red;
+			else count <= count+1;
+		end
+		
+	always_comb 
+		case (state)
+			switching: nextstate = sending;
+			sending:   if (count == 9'd65) nextstate = over;
+						  else if (done)     nextstate = switching;
+						  else               nextstate = sending;
+			over: 	  nextstate = over;
+			default:	  nextstate = over;
+						  
+		endcase
+	
+	assign resetsb = (state == switching);
+	//assign data = red ? 24'h00b000 : 24'h00f060; // BB, RR, GG
+	makesquares ms(clk, reset, resetsb, data);
+	
+	
+endmodule
+
+
+module makesquares(input  logic clk, reset, switchcolor,
+						 output logic[23:0] color);
+			
+	logic [3:0] count;
+	logic [3:0] column, nextcolumn;
+	logic [3:0] row, nextrow;
+	
+	logic switchcolumn, oddcol;
+	
+	logic color1, color2, color3, color4, color5, color6, color7, color8, color9, blank;
+	logic [9:0] controlcolors;
+	
+	always_ff @(posedge clk)
+		if (reset) begin
+			row <= 4'd0;
+			column <= 4'd0;
+		end
+		else if (switchcolumn & switchcolor) column <= nextcolumn;
+		else if (switchcolor) row <= nextrow;
+	
+	
+	// two finite state machines, one switches cols, one switches rows
+	// goes through in a snakelike order, order in which LEDs are written
+	always_comb 
+		case (column)
+			4'd0: nextcolumn = 4'd1;
+			4'd1: nextcolumn = 4'd2;
+			4'd2: nextcolumn = 4'd3;
+			4'd3: nextcolumn = 4'd4;
+			4'd4: nextcolumn = 4'd5;
+			4'd5: nextcolumn = 4'd6;
+			4'd6: nextcolumn = 4'd7;
+			4'd7: nextcolumn = 4'd8;
+			4'd8: nextcolumn = 4'd8;
+			default: nextcolumn = 4'd8;
+		endcase
+		
+	always_comb
+		case (row)
+			4'd0: if (column == 4'd7) nextrow = 4'd8;
+					else if (oddcol) nextrow = 4'd0;
+					else 		        nextrow = 4'd1;
+			4'd1: if (oddcol)  	  nextrow = 4'd0;
+					else 				  nextrow = 4'd2;					
+			4'd2: if (oddcol)  	  nextrow = 4'd1;
+					else 				  nextrow = 4'd3;					
+			4'd3: if (oddcol)  	  nextrow = 4'd2;
+					else 				  nextrow = 4'd4;					
+			4'd4: if (oddcol)  	  nextrow = 4'd3;
+					else 				  nextrow = 4'd5;					
+			4'd5: if (oddcol)      nextrow = 4'd4;
+					else 				  nextrow = 4'd6;				
+			4'd6: if (oddcol)      nextrow = 4'd5;
+					else 				  nextrow = 4'd7;				
+			4'd7: if (oddcol)      nextrow = 4'd6;
+					else	 			  nextrow = 4'd7;
+			4'd8: nextrow = 4'd8;
+			default: nextrow = 4'd8;
+		endcase
+		
+	assign switchcolumn = (oddcol & (row == 4'd0)) | ((~oddcol) & (row == 4'd7));
+	
+	assign oddcol = (column == 4'd1)|(column == 4'd3)|(column == 4'd5)|(column == 4'd7);
+	assign blank = (row == 4'd2)|(row == 4'd5)|(column== 4'd5)|(column== 4'd2);
+	assign color1 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd0)|(column== 4'd1));
+	assign color2 = ((row == 4'd3)|(row == 4'd4))&((column== 4'd0)|(column== 4'd1));
+	assign color3 = ((row == 4'd6)|(row == 4'd7))&((column== 4'd0)|(column== 4'd1));
+	assign color4 = ((row == 4'd6)|(row == 4'd7))&((column== 4'd3)|(column== 4'd4));
+	assign color5 = ((row == 4'd3)|(row == 4'd4))&((column== 4'd3)|(column== 4'd4));
+	assign color6 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd3)|(column== 4'd4));
+	assign color7 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd6)|(column== 4'd7));
+	assign color8 = ((row == 4'd3)|(row == 4'd4))&((column== 4'd6)|(column== 4'd7));
+	assign color9 = ((row == 4'd6)|(row == 4'd7))&((column== 4'd6)|(column== 4'd7));
+	assign controlcolors = {blank, color9, color8, color7, color6, color5, color4, color3, color2, color1};
+	
+	colormux cm(controlcolors, color);
+		
+endmodule
+
+module colormux(input logic  [9:0] colorcontrol,
+					 output logic [23:0] color);
+	
+	// red   : 00b000
+	// orange: 00f060
+	// yellow: 00b0b0
+	// green : 0000b0
+	// blue  : b00000
+	// purple: b05000
+	
+	always_comb
+		case (colorcontrol)
+			10'b0000000001: color = 24'h00b000;
+			10'b0000000010: color = 24'h00f060;
+			10'b0000000100: color = 24'h00b0b0;
+			10'b0000001000: color = 24'h0000b0;
+			10'b0000010000: color = 24'hb00000;
+			10'b0000100000: color = 24'hb05000;
+			10'b0001000000: color = 24'h00b000;
+			10'b0010000000: color = 24'h00f060;
+			10'b0100000000: color = 24'h00b0b0;
+			10'b1000000000: color = 24'h000000;
+			default: color = 24'h000000;
+		endcase
+
+endmodule
+							
+
 /*
 module aes_spi(input  logic sck, 
                input  logic sdi,
@@ -28,15 +178,16 @@ module aes_spi(input  logic sck,
 endmodule
 */
 
+
 /////////////////////////////////////////////////////////////
 // Takes in 24-bit color data, outputs one bit that follows 
 // the pattern detailed here: 
 // https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
 // for 1s and 0s. Assumes a 40 MHz clock.
 /////////////////////////////////////////////////////////////
-module send_bytes(input logic clk, reset,
-                  input logic [23:0] data,
-                  output logic datastream, done);
+module make_data_stream(input logic clk, reset,
+                        input logic [23:0] data,
+                        output logic datastream, done);
 
   // counter logic
   logic [10:0] counterval;
@@ -95,10 +246,10 @@ module send_bytes(input logic clk, reset,
   // control signal logic 
   assign currentbit = data[bitcounter];
   assign nextbit = data[bitcounter+1];
-  assign done = (bitcounter == 5'd24 & resetcounter);
+  assign done = (bitcounter == 5'd24 & reset_counter);
   assign reset_counter = (count == counterval);
   assign incbitcounter = (state == T0L)|(state==T1L);
-  assign datastream = (state == T1H)|(state == T0H);
+  assign datastream = ((state == T1H)|(state == T0H))&(~reset);
   assign s = {{state==R},(state==T0L)|(state==T1L), (state==T1H)|(state==T1L)};
   countervalmux cntrvalmux(s, counterval);
 

@@ -10,17 +10,11 @@
 /////////////////////////////////////////////
 
 module testbench();
-    logic clk, reset, done, datastream;
-    logic [23:0] data;
+    logic clk, reset, datastream;
     
     // device under test
-    send_bytes dut(clk, reset, data, datastream, done);
-    
-    // test case
-    initial begin   
-// Test case from FIPS-197 Appendix A.1, B
-        data   <= 24'b001100110011001100110011;
-    end
+    send_bytes dut(clk, reset, datastream);
+
     
     // generate clock and load signals
     initial 
