@@ -112,7 +112,8 @@ out[10] <= s[2].DB_MAX_OUTPUT_PORT_TYPE
 
 |send_bytes|makesquares:ms
 clk => column~10.DATAIN
-clk => row~10.DATAIN
+clk => row~11.DATAIN
+reset => row.OUTPUTSELECT
 reset => row.OUTPUTSELECT
 reset => row.OUTPUTSELECT
 reset => row.OUTPUTSELECT
@@ -132,6 +133,7 @@ reset => column.OUTPUTSELECT
 reset => column.OUTPUTSELECT
 reset => column.OUTPUTSELECT
 switchcolor => always0.IN1
+switchcolor => row.OUTPUTSELECT
 switchcolor => row.OUTPUTSELECT
 switchcolor => row.OUTPUTSELECT
 switchcolor => row.OUTPUTSELECT

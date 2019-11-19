@@ -55,7 +55,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	
 	always_ff @(posedge clk)
 		if (reset) begin
-			row <= 4'd0;
+			row <= 4'd9;
 			column <= 4'd0;
 		end
 		else if (switchcolumn & switchcolor) column <= nextcolumn;
@@ -80,6 +80,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 		
 	always_comb
 		case (row)
+			4'd9: nextrow = 4'd0;
 			4'd0: if (column == 4'd7) nextrow = 4'd8;
 					else if (oddcol) nextrow = 4'd0;
 					else 		        nextrow = 4'd1;
@@ -103,7 +104,11 @@ module makesquares(input  logic clk, reset, switchcolor,
 		
 	assign switchcolumn = (oddcol & (row == 4'd0)) | ((~oddcol) & (row == 4'd7));
 	
+	
 	assign oddcol = (column == 4'd1)|(column == 4'd3)|(column == 4'd5)|(column == 4'd7);
+	
+	
+	// this is the correct way
 	assign blank = (row == 4'd2)|(row == 4'd5)|(column== 4'd5)|(column== 4'd2);
 	assign color1 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd0)|(column== 4'd1));
 	assign color2 = ((row == 4'd3)|(row == 4'd4))&((column== 4'd0)|(column== 4'd1));
@@ -114,8 +119,21 @@ module makesquares(input  logic clk, reset, switchcolor,
 	assign color7 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd6)|(column== 4'd7));
 	assign color8 = ((row == 4'd3)|(row == 4'd4))&((column== 4'd6)|(column== 4'd7));
 	assign color9 = ((row == 4'd6)|(row == 4'd7))&((column== 4'd6)|(column== 4'd7));
-	assign controlcolors = {blank, color9, color8, color7, color6, color5, color4, color3, color2, color1};
 	
+	/*
+	assign blank = (row == 4'd7)|(column == 4'd7)|(row == 4'd6)|(column == 4'd6);
+	assign color1 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd0)|(column== 4'd1));
+	assign color2 = ((row == 4'd2)|(row == 4'd3))&((column== 4'd0)|(column== 4'd1));
+	assign color3 = ((row == 4'd4)|(row == 4'd5))&((column== 4'd0)|(column== 4'd1));
+	assign color4 = ((row == 4'd4)|(row == 4'd5))&((column== 4'd2)|(column== 4'd3));
+	assign color5 = ((row == 4'd2)|(row == 4'd3))&((column== 4'd2)|(column== 4'd3));
+	assign color6 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd2)|(column== 4'd3));
+	assign color7 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd4)|(column== 4'd5));
+	assign color8 = ((row == 4'd2)|(row == 4'd3))&((column== 4'd4)|(column== 4'd5));
+	assign color9 = ((row == 4'd4)|(row == 4'd5))&((column== 4'd4)|(column== 4'd5));
+	*/
+	
+	assign controlcolors = {blank, color9, color8, color7, color6, color5, color4, color3, color2, color1};
 	colormux cm(controlcolors, color);
 		
 endmodule
