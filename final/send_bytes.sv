@@ -9,7 +9,7 @@ module send_bytes(input  logic clk,
 	logic [31:0] orientation;
 
 	rubiks_spi spi(sck, sdi, sdo, done, orientation);
-	rubiks_core core(clk, load, orientation, done);
+	rubiks_core core(clk, load, orientation, done, datastream);
 
 endmodule
 
@@ -41,9 +41,10 @@ endmodule
 
 module rubiks_core(input logic clk, reset,
 					input logic [31:0] orientation,
-					output logic datastream,)
+					output logic finished,
+					output logic datastream);
 		
-	typedef enum logic [1:0] {switching, sending, over} statetype;
+	typedef enum logic [1:0] {switching, sending, over, finish} statetype;
 	statetype state, nextstate;
 	
 	logic resetsb, done, red;
@@ -70,11 +71,13 @@ module rubiks_core(input logic clk, reset,
 			sending:   if (count == 9'd65) nextstate = over;
 						  else if (done)     nextstate = switching;
 						  else               nextstate = sending;
-			over: 	  nextstate = over;
-			default:	  nextstate = over;
+			over: 	  nextstate = finish;
+			finish:    nextstate = finish;
+			default:	  nextstate = finish;
 						  
 		endcase
 	
+	assign finished = (state == finish);
 	assign resetsb = (state == switching);
 	//assign data = red ? 24'h00b000 : 24'h00f060; // BB, RR, GG
 	makesquares ms(clk, reset, resetsb, data);
@@ -180,117 +183,36 @@ module makesquares(input  logic clk, reset, switchcolor,
 		
 endmodule
 
+module convert_orientation(input  logic  [2:0]  bit_value,
+									output logic  [23:0] hex_value);
+
+	always_comb
+		case (bit_value)
+			3'b000:  hex_value = 24'h00b000; // red
+			3'b001:  hex_value = 24'h00f060; // orange
+			3'b010:  hex_value = 24'h00b0b0; // yellow
+			3'b011:  hex_value = 24'h0000b0; // green
+			3'b100:  hex_value = 24'hb00000; // blue
+			3'b101:  hex_value = 24'hb05000; // purple
+			default: hex_value = 24'h000000; // blank
+		endcase
+									
+endmodule
+
 module colormux(input logic  [9:0] colorcontrol,
 				input logic [31:0] orientation,
 					 output logic [23:0] color);
 	logic [23:0] sqr1color, sqr2color, sqr3color, sqr4color, sqr5color, sqr6color, sqr7color, sqr8color, sqr9color;
 	
-	
-	// red   : h00b000
-	// orange: 00f060
-	// yellow: 00b0b0
-	// green : 0000b0
-	// blue  : b00000
-	// purple: b05000
-
-	always_comb
-		case (orientation[2:0])
-			3'b000:  sqr1color = 24'h00b000
-			3'b001:  sqr1color = 24'h00f060
-			3'b010:  sqr1color = 24'h00b0b0
-			3'b011:  sqr1color = 24'h0000b0
-			3'b100:  sqr1color = 24'hb00000
-			3'b101:  sqr1color = 24'hb05000
-			default: sqr1color = 24'h000000;
-		endcase
-
-	always_comb
-		case (orientation[5:3])
-			3'b000:  sqr2color = 24'h00b000
-			3'b001:  sqr2color = 24'h00f060
-			3'b010:  sqr2color = 24'h00b0b0
-			3'b011:  sqr2color = 24'h0000b0
-			3'b100:  sqr2color = 24'hb00000
-			3'b101:  sqr2color = 24'hb05000
-			default: sqr2color = 24'h000000;
-		endcase
-
-	always_comb
-		case (orientation[8:6])
-			3'b000:  sqr3color = 24'h00b000
-			3'b001:  sqr3color = 24'h00f060
-			3'b010:  sqr3color = 24'h00b0b0
-			3'b011:  sqr3color = 24'h0000b0
-			3'b100:  sqr3color = 24'hb00000
-			3'b101:  sqr3color = 24'hb05000
-			default: sqr3color = 24'h000000;
-		endcase
-	
-	always_comb
-		case (orientation[11:9])
-			3'b000:  sqr4color = 24'h00b000
-			3'b001:  sqr4color = 24'h00f060
-			3'b010:  sqr4color = 24'h00b0b0
-			3'b011:  sqr4color = 24'h0000b0
-			3'b100:  sqr4color = 24'hb00000
-			3'b101:  sqr4color = 24'hb05000
-			default: sqr4color = 24'h000000;
-		endcase
-	
-	always_comb
-		case (orientation[14:12])
-			3'b000:  sqr5color = 24'h00b000
-			3'b001:  sqr5color = 24'h00f060
-			3'b010:  sqr5color = 24'h00b0b0
-			3'b011:  sqr5color = 24'h0000b0
-			3'b100:  sqr5color = 24'hb00000
-			3'b101:  sqr5color = 24'hb05000
-			default: sqr5color = 24'h000000;
-		endcase
-	
-	always_comb
-		case (orientation[17:15])
-			3'b000:  sqr6color = 24'h00b000
-			3'b001:  sqr6color = 24'h00f060
-			3'b010:  sqr6color = 24'h00b0b0
-			3'b011:  sqr6color = 24'h0000b0
-			3'b100:  sqr6color = 24'hb00000
-			3'b101:  sqr6color = 24'hb05000
-			default: sqr6color = 24'h000000;
-		endcase
-	
-	always_comb
-		case (orientation[20:18])
-			3'b000:  sqr7color = 24'h00b000
-			3'b001:  sqr7color = 24'h00f060
-			3'b010:  sqr7color = 24'h00b0b0
-			3'b011:  sqr7color = 24'h0000b0
-			3'b100:  sqr7color = 24'hb00000
-			3'b101:  sqr7color = 24'hb05000
-			default: sqr7color = 24'h000000;
-		endcase
-	
-	always_comb
-		case (orientation[23:21])
-			3'b000:  sqr8color = 24'h00b000
-			3'b001:  sqr8color = 24'h00f060
-			3'b010:  sqr8color = 24'h00b0b0
-			3'b011:  sqr8color = 24'h0000b0
-			3'b100:  sqr8color = 24'hb00000
-			3'b101:  sqr8color = 24'hb05000
-			default: sqr8color = 24'h000000;
-		endcase
-	
-	always_comb
-		case (orientation[26:24])
-			3'b000:  sqr9color = 24'h00b000
-			3'b001:  sqr9color = 24'h00f060
-			3'b010:  sqr9color = 24'h00b0b0
-			3'b011:  sqr9color = 24'h0000b0
-			3'b100:  sqr9color = 24'hb00000
-			3'b101:  sqr9color = 24'hb05000
-			default: sqr9color = 24'h000000;
-		endcase
+	convert_orientation color1(orientation[2:0], sqr1color);
+	convert_orientation color2(orientation[5:3], sqr2color);
+	convert_orientation color3(orientation[8:6], sqr3color);
+	convert_orientation color4(orientation[11:9], sqr4color);
+	convert_orientation color5(orientation[14:12], sqr5color);
+	convert_orientation color6(orientation[17:15], sqr6color);
+	convert_orientation color7(orientation[20:18], sqr7color);
+	convert_orientation color8(orientation[23:21], sqr8color);
+	convert_orientation color9(orientation[26:24], sqr9color);
 	
 	always_comb
 		case (colorcontrol)

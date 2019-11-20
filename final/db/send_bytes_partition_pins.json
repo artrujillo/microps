@@ -4,15 +4,31 @@
 			"name" : "Top",
 			"pins" : [
 				{
+					"name" : "sdo",
+					"strict" : false
+				},
+				{
+					"name" : "done",
+					"strict" : false
+				},
+				{
 					"name" : "datastream",
 					"strict" : false
 				},
 				{
-					"name" : "reset",
+					"name" : "sck",
+					"strict" : false
+				},
+				{
+					"name" : "load",
 					"strict" : false
 				},
 				{
 					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "sdi",
 					"strict" : false
 				}
 			]
