@@ -2,10 +2,10 @@
 clk => clk.IN1
 sck => sck.IN1
 sdi => sdi.IN1
-sdo <= rubiks_spi:spi.port2
+sdo << rubiks_spi:spi.port2
 load => load.IN1
-done <= done.DB_MAX_OUTPUT_PORT_TYPE
-datastream <= rubiks_core:core.port4
+done << done.DB_MAX_OUTPUT_PORT_TYPE
+datastream << rubiks_core:core.port4
 
 
 |send_bytes|rubiks_spi:spi
@@ -259,38 +259,6 @@ switchcolor => row.OUTPUTSELECT
 switchcolor => row.OUTPUTSELECT
 switchcolor => row.OUTPUTSELECT
 switchcolor => row.OUTPUTSELECT
-orientation[0] => orientation[0].IN1
-orientation[1] => orientation[1].IN1
-orientation[2] => orientation[2].IN1
-orientation[3] => orientation[3].IN1
-orientation[4] => orientation[4].IN1
-orientation[5] => orientation[5].IN1
-orientation[6] => orientation[6].IN1
-orientation[7] => orientation[7].IN1
-orientation[8] => orientation[8].IN1
-orientation[9] => orientation[9].IN1
-orientation[10] => orientation[10].IN1
-orientation[11] => orientation[11].IN1
-orientation[12] => orientation[12].IN1
-orientation[13] => orientation[13].IN1
-orientation[14] => orientation[14].IN1
-orientation[15] => orientation[15].IN1
-orientation[16] => orientation[16].IN1
-orientation[17] => orientation[17].IN1
-orientation[18] => orientation[18].IN1
-orientation[19] => orientation[19].IN1
-orientation[20] => orientation[20].IN1
-orientation[21] => orientation[21].IN1
-orientation[22] => orientation[22].IN1
-orientation[23] => orientation[23].IN1
-orientation[24] => orientation[24].IN1
-orientation[25] => orientation[25].IN1
-orientation[26] => orientation[26].IN1
-orientation[27] => orientation[27].IN1
-orientation[28] => orientation[28].IN1
-orientation[29] => orientation[29].IN1
-orientation[30] => orientation[30].IN1
-orientation[31] => orientation[31].IN1
 color[0] <= colormux:cm.port2
 color[1] <= colormux:cm.port2
 color[2] <= colormux:cm.port2

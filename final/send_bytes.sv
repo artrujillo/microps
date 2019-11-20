@@ -80,13 +80,14 @@ module rubiks_core(input logic clk, reset,
 	assign finished = (state == finish);
 	assign resetsb = (state == switching);
 	//assign data = red ? 24'h00b000 : 24'h00f060; // BB, RR, GG
-	makesquares ms(clk, reset, resetsb, data);
+	//makesquares ms(clk, reset, resetsb, orientation, data);
+	 makesquares ms(clk, reset, resetsb, data);
 	
 endmodule
 
 
 module makesquares(input  logic clk, reset, switchcolor,
-					input logic [31:0] orientation,
+					//input logic [31:0] orientation,
 						 output logic[23:0] color);
 			
 	logic [3:0] count;
@@ -94,6 +95,10 @@ module makesquares(input  logic clk, reset, switchcolor,
 	logic [3:0] row, nextrow;
 	
 	logic switchcolumn, oddcol;
+	
+	logic [31:0] orientation;
+	
+	assign orientation = 32'b00000000001010011000100101100000;
 	
 	logic color1, color2, color3, color4, color5, color6, color7, color8, color9, blank;
 	logic [9:0] controlcolors;

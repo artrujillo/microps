@@ -29,7 +29,7 @@
 (DELAYFILE
   (SDFVERSION "2.1")
   (DESIGN "send_bytes")
-  (DATE "11/19/2019 22:55:48")
+  (DATE "11/20/2019 14:28:53")
   (VENDOR "Altera")
   (PROGRAM "Quartus Prime")
   (VERSION "Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition")
@@ -41,7 +41,7 @@
     (INSTANCE sdo\~output)
     (DELAY
       (ABSOLUTE
-        (PORT i (914:914:914) (787:787:787))
+        (PORT i (626:626:626) (535:535:535))
         (IOPATH i o (3157:3157:3157) (3105:3105:3105))
       )
     )
@@ -51,7 +51,7 @@
     (INSTANCE done\~output)
     (DELAY
       (ABSOLUTE
-        (PORT i (1595:1595:1595) (1404:1404:1404))
+        (PORT i (1667:1667:1667) (1503:1503:1503))
         (IOPATH i o (3157:3157:3157) (3105:3105:3105))
       )
     )
@@ -61,7 +61,7 @@
     (INSTANCE datastream\~output)
     (DELAY
       (ABSOLUTE
-        (PORT i (1359:1359:1359) (1217:1217:1217))
+        (PORT i (1212:1212:1212) (1135:1135:1135))
         (IOPATH i o (3157:3157:3157) (3105:3105:3105))
       )
     )
@@ -72,25 +72,6 @@
     (DELAY
       (ABSOLUTE
         (IOPATH i o (764:764:764) (811:811:811))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_io_ibuf")
-    (INSTANCE sdi\~input)
-    (DELAY
-      (ABSOLUTE
-        (IOPATH i o (764:764:764) (811:811:811))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE spi\|orientation\[0\]\~feeder)
-    (DELAY
-      (ABSOLUTE
-        (PORT datad (3276:3276:3276) (3508:3508:3508))
-        (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
   )
@@ -114,12 +95,12 @@
   )
   (CELL
     (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|count\[0\]\~11)
+    (INSTANCE core\|count\[0\]\~10)
     (DELAY
       (ABSOLUTE
-        (PORT dataa (345:345:345) (432:432:432))
-        (IOPATH dataa combout (471:471:471) (472:472:472))
-        (IOPATH dataa cout (552:552:552) (416:416:416))
+        (PORT datab (341:341:341) (423:423:423))
+        (IOPATH datab combout (472:472:472) (473:473:473))
+        (IOPATH datab cout (565:565:565) (421:421:421))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -135,25 +116,53 @@
   )
   (CELL
     (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|count\[8\]\~10)
+    (INSTANCE core\|mds\|bitcounter\[0\]\~7)
     (DELAY
       (ABSOLUTE
-        (PORT datac (3606:3606:3606) (3792:3792:3792))
-        (PORT datad (333:333:333) (408:408:408))
-        (IOPATH datac combout (324:324:324) (316:316:316))
+        (PORT dataa (379:379:379) (469:469:469))
+        (IOPATH dataa combout (471:471:471) (472:472:472))
+        (IOPATH dataa cout (552:552:552) (416:416:416))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
   )
   (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|count\[0\])
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|bitcounter\[2\]\~11)
     (DELAY
       (ABSOLUTE
-        (PORT clk (1608:1608:1608) (1643:1643:1643))
+        (PORT dataa (404:404:404) (501:501:501))
+        (IOPATH dataa combout (471:471:471) (472:472:472))
+        (IOPATH dataa cout (552:552:552) (416:416:416))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+        (IOPATH cin cout (73:73:73) (73:73:73))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|bitcounter\[3\]\~13)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (414:414:414) (529:529:529))
+        (IOPATH dataa combout (461:461:461) (481:481:481))
+        (IOPATH dataa cout (552:552:552) (416:416:416))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+        (IOPATH cin cout (73:73:73) (73:73:73))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|bitcounter\[3\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1594:1594:1594) (1631:1631:1631))
         (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (4277:4277:4277) (4507:4507:4507))
-        (PORT ena (1088:1088:1088) (1080:1080:1080))
+        (PORT sclr (1952:1952:1952) (2056:2056:2056))
+        (PORT ena (1082:1082:1082) (1076:1076:1076))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -165,10 +174,2450 @@
   )
   (CELL
     (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|count\[1\]\~13)
+    (INSTANCE core\|mds\|bitcounter\[4\]\~16)
     (DELAY
       (ABSOLUTE
-        (PORT dataa (345:345:345) (435:435:435))
+        (PORT datab (404:404:404) (491:491:491))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|bitcounter\[4\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1594:1594:1594) (1631:1631:1631))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (1952:1952:1952) (2056:2056:2056))
+        (PORT ena (1082:1082:1082) (1076:1076:1076))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Equal0\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (403:403:403) (500:500:500))
+        (PORT datab (375:375:375) (464:464:464))
+        (PORT datac (360:360:360) (450:450:450))
+        (PORT datad (336:336:336) (416:416:416))
+        (IOPATH dataa combout (392:392:392) (398:398:398))
+        (IOPATH datab combout (393:393:393) (408:408:408))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Equal0\~1)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (287:287:287) (319:319:319))
+        (PORT datad (371:371:371) (478:478:478))
+        (IOPATH datab combout (472:472:472) (473:473:473))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|column\.0000\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT datad (3814:3814:3814) (4011:4011:4011))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|row\.0111\~3)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (584:584:584) (627:627:627))
+        (PORT datab (3474:3474:3474) (3700:3700:3700))
+        (PORT datac (851:851:851) (854:854:854))
+        (PORT datad (878:878:878) (842:842:842))
+        (IOPATH dataa combout (471:471:471) (453:453:453))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|column\~29)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (888:888:888) (890:890:890))
+        (PORT datad (3813:3813:3813) (4011:4011:4011))
+        (IOPATH datab combout (472:472:472) (473:473:473))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|column\.0010)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1595:1595:1595) (1631:1631:1631))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT ena (1305:1305:1305) (1252:1252:1252))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|column\~27)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (3417:3417:3417) (3660:3660:3660))
+        (PORT datad (897:897:897) (877:877:877))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|column\.0011)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1618:1618:1618) (1652:1652:1652))
+        (PORT asdata (899:899:899) (872:872:872))
+        (PORT ena (1436:1436:1436) (1401:1401:1401))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD asdata (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|column\~28)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (3722:3722:3722) (3910:3910:3910))
+        (PORT datad (588:588:588) (648:648:648))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|column\.0100)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1618:1618:1618) (1652:1652:1652))
+        (PORT asdata (1412:1412:1412) (1363:1363:1363))
+        (PORT ena (1436:1436:1436) (1401:1401:1401))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD asdata (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|column\~30)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (898:898:898) (879:879:879))
+        (PORT datad (3813:3813:3813) (4010:4010:4010))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|column\.0101)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1595:1595:1595) (1631:1631:1631))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT ena (1305:1305:1305) (1252:1252:1252))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|column\~25)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (385:385:385) (476:476:476))
+        (PORT datad (3817:3817:3817) (4015:4015:4015))
+        (IOPATH dataa combout (471:471:471) (472:472:472))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|column\.0110)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1595:1595:1595) (1631:1631:1631))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT ena (1305:1305:1305) (1252:1252:1252))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|column\~26)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (329:329:329) (413:413:413))
+        (PORT datad (3816:3816:3816) (4013:4013:4013))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|column\.0111)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1595:1595:1595) (1631:1631:1631))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT ena (1305:1305:1305) (1252:1252:1252))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|row\~28)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (936:936:936) (936:936:936))
+        (PORT datab (377:377:377) (464:464:464))
+        (PORT datac (1008:1008:1008) (1037:1037:1037))
+        (PORT datad (339:339:339) (420:420:420))
+        (IOPATH dataa combout (471:471:471) (453:453:453))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|row\~31)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (381:381:381) (477:477:477))
+        (PORT datac (788:788:788) (739:739:739))
+        (PORT datad (925:925:925) (907:907:907))
+        (IOPATH dataa combout (453:453:453) (446:446:446))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|row\~30)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (3419:3419:3419) (3663:3663:3663))
+        (PORT datad (255:255:255) (280:280:280))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|row\.0011)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1593:1593:1593) (1630:1630:1630))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (4388:4388:4388) (4621:4621:4621))
+        (PORT ena (1705:1705:1705) (1614:1614:1614))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|row\~34)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (413:413:413) (513:513:513))
+        (PORT datac (982:982:982) (981:981:981))
+        (PORT datad (875:875:875) (839:839:839))
+        (IOPATH dataa combout (471:471:471) (472:472:472))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|row\.0010)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1619:1619:1619) (1653:1653:1653))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (4077:4077:4077) (4376:4376:4376))
+        (PORT ena (1109:1109:1109) (1102:1102:1102))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|Selector1\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (393:393:393) (473:473:473))
+        (PORT datac (329:329:329) (415:415:415))
+        (PORT datad (874:874:874) (838:838:838))
+        (IOPATH datab combout (472:472:472) (473:473:473))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|row\.0001)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1619:1619:1619) (1653:1653:1653))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (4077:4077:4077) (4376:4376:4376))
+        (PORT ena (1109:1109:1109) (1102:1102:1102))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|row\.1001\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (3425:3425:3425) (3669:3669:3669))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|row\.1001)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1619:1619:1619) (1653:1653:1653))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT ena (1109:1109:1109) (1102:1102:1102))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|row\~26)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (412:412:412) (511:511:511))
+        (PORT datac (293:293:293) (371:371:371))
+        (PORT datad (874:874:874) (838:838:838))
+        (IOPATH dataa combout (405:405:405) (398:398:398))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|row\~29)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (880:880:880) (819:819:819))
+        (PORT datab (277:277:277) (302:302:302))
+        (PORT datad (254:254:254) (278:278:278))
+        (IOPATH dataa combout (405:405:405) (398:398:398))
+        (IOPATH datab combout (410:410:410) (408:408:408))
+        (IOPATH datac combout (462:462:462) (482:482:482))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|row\.0000)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1619:1619:1619) (1653:1653:1653))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (4077:4077:4077) (4376:4376:4376))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|row\~27)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (620:620:620) (656:656:656))
+        (PORT datab (412:412:412) (501:501:501))
+        (PORT datac (1309:1309:1309) (1286:1286:1286))
+        (PORT datad (875:875:875) (839:839:839))
+        (IOPATH dataa combout (421:421:421) (418:418:418))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|row\.0111\~2)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (279:279:279) (311:311:311))
+        (PORT datab (3472:3472:3472) (3698:3698:3698))
+        (PORT datad (256:256:256) (281:281:281))
+        (IOPATH dataa combout (448:448:448) (472:472:472))
+        (IOPATH datab combout (454:454:454) (473:473:473))
+        (IOPATH datac combout (462:462:462) (482:482:482))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|row\.0111)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1619:1619:1619) (1653:1653:1653))
+        (PORT d (99:99:99) (115:115:115))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|always0\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (2061:2061:2061) (1999:1999:1999))
+        (PORT datab (1690:1690:1690) (1668:1668:1668))
+        (PORT datac (787:787:787) (738:738:738))
+        (PORT datad (938:938:938) (924:924:924))
+        (IOPATH dataa combout (471:471:471) (453:453:453))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|column\~24)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (3718:3718:3718) (3906:3906:3906))
+        (PORT datad (238:238:238) (257:257:257))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|column\.0000)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1595:1595:1595) (1631:1631:1631))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT ena (1305:1305:1305) (1252:1252:1252))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|column\~23)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (613:613:613) (638:638:638))
+        (PORT datad (3815:3815:3815) (4013:4013:4013))
+        (IOPATH dataa combout (481:481:481) (491:491:491))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|column\.0001)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1595:1595:1595) (1631:1631:1631))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT ena (1305:1305:1305) (1252:1252:1252))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|oddcol\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (935:935:935) (936:936:936))
+        (PORT datab (377:377:377) (463:463:463))
+        (PORT datac (1008:1008:1008) (1037:1037:1037))
+        (PORT datad (340:340:340) (421:421:421))
+        (IOPATH dataa combout (471:471:471) (453:453:453))
+        (IOPATH datab combout (472:472:472) (452:452:452))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|row\~32)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (829:829:829) (783:783:783))
+        (PORT datab (987:987:987) (989:989:989))
+        (PORT datad (902:902:902) (879:879:879))
+        (IOPATH dataa combout (481:481:481) (491:491:491))
+        (IOPATH datab combout (472:472:472) (452:452:452))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|row\.0100)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1593:1593:1593) (1630:1630:1630))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (4388:4388:4388) (4621:4621:4621))
+        (PORT ena (1705:1705:1705) (1614:1614:1614))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|row\~35)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (380:380:380) (468:468:468))
+        (PORT datac (1928:1928:1928) (1909:1909:1909))
+        (PORT datad (876:876:876) (840:840:840))
+        (IOPATH datab combout (410:410:410) (408:408:408))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|row\.0101)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1619:1619:1619) (1653:1653:1653))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (4077:4077:4077) (4376:4376:4376))
+        (PORT ena (1109:1109:1109) (1102:1102:1102))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|row\~33)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (885:885:885) (892:892:892))
+        (PORT datab (412:412:412) (502:502:502))
+        (PORT datad (878:878:878) (842:842:842))
+        (IOPATH dataa combout (471:471:471) (472:472:472))
+        (IOPATH datab combout (410:410:410) (408:408:408))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|ms\|row\.0110)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1619:1619:1619) (1653:1653:1653))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (4077:4077:4077) (4376:4376:4376))
+        (PORT ena (1109:1109:1109) (1102:1102:1102))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|WideOr7\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (333:333:333) (424:424:424))
+        (PORT datad (366:366:366) (453:453:453))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|color7\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (325:325:325) (407:407:407))
+        (PORT datad (336:336:336) (419:419:419))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|color4\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (334:334:334) (425:425:425))
+        (PORT datad (612:612:612) (680:680:680))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|color2\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (339:339:339) (430:430:430))
+        (PORT datad (353:353:353) (430:430:430))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Selector8\~6)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (971:971:971) (897:897:897))
+        (PORT datab (933:933:933) (872:872:872))
+        (PORT datac (622:622:622) (624:624:624))
+        (PORT datad (309:309:309) (342:342:342))
+        (IOPATH dataa combout (448:448:448) (472:472:472))
+        (IOPATH datab combout (454:454:454) (473:473:473))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|color1\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (343:343:343) (421:421:421))
+        (PORT datad (320:320:320) (390:390:390))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Selector8\~7)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (368:368:368) (465:465:465))
+        (PORT datad (353:353:353) (429:429:429))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Selector8\~11)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (666:666:666) (677:677:677))
+        (PORT datab (664:664:664) (680:680:680))
+        (PORT datad (612:612:612) (679:679:679))
+        (IOPATH dataa combout (481:481:481) (491:491:491))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (462:462:462) (482:482:482))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Selector8\~12)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (599:599:599) (567:567:567))
+        (PORT datab (904:904:904) (908:908:908))
+        (PORT datac (615:615:615) (637:637:637))
+        (PORT datad (516:516:516) (517:517:517))
+        (IOPATH dataa combout (421:421:421) (428:428:428))
+        (IOPATH datab combout (432:432:432) (433:433:433))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Selector8\~8)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (278:278:278) (310:310:310))
+        (PORT datab (583:583:583) (547:547:547))
+        (PORT datac (866:866:866) (802:802:802))
+        (PORT datad (445:445:445) (418:418:418))
+        (IOPATH dataa combout (453:453:453) (413:413:413))
+        (IOPATH datab combout (473:473:473) (487:487:487))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|controlcolors\[9\]\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (369:369:369) (457:457:457))
+        (PORT datab (359:359:359) (435:435:435))
+        (PORT datac (865:865:865) (859:859:859))
+        (PORT datad (896:896:896) (875:875:875))
+        (IOPATH dataa combout (471:471:471) (453:453:453))
+        (IOPATH datab combout (472:472:472) (452:452:452))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~6)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1335:1335:1335) (1290:1290:1290))
+        (PORT datab (279:279:279) (304:304:304))
+        (PORT datac (885:885:885) (887:887:887))
+        (PORT datad (836:836:836) (783:783:783))
+        (IOPATH dataa combout (461:461:461) (481:481:481))
+        (IOPATH datab combout (455:455:455) (412:412:412))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|controlcolors\[6\]\~2)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1270:1270:1270) (1219:1219:1219))
+        (PORT datab (666:666:666) (682:682:682))
+        (PORT datac (606:606:606) (631:631:631))
+        (PORT datad (916:916:916) (909:909:909))
+        (IOPATH dataa combout (453:453:453) (472:472:472))
+        (IOPATH datab combout (454:454:454) (473:473:473))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|controlcolors\[1\]\~1)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (377:377:377) (471:471:471))
+        (PORT datab (391:391:391) (471:471:471))
+        (PORT datac (616:616:616) (637:637:637))
+        (PORT datad (862:862:862) (862:862:862))
+        (IOPATH dataa combout (471:471:471) (453:453:453))
+        (IOPATH datab combout (472:472:472) (452:452:452))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Equal2\~6)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (577:577:577) (547:547:547))
+        (PORT datab (954:954:954) (950:950:950))
+        (PORT datac (1226:1226:1226) (1171:1171:1171))
+        (PORT datad (514:514:514) (489:489:489))
+        (IOPATH dataa combout (481:481:481) (491:491:491))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Equal7\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (588:588:588) (603:603:603))
+        (PORT datab (343:343:343) (378:378:378))
+        (PORT datac (623:623:623) (624:624:624))
+        (PORT datad (573:573:573) (566:566:566))
+        (IOPATH dataa combout (421:421:421) (418:418:418))
+        (IOPATH datab combout (393:393:393) (408:408:408))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Equal7\~1)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (595:595:595) (562:562:562))
+        (PORT datab (348:348:348) (384:384:384))
+        (PORT datac (552:552:552) (547:547:547))
+        (PORT datad (239:239:239) (257:257:257))
+        (IOPATH dataa combout (392:392:392) (398:398:398))
+        (IOPATH datab combout (393:393:393) (408:408:408))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~7)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (927:927:927) (932:932:932))
+        (PORT datab (1354:1354:1354) (1285:1285:1285))
+        (PORT datad (273:273:273) (294:294:294))
+        (IOPATH dataa combout (405:405:405) (398:398:398))
+        (IOPATH datab combout (435:435:435) (433:433:433))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|controlcolors\[2\])
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (955:955:955) (960:960:960))
+        (PORT datab (932:932:932) (922:922:922))
+        (PORT datac (885:885:885) (860:860:860))
+        (PORT datad (534:534:534) (563:563:563))
+        (IOPATH dataa combout (432:432:432) (446:446:446))
+        (IOPATH datab combout (440:440:440) (462:462:462))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Equal2\~4)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (580:580:580) (551:551:551))
+        (PORT datab (337:337:337) (369:369:369))
+        (PORT datac (941:941:941) (899:899:899))
+        (PORT datad (513:513:513) (501:501:501))
+        (IOPATH dataa combout (481:481:481) (491:491:491))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Equal2\~5)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (596:596:596) (628:628:628))
+        (PORT datab (287:287:287) (319:319:319))
+        (PORT datac (245:245:245) (276:276:276))
+        (PORT datad (272:272:272) (296:296:296))
+        (IOPATH dataa combout (420:420:420) (428:428:428))
+        (IOPATH datab combout (410:410:410) (408:408:408))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Equal6\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (582:582:582) (559:559:559))
+        (PORT datab (679:679:679) (666:666:666))
+        (PORT datac (941:941:941) (898:898:898))
+        (PORT datad (965:965:965) (919:919:919))
+        (IOPATH dataa combout (453:453:453) (446:446:446))
+        (IOPATH datab combout (435:435:435) (433:433:433))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~8)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (583:583:583) (554:554:554))
+        (PORT datab (337:337:337) (370:370:370))
+        (PORT datac (952:952:952) (909:909:909))
+        (PORT datad (514:514:514) (503:503:503))
+        (IOPATH dataa combout (392:392:392) (398:398:398))
+        (IOPATH datab combout (393:393:393) (408:408:408))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Equal5\~5)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (725:725:725) (772:772:772))
+        (PORT datab (673:673:673) (726:726:726))
+        (PORT datac (505:505:505) (480:480:480))
+        (PORT datad (514:514:514) (489:489:489))
+        (IOPATH dataa combout (438:438:438) (448:448:448))
+        (IOPATH datab combout (440:440:440) (462:462:462))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~9)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (596:596:596) (628:628:628))
+        (PORT datab (286:286:286) (317:317:317))
+        (PORT datac (239:239:239) (265:265:265))
+        (PORT datad (245:245:245) (266:266:266))
+        (IOPATH dataa combout (392:392:392) (398:398:398))
+        (IOPATH datab combout (393:393:393) (408:408:408))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~10)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1304:1304:1304) (1262:1262:1262))
+        (PORT datab (288:288:288) (320:320:320))
+        (PORT datac (261:261:261) (287:287:287))
+        (PORT datad (236:236:236) (254:254:254))
+        (IOPATH dataa combout (453:453:453) (446:446:446))
+        (IOPATH datab combout (435:435:435) (424:424:424))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Equal6\~1)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (655:655:655) (733:733:733))
+        (PORT datab (376:376:376) (463:463:463))
+        (PORT datac (952:952:952) (909:909:909))
+        (PORT datad (514:514:514) (502:502:502))
+        (IOPATH dataa combout (438:438:438) (448:448:448))
+        (IOPATH datab combout (440:440:440) (462:462:462))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|controlcolors\[5\]\~3)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (667:667:667) (678:678:678))
+        (PORT datab (375:375:375) (462:462:462))
+        (PORT datad (606:606:606) (634:634:634))
+        (IOPATH dataa combout (453:453:453) (472:472:472))
+        (IOPATH datab combout (454:454:454) (473:473:473))
+        (IOPATH datac combout (462:462:462) (482:482:482))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Equal5\~4)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (308:308:308) (340:340:340))
+        (PORT datab (279:279:279) (304:304:304))
+        (PORT datac (242:242:242) (273:273:273))
+        (PORT datad (247:247:247) (268:268:268))
+        (IOPATH dataa combout (420:420:420) (428:428:428))
+        (IOPATH datab combout (410:410:410) (408:408:408))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~11)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (315:315:315) (349:349:349))
+        (PORT datab (284:284:284) (315:315:315))
+        (PORT datac (235:235:235) (261:261:261))
+        (PORT datad (237:237:237) (255:255:255))
+        (IOPATH dataa combout (461:461:461) (481:481:481))
+        (IOPATH datab combout (473:473:473) (487:487:487))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~12)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (932:932:932) (925:925:925))
+        (PORT datac (821:821:821) (767:767:767))
+        (PORT datad (1198:1198:1198) (1106:1106:1106))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~13)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1298:1298:1298) (1255:1255:1255))
+        (PORT datab (661:661:661) (684:684:684))
+        (PORT datac (838:838:838) (784:784:784))
+        (PORT datad (244:244:244) (265:265:265))
+        (IOPATH dataa combout (421:421:421) (428:428:428))
+        (IOPATH datab combout (473:473:473) (487:487:487))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~14)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (662:662:662) (686:686:686))
+        (PORT datac (1163:1163:1163) (1068:1068:1068))
+        (PORT datad (896:896:896) (833:833:833))
+        (IOPATH datab combout (432:432:432) (433:433:433))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~15)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (861:861:861) (809:809:809))
+        (PORT datab (1004:1004:1004) (973:973:973))
+        (PORT datac (237:237:237) (263:263:263))
+        (PORT datad (917:917:917) (911:911:911))
+        (IOPATH dataa combout (448:448:448) (472:472:472))
+        (IOPATH datab combout (455:455:455) (473:473:473))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~16)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1050:1050:1050) (1047:1047:1047))
+        (PORT datab (898:898:898) (894:894:894))
+        (PORT datac (238:238:238) (265:265:265))
+        (PORT datad (243:243:243) (268:268:268))
+        (IOPATH dataa combout (448:448:448) (472:472:472))
+        (IOPATH datab combout (455:455:455) (473:473:473))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~17)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1333:1333:1333) (1288:1288:1288))
+        (PORT datab (578:578:578) (583:583:583))
+        (PORT datac (883:883:883) (885:885:885))
+        (PORT datad (273:273:273) (294:294:294))
+        (IOPATH dataa combout (461:461:461) (481:481:481))
+        (IOPATH datab combout (455:455:455) (412:412:412))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|color\~5)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (886:886:886) (853:853:853))
+        (PORT datab (1011:1011:1011) (963:963:963))
+        (PORT datac (1216:1216:1216) (1149:1149:1149))
+        (PORT datad (932:932:932) (881:881:881))
+        (IOPATH dataa combout (471:471:471) (453:453:453))
+        (IOPATH datab combout (472:472:472) (452:452:452))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|color\~6)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (952:952:952) (873:873:873))
+        (PORT datab (1358:1358:1358) (1303:1303:1303))
+        (PORT datac (236:236:236) (263:263:263))
+        (PORT datad (1290:1290:1290) (1247:1247:1247))
+        (IOPATH dataa combout (392:392:392) (407:407:407))
+        (IOPATH datab combout (393:393:393) (412:412:412))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|color\~7)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (887:887:887) (854:854:854))
+        (PORT datab (1013:1013:1013) (965:965:965))
+        (PORT datac (1218:1218:1218) (1151:1151:1151))
+        (PORT datad (934:934:934) (883:883:883))
+        (IOPATH dataa combout (471:471:471) (453:453:453))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|color\~8)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (874:874:874) (833:833:833))
+        (PORT datab (1677:1677:1677) (1577:1577:1577))
+        (PORT datac (947:947:947) (943:943:943))
+        (PORT datad (238:238:238) (256:256:256))
+        (IOPATH dataa combout (453:453:453) (472:472:472))
+        (IOPATH datab combout (454:454:454) (473:473:473))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~28)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (886:886:886) (853:853:853))
+        (PORT datab (1296:1296:1296) (1268:1268:1268))
+        (PORT datac (1256:1256:1256) (1214:1214:1214))
+        (PORT datad (931:931:931) (880:880:880))
+        (IOPATH dataa combout (392:392:392) (407:407:407))
+        (IOPATH datab combout (393:393:393) (412:412:412))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~19)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (951:951:951) (872:872:872))
+        (PORT datab (1014:1014:1014) (967:967:967))
+        (PORT datac (253:253:253) (291:291:291))
+        (PORT datad (833:833:833) (782:782:782))
+        (IOPATH dataa combout (471:471:471) (453:453:453))
+        (IOPATH datab combout (472:472:472) (452:452:452))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~20)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (887:887:887) (853:853:853))
+        (PORT datab (1348:1348:1348) (1294:1294:1294))
+        (PORT datac (1217:1217:1217) (1151:1151:1151))
+        (PORT datad (933:933:933) (883:883:883))
+        (IOPATH dataa combout (471:471:471) (453:453:453))
+        (IOPATH datab combout (472:472:472) (452:452:452))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~21)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (1357:1357:1357) (1303:1303:1303))
+        (PORT datac (254:254:254) (292:292:292))
+        (PORT datad (238:238:238) (256:256:256))
+        (IOPATH datab combout (472:472:472) (473:473:473))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~22)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (299:299:299) (341:341:341))
+        (PORT datab (1291:1291:1291) (1176:1176:1176))
+        (PORT datac (236:236:236) (262:262:262))
+        (PORT datad (237:237:237) (255:255:255))
+        (IOPATH dataa combout (438:438:438) (448:448:448))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Selector8\~9)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (620:620:620) (655:655:655))
+        (PORT datab (375:375:375) (463:463:463))
+        (PORT datac (368:368:368) (464:464:464))
+        (PORT datad (369:369:369) (456:456:456))
+        (IOPATH dataa combout (456:456:456) (486:486:486))
+        (IOPATH datab combout (457:457:457) (489:489:489))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|Selector8\~10)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (874:874:874) (834:834:834))
+        (PORT datab (941:941:941) (860:860:860))
+        (PORT datac (1217:1217:1217) (1150:1150:1150))
+        (PORT datad (933:933:933) (882:882:882))
+        (IOPATH dataa combout (471:471:471) (453:453:453))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|ms\|cm\|color\~4)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (887:887:887) (854:854:854))
+        (PORT datab (977:977:977) (927:927:927))
+        (PORT datac (1218:1218:1218) (1152:1152:1152))
+        (PORT datad (954:954:954) (918:918:918))
+        (IOPATH dataa combout (421:421:421) (418:418:418))
+        (IOPATH datab combout (435:435:435) (424:424:424))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~18)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (859:859:859) (812:812:812))
+        (PORT datab (1366:1366:1366) (1358:1358:1358))
+        (PORT datac (236:236:236) (262:262:262))
+        (PORT datad (238:238:238) (256:256:256))
+        (IOPATH dataa combout (481:481:481) (491:491:491))
+        (IOPATH datab combout (440:440:440) (462:462:462))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~23)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (281:281:281) (313:313:313))
+        (PORT datab (279:279:279) (304:304:304))
+        (PORT datac (238:238:238) (265:265:265))
+        (PORT datad (236:236:236) (255:255:255))
+        (IOPATH dataa combout (393:393:393) (398:398:398))
+        (IOPATH datab combout (393:393:393) (408:408:408))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~24)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1297:1297:1297) (1254:1254:1254))
+        (PORT datab (663:663:663) (686:686:686))
+        (PORT datac (838:838:838) (790:790:790))
+        (PORT datad (558:558:558) (560:560:560))
+        (IOPATH dataa combout (421:421:421) (428:428:428))
+        (IOPATH datab combout (473:473:473) (487:487:487))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~25)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1051:1051:1051) (1048:1048:1048))
+        (PORT datab (931:931:931) (858:858:858))
+        (PORT datac (235:235:235) (261:261:261))
+        (PORT datad (239:239:239) (257:257:257))
+        (IOPATH dataa combout (461:461:461) (481:481:481))
+        (IOPATH datab combout (454:454:454) (473:473:473))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|count\[0\]\~11)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (359:359:359) (436:436:436))
+        (IOPATH datab combout (472:472:472) (473:473:473))
+        (IOPATH datab cout (565:565:565) (421:421:421))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|state\~15)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (1441:1441:1441) (1389:1389:1389))
+        (PORT datad (486:486:486) (455:455:455))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|count\[0\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1593:1593:1593) (1628:1628:1628))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (935:935:935) (1003:1003:1003))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|count\[1\]\~13)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (362:362:362) (446:446:446))
+        (IOPATH dataa combout (461:461:461) (481:481:481))
+        (IOPATH dataa cout (552:552:552) (416:416:416))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+        (IOPATH cin cout (73:73:73) (73:73:73))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|count\[1\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1593:1593:1593) (1628:1628:1628))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (935:935:935) (1003:1003:1003))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Equal2\~2)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (371:371:371) (481:481:481))
+        (PORT datab (368:368:368) (471:471:471))
+        (PORT datac (533:533:533) (561:561:561))
+        (PORT datad (627:627:627) (681:681:681))
+        (IOPATH dataa combout (471:471:471) (453:453:453))
+        (IOPATH datab combout (472:472:472) (462:462:462))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|count\[2\]\~15)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (363:363:363) (446:446:446))
+        (IOPATH dataa combout (471:471:471) (472:472:472))
+        (IOPATH dataa cout (552:552:552) (416:416:416))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+        (IOPATH cin cout (73:73:73) (73:73:73))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|count\[2\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1593:1593:1593) (1628:1628:1628))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (935:935:935) (1003:1003:1003))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|count\[3\]\~17)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (360:360:360) (437:437:437))
+        (IOPATH datab combout (473:473:473) (487:487:487))
+        (IOPATH datab cout (565:565:565) (421:421:421))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+        (IOPATH cin cout (73:73:73) (73:73:73))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|count\[3\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1593:1593:1593) (1628:1628:1628))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (935:935:935) (1003:1003:1003))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|count\[4\]\~19)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (360:360:360) (437:437:437))
+        (IOPATH datab combout (472:472:472) (473:473:473))
+        (IOPATH datab cout (565:565:565) (421:421:421))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+        (IOPATH cin cout (73:73:73) (73:73:73))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|count\[4\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1593:1593:1593) (1628:1628:1628))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (935:935:935) (1003:1003:1003))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|count\[5\]\~21)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (360:360:360) (437:437:437))
+        (IOPATH datab combout (473:473:473) (487:487:487))
+        (IOPATH datab cout (565:565:565) (421:421:421))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+        (IOPATH cin cout (73:73:73) (73:73:73))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|count\[5\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1593:1593:1593) (1628:1628:1628))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (935:935:935) (1003:1003:1003))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Equal2\~3)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (371:371:371) (482:482:482))
+        (PORT datab (370:370:370) (472:472:472))
+        (PORT datac (953:953:953) (956:956:956))
+        (PORT datad (564:564:564) (582:582:582))
+        (IOPATH dataa combout (481:481:481) (491:491:491))
+        (IOPATH datab combout (472:472:472) (462:462:462))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|count\[6\]\~23)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (360:360:360) (437:437:437))
+        (IOPATH datab combout (472:472:472) (473:473:473))
+        (IOPATH datab cout (565:565:565) (421:421:421))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+        (IOPATH cin cout (73:73:73) (73:73:73))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|count\[6\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1593:1593:1593) (1628:1628:1628))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (935:935:935) (1003:1003:1003))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|count\[7\]\~25)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (363:363:363) (447:447:447))
+        (IOPATH dataa combout (461:461:461) (481:481:481))
+        (IOPATH dataa cout (552:552:552) (416:416:416))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+        (IOPATH cin cout (73:73:73) (73:73:73))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|count\[7\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1593:1593:1593) (1628:1628:1628))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (935:935:935) (1003:1003:1003))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|count\[8\]\~27)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (574:574:574) (602:602:602))
+        (IOPATH dataa combout (471:471:471) (472:472:472))
+        (IOPATH dataa cout (552:552:552) (416:416:416))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+        (IOPATH cin cout (73:73:73) (73:73:73))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|count\[8\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1593:1593:1593) (1628:1628:1628))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (935:935:935) (1003:1003:1003))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Equal2\~1)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (571:571:571) (609:609:609))
+        (PORT datab (670:670:670) (727:727:727))
+        (PORT datac (846:846:846) (829:829:829))
+        (PORT datad (566:566:566) (583:583:583))
+        (IOPATH dataa combout (456:456:456) (486:486:486))
+        (IOPATH datab combout (457:457:457) (489:489:489))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Equal2\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (370:370:370) (480:480:480))
+        (PORT datab (367:367:367) (469:469:469))
+        (PORT datac (951:951:951) (953:953:953))
+        (PORT datad (528:528:528) (551:551:551))
+        (IOPATH dataa combout (481:481:481) (491:491:491))
+        (IOPATH datab combout (472:472:472) (462:462:462))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Equal2\~4)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (279:279:279) (311:311:311))
+        (PORT datab (276:276:276) (300:300:300))
+        (PORT datac (239:239:239) (265:265:265))
+        (PORT datad (238:238:238) (256:256:256))
+        (IOPATH dataa combout (393:393:393) (398:398:398))
+        (IOPATH datab combout (393:393:393) (408:408:408))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|count\[9\]\~29)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (363:363:363) (446:446:446))
+        (IOPATH dataa combout (461:461:461) (481:481:481))
+        (IOPATH dataa cout (552:552:552) (416:416:416))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+        (IOPATH cin cout (73:73:73) (73:73:73))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|count\[9\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1593:1593:1593) (1628:1628:1628))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (935:935:935) (1003:1003:1003))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|count\[10\]\~31)
+    (DELAY
+      (ABSOLUTE
+        (PORT datad (321:321:321) (391:391:391))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|count\[10\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1593:1593:1593) (1628:1628:1628))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (935:935:935) (1003:1003:1003))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Equal2\~5)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (888:888:888) (875:875:875))
+        (PORT datab (569:569:569) (600:600:600))
+        (PORT datac (578:578:578) (593:593:593))
+        (PORT datad (627:627:627) (681:681:681))
+        (IOPATH dataa combout (456:456:456) (486:486:486))
+        (IOPATH datab combout (457:457:457) (489:489:489))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Equal2\~6)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (280:280:280) (312:312:312))
+        (PORT datab (627:627:627) (631:631:631))
+        (PORT datac (578:578:578) (593:593:593))
+        (PORT datad (238:238:238) (256:256:256))
+        (IOPATH dataa combout (404:404:404) (398:398:398))
+        (IOPATH datab combout (435:435:435) (424:424:424))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Selector4\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (640:640:640) (654:654:654))
+        (PORT datab (330:330:330) (366:366:366))
+        (PORT datac (842:842:842) (789:789:789))
+        (PORT datad (373:373:373) (480:480:480))
+        (IOPATH dataa combout (471:471:471) (472:472:472))
+        (IOPATH datab combout (393:393:393) (408:408:408))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Selector4\~1)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (843:843:843) (806:806:806))
+        (PORT datab (543:543:543) (502:502:502))
+        (PORT datac (256:256:256) (293:293:293))
+        (PORT datad (790:790:790) (725:725:725))
+        (IOPATH dataa combout (448:448:448) (472:472:472))
+        (IOPATH datab combout (454:454:454) (473:473:473))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|state\.R)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (2128:2128:2128) (2138:2138:2138))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (2284:2284:2284) (2370:2370:2370))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|state\~17)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (415:415:415) (530:530:530))
+        (PORT datac (577:577:577) (604:604:604))
+        (PORT datad (290:290:290) (323:323:323))
+        (IOPATH dataa combout (420:420:420) (428:428:428))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|state\~18)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (279:279:279) (311:311:311))
+        (PORT datab (288:288:288) (320:320:320))
+        (PORT datac (808:808:808) (759:759:759))
+        (PORT datad (372:372:372) (479:479:479))
+        (IOPATH dataa combout (481:481:481) (491:491:491))
+        (IOPATH datab combout (472:472:472) (452:452:452))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|state\~13)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (842:842:842) (789:789:789))
+        (PORT datad (1339:1339:1339) (1295:1295:1295))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~26)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1298:1298:1298) (1255:1255:1255))
+        (PORT datab (662:662:662) (685:685:685))
+        (PORT datac (837:837:837) (789:789:789))
+        (PORT datad (559:559:559) (561:561:561))
+        (IOPATH dataa combout (405:405:405) (398:398:398))
+        (IOPATH datab combout (455:455:455) (436:436:436))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux1\~27)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1295:1295:1295) (1252:1252:1252))
+        (PORT datab (663:663:663) (687:687:687))
+        (PORT datac (839:839:839) (785:785:785))
+        (PORT datad (246:246:246) (268:268:268))
+        (IOPATH dataa combout (405:405:405) (398:398:398))
+        (IOPATH datab combout (455:455:455) (436:436:436))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux0\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1050:1050:1050) (1047:1047:1047))
+        (PORT datab (899:899:899) (894:894:894))
+        (PORT datac (238:238:238) (264:264:264))
+        (PORT datad (237:237:237) (256:256:256))
+        (IOPATH dataa combout (453:453:453) (472:472:472))
+        (IOPATH datab combout (454:454:454) (473:473:473))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Mux0\~1)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (941:941:941) (924:924:924))
+        (PORT datab (285:285:285) (313:313:313))
+        (PORT datac (875:875:875) (816:816:816))
+        (PORT datad (238:238:238) (256:256:256))
+        (IOPATH dataa combout (448:448:448) (472:472:472))
+        (IOPATH datab combout (454:454:454) (473:473:473))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|state\~23)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1695:1695:1695) (1679:1679:1679))
+        (PORT datab (363:363:363) (440:440:440))
+        (PORT datac (1302:1302:1302) (1212:1212:1212))
+        (PORT datad (245:245:245) (266:266:266))
+        (IOPATH dataa combout (448:448:448) (472:472:472))
+        (IOPATH datab combout (454:454:454) (473:473:473))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|state\~19)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (849:849:849) (797:797:797))
+        (PORT datab (549:549:549) (512:512:512))
+        (PORT datac (251:251:251) (287:287:287))
+        (PORT datad (238:238:238) (257:257:257))
+        (IOPATH dataa combout (448:448:448) (472:472:472))
+        (IOPATH datab combout (455:455:455) (473:473:473))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|state\.T0H)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (2128:2128:2128) (2138:2138:2138))
+        (PORT d (99:99:99) (115:115:115))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|state\~21)
+    (DELAY
+      (ABSOLUTE
+        (PORT datac (1377:1377:1377) (1354:1354:1354))
+        (PORT datad (1339:1339:1339) (1385:1385:1385))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|state\.T0L)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1592:1592:1592) (1626:1626:1626))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT ena (1364:1364:1364) (1307:1307:1307))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|s\[1\]\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (372:372:372) (483:483:483))
+        (PORT datac (328:328:328) (434:434:434))
+        (IOPATH dataa combout (481:481:481) (491:491:491))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|state\~14)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (413:413:413) (528:528:528))
+        (PORT datab (846:846:846) (792:792:792))
+        (PORT datac (573:573:573) (599:599:599))
+        (PORT datad (291:291:291) (325:325:325))
+        (IOPATH dataa combout (420:420:420) (428:428:428))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|state\~22)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1695:1695:1695) (1679:1679:1679))
+        (PORT datab (643:643:643) (703:703:703))
+        (PORT datac (1299:1299:1299) (1209:1209:1209))
+        (PORT datad (246:246:246) (268:268:268))
+        (IOPATH dataa combout (448:448:448) (472:472:472))
+        (IOPATH datab combout (454:454:454) (473:473:473))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|state\~16)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (556:556:556) (521:521:521))
+        (PORT datab (549:549:549) (512:512:512))
+        (PORT datac (250:250:250) (286:286:286))
+        (PORT datad (237:237:237) (256:256:256))
+        (IOPATH dataa combout (432:432:432) (446:446:446))
+        (IOPATH datab combout (437:437:437) (436:436:436))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|state\.T1H)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (2128:2128:2128) (2138:2138:2138))
+        (PORT d (99:99:99) (115:115:115))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|state\~20)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (1438:1438:1438) (1400:1400:1400))
+        (PORT datac (950:950:950) (952:952:952))
+        (IOPATH dataa combout (453:453:453) (446:446:446))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|state\.T1L)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1592:1592:1592) (1626:1626:1626))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT ena (1364:1364:1364) (1307:1307:1307))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|bitcounter\[4\]\~18)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (370:370:370) (480:480:480))
+        (PORT datab (366:366:366) (468:468:468))
+        (PORT datac (271:271:271) (302:302:302))
+        (IOPATH dataa combout (453:453:453) (413:413:413))
+        (IOPATH datab combout (455:455:455) (412:412:412))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|bitcounter\[4\]\~15)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (418:418:418) (534:534:534))
+        (PORT datab (331:331:331) (367:367:367))
+        (PORT datac (841:841:841) (775:775:775))
+        (PORT datad (1340:1340:1340) (1297:1297:1297))
+        (IOPATH dataa combout (420:420:420) (428:428:428))
+        (IOPATH datab combout (432:432:432) (433:433:433))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|bitcounter\[0\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1594:1594:1594) (1631:1631:1631))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (1952:1952:1952) (2056:2056:2056))
+        (PORT ena (1082:1082:1082) (1076:1076:1076))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|bitcounter\[1\]\~9)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (376:376:376) (466:466:466))
+        (IOPATH datab combout (473:473:473) (487:487:487))
+        (IOPATH datab cout (565:565:565) (421:421:421))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+        (IOPATH cin cout (73:73:73) (73:73:73))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|bitcounter\[1\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1594:1594:1594) (1631:1631:1631))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (1952:1952:1952) (2056:2056:2056))
+        (PORT ena (1082:1082:1082) (1076:1076:1076))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|mds\|bitcounter\[2\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1594:1594:1594) (1631:1631:1631))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (1952:1952:1952) (2056:2056:2056))
+        (PORT ena (1082:1082:1082) (1076:1076:1076))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|Equal1\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (404:404:404) (500:500:500))
+        (PORT datab (376:376:376) (466:466:466))
+        (PORT datac (360:360:360) (450:450:450))
+        (PORT datad (338:338:338) (418:418:418))
+        (IOPATH dataa combout (438:438:438) (448:448:448))
+        (IOPATH datab combout (440:440:440) (462:462:462))
+        (IOPATH datac combout (327:327:327) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|mds\|done\~1)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (1173:1173:1173) (1086:1086:1086))
+        (PORT datac (271:271:271) (302:302:302))
+        (PORT datad (928:928:928) (919:919:919))
+        (IOPATH datab combout (410:410:410) (408:408:408))
+        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|Selector0\~0)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (287:287:287) (325:325:325))
+        (PORT datac (324:324:324) (403:403:403))
+        (PORT datad (1132:1132:1132) (1022:1022:1022))
+        (IOPATH dataa combout (453:453:453) (446:446:446))
+        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|state\.sending)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1598:1598:1598) (1635:1635:1635))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (4407:4407:4407) (4653:4653:4653))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|count\[8\]\~28)
+    (DELAY
+      (ABSOLUTE
+        (PORT datab (369:369:369) (451:451:451))
+        (PORT datac (3754:3754:3754) (3944:3944:3944))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (327:327:327) (316:316:316))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|count\[0\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1598:1598:1598) (1635:1635:1635))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (4407:4407:4407) (4653:4653:4653))
+        (PORT ena (1080:1080:1080) (1065:1065:1065))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|count\[1\]\~12)
+    (DELAY
+      (ABSOLUTE
+        (PORT dataa (344:344:344) (431:431:431))
         (IOPATH dataa combout (461:461:461) (481:481:481))
         (IOPATH dataa cout (552:552:552) (416:416:416))
         (IOPATH datad combout (177:177:177) (155:155:155))
@@ -182,10 +2631,10 @@
     (INSTANCE core\|count\[1\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (1608:1608:1608) (1643:1643:1643))
+        (PORT clk (1598:1598:1598) (1635:1635:1635))
         (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (4277:4277:4277) (4507:4507:4507))
-        (PORT ena (1088:1088:1088) (1080:1080:1080))
+        (PORT sclr (4407:4407:4407) (4653:4653:4653))
+        (PORT ena (1080:1080:1080) (1065:1065:1065))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -197,12 +2646,12 @@
   )
   (CELL
     (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|count\[2\]\~15)
+    (INSTANCE core\|count\[2\]\~14)
     (DELAY
       (ABSOLUTE
-        (PORT datab (343:343:343) (423:423:423))
-        (IOPATH datab combout (472:472:472) (473:473:473))
-        (IOPATH datab cout (565:565:565) (421:421:421))
+        (PORT dataa (345:345:345) (435:435:435))
+        (IOPATH dataa combout (471:471:471) (472:472:472))
+        (IOPATH dataa cout (552:552:552) (416:416:416))
         (IOPATH datad combout (177:177:177) (155:155:155))
         (IOPATH cin combout (607:607:607) (577:577:577))
         (IOPATH cin cout (73:73:73) (73:73:73))
@@ -214,10 +2663,10 @@
     (INSTANCE core\|count\[2\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (1608:1608:1608) (1643:1643:1643))
+        (PORT clk (1598:1598:1598) (1635:1635:1635))
         (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (4277:4277:4277) (4507:4507:4507))
-        (PORT ena (1088:1088:1088) (1080:1080:1080))
+        (PORT sclr (4407:4407:4407) (4653:4653:4653))
+        (PORT ena (1080:1080:1080) (1065:1065:1065))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -229,10 +2678,10 @@
   )
   (CELL
     (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|count\[3\]\~17)
+    (INSTANCE core\|count\[3\]\~16)
     (DELAY
       (ABSOLUTE
-        (PORT datab (342:342:342) (425:425:425))
+        (PORT datab (343:343:343) (424:424:424))
         (IOPATH datab combout (473:473:473) (487:487:487))
         (IOPATH datab cout (565:565:565) (421:421:421))
         (IOPATH datad combout (177:177:177) (155:155:155))
@@ -246,10 +2695,10 @@
     (INSTANCE core\|count\[3\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (1608:1608:1608) (1643:1643:1643))
+        (PORT clk (1598:1598:1598) (1635:1635:1635))
         (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (4277:4277:4277) (4507:4507:4507))
-        (PORT ena (1088:1088:1088) (1080:1080:1080))
+        (PORT sclr (4407:4407:4407) (4653:4653:4653))
+        (PORT ena (1080:1080:1080) (1065:1065:1065))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -261,7 +2710,7 @@
   )
   (CELL
     (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|count\[4\]\~19)
+    (INSTANCE core\|count\[4\]\~18)
     (DELAY
       (ABSOLUTE
         (PORT datab (343:343:343) (422:422:422))
@@ -278,10 +2727,10 @@
     (INSTANCE core\|count\[4\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (1608:1608:1608) (1643:1643:1643))
+        (PORT clk (1598:1598:1598) (1635:1635:1635))
         (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (4277:4277:4277) (4507:4507:4507))
-        (PORT ena (1088:1088:1088) (1080:1080:1080))
+        (PORT sclr (4407:4407:4407) (4653:4653:4653))
+        (PORT ena (1080:1080:1080) (1065:1065:1065))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -293,10 +2742,10 @@
   )
   (CELL
     (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|count\[5\]\~21)
+    (INSTANCE core\|count\[5\]\~20)
     (DELAY
       (ABSOLUTE
-        (PORT datab (342:342:342) (424:424:424))
+        (PORT datab (342:342:342) (425:425:425))
         (IOPATH datab combout (473:473:473) (487:487:487))
         (IOPATH datab cout (565:565:565) (421:421:421))
         (IOPATH datad combout (177:177:177) (155:155:155))
@@ -310,10 +2759,10 @@
     (INSTANCE core\|count\[5\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (1608:1608:1608) (1643:1643:1643))
+        (PORT clk (1598:1598:1598) (1635:1635:1635))
         (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (4277:4277:4277) (4507:4507:4507))
-        (PORT ena (1088:1088:1088) (1080:1080:1080))
+        (PORT sclr (4407:4407:4407) (4653:4653:4653))
+        (PORT ena (1080:1080:1080) (1065:1065:1065))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -325,12 +2774,12 @@
   )
   (CELL
     (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|count\[6\]\~23)
+    (INSTANCE core\|count\[6\]\~22)
     (DELAY
       (ABSOLUTE
-        (PORT dataa (344:344:344) (432:432:432))
-        (IOPATH dataa combout (471:471:471) (472:472:472))
-        (IOPATH dataa cout (552:552:552) (416:416:416))
+        (PORT datab (361:361:361) (437:437:437))
+        (IOPATH datab combout (472:472:472) (473:473:473))
+        (IOPATH datab cout (565:565:565) (421:421:421))
         (IOPATH datad combout (177:177:177) (155:155:155))
         (IOPATH cin combout (607:607:607) (577:577:577))
         (IOPATH cin cout (73:73:73) (73:73:73))
@@ -342,10 +2791,10 @@
     (INSTANCE core\|count\[6\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (1608:1608:1608) (1643:1643:1643))
+        (PORT clk (1598:1598:1598) (1635:1635:1635))
         (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (4277:4277:4277) (4507:4507:4507))
-        (PORT ena (1088:1088:1088) (1080:1080:1080))
+        (PORT sclr (4407:4407:4407) (4653:4653:4653))
+        (PORT ena (1080:1080:1080) (1065:1065:1065))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -357,12 +2806,12 @@
   )
   (CELL
     (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|count\[7\]\~25)
+    (INSTANCE core\|count\[7\]\~24)
     (DELAY
       (ABSOLUTE
-        (PORT datab (360:360:360) (437:437:437))
-        (IOPATH datab combout (473:473:473) (487:487:487))
-        (IOPATH datab cout (565:565:565) (421:421:421))
+        (PORT dataa (346:346:346) (433:433:433))
+        (IOPATH dataa combout (461:461:461) (481:481:481))
+        (IOPATH dataa cout (552:552:552) (416:416:416))
         (IOPATH datad combout (177:177:177) (155:155:155))
         (IOPATH cin combout (607:607:607) (577:577:577))
         (IOPATH cin cout (73:73:73) (73:73:73))
@@ -374,39 +2823,10 @@
     (INSTANCE core\|count\[7\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (1608:1608:1608) (1643:1643:1643))
+        (PORT clk (1598:1598:1598) (1635:1635:1635))
         (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (4277:4277:4277) (4507:4507:4507))
-        (PORT ena (1088:1088:1088) (1080:1080:1080))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-      (HOLD ena (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|count\[8\]\~27)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (354:354:354) (450:450:450))
-        (IOPATH dataa combout (481:481:481) (491:491:491))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|count\[8\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1608:1608:1608) (1643:1643:1643))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (4277:4277:4277) (4507:4507:4507))
-        (PORT ena (1088:1088:1088) (1080:1080:1080))
+        (PORT sclr (4407:4407:4407) (4653:4653:4653))
+        (PORT ena (1080:1080:1080) (1065:1065:1065))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -421,15 +2841,44 @@
     (INSTANCE core\|Equal0\~1)
     (DELAY
       (ABSOLUTE
-        (PORT dataa (576:576:576) (604:604:604))
-        (PORT datab (343:343:343) (426:426:426))
-        (PORT datac (302:302:302) (387:387:387))
-        (PORT datad (303:303:303) (380:380:380))
-        (IOPATH dataa combout (438:438:438) (448:448:448))
-        (IOPATH datab combout (440:440:440) (462:462:462))
-        (IOPATH datac combout (327:327:327) (315:315:315))
+        (PORT dataa (573:573:573) (601:601:601))
+        (PORT datab (342:342:342) (424:424:424))
+        (PORT datac (301:301:301) (386:386:386))
+        (PORT datad (302:302:302) (379:379:379))
+        (IOPATH dataa combout (471:471:471) (453:453:453))
+        (IOPATH datab combout (494:494:494) (496:496:496))
+        (IOPATH datac combout (324:324:324) (315:315:315))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE core\|count\[8\]\~26)
+    (DELAY
+      (ABSOLUTE
+        (PORT datad (302:302:302) (378:378:378))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+        (IOPATH cin combout (607:607:607) (577:577:577))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE core\|count\[8\])
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (1598:1598:1598) (1635:1635:1635))
+        (PORT d (99:99:99) (115:115:115))
+        (PORT sclr (4407:4407:4407) (4653:4653:4653))
+        (PORT ena (1080:1080:1080) (1065:1065:1065))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+      (HOLD sclr (posedge clk) (212:212:212))
+      (HOLD ena (posedge clk) (212:212:212))
     )
   )
   (CELL
@@ -437,807 +2886,13 @@
     (INSTANCE core\|Equal0\~0)
     (DELAY
       (ABSOLUTE
-        (PORT dataa (345:345:345) (435:435:435))
-        (PORT datab (343:343:343) (426:426:426))
-        (PORT datac (301:301:301) (386:386:386))
-        (PORT datad (303:303:303) (379:379:379))
-        (IOPATH dataa combout (392:392:392) (407:407:407))
-        (IOPATH datab combout (393:393:393) (412:412:412))
-        (IOPATH datac combout (324:324:324) (315:315:315))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|state\~11)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (356:356:356) (452:452:452))
-        (PORT datab (290:290:290) (318:318:318))
-        (PORT datac (244:244:244) (274:274:274))
-        (PORT datad (244:244:244) (269:269:269))
-        (IOPATH dataa combout (405:405:405) (398:398:398))
-        (IOPATH datab combout (494:494:494) (496:496:496))
-        (IOPATH datac combout (324:324:324) (315:315:315))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|bitcounter\[0\]\~5)
-    (DELAY
-      (ABSOLUTE
-        (PORT datab (566:566:566) (593:593:593))
-        (IOPATH datab combout (472:472:472) (473:473:473))
-        (IOPATH datab cout (565:565:565) (421:421:421))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|count\[0\]\~11)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (344:344:344) (434:434:434))
-        (IOPATH dataa combout (471:471:471) (472:472:472))
-        (IOPATH dataa cout (552:552:552) (416:416:416))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|always0\~0)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (1037:1037:1037) (1019:1019:1019))
-        (PORT datad (460:460:460) (434:434:434))
-        (IOPATH dataa combout (481:481:481) (491:491:491))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|count\[0\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1643:1643:1643))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1142:1142:1142) (1159:1159:1159))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|count\[1\]\~13)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (567:567:567) (602:602:602))
-        (IOPATH dataa combout (461:461:461) (481:481:481))
-        (IOPATH dataa cout (552:552:552) (416:416:416))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-        (IOPATH cin cout (73:73:73) (73:73:73))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|count\[1\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1643:1643:1643))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1142:1142:1142) (1159:1159:1159))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|count\[2\]\~15)
-    (DELAY
-      (ABSOLUTE
-        (PORT datab (558:558:558) (581:581:581))
-        (IOPATH datab combout (472:472:472) (473:473:473))
-        (IOPATH datab cout (565:565:565) (421:421:421))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-        (IOPATH cin cout (73:73:73) (73:73:73))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|count\[2\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1643:1643:1643))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1142:1142:1142) (1159:1159:1159))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|count\[3\]\~17)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (345:345:345) (434:434:434))
-        (IOPATH dataa combout (461:461:461) (481:481:481))
-        (IOPATH dataa cout (552:552:552) (416:416:416))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-        (IOPATH cin cout (73:73:73) (73:73:73))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|count\[3\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1643:1643:1643))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1142:1142:1142) (1159:1159:1159))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|count\[4\]\~19)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (577:577:577) (600:600:600))
-        (IOPATH dataa combout (471:471:471) (472:472:472))
-        (IOPATH dataa cout (552:552:552) (416:416:416))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-        (IOPATH cin cout (73:73:73) (73:73:73))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|count\[4\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1643:1643:1643))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1142:1142:1142) (1159:1159:1159))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|count\[5\]\~21)
-    (DELAY
-      (ABSOLUTE
-        (PORT datab (342:342:342) (425:425:425))
-        (IOPATH datab combout (473:473:473) (487:487:487))
-        (IOPATH datab cout (565:565:565) (421:421:421))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-        (IOPATH cin cout (73:73:73) (73:73:73))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|count\[5\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1643:1643:1643))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1142:1142:1142) (1159:1159:1159))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|count\[6\]\~23)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (556:556:556) (594:594:594))
-        (IOPATH dataa combout (471:471:471) (472:472:472))
-        (IOPATH dataa cout (552:552:552) (416:416:416))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-        (IOPATH cin cout (73:73:73) (73:73:73))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|count\[6\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1643:1643:1643))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1142:1142:1142) (1159:1159:1159))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|count\[7\]\~25)
-    (DELAY
-      (ABSOLUTE
-        (PORT datab (342:342:342) (424:424:424))
-        (IOPATH datab combout (473:473:473) (487:487:487))
-        (IOPATH datab cout (565:565:565) (421:421:421))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-        (IOPATH cin cout (73:73:73) (73:73:73))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|count\[7\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1643:1643:1643))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1142:1142:1142) (1159:1159:1159))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|count\[8\]\~27)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (344:344:344) (434:434:434))
-        (IOPATH dataa combout (471:471:471) (472:472:472))
-        (IOPATH dataa cout (552:552:552) (416:416:416))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-        (IOPATH cin cout (73:73:73) (73:73:73))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|count\[8\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1643:1643:1643))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1142:1142:1142) (1159:1159:1159))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|count\[9\]\~29)
-    (DELAY
-      (ABSOLUTE
-        (PORT datab (360:360:360) (437:437:437))
-        (IOPATH datab combout (473:473:473) (487:487:487))
-        (IOPATH datab cout (565:565:565) (421:421:421))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-        (IOPATH cin cout (73:73:73) (73:73:73))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|count\[9\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1643:1643:1643))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1142:1142:1142) (1159:1159:1159))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|state\~13)
-    (DELAY
-      (ABSOLUTE
-        (PORT datac (1319:1319:1319) (1301:1301:1301))
-        (PORT datad (329:329:329) (407:407:407))
-        (IOPATH datac combout (324:324:324) (316:316:316))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|Equal0\~0)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (354:354:354) (451:451:451))
-        (PORT datab (570:570:570) (597:597:597))
-        (PORT datac (310:310:310) (402:402:402))
-        (PORT datad (312:312:312) (393:393:393))
-        (IOPATH dataa combout (432:432:432) (446:446:446))
-        (IOPATH datab combout (437:437:437) (436:436:436))
-        (IOPATH datac combout (327:327:327) (315:315:315))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|state\~9)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (370:370:370) (459:459:459))
-        (PORT datac (327:327:327) (428:428:428))
-        (PORT datad (245:245:245) (266:266:266))
-        (IOPATH dataa combout (471:471:471) (472:472:472))
-        (IOPATH datac combout (324:324:324) (315:315:315))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|Equal1\~0)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (353:353:353) (449:449:449))
-        (PORT datab (350:350:350) (438:438:438))
-        (PORT datac (526:526:526) (557:557:557))
-        (PORT datad (311:311:311) (392:392:392))
-        (IOPATH dataa combout (392:392:392) (407:407:407))
-        (IOPATH datab combout (393:393:393) (412:412:412))
-        (IOPATH datac combout (324:324:324) (315:315:315))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|state\~10)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (280:280:280) (312:312:312))
-        (PORT datab (371:371:371) (451:451:451))
-        (PORT datac (328:328:328) (429:429:429))
-        (PORT datad (752:752:752) (659:659:659))
-        (IOPATH dataa combout (471:471:471) (453:453:453))
-        (IOPATH datab combout (472:472:472) (452:452:452))
-        (IOPATH datac combout (324:324:324) (315:315:315))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|state\~11)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (610:610:610) (580:580:580))
-        (PORT datab (1058:1058:1058) (1040:1040:1040))
-        (PORT datad (240:240:240) (259:259:259))
-        (IOPATH dataa combout (448:448:448) (472:472:472))
-        (IOPATH datab combout (455:455:455) (473:473:473))
-        (IOPATH datac combout (462:462:462) (482:482:482))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|state\.T0H)
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1642:1642:1642))
-        (PORT d (99:99:99) (115:115:115))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|state\~12)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (1380:1380:1380) (1349:1349:1349))
-        (PORT datab (861:861:861) (849:849:849))
-        (PORT datad (837:837:837) (786:786:786))
-        (IOPATH dataa combout (453:453:453) (446:446:446))
-        (IOPATH datab combout (435:435:435) (433:433:433))
-        (IOPATH datac combout (462:462:462) (482:482:482))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|state\.T0L)
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1642:1642:1642))
-        (PORT d (99:99:99) (115:115:115))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|state\~14)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (374:374:374) (464:464:464))
-        (PORT datab (368:368:368) (465:465:465))
-        (PORT datac (1312:1312:1312) (1293:1293:1293))
-        (PORT datad (249:249:249) (270:270:270))
-        (IOPATH dataa combout (392:392:392) (398:398:398))
-        (IOPATH datab combout (393:393:393) (408:408:408))
-        (IOPATH datac combout (324:324:324) (316:316:316))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|state\~15)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (280:280:280) (312:312:312))
-        (PORT datab (313:313:313) (343:343:343))
-        (PORT datac (238:238:238) (265:265:265))
-        (PORT datad (838:838:838) (787:787:787))
-        (IOPATH dataa combout (471:471:471) (472:472:472))
-        (IOPATH datab combout (393:393:393) (408:408:408))
-        (IOPATH datac combout (324:324:324) (316:316:316))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|state\.R)
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1642:1642:1642))
-        (PORT d (99:99:99) (115:115:115))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|Equal2\~3)
-    (DELAY
-      (ABSOLUTE
         (PORT dataa (346:346:346) (436:436:436))
         (PORT datab (343:343:343) (426:426:426))
-        (PORT datac (533:533:533) (556:556:556))
-        (PORT datad (576:576:576) (596:596:596))
-        (IOPATH dataa combout (456:456:456) (486:486:486))
-        (IOPATH datab combout (457:457:457) (489:489:489))
-        (IOPATH datac combout (324:324:324) (316:316:316))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|count\[10\]\~31)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (345:345:345) (433:433:433))
+        (PORT datac (302:302:302) (387:387:387))
+        (PORT datad (304:304:304) (380:380:380))
         (IOPATH dataa combout (481:481:481) (491:491:491))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|count\[10\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1643:1643:1643))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1142:1142:1142) (1159:1159:1159))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|Equal2\~4)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (344:344:344) (433:433:433))
-        (PORT datab (557:557:557) (581:581:581))
-        (PORT datac (303:303:303) (387:387:387))
-        (PORT datad (575:575:575) (595:595:595))
-        (IOPATH dataa combout (456:456:456) (486:486:486))
-        (IOPATH datab combout (457:457:457) (489:489:489))
-        (IOPATH datac combout (324:324:324) (316:316:316))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|Equal2\~1)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (555:555:555) (593:593:593))
-        (PORT datab (369:369:369) (450:450:450))
-        (PORT datac (321:321:321) (399:399:399))
-        (PORT datad (572:572:572) (592:592:592))
-        (IOPATH dataa combout (448:448:448) (472:472:472))
-        (IOPATH datab combout (454:454:454) (473:473:473))
-        (IOPATH datac combout (327:327:327) (316:316:316))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|Equal2\~2)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (636:636:636) (644:644:644))
-        (PORT datab (343:343:343) (426:426:426))
-        (PORT datac (327:327:327) (412:412:412))
-        (PORT datad (240:240:240) (259:259:259))
-        (IOPATH dataa combout (438:438:438) (448:448:448))
-        (IOPATH datab combout (440:440:440) (462:462:462))
-        (IOPATH datac combout (327:327:327) (315:315:315))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|Equal2\~5)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (347:347:347) (437:437:437))
-        (PORT datab (281:281:281) (307:307:307))
-        (PORT datac (240:240:240) (267:267:267))
-        (PORT datad (241:241:241) (260:260:260))
-        (IOPATH dataa combout (420:420:420) (428:428:428))
-        (IOPATH datab combout (410:410:410) (408:408:408))
-        (IOPATH datac combout (324:324:324) (316:316:316))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|bitcounter\[1\]\~15)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (1373:1373:1373) (1341:1341:1341))
-        (PORT datab (314:314:314) (344:344:344))
-        (PORT datac (548:548:548) (531:531:531))
-        (PORT datad (542:542:542) (564:564:564))
-        (IOPATH dataa combout (481:481:481) (491:491:491))
-        (IOPATH datab combout (432:432:432) (433:433:433))
-        (IOPATH datac combout (324:324:324) (316:316:316))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|bitcounter\[0\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1642:1642:1642))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1643:1643:1643) (1706:1706:1706))
-        (PORT ena (1079:1079:1079) (1064:1064:1064))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-      (HOLD ena (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|bitcounter\[1\]\~7)
-    (DELAY
-      (ABSOLUTE
-        (PORT datab (349:349:349) (437:437:437))
-        (IOPATH datab combout (473:473:473) (487:487:487))
-        (IOPATH datab cout (565:565:565) (421:421:421))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-        (IOPATH cin cout (73:73:73) (73:73:73))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|bitcounter\[1\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1642:1642:1642))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1643:1643:1643) (1706:1706:1706))
-        (PORT ena (1079:1079:1079) (1064:1064:1064))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-      (HOLD ena (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|bitcounter\[2\]\~9)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (353:353:353) (449:449:449))
-        (IOPATH dataa combout (471:471:471) (472:472:472))
-        (IOPATH dataa cout (552:552:552) (416:416:416))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-        (IOPATH cin cout (73:73:73) (73:73:73))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|bitcounter\[2\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1642:1642:1642))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1643:1643:1643) (1706:1706:1706))
-        (PORT ena (1079:1079:1079) (1064:1064:1064))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-      (HOLD ena (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|bitcounter\[3\]\~11)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (354:354:354) (444:444:444))
-        (IOPATH dataa combout (461:461:461) (481:481:481))
-        (IOPATH dataa cout (552:552:552) (416:416:416))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-        (IOPATH cin cout (73:73:73) (73:73:73))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|bitcounter\[3\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1642:1642:1642))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1643:1643:1643) (1706:1706:1706))
-        (PORT ena (1079:1079:1079) (1064:1064:1064))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-      (HOLD ena (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|bitcounter\[4\]\~13)
-    (DELAY
-      (ABSOLUTE
-        (PORT datab (370:370:370) (467:467:467))
-        (IOPATH datab combout (494:494:494) (496:496:496))
-        (IOPATH cin combout (607:607:607) (577:577:577))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|mds\|bitcounter\[4\])
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1607:1607:1607) (1642:1642:1642))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT sclr (1643:1643:1643) (1706:1706:1706))
-        (PORT ena (1079:1079:1079) (1064:1064:1064))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-      (HOLD sclr (posedge clk) (212:212:212))
-      (HOLD ena (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|mds\|Equal1\~1)
-    (DELAY
-      (ABSOLUTE
-        (PORT datac (326:326:326) (427:427:427))
-        (PORT datad (751:751:751) (658:658:658))
-        (IOPATH datac combout (324:324:324) (316:316:316))
+        (IOPATH datab combout (472:472:472) (452:452:452))
+        (IOPATH datac combout (324:324:324) (315:315:315))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -1247,13 +2902,13 @@
     (INSTANCE core\|mds\|done\~0)
     (DELAY
       (ABSOLUTE
-        (PORT dataa (353:353:353) (449:449:449))
-        (PORT datab (290:290:290) (318:318:318))
-        (PORT datac (248:248:248) (279:279:279))
-        (PORT datad (334:334:334) (409:409:409))
-        (IOPATH dataa combout (392:392:392) (398:398:398))
+        (PORT dataa (282:282:282) (315:315:315))
+        (PORT datab (345:345:345) (424:424:424))
+        (PORT datac (328:328:328) (412:412:412))
+        (PORT datad (240:240:240) (258:258:258))
+        (IOPATH dataa combout (393:393:393) (398:398:398))
         (IOPATH datab combout (393:393:393) (408:408:408))
-        (IOPATH datac combout (324:324:324) (315:315:315))
+        (IOPATH datac combout (327:327:327) (316:316:316))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -1263,12 +2918,10 @@
     (INSTANCE core\|state\~9)
     (DELAY
       (ABSOLUTE
-        (PORT dataa (885:885:885) (821:821:821))
-        (PORT datab (3673:3673:3673) (3842:3842:3842))
-        (PORT datac (834:834:834) (775:775:775))
-        (PORT datad (435:435:435) (411:411:411))
-        (IOPATH dataa combout (393:393:393) (398:398:398))
-        (IOPATH datab combout (494:494:494) (496:496:496))
+        (PORT dataa (291:291:291) (330:330:330))
+        (PORT datac (3749:3749:3749) (3938:3938:3938))
+        (PORT datad (1131:1131:1131) (1020:1020:1020))
+        (IOPATH dataa combout (421:421:421) (418:418:418))
         (IOPATH datac combout (324:324:324) (315:315:315))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
@@ -1279,49 +2932,7 @@
     (INSTANCE core\|state\.switching)
     (DELAY
       (ABSOLUTE
-        (PORT clk (1608:1608:1608) (1644:1644:1644))
-        (PORT d (99:99:99) (115:115:115))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|state\~10)
-    (DELAY
-      (ABSOLUTE
-        (PORT datac (3610:3610:3610) (3796:3796:3796))
-        (PORT datad (578:578:578) (598:598:598))
-        (IOPATH datac combout (324:324:324) (315:315:315))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE core\|state\~12)
-    (DELAY
-      (ABSOLUTE
-        (PORT dataa (280:280:280) (311:311:311))
-        (PORT datab (278:278:278) (303:303:303))
-        (PORT datac (800:800:800) (753:753:753))
-        (PORT datad (799:799:799) (745:745:745))
-        (IOPATH dataa combout (471:471:471) (453:453:453))
-        (IOPATH datab combout (472:472:472) (452:452:452))
-        (IOPATH datac combout (324:324:324) (315:315:315))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE core\|state\.sending)
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1608:1608:1608) (1643:1643:1643))
+        (PORT clk (1598:1598:1598) (1635:1635:1635))
         (PORT d (99:99:99) (115:115:115))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
@@ -1335,11 +2946,11 @@
     (INSTANCE core\|state\~8)
     (DELAY
       (ABSOLUTE
-        (PORT dataa (1228:1228:1228) (1174:1174:1174))
-        (PORT datac (1154:1154:1154) (1119:1119:1119))
-        (PORT datad (4301:4301:4301) (4397:4397:4397))
-        (IOPATH dataa combout (461:461:461) (481:481:481))
-        (IOPATH datac combout (327:327:327) (315:315:315))
+        (PORT datab (978:978:978) (963:963:963))
+        (PORT datac (3660:3660:3660) (3853:3853:3853))
+        (PORT datad (835:835:835) (812:812:812))
+        (IOPATH datab combout (472:472:472) (473:473:473))
+        (IOPATH datac combout (324:324:324) (315:315:315))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -1349,7 +2960,7 @@
     (INSTANCE core\|state\.finish)
     (DELAY
       (ABSOLUTE
-        (PORT clk (1599:1599:1599) (1637:1637:1637))
+        (PORT clk (1595:1595:1595) (1632:1632:1632))
         (PORT d (99:99:99) (115:115:115))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
@@ -1363,7 +2974,7 @@
     (INSTANCE spi\|wasdone\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (544:544:544) (568:568:568))
+        (PORT datad (565:565:565) (583:583:583))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -1373,7 +2984,7 @@
     (INSTANCE spi\|wasdone)
     (DELAY
       (ABSOLUTE
-        (PORT clk (1900:1900:1900) (2059:2059:2059))
+        (PORT clk (1692:1692:1692) (1777:1777:1777))
         (PORT d (99:99:99) (115:115:115))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
@@ -1383,18 +2994,27 @@
     )
   )
   (CELL
+    (CELLTYPE "cycloneive_io_ibuf")
+    (INSTANCE sdi\~input)
+    (DELAY
+      (ABSOLUTE
+        (IOPATH i o (764:764:764) (811:811:811))
+      )
+    )
+  )
+  (CELL
     (CELLTYPE "dffeas")
     (INSTANCE spi\|orientation\[0\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
-        (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
+        (PORT asdata (4083:4083:4083) (4264:4264:4264))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
     (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
+      (HOLD asdata (posedge clk) (212:212:212))
       (HOLD ena (posedge clk) (212:212:212))
     )
   )
@@ -1403,8 +3023,8 @@
     (INSTANCE spi\|orientation\[1\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datac (298:298:298) (376:376:376))
-        (IOPATH datac combout (327:327:327) (316:316:316))
+        (PORT datad (295:295:295) (364:364:364))
+        (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
   )
@@ -1413,9 +3033,9 @@
     (INSTANCE spi\|orientation\[1\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1429,8 +3049,8 @@
     (INSTANCE spi\|orientation\[2\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (510:510:510) (537:537:537))
-        (IOPATH datad combout (177:177:177) (155:155:155))
+        (PORT datac (625:625:625) (669:669:669))
+        (IOPATH datac combout (327:327:327) (316:316:316))
       )
     )
   )
@@ -1439,9 +3059,9 @@
     (INSTANCE spi\|orientation\[2\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2030:2030:2030) (1910:1910:1910))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1411:1411:1411) (1361:1361:1361))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1455,7 +3075,7 @@
     (INSTANCE spi\|orientation\[3\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (809:809:809) (788:788:788))
+        (PORT datad (296:296:296) (366:366:366))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -1465,9 +3085,9 @@
     (INSTANCE spi\|orientation\[3\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2009:2009:2009) (1901:1901:1901))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1663:1663:1663) (1654:1654:1654))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1481,7 +3101,7 @@
     (INSTANCE spi\|orientation\[4\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (296:296:296) (366:366:366))
+        (PORT datad (297:297:297) (367:367:367))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -1491,9 +3111,9 @@
     (INSTANCE spi\|orientation\[4\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2009:2009:2009) (1901:1901:1901))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1663:1663:1663) (1654:1654:1654))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1507,8 +3127,8 @@
     (INSTANCE spi\|orientation\[5\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (296:296:296) (366:366:366))
-        (IOPATH datad combout (177:177:177) (155:155:155))
+        (PORT datac (295:295:295) (373:373:373))
+        (IOPATH datac combout (327:327:327) (316:316:316))
       )
     )
   )
@@ -1517,9 +3137,9 @@
     (INSTANCE spi\|orientation\[5\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2009:2009:2009) (1901:1901:1901))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1663:1663:1663) (1654:1654:1654))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1533,7 +3153,7 @@
     (INSTANCE spi\|orientation\[6\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (861:861:861) (856:856:856))
+        (PORT datad (586:586:586) (638:638:638))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -1543,9 +3163,9 @@
     (INSTANCE spi\|orientation\[6\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2125:2125:2125) (2084:2084:2084))
+        (PORT clk (2084:2084:2084) (2042:2042:2042))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1664:1664:1664) (1649:1649:1649))
+        (PORT ena (1527:1527:1527) (1447:1447:1447))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1559,7 +3179,7 @@
     (INSTANCE spi\|orientation\[7\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (610:610:610) (651:651:651))
+        (PORT datad (295:295:295) (365:365:365))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -1569,9 +3189,9 @@
     (INSTANCE spi\|orientation\[7\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (1973:1973:1973) (1864:1864:1864))
+        (PORT clk (2084:2084:2084) (2042:2042:2042))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1672:1672:1672) (1652:1652:1652))
+        (PORT ena (1527:1527:1527) (1447:1447:1447))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1585,7 +3205,7 @@
     (INSTANCE spi\|orientation\[8\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (535:535:535) (550:550:550))
+        (PORT datad (574:574:574) (619:619:619))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -1595,9 +3215,9 @@
     (INSTANCE spi\|orientation\[8\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2009:2009:2009) (1901:1901:1901))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1663:1663:1663) (1654:1654:1654))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1611,7 +3231,7 @@
     (INSTANCE spi\|orientation\[9\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (802:802:802) (778:778:778))
+        (PORT datad (297:297:297) (367:367:367))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -1621,9 +3241,9 @@
     (INSTANCE spi\|orientation\[9\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1637,8 +3257,8 @@
     (INSTANCE spi\|orientation\[10\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datac (506:506:506) (530:530:530))
-        (IOPATH datac combout (327:327:327) (316:316:316))
+        (PORT datad (296:296:296) (366:366:366))
+        (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
   )
@@ -1647,9 +3267,9 @@
     (INSTANCE spi\|orientation\[10\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1663,8 +3283,8 @@
     (INSTANCE spi\|orientation\[11\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (498:498:498) (525:525:525))
-        (IOPATH datad combout (177:177:177) (155:155:155))
+        (PORT datac (297:297:297) (375:375:375))
+        (IOPATH datac combout (327:327:327) (316:316:316))
       )
     )
   )
@@ -1673,9 +3293,9 @@
     (INSTANCE spi\|orientation\[11\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1689,7 +3309,7 @@
     (INSTANCE spi\|orientation\[12\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (296:296:296) (367:367:367))
+        (PORT datad (582:582:582) (630:630:630))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -1699,9 +3319,9 @@
     (INSTANCE spi\|orientation\[12\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1715,8 +3335,8 @@
     (INSTANCE spi\|orientation\[13\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datac (506:506:506) (533:533:533))
-        (IOPATH datac combout (327:327:327) (316:316:316))
+        (PORT datad (297:297:297) (367:367:367))
+        (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
   )
@@ -1725,9 +3345,9 @@
     (INSTANCE spi\|orientation\[13\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1741,7 +3361,7 @@
     (INSTANCE spi\|orientation\[14\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datac (298:298:298) (377:377:377))
+        (PORT datac (299:299:299) (377:377:377))
         (IOPATH datac combout (327:327:327) (316:316:316))
       )
     )
@@ -1751,9 +3371,9 @@
     (INSTANCE spi\|orientation\[14\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1767,8 +3387,8 @@
     (INSTANCE spi\|orientation\[15\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (295:295:295) (365:365:365))
-        (IOPATH datad combout (177:177:177) (155:155:155))
+        (PORT datac (295:295:295) (373:373:373))
+        (IOPATH datac combout (327:327:327) (316:316:316))
       )
     )
   )
@@ -1777,9 +3397,9 @@
     (INSTANCE spi\|orientation\[15\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1793,7 +3413,7 @@
     (INSTANCE spi\|orientation\[16\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (819:819:819) (797:797:797))
+        (PORT datad (296:296:296) (367:367:367))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -1803,9 +3423,9 @@
     (INSTANCE spi\|orientation\[16\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2009:2009:2009) (1901:1901:1901))
+        (PORT clk (1936:1936:1936) (1824:1824:1824))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1663:1663:1663) (1654:1654:1654))
+        (PORT ena (1259:1259:1259) (1154:1154:1154))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1819,8 +3439,8 @@
     (INSTANCE spi\|orientation\[17\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datac (296:296:296) (375:375:375))
-        (IOPATH datac combout (327:327:327) (316:316:316))
+        (PORT datad (496:496:496) (522:522:522))
+        (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
   )
@@ -1829,9 +3449,9 @@
     (INSTANCE spi\|orientation\[17\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2009:2009:2009) (1901:1901:1901))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1663:1663:1663) (1654:1654:1654))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1845,8 +3465,8 @@
     (INSTANCE spi\|orientation\[18\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (296:296:296) (366:366:366))
-        (IOPATH datad combout (177:177:177) (155:155:155))
+        (PORT datac (296:296:296) (374:374:374))
+        (IOPATH datac combout (327:327:327) (316:316:316))
       )
     )
   )
@@ -1855,9 +3475,9 @@
     (INSTANCE spi\|orientation\[18\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2009:2009:2009) (1901:1901:1901))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1663:1663:1663) (1654:1654:1654))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1871,8 +3491,8 @@
     (INSTANCE spi\|orientation\[19\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (298:298:298) (368:368:368))
-        (IOPATH datad combout (177:177:177) (155:155:155))
+        (PORT datac (297:297:297) (376:376:376))
+        (IOPATH datac combout (327:327:327) (316:316:316))
       )
     )
   )
@@ -1881,9 +3501,9 @@
     (INSTANCE spi\|orientation\[19\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2009:2009:2009) (1901:1901:1901))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1663:1663:1663) (1654:1654:1654))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1897,8 +3517,8 @@
     (INSTANCE spi\|orientation\[20\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (775:775:775) (758:758:758))
-        (IOPATH datad combout (177:177:177) (155:155:155))
+        (PORT datac (295:295:295) (373:373:373))
+        (IOPATH datac combout (327:327:327) (316:316:316))
       )
     )
   )
@@ -1907,9 +3527,9 @@
     (INSTANCE spi\|orientation\[20\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2030:2030:2030) (1910:1910:1910))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1411:1411:1411) (1361:1361:1361))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1923,8 +3543,8 @@
     (INSTANCE spi\|orientation\[21\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (808:808:808) (790:790:790))
-        (IOPATH datad combout (177:177:177) (155:155:155))
+        (PORT datac (295:295:295) (373:373:373))
+        (IOPATH datac combout (327:327:327) (316:316:316))
       )
     )
   )
@@ -1933,9 +3553,9 @@
     (INSTANCE spi\|orientation\[21\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (1973:1973:1973) (1864:1864:1864))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1672:1672:1672) (1652:1652:1652))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1949,8 +3569,8 @@
     (INSTANCE spi\|orientation\[22\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (296:296:296) (366:366:366))
-        (IOPATH datad combout (177:177:177) (155:155:155))
+        (PORT datac (295:295:295) (373:373:373))
+        (IOPATH datac combout (327:327:327) (316:316:316))
       )
     )
   )
@@ -1959,9 +3579,9 @@
     (INSTANCE spi\|orientation\[22\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (1973:1973:1973) (1864:1864:1864))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1672:1672:1672) (1652:1652:1652))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -1975,7 +3595,7 @@
     (INSTANCE spi\|orientation\[23\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (805:805:805) (779:779:779))
+        (PORT datad (297:297:297) (367:367:367))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -1985,9 +3605,9 @@
     (INSTANCE spi\|orientation\[23\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2030:2030:2030) (1910:1910:1910))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1411:1411:1411) (1361:1361:1361))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -2001,7 +3621,7 @@
     (INSTANCE spi\|orientation\[24\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (296:296:296) (366:366:366))
+        (PORT datad (297:297:297) (368:368:368))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -2011,9 +3631,9 @@
     (INSTANCE spi\|orientation\[24\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2030:2030:2030) (1910:1910:1910))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1411:1411:1411) (1361:1361:1361))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -2027,7 +3647,7 @@
     (INSTANCE spi\|orientation\[25\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (296:296:296) (366:366:366))
+        (PORT datad (297:297:297) (367:367:367))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -2037,9 +3657,9 @@
     (INSTANCE spi\|orientation\[25\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2030:2030:2030) (1910:1910:1910))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1411:1411:1411) (1361:1361:1361))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -2053,7 +3673,7 @@
     (INSTANCE spi\|orientation\[26\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (533:533:533) (548:548:548))
+        (PORT datad (296:296:296) (366:366:366))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -2063,9 +3683,9 @@
     (INSTANCE spi\|orientation\[26\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -2079,8 +3699,8 @@
     (INSTANCE spi\|orientation\[27\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datac (296:296:296) (374:374:374))
-        (IOPATH datac combout (327:327:327) (316:316:316))
+        (PORT datad (295:295:295) (365:365:365))
+        (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
   )
@@ -2089,9 +3709,9 @@
     (INSTANCE spi\|orientation\[27\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -2105,7 +3725,7 @@
     (INSTANCE spi\|orientation\[28\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datad (295:295:295) (365:365:365))
+        (PORT datad (297:297:297) (367:367:367))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
@@ -2115,9 +3735,9 @@
     (INSTANCE spi\|orientation\[28\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -2131,8 +3751,8 @@
     (INSTANCE spi\|orientation\[29\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datac (295:295:295) (373:373:373))
-        (IOPATH datac combout (327:327:327) (316:316:316))
+        (PORT datad (296:296:296) (366:366:366))
+        (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
   )
@@ -2141,9 +3761,9 @@
     (INSTANCE spi\|orientation\[29\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -2157,8 +3777,8 @@
     (INSTANCE spi\|orientation\[30\]\~feeder)
     (DELAY
       (ABSOLUTE
-        (PORT datac (548:548:548) (568:568:568))
-        (IOPATH datac combout (327:327:327) (316:316:316))
+        (PORT datad (297:297:297) (367:367:367))
+        (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
   )
@@ -2167,9 +3787,9 @@
     (INSTANCE spi\|orientation\[30\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
         (PORT d (99:99:99) (115:115:115))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -2179,37 +3799,13 @@
     )
   )
   (CELL
-    (CELLTYPE "cycloneive_lcell_comb")
-    (INSTANCE spi\|sdodelayed\~feeder)
-    (DELAY
-      (ABSOLUTE
-        (PORT datad (894:894:894) (857:857:857))
-        (IOPATH datad combout (177:177:177) (155:155:155))
-      )
-    )
-  )
-  (CELL
-    (CELLTYPE "dffeas")
-    (INSTANCE spi\|sdodelayed)
-    (DELAY
-      (ABSOLUTE
-        (PORT clk (1932:1932:1932) (2064:2064:2064))
-        (PORT d (99:99:99) (115:115:115))
-        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
-      )
-    )
-    (TIMINGCHECK
-      (HOLD d (posedge clk) (212:212:212))
-    )
-  )
-  (CELL
     (CELLTYPE "dffeas")
     (INSTANCE spi\|orientation\[31\])
     (DELAY
       (ABSOLUTE
-        (PORT clk (2084:2084:2084) (1953:1953:1953))
-        (PORT asdata (999:999:999) (1012:1012:1012))
-        (PORT ena (1221:1221:1221) (1119:1119:1119))
+        (PORT clk (1745:1745:1745) (1683:1683:1683))
+        (PORT asdata (789:789:789) (859:859:859))
+        (PORT ena (1384:1384:1384) (1341:1341:1341))
         (IOPATH (posedge clk) q (261:261:261) (261:261:261))
       )
     )
@@ -2220,14 +3816,38 @@
   )
   (CELL
     (CELLTYPE "cycloneive_lcell_comb")
+    (INSTANCE spi\|sdodelayed\~feeder)
+    (DELAY
+      (ABSOLUTE
+        (PORT datad (885:885:885) (878:878:878))
+        (IOPATH datad combout (177:177:177) (155:155:155))
+      )
+    )
+  )
+  (CELL
+    (CELLTYPE "dffeas")
+    (INSTANCE spi\|sdodelayed)
+    (DELAY
+      (ABSOLUTE
+        (PORT clk (2031:2031:2031) (2088:2088:2088))
+        (PORT d (99:99:99) (115:115:115))
+        (IOPATH (posedge clk) q (261:261:261) (261:261:261))
+      )
+    )
+    (TIMINGCHECK
+      (HOLD d (posedge clk) (212:212:212))
+    )
+  )
+  (CELL
+    (CELLTYPE "cycloneive_lcell_comb")
     (INSTANCE spi\|sdo\~0)
     (DELAY
       (ABSOLUTE
-        (PORT dataa (811:811:811) (791:791:791))
-        (PORT datab (392:392:392) (471:471:471))
-        (PORT datad (541:541:541) (566:566:566))
-        (IOPATH dataa combout (471:471:471) (472:472:472))
-        (IOPATH datab combout (393:393:393) (408:408:408))
+        (PORT dataa (611:611:611) (633:633:633))
+        (PORT datab (386:386:386) (464:464:464))
+        (PORT datad (929:929:929) (950:950:950))
+        (IOPATH dataa combout (461:461:461) (481:481:481))
+        (IOPATH datab combout (455:455:455) (412:412:412))
         (IOPATH datac combout (462:462:462) (482:482:482))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
@@ -2238,9 +3858,11 @@
     (INSTANCE core\|mds\|datastream\~0)
     (DELAY
       (ABSOLUTE
-        (PORT datac (1149:1149:1149) (1114:1114:1114))
-        (PORT datad (1479:1479:1479) (1384:1384:1384))
-        (IOPATH datac combout (327:327:327) (315:315:315))
+        (PORT datab (1002:1002:1002) (991:991:991))
+        (PORT datac (1371:1371:1371) (1346:1346:1346))
+        (PORT datad (1334:1334:1334) (1379:1379:1379))
+        (IOPATH datab combout (410:410:410) (408:408:408))
+        (IOPATH datac combout (327:327:327) (316:316:316))
         (IOPATH datad combout (177:177:177) (155:155:155))
       )
     )
