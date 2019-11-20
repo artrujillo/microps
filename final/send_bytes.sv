@@ -1,6 +1,47 @@
-module send_bytes(input logic clk, reset,
-			         output logic datastream);
+module send_bytes(input  logic clk,
+           input  logic sck, 
+           input  logic sdi,
+           output logic sdo,
+           input  logic load,
+           output logic done,
+		   output logic datastream);
+
 	logic [31:0] orientation;
+
+	rubiks_spi spi(sck, sdi, sdo, done, orientation);
+	rubiks_core core(clk, load, orientation, done);
+
+endmodule
+
+module rubiks_spi(input  logic sck, 
+						input  logic sdi,
+						output logic sdo,
+						input  logic done,
+						output logic [31:0] orientation);
+
+    logic         sdodelayed, wasdone;
+    logic [31:0]  orientation_captured;
+               
+    // assert load
+    // apply 256 sclks to shift in key and plaintext, starting with orientation[0]
+    // then deassert load, wait until done
+    // then apply 24 sclks to shift out cyphertext, starting with cyphertext[0]
+    always_ff @(posedge sck)
+        if (!wasdone)  {orientation} = {orientation[30:0], sdi};
+    
+    // sdo should change on the negative edge of sck
+    always_ff @(negedge sck) begin
+        wasdone = done;
+        sdodelayed = orientation[30];
+    end
+    
+    // when done is first asserted, shift out msb before clock edge
+    assign sdo = (done & !wasdone) ? orientation[31] : sdodelayed;
+endmodule
+
+module rubiks_core(input logic clk, reset,
+					input logic [31:0] orientation,
+					output logic datastream,)
 		
 	typedef enum logic [1:0] {switching, sending, over} statetype;
 	statetype state, nextstate;
@@ -38,11 +79,11 @@ module send_bytes(input logic clk, reset,
 	//assign data = red ? 24'h00b000 : 24'h00f060; // BB, RR, GG
 	makesquares ms(clk, reset, resetsb, data);
 	
-	
 endmodule
 
 
 module makesquares(input  logic clk, reset, switchcolor,
+					input logic [31:0] orientation,
 						 output logic[23:0] color);
 			
 	logic [3:0] count;
@@ -135,63 +176,137 @@ module makesquares(input  logic clk, reset, switchcolor,
 	*/
 	
 	assign controlcolors = {blank, color9, color8, color7, color6, color5, color4, color3, color2, color1};
-	colormux cm(controlcolors, color);
+	colormux cm(controlcolors, orientation, color);
 		
 endmodule
 
 module colormux(input logic  [9:0] colorcontrol,
+				input logic [31:0] orientation,
 					 output logic [23:0] color);
+	logic [23:0] sqr1color, sqr2color, sqr3color, sqr4color, sqr5color, sqr6color, sqr7color, sqr8color, sqr9color;
 	
-	// red   : 00b000
+	
+	// red   : h00b000
 	// orange: 00f060
 	// yellow: 00b0b0
 	// green : 0000b0
 	// blue  : b00000
 	// purple: b05000
+
+	always_comb
+		case (orientation[2:0])
+			3'b000:  sqr1color = 24'h00b000
+			3'b001:  sqr1color = 24'h00f060
+			3'b010:  sqr1color = 24'h00b0b0
+			3'b011:  sqr1color = 24'h0000b0
+			3'b100:  sqr1color = 24'hb00000
+			3'b101:  sqr1color = 24'hb05000
+			default: sqr1color = 24'h000000;
+		endcase
+
+	always_comb
+		case (orientation[5:3])
+			3'b000:  sqr2color = 24'h00b000
+			3'b001:  sqr2color = 24'h00f060
+			3'b010:  sqr2color = 24'h00b0b0
+			3'b011:  sqr2color = 24'h0000b0
+			3'b100:  sqr2color = 24'hb00000
+			3'b101:  sqr2color = 24'hb05000
+			default: sqr2color = 24'h000000;
+		endcase
+
+	always_comb
+		case (orientation[8:6])
+			3'b000:  sqr3color = 24'h00b000
+			3'b001:  sqr3color = 24'h00f060
+			3'b010:  sqr3color = 24'h00b0b0
+			3'b011:  sqr3color = 24'h0000b0
+			3'b100:  sqr3color = 24'hb00000
+			3'b101:  sqr3color = 24'hb05000
+			default: sqr3color = 24'h000000;
+		endcase
+	
+	always_comb
+		case (orientation[11:9])
+			3'b000:  sqr4color = 24'h00b000
+			3'b001:  sqr4color = 24'h00f060
+			3'b010:  sqr4color = 24'h00b0b0
+			3'b011:  sqr4color = 24'h0000b0
+			3'b100:  sqr4color = 24'hb00000
+			3'b101:  sqr4color = 24'hb05000
+			default: sqr4color = 24'h000000;
+		endcase
+	
+	always_comb
+		case (orientation[14:12])
+			3'b000:  sqr5color = 24'h00b000
+			3'b001:  sqr5color = 24'h00f060
+			3'b010:  sqr5color = 24'h00b0b0
+			3'b011:  sqr5color = 24'h0000b0
+			3'b100:  sqr5color = 24'hb00000
+			3'b101:  sqr5color = 24'hb05000
+			default: sqr5color = 24'h000000;
+		endcase
+	
+	always_comb
+		case (orientation[17:15])
+			3'b000:  sqr6color = 24'h00b000
+			3'b001:  sqr6color = 24'h00f060
+			3'b010:  sqr6color = 24'h00b0b0
+			3'b011:  sqr6color = 24'h0000b0
+			3'b100:  sqr6color = 24'hb00000
+			3'b101:  sqr6color = 24'hb05000
+			default: sqr6color = 24'h000000;
+		endcase
+	
+	always_comb
+		case (orientation[20:18])
+			3'b000:  sqr7color = 24'h00b000
+			3'b001:  sqr7color = 24'h00f060
+			3'b010:  sqr7color = 24'h00b0b0
+			3'b011:  sqr7color = 24'h0000b0
+			3'b100:  sqr7color = 24'hb00000
+			3'b101:  sqr7color = 24'hb05000
+			default: sqr7color = 24'h000000;
+		endcase
+	
+	always_comb
+		case (orientation[23:21])
+			3'b000:  sqr8color = 24'h00b000
+			3'b001:  sqr8color = 24'h00f060
+			3'b010:  sqr8color = 24'h00b0b0
+			3'b011:  sqr8color = 24'h0000b0
+			3'b100:  sqr8color = 24'hb00000
+			3'b101:  sqr8color = 24'hb05000
+			default: sqr8color = 24'h000000;
+		endcase
+	
+	always_comb
+		case (orientation[26:24])
+			3'b000:  sqr9color = 24'h00b000
+			3'b001:  sqr9color = 24'h00f060
+			3'b010:  sqr9color = 24'h00b0b0
+			3'b011:  sqr9color = 24'h0000b0
+			3'b100:  sqr9color = 24'hb00000
+			3'b101:  sqr9color = 24'hb05000
+			default: sqr9color = 24'h000000;
+		endcase
 	
 	always_comb
 		case (colorcontrol)
-			10'b0000000001: color = 24'h00b000;
-			10'b0000000010: color = 24'h00f060;
-			10'b0000000100: color = 24'h00b0b0;
-			10'b0000001000: color = 24'h0000b0;
-			10'b0000010000: color = 24'hb00000;
-			10'b0000100000: color = 24'hb05000;
-			10'b0001000000: color = 24'h00b000;
-			10'b0010000000: color = 24'h00f060;
-			10'b0100000000: color = 24'h00b0b0;
+			10'b0000000001: color = sqr1color;
+			10'b0000000010: color = sqr2color;
+			10'b0000000100: color = sqr3color;
+			10'b0000001000: color = sqr4color;
+			10'b0000010000: color = sqr5color;
+			10'b0000100000: color = sqr6color;
+			10'b0001000000: color = sqr7color;
+			10'b0010000000: color = sqr8color;
+			10'b0100000000: color = sqr9color;
 			10'b1000000000: color = 24'h000000;
 			default: color = 24'h000000;
 		endcase
 
-endmodule
-							
-
-
-module rubiks_spi(input  logic sck, 
-						input  logic sdi,
-						output logic sdo,
-						input  logic done,
-						output logic [31:0] orientation);
-
-    logic         sdodelayed, wasdone;
-    logic [31:0]  orientation_captured;
-               
-    // assert load
-    // apply 256 sclks to shift in key and plaintext, starting with orientation[0]
-    // then deassert load, wait until done
-    // then apply 24 sclks to shift out cyphertext, starting with cyphertext[0]
-    always_ff @(posedge sck)
-        if (!wasdone)  {orientation} = {orientation[30:0], sdi};
-    
-    // sdo should change on the negative edge of sck
-    always_ff @(negedge sck) begin
-        wasdone = done;
-        sdodelayed = orientation[30];
-    end
-    
-    // when done is first asserted, shift out msb before clock edge
-    assign sdo = (done & !wasdone) ? orientation[31] : sdodelayed;
 endmodule
 
 
