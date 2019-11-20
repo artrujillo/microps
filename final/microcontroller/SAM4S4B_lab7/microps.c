@@ -21,7 +21,7 @@ Fall 2019
 
 // mid-point demo orientations
 
-//char cwOrientation[4] = {0x60, 0x89, 0x29, 0x00};
+// hard-coded bits to be sent over spi
 char cwOrientation[4] = {0x00, 0x29, 0x89, 0x60};
 
 
@@ -62,7 +62,7 @@ int main(void) {
 	pioPinMode(ledCCW, PIO_OUTPUT);
 	pioDigitalWrite(ledCW, 0);
 	pioDigitalWrite(ledCCW, 0);
-	
+
   while(1){
       rot = pioDigitalRead(pinCW);
       if (rot != pinCWLast){ // Means the knob is rotating

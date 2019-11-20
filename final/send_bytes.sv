@@ -9,6 +9,8 @@ module send_bytes(input  logic clk,
 
 	logic [31:0] orientation;
 
+	// our spi is currently not working as expected, so the communication between 
+	// these modules is very minimal at this time.
 	rubiks_spi spi(sck, sdi, sdo, done, orientation);
 	rubiks_core core(clk, load, orientation, done, datastream);
 
@@ -210,6 +212,8 @@ module makesquares(input  logic clk, reset, switchcolor,
 		
 endmodule
 
+// takes in 3 bits of current orientation and converts them to the 
+// corresponding HEX values that we need to illuminate the matrix
 module convert_orientation(input  logic  [2:0]  bit_value,
 									output logic  [23:0] hex_value);
 
@@ -226,11 +230,16 @@ module convert_orientation(input  logic  [2:0]  bit_value,
 									
 endmodule
 
+
+// takes in the current orientation as well as a one-hot encoding that 
+// allows us to illuminate the matrix properly
 module colormux(input logic  [9:0] colorcontrol,
 					 input logic [31:0] orientation,
 					 output logic [23:0] color);
 	logic [23:0] sqr1color, sqr2color, sqr3color, sqr4color, sqr5color, sqr6color, sqr7color, sqr8color, sqr9color;
 	
+	// convert each necessary piece of the orientation into the proper
+	// HEX value for the square that the color corresponds to
 	convert_orientation color1(orientation[2:0], sqr1color);
 	convert_orientation color2(orientation[5:3], sqr2color);
 	convert_orientation color3(orientation[8:6], sqr3color);
