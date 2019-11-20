@@ -1,5 +1,5 @@
 Analysis & Synthesis report for send_bytes
-Tue Nov 19 14:58:03 2019
+Tue Nov 19 19:42:48 2019
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -49,7 +49,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Nov 19 14:58:03 2019       ;
+; Analysis & Synthesis Status        ; Successful - Tue Nov 19 19:42:48 2019       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; send_bytes                                  ;
 ; Top-level Entity Name              ; send_bytes                                  ;
@@ -169,13 +169,13 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                 ;
-+----------------------------------+-----------------+------------------------------------+----------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                       ; Library ;
-+----------------------------------+-----------------+------------------------------------+----------------------------------------------------+---------+
-; send_bytes.sv                    ; yes             ; Auto-Found SystemVerilog HDL File  ; C:/Users/pking/Desktop/microps/final/send_bytes.sv ;         ;
-+----------------------------------+-----------------+------------------------------------+----------------------------------------------------+---------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                     ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                           ; Library ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------+---------+
+; send_bytes.sv                    ; yes             ; Auto-Found SystemVerilog HDL File  ; C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv ;         ;
++----------------------------------+-----------------+------------------------------------+--------------------------------------------------------+---------+
 
 
 +---------------------------------------------------------+
@@ -386,27 +386,28 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Tue Nov 19 14:57:53 2019
+    Info: Processing started: Tue Nov 19 19:42:37 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off send_bytes -c send_bytes
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file testbench.sv
-    Info (12023): Found entity 1: testbench File: C:/Users/pking/Desktop/microps/final/testbench.sv Line: 12
-Warning (12125): Using design file send_bytes.sv, which is not specified as a design file for the current project, but contains definitions for 5 design units and 5 entities in project
-    Info (12023): Found entity 1: send_bytes File: C:/Users/pking/Desktop/microps/final/send_bytes.sv Line: 1
-    Info (12023): Found entity 2: makesquares File: C:/Users/pking/Desktop/microps/final/send_bytes.sv Line: 44
-    Info (12023): Found entity 3: colormux File: C:/Users/pking/Desktop/microps/final/send_bytes.sv Line: 141
-    Info (12023): Found entity 4: make_data_stream File: C:/Users/pking/Desktop/microps/final/send_bytes.sv Line: 206
-    Info (12023): Found entity 5: countervalmux File: C:/Users/pking/Desktop/microps/final/send_bytes.sv Line: 278
+    Info (12023): Found entity 1: testbench File: C:/Users/atrujillo/Desktop/microps/final/testbench.sv Line: 12
+Warning (12125): Using design file send_bytes.sv, which is not specified as a design file for the current project, but contains definitions for 6 design units and 6 entities in project
+    Info (12023): Found entity 1: send_bytes File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 1
+    Info (12023): Found entity 2: makesquares File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 45
+    Info (12023): Found entity 3: colormux File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 142
+    Info (12023): Found entity 4: rubiks_spi File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 171
+    Info (12023): Found entity 5: make_data_stream File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 205
+    Info (12023): Found entity 6: countervalmux File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 277
 Info (12127): Elaborating entity "send_bytes" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at send_bytes.sv(22): truncated value with size 32 to match size of target (9) File: C:/Users/pking/Desktop/microps/final/send_bytes.sv Line: 22
-Info (12128): Elaborating entity "make_data_stream" for hierarchy "make_data_stream:mds" File: C:/Users/pking/Desktop/microps/final/send_bytes.sv Line: 11
-Warning (10230): Verilog HDL assignment warning at send_bytes.sv(227): truncated value with size 32 to match size of target (11) File: C:/Users/pking/Desktop/microps/final/send_bytes.sv Line: 227
-Warning (10230): Verilog HDL assignment warning at send_bytes.sv(232): truncated value with size 32 to match size of target (5) File: C:/Users/pking/Desktop/microps/final/send_bytes.sv Line: 232
-Info (12128): Elaborating entity "countervalmux" for hierarchy "make_data_stream:mds|countervalmux:cntrvalmux" File: C:/Users/pking/Desktop/microps/final/send_bytes.sv Line: 272
-Info (12128): Elaborating entity "makesquares" for hierarchy "makesquares:ms" File: C:/Users/pking/Desktop/microps/final/send_bytes.sv Line: 38
-Info (12128): Elaborating entity "colormux" for hierarchy "makesquares:ms|colormux:cm" File: C:/Users/pking/Desktop/microps/final/send_bytes.sv Line: 137
-Info (10264): Verilog HDL Case Statement information at send_bytes.sv(152): all case item expressions in this case statement are onehot File: C:/Users/pking/Desktop/microps/final/send_bytes.sv Line: 152
+Warning (10230): Verilog HDL assignment warning at send_bytes.sv(23): truncated value with size 32 to match size of target (9) File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 23
+Info (12128): Elaborating entity "make_data_stream" for hierarchy "make_data_stream:mds" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 12
+Warning (10230): Verilog HDL assignment warning at send_bytes.sv(226): truncated value with size 32 to match size of target (11) File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 226
+Warning (10230): Verilog HDL assignment warning at send_bytes.sv(231): truncated value with size 32 to match size of target (5) File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 231
+Info (12128): Elaborating entity "countervalmux" for hierarchy "make_data_stream:mds|countervalmux:cntrvalmux" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 271
+Info (12128): Elaborating entity "makesquares" for hierarchy "makesquares:ms" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 39
+Info (12128): Elaborating entity "colormux" for hierarchy "makesquares:ms|colormux:cm" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 138
+Info (10264): Verilog HDL Case Statement information at send_bytes.sv(153): all case item expressions in this case statement are onehot File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 153
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 12 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
@@ -417,8 +418,8 @@ Info (21057): Implemented 135 device resources after synthesis - the final resou
     Info (21061): Implemented 132 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 5 warnings
     Info: Peak virtual memory: 4757 megabytes
-    Info: Processing ended: Tue Nov 19 14:58:04 2019
+    Info: Processing ended: Tue Nov 19 19:42:48 2019
     Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:22
+    Info: Total CPU time (on all processors): 00:00:24
 
 

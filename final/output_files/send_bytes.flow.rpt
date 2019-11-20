@@ -1,5 +1,5 @@
 Flow report for send_bytes
-Tue Nov 19 14:58:15 2019
+Tue Nov 19 19:42:59 2019
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -40,7 +40,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Tue Nov 19 14:58:15 2019       ;
+; Flow Status                        ; Successful - Tue Nov 19 19:42:59 2019       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; send_bytes                                  ;
 ; Top-level Entity Name              ; send_bytes                                  ;
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/19/2019 14:57:53 ;
+; Start date & time ; 11/19/2019 19:42:37 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; send_bytes          ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 22759552521597.157420427323592         ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 22759552388169.157422135717164         ; --            ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Systemverilog Hdl                      ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (SystemVerilog)        ; <None>        ; --          ; --             ;
 ; EDA_TIME_SCALE                      ; 1 ps                                   ; --            ; --          ; eda_simulation ;
@@ -94,12 +94,12 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:10     ; 1.0                     ; 4750 MB             ; 00:00:22                           ;
-; Fitter               ; 00:00:04     ; 1.0                     ; 5237 MB             ; 00:00:05                           ;
-; Assembler            ; 00:00:00     ; 1.0                     ; 4690 MB             ; 00:00:01                           ;
-; Timing Analyzer      ; 00:00:02     ; 1.0                     ; 4747 MB             ; 00:00:02                           ;
+; Analysis & Synthesis ; 00:00:11     ; 1.0                     ; 4750 MB             ; 00:00:24                           ;
+; Fitter               ; 00:00:04     ; 1.0                     ; 5236 MB             ; 00:00:04                           ;
+; Assembler            ; 00:00:01     ; 1.0                     ; 4689 MB             ; 00:00:01                           ;
+; Timing Analyzer      ; 00:00:01     ; 1.0                     ; 4743 MB             ; 00:00:02                           ;
 ; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4656 MB             ; 00:00:01                           ;
-; Total                ; 00:00:17     ; --                      ; --                  ; 00:00:31                           ;
+; Total                ; 00:00:18     ; --                      ; --                  ; 00:00:32                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -108,11 +108,11 @@ refer to the applicable agreement for further details.
 +----------------------+------------------+------------+------------+----------------+
 ; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +----------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis ; Eng-B185microP4  ; Windows 10 ; 10.0       ; x86_64         ;
-; Fitter               ; Eng-B185microP4  ; Windows 10 ; 10.0       ; x86_64         ;
-; Assembler            ; Eng-B185microP4  ; Windows 10 ; 10.0       ; x86_64         ;
-; Timing Analyzer      ; Eng-B185microP4  ; Windows 10 ; 10.0       ; x86_64         ;
-; EDA Netlist Writer   ; Eng-B185microP4  ; Windows 10 ; 10.0       ; x86_64         ;
+; Analysis & Synthesis ; Eng-B185-P       ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter               ; Eng-B185-P       ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler            ; Eng-B185-P       ; Windows 10 ; 10.0       ; x86_64         ;
+; Timing Analyzer      ; Eng-B185-P       ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer   ; Eng-B185-P       ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 

@@ -1,7 +1,7 @@
 |send_bytes
 clk => clk.IN2
 reset => reset.IN1
-datastream <= make_data_stream:mds.port3
+datastream << make_data_stream:mds.port3
 
 
 |send_bytes|make_data_stream:mds

@@ -1,6 +1,6 @@
 vendor_name = ModelSim
-source_file = 1, C:/Users/pking/Desktop/microps/final/testbench.sv
-source_file = 1, C:/Users/pking/Desktop/microps/final/send_bytes.sv
+source_file = 1, C:/Users/atrujillo/Desktop/microps/final/testbench.sv
+source_file = 1, C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv
 design_name = send_bytes
 instance = comp, \datastream~output , datastream~output, send_bytes, 1
 instance = comp, \clk~input , clk~input, send_bytes, 1

@@ -1,5 +1,6 @@
 module send_bytes(input logic clk, reset,
 			         output logic datastream);
+	logic [31:0] orientation;
 		
 	typedef enum logic [1:0] {switching, sending, over} statetype;
 	statetype state, nextstate;
@@ -166,35 +167,33 @@ module colormux(input logic  [9:0] colorcontrol,
 endmodule
 							
 
-/*
-module aes_spi(input  logic sck, 
-               input  logic sdi,
-               output logic sdo,
-               input  logic done,
-               output logic [23:0] orientation
-               input  logic [23:0] finished);
+
+module rubiks_spi(input  logic sck, 
+						input  logic sdi,
+						output logic sdo,
+						input  logic done,
+						output logic [31:0] orientation);
 
     logic         sdodelayed, wasdone;
-    logic [23:0] finishedcaptured;
+    logic [31:0]  orientation_captured;
                
     // assert load
     // apply 256 sclks to shift in key and plaintext, starting with orientation[0]
     // then deassert load, wait until done
     // then apply 24 sclks to shift out cyphertext, starting with cyphertext[0]
     always_ff @(posedge sck)
-        if (!wasdone)  {orientation} = {orientation[22:0], sdi};
-        else           {orientation} = {orientation, sdi}; 
+        if (!wasdone)  {orientation} = {orientation[30:0], sdi};
     
     // sdo should change on the negative edge of sck
     always_ff @(negedge sck) begin
         wasdone = done;
-        sdodelayed = finishedcaptured[22];
+        sdodelayed = orientation[30];
     end
     
     // when done is first asserted, shift out msb before clock edge
-    assign sdo = (done & !wasdone) ? finished[23] : sdodelayed;
+    assign sdo = (done & !wasdone) ? orientation[31] : sdodelayed;
 endmodule
-*/
+
 
 
 /////////////////////////////////////////////////////////////

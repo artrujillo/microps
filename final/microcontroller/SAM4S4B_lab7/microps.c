@@ -16,21 +16,21 @@ Fall 2019
 #define pinCW PIO_PA10 // Connected to CLK on KY­040
 #define ledCW PIO_PA17
 #define ledCCW PIO_PA18
+#define LOAD_PIN 29
+#define DONE_PIN 30
+///////////////////////////
+// function prototypes
+///////////////////////////
 
-int setup_rot_encoder() {
-	pioPinMode(pinCW, PIO_INPUT);
-	pioPinMode(pinCCW, PIO_INPUT);
-	/* Read Pin A
-	Whatever state it's in will reflect the last position
-	*/
-	return pioDigitalRead(pinCW);
-}
+int setup_rot_encoder();
+void send_orientation(char*);
+
+///////////////////////////
+// main
+//////////////////////////
 
 int main(void) {
-	uint16_t CW;
-	uint16_t CCW;
 	uint16_t pinCWLast;
-	uint16_t rotCW;
 	uint16_t rot;
 	samInit();
 	pioInit();
@@ -56,4 +56,31 @@ int main(void) {
         }
 			pinCWLast = rot;
     }
+}
+
+///////////////////////////
+// helper functions
+///////////////////////////
+
+int setup_rot_encoder() {
+	pioPinMode(pinCW, PIO_INPUT);
+	pioPinMode(pinCCW, PIO_INPUT);
+	/* Read Pin A
+	Whatever state it's in will reflect the last position
+	*/
+	return pioDigitalRead(pinCW);
+}
+
+void send_orientation(char* current_orientation){
+	int i;
+	
+	pioDigitalWrite(LOAD_PIN, 1);
+	
+	for (i = 0; i < 4; i++){
+		spiSendReceive(current_orientation[i]);
+	}
+	
+	pioDigitalWrite(LOAD_PIN, 0);
+	
+	while(!pioDigitalRead(DONE_PIN));
 }
