@@ -18,6 +18,13 @@ Fall 2019
 #define ledCCW PIO_PA18
 #define LOAD_PIN 29
 #define DONE_PIN 30
+
+// mid-point demo orientations
+
+//char cwOrientation[4] = {0x60, 0x89, 0x29, 0x00};
+char cwOrientation[4] = {0x00, 0x29, 0x89, 0x60};
+
+
 ///////////////////////////
 // function prototypes
 ///////////////////////////
@@ -41,6 +48,12 @@ int main(void) {
 	uint16_t rot; // used to read a current rot position 
 	samInit();
 	pioInit();
+	spiInit(MCK_FREQ/244000, 0, 1);
+	
+	pioPinMode(LOAD_PIN, PIO_OUTPUT);
+	pioPinMode(DONE_PIN, PIO_INPUT);
+	
+	send_orientation(cwOrientation);
 	
   	pinCWLast = setup_rot_encoder();
 	
