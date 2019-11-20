@@ -15,6 +15,16 @@ module send_bytes(input  logic clk,
 endmodule
 
 
+
+/*
+Our spi module does not fully work at this point. We still need to debug using
+the logic analyzer to see what exactly is being passed through from the MC to the
+FPGA. Once we debug this, we will no longer need to hard code 'orientation' in our 
+makesquares module.
+*/
+
+// SPI module used to retrieve the current cube orientation from the MC and return
+// a DONE signal to the MC once the display has been illuminated
 module rubiks_spi(input  logic sck, 
 						input  logic sdi,
 						output logic sdo,
@@ -25,9 +35,8 @@ module rubiks_spi(input  logic sck,
     logic [31:0]  orientation_captured;
                
     // assert load
-    // apply 256 sclks to shift in key and plaintext, starting with orientation[0]
+    // apply 32 sclks to shift orientation starting with orientation[0]
     // then deassert load, wait until done
-    // then apply 24 sclks to shift out cyphertext, starting with cyphertext[0]
     always_ff @(posedge sck)
         if (!wasdone)  {orientation} = {orientation[30:0], sdi};
     
