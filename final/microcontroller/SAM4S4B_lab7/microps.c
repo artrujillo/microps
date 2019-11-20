@@ -22,7 +22,14 @@ Fall 2019
 // function prototypes
 ///////////////////////////
 
+// does basic PIO setup for the rotary encoder
+// returns the initial read of the rotary encoder this
+// read is used to later detect changes in rotation
 int setup_rot_encoder();
+
+// spi communication for microcontroller
+// takes in an array of bytes that are then sent over 
+// using spiSendRecieve and then waits for a DONE signal
 void send_orientation(char*);
 
 ///////////////////////////
@@ -30,17 +37,19 @@ void send_orientation(char*);
 //////////////////////////
 
 int main(void) {
-	uint16_t pinCWLast;
-	uint16_t rot;
+	uint16_t pinCWLast; // used to track the most recent rot. encoder position
+	uint16_t rot; // used to read a current rot position 
 	samInit();
 	pioInit();
 	
-  pinCWLast = setup_rot_encoder();
+  	pinCWLast = setup_rot_encoder();
 	
+	// PIO setup for rot. encoder demo
 	pioPinMode(ledCW, PIO_OUTPUT);
 	pioPinMode(ledCCW, PIO_OUTPUT);
 	pioDigitalWrite(ledCW, 0);
 	pioDigitalWrite(ledCCW, 0);
+	
   while(1){
       rot = pioDigitalRead(pinCW);
       if (rot != pinCWLast){ // Means the knob is rotating
