@@ -1,3 +1,4 @@
+// top level module, contains spi and core modules
 module send_bytes(input  logic clk,
            input  logic sck, 
            input  logic sdi,
@@ -12,6 +13,7 @@ module send_bytes(input  logic clk,
 	rubiks_core core(clk, load, orientation, done, datastream);
 
 endmodule
+
 
 module rubiks_spi(input  logic sck, 
 						input  logic sdi,
@@ -39,6 +41,8 @@ module rubiks_spi(input  logic sck,
     assign sdo = (done & !wasdone) ? orientation[31] : sdodelayed;
 endmodule
 
+
+// programs a rubiks face with colors given by orientation
 module rubiks_core(input logic clk, reset,
 					input logic [31:0] orientation,
 					output logic finished,
@@ -50,44 +54,53 @@ module rubiks_core(input logic clk, reset,
 	logic resetsb, done, red;
 	logic [23:0] data;
 	logic [8:0] count;
-	
-	make_data_stream mds(clk, resetsb, data, datastream, done);
-	
+		
+	// register for finite state machine, counter
 	always_ff @(posedge clk)
 		if (reset) begin
 			state <= switching;
-			red <= 0;
+			red <= 0; // for easy testing/programming of LED matrix
 			count <= 0;
 		end
 		else begin
 			state <= nextstate;
-			if (state == sending) red <= ~red;
-			else count <= count+1;
+			if (state == sending) red <= ~red; // for testing
+			else count <= count+1; // counter for how many LEDs have been programmed
 		end
 		
+	// next state logic for finite state machine
+	// sending: waits for make_data_stream to send 24 bits
+	// switching: updates data to be a new 24 color bits
+	// over and finish: show that this face is done writing so that we can write the next one
 	always_comb 
 		case (state)
 			switching: nextstate = sending;
 			sending:   if (count == 9'd65) nextstate = over;
-						  else if (done)     nextstate = switching;
-						  else               nextstate = sending;
+						  else if (done)      nextstate = switching;
+						  else                nextstate = sending;
 			over: 	  nextstate = finish;
 			finish:    nextstate = finish;
 			default:	  nextstate = finish;
 						  
 		endcase
 	
+	// control logic
 	assign finished = (state == finish);
 	assign resetsb = (state == switching);
-	//assign data = red ? 24'h00b000 : 24'h00f060; // BB, RR, GG
-	//makesquares ms(clk, reset, resetsb, orientation, data);
-	 makesquares ms(clk, reset, resetsb, data);
+	
+	//assign data = red ? 24'h00b000 : 24'h00f060; // for easy testing/programming of LED matrix
+	//makesquares ms(clk, reset, resetsb, orientation, data); // orientation is currently hardcoded because SPI isn't working 
+	
+	// get the 24-bit color data from make squares
+	makesquares ms(clk, reset, resetsb, data);
+	// make the datastream based on the 24 bits of color data
+	make_data_stream mds(clk, resetsb, data, datastream, done);
 	
 endmodule
 
-
+// outputs colors in correct order to display squares for rubiks cube
 module makesquares(input  logic clk, reset, switchcolor,
-					//input logic [31:0] orientation,
+						//input logic [31:0] orientation, // orientation is currently hardcoded because SPI isn't working
 						 output logic[23:0] color);
 			
 	logic [3:0] count;
@@ -96,10 +109,11 @@ module makesquares(input  logic clk, reset, switchcolor,
 	
 	logic switchcolumn, oddcol;
 	
+	// 
 	logic [31:0] orientation;
-	
 	assign orientation = 32'b00000000001010011000100101100000;
 	
+	// control logic for choosing correct color
 	logic color1, color2, color3, color4, color5, color6, color7, color8, color9, blank;
 	logic [9:0] controlcolors;
 	
@@ -130,7 +144,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 		
 	always_comb
 		case (row)
-			4'd9: nextrow = 4'd0;
+			4'd9: nextrow = 4'd0; // buffer state to handle reset case
 			4'd0: if (column == 4'd7) nextrow = 4'd8;
 					else if (oddcol) nextrow = 4'd0;
 					else 		        nextrow = 4'd1;
@@ -152,13 +166,11 @@ module makesquares(input  logic clk, reset, switchcolor,
 			default: nextrow = 4'd8;
 		endcase
 		
+	// control logic 
 	assign switchcolumn = (oddcol & (row == 4'd0)) | ((~oddcol) & (row == 4'd7));
-	
-	
 	assign oddcol = (column == 4'd1)|(column == 4'd3)|(column == 4'd5)|(column == 4'd7);
 	
-	
-	// this is the correct way
+	// color bit logic 
 	assign blank = (row == 4'd2)|(row == 4'd5)|(column== 4'd5)|(column== 4'd2);
 	assign color1 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd0)|(column== 4'd1));
 	assign color2 = ((row == 4'd3)|(row == 4'd4))&((column== 4'd0)|(column== 4'd1));
@@ -170,7 +182,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	assign color8 = ((row == 4'd3)|(row == 4'd4))&((column== 4'd6)|(column== 4'd7));
 	assign color9 = ((row == 4'd6)|(row == 4'd7))&((column== 4'd6)|(column== 4'd7));
 	
-	/*
+	/* experimenting with another way we could display a face
 	assign blank = (row == 4'd7)|(column == 4'd7)|(row == 4'd6)|(column == 4'd6);
 	assign color1 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd0)|(column== 4'd1));
 	assign color2 = ((row == 4'd2)|(row == 4'd3))&((column== 4'd0)|(column== 4'd1));
@@ -183,6 +195,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	assign color9 = ((row == 4'd4)|(row == 4'd5))&((column== 4'd4)|(column== 4'd5));
 	*/
 	
+	// choose the color data based on the color mux
 	assign controlcolors = {blank, color9, color8, color7, color6, color5, color4, color3, color2, color1};
 	colormux cm(controlcolors, orientation, color);
 		
@@ -205,7 +218,7 @@ module convert_orientation(input  logic  [2:0]  bit_value,
 endmodule
 
 module colormux(input logic  [9:0] colorcontrol,
-				input logic [31:0] orientation,
+					 input logic [31:0] orientation,
 					 output logic [23:0] color);
 	logic [23:0] sqr1color, sqr2color, sqr3color, sqr4color, sqr5color, sqr6color, sqr7color, sqr8color, sqr9color;
 	
@@ -281,6 +294,11 @@ module make_data_stream(input logic clk, reset,
     else state <= nextstate;
 
   // nextstate logic
+  // T0H: high pulse for writing a 0
+  // T1H: high pulse for writing a 1
+  // T0L: low pulse for writing a 0
+  // T1L: low pulse for writing a 1
+  // R: reset to indicate shift
   always_comb
     case (state)
       T0H: if (~reset_counter) nextstate = T0H;
@@ -303,14 +321,14 @@ module make_data_stream(input logic clk, reset,
     endcase
 
   // control signal logic 
-  assign currentbit = data[bitcounter];
-  assign nextbit = data[bitcounter+1];
-  assign done = (bitcounter == 5'd24 & reset_counter);
-  assign reset_counter = (count == counterval);
-  assign incbitcounter = (state == T0L)|(state==T1L);
-  assign datastream = ((state == T1H)|(state == T0H))&(~reset);
-  assign s = {{state==R},(state==T0L)|(state==T1L), (state==T1H)|(state==T1L)};
-  countervalmux cntrvalmux(s, counterval);
+  assign currentbit = data[bitcounter]; // current bit that is being written
+  assign nextbit = data[bitcounter+1]; // get the next bit to write
+  assign done = (bitcounter == 5'd24 & reset_counter); // when all 24 bits have been written, single pulse
+  assign reset_counter = (count == counterval); // switch to next state, and reset counter
+  assign incbitcounter = (state == T0L)|(state==T1L); // when the bit counter should be updated, which is low pulse
+  assign datastream = ((state == T1H)|(state == T0H))&(~reset); // data stream is high when we are in high pulse states
+  assign s = {{state==R},(state==T0L)|(state==T1L), (state==T1H)|(state==T1L)}; // input to mux to choose constants
+  countervalmux cntrvalmux(s, counterval); // mux chooses constants, depending on how long the pulse should be
 
 endmodule
 
@@ -321,12 +339,12 @@ module countervalmux(input  logic  [2:0] s,
 
   always_comb
     case (s)
-      3'b000: out = 11'd16;
-      3'b001: out = 11'd32;
-      3'b010: out = 11'd34;
-      3'b011: out = 11'd18;
-      3'b100: out = 11'd2000;
-		default: out = 11'd2000;
+      3'b000: out = 11'd16; // T0H
+      3'b001: out = 11'd32; // T1H
+      3'b010: out = 11'd34; // T0L
+      3'b011: out = 11'd18; // T1L
+      3'b100: out = 11'd2000; // R
+		default: out = 11'd2000; // R
     endcase
 
 endmodule
