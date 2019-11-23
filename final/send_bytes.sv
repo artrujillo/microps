@@ -8,7 +8,7 @@ module send_bytes(input  logic clk,
            output logic done,
 		   output logic datastream);
 
-	logic [31:0] orientation;
+	logic [161:0] orientation;
 
 	// our spi is currently not working as expected, so the communication between 
 	// these modules is very minimal at this time.
@@ -32,19 +32,19 @@ module rubiks_spi(input  logic sck,
 						input  logic sdi,
 						output logic sdo,
 						input  logic load,
-						output logic [31:0] orientation);
+						output logic [161:0] orientation);
                
     // assert load
     // apply 32 sclks to shift orientation starting with orientation[0]
     always_ff @(posedge sck)
-        if (load)  {orientation} = {orientation[30:0], sdi};
+        if (load)  {orientation} = {orientation[160:0], sdi};
     
 endmodule
 
 
 // programs a rubiks face with colors given by orientation
 module rubiks_core(input logic clk, reset,
-					input logic [31:0] orientation,
+					input logic [161:0] orientation,
 					output logic finished,
 					output logic datastream);
 		
@@ -89,7 +89,7 @@ module rubiks_core(input logic clk, reset,
 	assign resetsb = (state == switching);
 	
 	// get the 24-bit color data from make squares
-	makesquares ms(clk, reset, resetsb, orientation, data); // orientation is currently hardcoded because SPI isn't working 
+	makesquares ms(clk, reset, resetsb, orientation, data);
 	
 	// make the datastream based on the 24 bits of color data
 	make_data_stream mds(clk, resetsb, data, datastream, done);
@@ -98,12 +98,21 @@ endmodule
 
 // outputs colors in correct order to display squares for rubiks cube
 module makesquares(input  logic clk, reset, switchcolor,
-						 input  logic [31:0] orientation,
-						 output logic[23:0] color);
+						 input  logic [161:0] orientation,
+						 output logic [23:0] color);
 			
-	logic [3:0] count;
+	logic [2:0] count;
 	logic [3:0] column, nextcolumn;
 	logic [3:0] row, nextrow;
+	logic [26:0] redface, orangeface, yellowface, greenface, blueface, purpleface, current_color;
+
+	assign blank = 27'b0;
+	assign redface = orientation[26:0];
+	assign orangeface = orientation[53:27];
+	assign yellowface = orientation[80:54];
+	assign greenface = orientation[107:81];
+	assign blueface = orientation[134:108];
+	assign purpleface = orientation[161:135];
 	
 	logic switchcolumn, oddcol;
 	
@@ -113,12 +122,13 @@ module makesquares(input  logic clk, reset, switchcolor,
 	
 	always_ff @(posedge clk)
 		if (reset) begin
+			count <= 3'b0;
 			row <= 4'd9;
 			column <= 4'd0;
 		end
 		else if (switchcolumn & switchcolor) column <= nextcolumn;
 		else if (switchcolor) row <= nextrow;
-	
+		count <= count + 1; // TODO - make sure this is correct
 	
 	// two finite state machines, one switches cols, one switches rows
 	// goes through in a snakelike order, order in which LEDs are written
@@ -159,7 +169,14 @@ module makesquares(input  logic clk, reset, switchcolor,
 			4'd8: nextrow = 4'd8;
 			default: nextrow = 4'd8;
 		endcase
-		
+
+	assign current_color = (count = 3'b000) ? redface;
+	assign current_color = (count = 3'b001) ? orangeface;
+	assign current_color = (count = 3'b010) ? yellowface;
+	assign current_color = (count = 3'b011) ? greenface;
+	assign current_color = (count = 3'b100) ? blueface;
+	assign current_color = (count = 3'b101) ? purpleface;
+
 	// control logic 
 	assign switchcolumn = (oddcol & (row == 4'd0)) | ((~oddcol) & (row == 4'd7));
 	assign oddcol = (column == 4'd1)|(column == 4'd3)|(column == 4'd5)|(column == 4'd7);
@@ -191,8 +208,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	
 	// choose the color data based on the color mux
 	assign controlcolors = {blank, color9, color8, color7, color6, color5, color4, color3, color2, color1};
-	colormux cm(controlcolors, orientation, color);
-		
+	colormux cm(controlcolors, current_color, color);
 endmodule
 
 // takes in 3 bits of current orientation and converts them to the 
@@ -217,7 +233,7 @@ endmodule
 // takes in the current orientation as well as a one-hot encoding that 
 // allows us to illuminate the matrix properly
 module colormux(input logic  [9:0] colorcontrol,
-					 input logic  [31:0] orientation,
+					 input logic  [26:0] orientation,
 					 output logic [23:0] color);
 	logic [23:0] sqr1color, sqr2color, sqr3color, sqr4color, sqr5color, sqr6color, sqr7color, sqr8color, sqr9color;
 	
