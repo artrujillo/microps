@@ -16,8 +16,9 @@ Fall 2019
 #define pinCW PIO_PA10 // Connected to CLK on KY­040
 #define ledCW PIO_PA17
 #define ledCCW PIO_PA18
-#define LOAD_PIN 29
-#define DONE_PIN 30
+#define LOAD_PIN PIO_PA29
+#define LOAD_COPY PIO_PA16
+#define FPGA_RESET PIO_PA15
 
 // mid-point demo orientations
 
@@ -51,17 +52,20 @@ int main(void) {
 	spiInit(MCK_FREQ/244000, 0, 1);
 	
 	pioPinMode(LOAD_PIN, PIO_OUTPUT);
-	pioPinMode(DONE_PIN, PIO_INPUT);
+	pioPinMode(LOAD_COPY, PIO_OUTPUT);
 	
-	send_orientation(cwOrientation);
+	
 	
   	pinCWLast = setup_rot_encoder();
 	
 	// PIO setup for rot. encoder demo
 	pioPinMode(ledCW, PIO_OUTPUT);
 	pioPinMode(ledCCW, PIO_OUTPUT);
+	pioPinMode(FPGA_RESET, PIO_OUTPUT);
 	pioDigitalWrite(ledCW, 0);
 	pioDigitalWrite(ledCCW, 0);
+	
+	send_orientation(cwOrientation);
 
   while(1){
       rot = pioDigitalRead(pinCW);
@@ -95,14 +99,18 @@ int setup_rot_encoder() {
 
 void send_orientation(char* current_orientation){
 	int i;
-	
+	char *recieved_text;
 	pioDigitalWrite(LOAD_PIN, 1);
-	
+	pioDigitalWrite(LOAD_COPY, 1);
 	for (i = 0; i < 4; i++){
 		spiSendReceive(current_orientation[i]);
 	}
 	
 	pioDigitalWrite(LOAD_PIN, 0);
+	pioDigitalWrite(LOAD_COPY, 0);
 	
-	while(!pioDigitalRead(DONE_PIN));
+	pioDigitalWrite(FPGA_RESET, 1);
+	pioDigitalWrite(FPGA_RESET, 0);
+	
+	
 }

@@ -4,10 +4,6 @@
 			"name" : "Top",
 			"pins" : [
 				{
-					"name" : "sdo",
-					"strict" : false
-				},
-				{
 					"name" : "done",
 					"strict" : false
 				},
@@ -16,15 +12,19 @@
 					"strict" : false
 				},
 				{
+					"name" : "reset",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
 					"name" : "sck",
 					"strict" : false
 				},
 				{
 					"name" : "load",
-					"strict" : false
-				},
-				{
-					"name" : "clk",
 					"strict" : false
 				},
 				{

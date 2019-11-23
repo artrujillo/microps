@@ -1,5 +1,6 @@
 // top level module, contains spi and core modules
 module send_bytes(input  logic clk,
+				input logic reset,
            input  logic sck, 
            input  logic sdi,
            output logic sdo,
@@ -11,8 +12,8 @@ module send_bytes(input  logic clk,
 
 	// our spi is currently not working as expected, so the communication between 
 	// these modules is very minimal at this time.
-	rubiks_spi spi(sck, sdi, sdo, done, orientation);
-	rubiks_core core(clk, load, orientation, done, datastream);
+	rubiks_spi spi(sck, sdi, sdo, load, orientation);
+	rubiks_core core(clk, reset, orientation, done, datastream);
 
 endmodule
 
@@ -30,26 +31,14 @@ makesquares module.
 module rubiks_spi(input  logic sck, 
 						input  logic sdi,
 						output logic sdo,
-						input  logic done,
+						input  logic load,
 						output logic [31:0] orientation);
-
-    logic         sdodelayed, wasdone;
-    logic [31:0]  orientation_captured;
                
     // assert load
     // apply 32 sclks to shift orientation starting with orientation[0]
-    // then deassert load, wait until done
     always_ff @(posedge sck)
-        if (!wasdone)  {orientation} = {orientation[30:0], sdi};
+        if (load)  {orientation} = {orientation[30:0], sdi};
     
-    // sdo should change on the negative edge of sck
-    always_ff @(negedge sck) begin
-        wasdone = done;
-        sdodelayed = orientation[30];
-    end
-    
-    // when done is first asserted, shift out msb before clock edge
-    assign sdo = (done & !wasdone) ? orientation[31] : sdodelayed;
 endmodule
 
 
@@ -99,11 +88,9 @@ module rubiks_core(input logic clk, reset,
 	assign finished = (state == finish);
 	assign resetsb = (state == switching);
 	
-	//assign data = red ? 24'h00b000 : 24'h00f060; // for easy testing/programming of LED matrix
-	//makesquares ms(clk, reset, resetsb, orientation, data); // orientation is currently hardcoded because SPI isn't working 
-	
 	// get the 24-bit color data from make squares
-	makesquares ms(clk, reset, resetsb, data);
+	makesquares ms(clk, reset, resetsb, orientation, data); // orientation is currently hardcoded because SPI isn't working 
+	
 	// make the datastream based on the 24 bits of color data
 	make_data_stream mds(clk, resetsb, data, datastream, done);
 	
@@ -111,7 +98,7 @@ endmodule
 
 // outputs colors in correct order to display squares for rubiks cube
 module makesquares(input  logic clk, reset, switchcolor,
-						//input logic [31:0] orientation, // orientation is currently hardcoded because SPI isn't working
+						 input  logic [31:0] orientation,
 						 output logic[23:0] color);
 			
 	logic [3:0] count;
@@ -119,10 +106,6 @@ module makesquares(input  logic clk, reset, switchcolor,
 	logic [3:0] row, nextrow;
 	
 	logic switchcolumn, oddcol;
-	
-	// 
-	logic [31:0] orientation;
-	assign orientation = 32'b00000000001010011000100101100000;
 	
 	// control logic for choosing correct color
 	logic color1, color2, color3, color4, color5, color6, color7, color8, color9, blank;
@@ -234,7 +217,7 @@ endmodule
 // takes in the current orientation as well as a one-hot encoding that 
 // allows us to illuminate the matrix properly
 module colormux(input logic  [9:0] colorcontrol,
-					 input logic [31:0] orientation,
+					 input logic  [31:0] orientation,
 					 output logic [23:0] color);
 	logic [23:0] sqr1color, sqr2color, sqr3color, sqr4color, sqr5color, sqr6color, sqr7color, sqr8color, sqr9color;
 	

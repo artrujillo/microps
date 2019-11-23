@@ -1,5 +1,5 @@
 Flow report for send_bytes
-Wed Nov 20 14:28:53 2019
+Fri Nov 22 16:01:09 2019
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -40,18 +40,18 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Wed Nov 20 14:28:53 2019       ;
+; Flow Status                        ; Successful - Fri Nov 22 16:01:09 2019       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; send_bytes                                  ;
 ; Top-level Entity Name              ; send_bytes                                  ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE6E22C8                                 ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 175 / 6,272 ( 3 % )                         ;
-;     Total combinational functions  ; 142 / 6,272 ( 2 % )                         ;
-;     Dedicated logic registers      ; 84 / 6,272 ( 1 % )                          ;
-; Total registers                    ; 84                                          ;
-; Total pins                         ; 7 / 92 ( 8 % )                              ;
+; Total logic elements               ; 211 / 6,272 ( 3 % )                         ;
+;     Total combinational functions  ; 206 / 6,272 ( 3 % )                         ;
+;     Dedicated logic registers      ; 77 / 6,272 ( 1 % )                          ;
+; Total registers                    ; 77                                          ;
+; Total pins                         ; 8 / 92 ( 9 % )                              ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0 / 276,480 ( 0 % )                         ;
 ; Embedded Multiplier 9-bit elements ; 0 / 30 ( 0 % )                              ;
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/20/2019 14:28:31 ;
+; Start date & time ; 11/22/2019 16:00:44 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; send_bytes          ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 22759552521597.157428891110864         ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 22759552388169.157446724422132         ; --            ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Systemverilog Hdl                      ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (SystemVerilog)        ; <None>        ; --          ; --             ;
 ; EDA_TIME_SCALE                      ; 1 ps                                   ; --            ; --          ; eda_simulation ;
@@ -94,12 +94,12 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:11     ; 1.0                     ; 4750 MB             ; 00:00:23                           ;
-; Fitter               ; 00:00:04     ; 1.0                     ; 5237 MB             ; 00:00:05                           ;
-; Assembler            ; 00:00:01     ; 1.0                     ; 4686 MB             ; 00:00:01                           ;
-; Timing Analyzer      ; 00:00:02     ; 1.0                     ; 4747 MB             ; 00:00:01                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4661 MB             ; 00:00:01                           ;
-; Total                ; 00:00:19     ; --                      ; --                  ; 00:00:31                           ;
+; Analysis & Synthesis ; 00:00:12     ; 1.0                     ; 4759 MB             ; 00:00:26                           ;
+; Fitter               ; 00:00:05     ; 1.0                     ; 5244 MB             ; 00:00:06                           ;
+; Assembler            ; 00:00:01     ; 1.0                     ; 4689 MB             ; 00:00:01                           ;
+; Timing Analyzer      ; 00:00:02     ; 1.0                     ; 4743 MB             ; 00:00:02                           ;
+; EDA Netlist Writer   ; 00:00:02     ; 1.0                     ; 4660 MB             ; 00:00:01                           ;
+; Total                ; 00:00:22     ; --                      ; --                  ; 00:00:36                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -108,11 +108,11 @@ refer to the applicable agreement for further details.
 +----------------------+------------------+------------+------------+----------------+
 ; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +----------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis ; Eng-B185microP4  ; Windows 10 ; 10.0       ; x86_64         ;
-; Fitter               ; Eng-B185microP4  ; Windows 10 ; 10.0       ; x86_64         ;
-; Assembler            ; Eng-B185microP4  ; Windows 10 ; 10.0       ; x86_64         ;
-; Timing Analyzer      ; Eng-B185microP4  ; Windows 10 ; 10.0       ; x86_64         ;
-; EDA Netlist Writer   ; Eng-B185microP4  ; Windows 10 ; 10.0       ; x86_64         ;
+; Analysis & Synthesis ; Eng-B185-P       ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter               ; Eng-B185-P       ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler            ; Eng-B185-P       ; Windows 10 ; 10.0       ; x86_64         ;
+; Timing Analyzer      ; Eng-B185-P       ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer   ; Eng-B185-P       ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 
