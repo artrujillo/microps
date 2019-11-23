@@ -163,10 +163,10 @@ void send_orientation(char* current_orientation){
 	pioDigitalWrite(FPGA_RESET, 0);
 }
 
-char* clockwise_turn(char* current_orientation){
+color* clockwise_turn(color* current_orientation){
 
 }
 
-char* counter_clockwise_turn(char* current_orientation){
+color* counter_clockwise_turn(color* current_orientation){
 
 }
