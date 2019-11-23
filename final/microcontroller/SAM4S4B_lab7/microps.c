@@ -30,33 +30,23 @@ Fall 2019
 #define BLUE_FACE PIO_PA23
 #define PURPLE_FACE PIO_PA24
 
-struct {
-	unsigned int fieldof3bits : 3;
-} color;
-
-color red = 0x0;
-color orange = 0x1;
-color yellow = 0x2;
-color green = 0x3;
-color blue = 0x4;
-color purple = 0x5;
-
+#define red 0x0;
+#define orange 0x1;
+#define yellow 0x2;
+#define green 0x3;
+#define blue 0x4;
+#define purple 0x5;
 // hard-coded bits to be sent over spi
 char cwOrientation[4] = {0x00, 0x29, 0x89, 0x60};
 
-char starting_orientation[24] = {0x05, 0xB6, 0xDB, 0x6D, 
-								 0x02, 0x92, 0x49, 0x24, 
-								 0x03, 0x6D, 0xB6, 0xDB, 
-								 0x02, 0x49, 0x24, 0x92, 
-								 0x01, 0x24, 0x92, 0x49, 
-								 0x00, 0x00, 0x00, 0x00};
+char starting_orientation[54] = {0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5,
+								 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4,
+								 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3,
+								 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2,
+								 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1,
+								 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
 
-color start_orient_color[54] = {purple, purple, purple, purple, purple, purple, purple, purple, purple,
-							    blue, blue, blue, blue, blue, blue, blue, blue, blue,
-								green, green, green, green, green, green, green, green, green,
-								yellow, yellow, yellow, yellow, yellow, yellow, yellow, yellow, yellow,
-								orange, orange, orange, orange, orange, orange, orange, orange, orange,
-								red, red, red, red, red, red, red, red, red};
+
 ///////////////////////////
 // function prototypes
 ///////////////////////////
@@ -99,7 +89,7 @@ int main(void) {
 	pioDigitalWrite(ledCW, 0);
 	pioDigitalWrite(ledCCW, 0);
 	
-	send_orientation(start_orient_color);
+	send_orientation(cwOrientation);
 
   while(1){
       rot = pioDigitalRead(pinCW);
@@ -110,8 +100,6 @@ int main(void) {
 			// used for testing rot encoder
 			pioDigitalWrite(ledCW, 1);
 			pioDigitalWrite(ledCCW, 0);
-			// actual code
-			clockwise_turn();
           } else { // Otherwise B changed first and we're moving CCW
 		  	// used for testing rot encoder
             pioDigitalWrite(ledCW, 0);
@@ -146,10 +134,9 @@ int user_interface_setup() {
 
 void send_orientation(char* current_orientation){
 	int i;
-	char *recieved_text;
 	pioDigitalWrite(LOAD_PIN, 1);
 	pioDigitalWrite(LOAD_COPY, 1); // used for logic analyzer
-	for (i = 0; i < 21; i++){
+	for (i = 0; i < 54; i++){
 		spiSendReceive(current_orientation[i]);
 	}
 	
@@ -160,10 +147,10 @@ void send_orientation(char* current_orientation){
 	pioDigitalWrite(FPGA_RESET, 0);
 }
 
-color* clockwise_turn(color* current_orientation){
+char* clockwise_turn(char* current_orientation){
 
 }
 
-color* counter_clockwise_turn(color* current_orientation){
+char* counter_clockwise_turn(char* current_orientation){
 
 }

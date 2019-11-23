@@ -1,5 +1,5 @@
 Analysis & Synthesis report for send_bytes
-Fri Nov 22 16:00:56 2019
+Sat Nov 23 14:46:42 2019
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -49,15 +49,15 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Nov 22 16:00:56 2019       ;
+; Analysis & Synthesis Status        ; Successful - Sat Nov 23 14:46:42 2019       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; send_bytes                                  ;
 ; Top-level Entity Name              ; send_bytes                                  ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 233                                         ;
-;     Total combinational functions  ; 206                                         ;
-;     Dedicated logic registers      ; 77                                          ;
-; Total registers                    ; 77                                          ;
+; Total logic elements               ; 930                                         ;
+;     Total combinational functions  ; 498                                         ;
+;     Dedicated logic registers      ; 485                                         ;
+; Total registers                    ; 485                                         ;
 ; Total pins                         ; 8                                           ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
@@ -183,45 +183,54 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 233       ;
+; Estimated Total logic elements              ; 930       ;
 ;                                             ;           ;
-; Total combinational functions               ; 206       ;
+; Total combinational functions               ; 498       ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 117       ;
-;     -- 3 input functions                    ; 32        ;
-;     -- <=2 input functions                  ; 57        ;
+;     -- 4 input functions                    ; 362       ;
+;     -- 3 input functions                    ; 83        ;
+;     -- <=2 input functions                  ; 53        ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 184       ;
+;     -- normal mode                          ; 476       ;
 ;     -- arithmetic mode                      ; 22        ;
 ;                                             ;           ;
-; Total registers                             ; 77        ;
-;     -- Dedicated logic registers            ; 77        ;
+; Total registers                             ; 485       ;
+;     -- Dedicated logic registers            ; 485       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
 ; I/O pins                                    ; 8         ;
 ;                                             ;           ;
 ; Embedded Multiplier 9-bit elements          ; 0         ;
 ;                                             ;           ;
-; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 50        ;
-; Total fan-out                               ; 929       ;
-; Average fan-out                             ; 3.11      ;
+; Maximum fan-out node                        ; sck~input ;
+; Maximum fan-out                             ; 432       ;
+; Total fan-out                               ; 3277      ;
+; Average fan-out                             ; 3.28      ;
 +---------------------------------------------+-----------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                 ;
-+------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------+------------------+--------------+
-; Compilation Hierarchy Node   ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                     ; Entity Name      ; Library Name ;
-+------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------+------------------+--------------+
-; |send_bytes                  ; 206 (0)             ; 77 (0)                    ; 0           ; 0            ; 0       ; 0         ; 8    ; 0            ; |send_bytes                                             ; send_bytes       ; work         ;
-;    |rubiks_core:core|        ; 206 (15)            ; 50 (12)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core                            ; rubiks_core      ; work         ;
-;       |make_data_stream:mds| ; 65 (65)             ; 21 (21)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|make_data_stream:mds       ; make_data_stream ; work         ;
-;       |makesquares:ms|       ; 126 (29)            ; 17 (17)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|makesquares:ms             ; makesquares      ; work         ;
-;          |colormux:cm|       ; 97 (97)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm ; colormux         ; work         ;
-;    |rubiks_spi:spi|          ; 0 (0)               ; 27 (27)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_spi:spi                              ; rubiks_spi       ; work         ;
-+------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------+------------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                           ;
++------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------+---------------------+--------------+
+; Compilation Hierarchy Node               ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                ; Entity Name         ; Library Name ;
++------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------+---------------------+--------------+
+; |send_bytes                              ; 498 (0)             ; 485 (0)                   ; 0           ; 0            ; 0       ; 0         ; 8    ; 0            ; |send_bytes                                                                        ; send_bytes          ; work         ;
+;    |rubiks_core:core|                    ; 498 (15)            ; 53 (12)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core                                                       ; rubiks_core         ; work         ;
+;       |make_data_stream:mds|             ; 138 (138)           ; 21 (21)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|make_data_stream:mds                                  ; make_data_stream    ; work         ;
+;       |makesquares:ms|                   ; 345 (253)           ; 20 (20)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|makesquares:ms                                        ; makesquares         ; work         ;
+;          |colormux:cm|                   ; 92 (65)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm                            ; colormux            ; work         ;
+;             |convert_orientation:color1| ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color1 ; convert_orientation ; work         ;
+;             |convert_orientation:color2| ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color2 ; convert_orientation ; work         ;
+;             |convert_orientation:color3| ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color3 ; convert_orientation ; work         ;
+;             |convert_orientation:color4| ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color4 ; convert_orientation ; work         ;
+;             |convert_orientation:color5| ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color5 ; convert_orientation ; work         ;
+;             |convert_orientation:color6| ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color6 ; convert_orientation ; work         ;
+;             |convert_orientation:color7| ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color7 ; convert_orientation ; work         ;
+;             |convert_orientation:color8| ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color8 ; convert_orientation ; work         ;
+;             |convert_orientation:color9| ; 3 (3)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color9 ; convert_orientation ; work         ;
+;    |rubiks_spi:spi|                      ; 0 (0)               ; 432 (432)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |send_bytes|rubiks_spi:spi                                                         ; rubiks_spi          ; work         ;
++------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -326,30 +335,32 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 77    ;
-; Number of registers using Synchronous Clear  ; 34    ;
+; Total registers                              ; 485   ;
+; Number of registers using Synchronous Clear  ; 36    ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 58    ;
+; Number of registers using Clock Enable       ; 463   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                  ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                        ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
-; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |send_bytes|rubiks_core:core|count[1]                             ;
-; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |send_bytes|rubiks_core:core|make_data_stream:mds|count[4]        ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |send_bytes|rubiks_core:core|make_data_stream:mds|bitcounter[1]   ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |send_bytes|rubiks_core:core|make_data_stream:mds|state           ;
-; 3:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; No         ; |send_bytes|rubiks_core:core|makesquares:ms|column                ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |send_bytes|rubiks_core:core|makesquares:ms|row                   ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |send_bytes|rubiks_core:core|makesquares:ms|row                   ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 12 LEs               ; 0 LEs                  ; No         ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|Selector0 ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                   ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
+; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |send_bytes|rubiks_core:core|count[7]                              ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; Yes        ; |send_bytes|rubiks_core:core|make_data_stream:mds|count[3]         ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |send_bytes|rubiks_core:core|make_data_stream:mds|bitcounter[0]    ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |send_bytes|rubiks_core:core|make_data_stream:mds|state            ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; No         ; |send_bytes|rubiks_core:core|makesquares:ms|column                 ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |send_bytes|rubiks_core:core|makesquares:ms|row                    ;
+; 8:1                ; 72 bits   ; 360 LEs       ; 288 LEs              ; 72 LEs                 ; No         ; |send_bytes|rubiks_core:core|makesquares:ms|Mux31                  ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |send_bytes|rubiks_core:core|makesquares:ms|row                    ;
+; 10:1               ; 3 bits    ; 18 LEs        ; 18 LEs               ; 0 LEs                  ; No         ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|Selector11 ;
+; 11:1               ; 2 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; No         ; |send_bytes|rubiks_core:core|make_data_stream:mds|Mux1             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 
 
 +-----------------------------------------------------+
@@ -358,23 +369,23 @@ Encoding Type:  One-Hot
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 8                           ;
-; cycloneiii_ff         ; 77                          ;
-;     ENA               ; 38                          ;
+; cycloneiii_ff         ; 485                         ;
+;     ENA               ; 443                         ;
 ;     ENA SCLR          ; 20                          ;
-;     SCLR              ; 14                          ;
-;     plain             ; 5                           ;
-; cycloneiii_lcell_comb ; 207                         ;
+;     SCLR              ; 16                          ;
+;     plain             ; 6                           ;
+; cycloneiii_lcell_comb ; 499                         ;
 ;     arith             ; 22                          ;
 ;         2 data inputs ; 22                          ;
-;     normal            ; 185                         ;
+;     normal            ; 477                         ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 5                           ;
-;         2 data inputs ; 30                          ;
-;         3 data inputs ; 32                          ;
-;         4 data inputs ; 117                         ;
+;         2 data inputs ; 26                          ;
+;         3 data inputs ; 83                          ;
+;         4 data inputs ; 362                         ;
 ;                       ;                             ;
-; Max LUT depth         ; 11.00                       ;
-; Average LUT depth     ; 6.49                        ;
+; Max LUT depth         ; 14.00                       ;
+; Average LUT depth     ; 10.92                       ;
 +-----------------------+-----------------------------+
 
 
@@ -393,7 +404,7 @@ Encoding Type:  One-Hot
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Fri Nov 22 16:00:44 2019
+    Info: Processing started: Sat Nov 23 14:46:30 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off send_bytes -c send_bytes
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 2 of the 2 processors detected
@@ -401,40 +412,43 @@ Info (12021): Found 1 design units, including 1 entities, in source file testben
     Info (12023): Found entity 1: testbench File: C:/Users/atrujillo/Desktop/microps/final/testbench.sv Line: 12
 Warning (12125): Using design file send_bytes.sv, which is not specified as a design file for the current project, but contains definitions for 8 design units and 8 entities in project
     Info (12023): Found entity 1: send_bytes File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 2
-    Info (12023): Found entity 2: rubiks_spi File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 31
-    Info (12023): Found entity 3: rubiks_core File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 46
-    Info (12023): Found entity 4: makesquares File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 100
-    Info (12023): Found entity 5: convert_orientation File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 200
-    Info (12023): Found entity 6: colormux File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 219
-    Info (12023): Found entity 7: make_data_stream File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 261
-    Info (12023): Found entity 8: countervalmux File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 338
+    Info (12023): Found entity 2: rubiks_spi File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 21
+    Info (12023): Found entity 3: rubiks_core File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 35
+    Info (12023): Found entity 4: makesquares File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 89
+    Info (12023): Found entity 5: convert_orientation File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 215
+    Info (12023): Found entity 6: colormux File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 233
+    Info (12023): Found entity 7: make_data_stream File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 273
+    Info (12023): Found entity 8: countervalmux File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 349
 Info (12127): Elaborating entity "send_bytes" for the top level hierarchy
 Info (12128): Elaborating entity "rubiks_spi" for hierarchy "rubiks_spi:spi" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 15
-Warning (10034): Output port "sdo" at send_bytes.sv(33) has no driver File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 33
+Warning (10034): Output port "sdo" at send_bytes.sv(23) has no driver File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 23
 Info (12128): Elaborating entity "rubiks_core" for hierarchy "rubiks_core:core" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 16
-Warning (10230): Verilog HDL assignment warning at send_bytes.sv(68): truncated value with size 32 to match size of target (9) File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 68
-Info (12128): Elaborating entity "makesquares" for hierarchy "rubiks_core:core|makesquares:ms" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 92
-Info (12128): Elaborating entity "colormux" for hierarchy "rubiks_core:core|makesquares:ms|colormux:cm" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 194
-Info (10264): Verilog HDL Case Statement information at send_bytes.sv(237): all case item expressions in this case statement are onehot File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 237
-Info (12128): Elaborating entity "convert_orientation" for hierarchy "rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color1" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 226
-Info (12128): Elaborating entity "make_data_stream" for hierarchy "rubiks_core:core|make_data_stream:mds" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 95
-Warning (10230): Verilog HDL assignment warning at send_bytes.sv(282): truncated value with size 32 to match size of target (11) File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 282
-Warning (10230): Verilog HDL assignment warning at send_bytes.sv(287): truncated value with size 32 to match size of target (5) File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 287
-Info (12128): Elaborating entity "countervalmux" for hierarchy "rubiks_core:core|make_data_stream:mds|countervalmux:cntrvalmux" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 332
+Warning (10230): Verilog HDL assignment warning at send_bytes.sv(57): truncated value with size 32 to match size of target (9) File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 57
+Info (12128): Elaborating entity "makesquares" for hierarchy "rubiks_core:core|makesquares:ms" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 81
+Warning (10230): Verilog HDL assignment warning at send_bytes.sv(121): truncated value with size 32 to match size of target (3) File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 121
+Warning (10230): Verilog HDL assignment warning at send_bytes.sv(125): truncated value with size 32 to match size of target (3) File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 125
+Warning (10230): Verilog HDL assignment warning at send_bytes.sv(127): truncated value with size 32 to match size of target (3) File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 127
+Info (12128): Elaborating entity "colormux" for hierarchy "rubiks_core:core|makesquares:ms|colormux:cm" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 210
+Info (10264): Verilog HDL Case Statement information at send_bytes.sv(251): all case item expressions in this case statement are onehot File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 251
+Info (12128): Elaborating entity "convert_orientation" for hierarchy "rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color1" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 240
+Info (12128): Elaborating entity "make_data_stream" for hierarchy "rubiks_core:core|make_data_stream:mds" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 84
+Warning (10230): Verilog HDL assignment warning at send_bytes.sv(294): truncated value with size 32 to match size of target (11) File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 294
+Warning (10230): Verilog HDL assignment warning at send_bytes.sv(299): truncated value with size 32 to match size of target (5) File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 299
+Info (12128): Elaborating entity "countervalmux" for hierarchy "rubiks_core:core|make_data_stream:mds|countervalmux:cntrvalmux" File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 344
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "sdo" is stuck at GND File: C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv Line: 6
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 14 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 241 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 938 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 5 input pins
     Info (21059): Implemented 3 output pins
-    Info (21061): Implemented 233 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 8 warnings
-    Info: Peak virtual memory: 4768 megabytes
-    Info: Processing ended: Fri Nov 22 16:00:56 2019
+    Info (21061): Implemented 930 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 11 warnings
+    Info: Peak virtual memory: 4766 megabytes
+    Info: Processing ended: Sat Nov 23 14:46:42 2019
     Info: Elapsed time: 00:00:12
-    Info: Total CPU time (on all processors): 00:00:26
+    Info: Total CPU time (on all processors): 00:00:24
 
 
