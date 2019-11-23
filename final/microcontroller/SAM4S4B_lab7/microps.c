@@ -3,7 +3,7 @@ Aaron Trujillo & Pinky King
 atrujillo@g.hmc.edu pking@g.hmc.edu
 Fall 2019
 
-'setup_rot_encoder' and rotary encoder functionality was adapted from:
+'user_interface_setup' and rotary encoder functionality was adapted from:
  http://eeshop.unl.edu/pdf/KEYES%20Rotary%20encoder%20module%20KY-040.pdf
 */
 
@@ -76,8 +76,7 @@ void send_orientation(char*);
 char* counter_clockwise_turn(char*);
 char* clockwise_turn(char*);
 
-
-///////////////////////////
+//////////////////////////
 // main
 //////////////////////////
 
@@ -90,8 +89,6 @@ int main(void) {
 	
 	pioPinMode(LOAD_PIN, PIO_OUTPUT);
 	pioPinMode(LOAD_COPY, PIO_OUTPUT);
-	
-	
 	
   	pinCWLast = user_interface_setup();
 	
@@ -151,7 +148,7 @@ void send_orientation(char* current_orientation){
 	int i;
 	char *recieved_text;
 	pioDigitalWrite(LOAD_PIN, 1);
-	pioDigitalWrite(LOAD_COPY, 1);
+	pioDigitalWrite(LOAD_COPY, 1); // used for logic analyzer
 	for (i = 0; i < 21; i++){
 		spiSendReceive(current_orientation[i]);
 	}

@@ -3,52 +3,37 @@ module send_bytes(input  logic clk,
 				input logic reset,
            input  logic sck, 
            input  logic sdi,
-           output logic sdo,
            input  logic load,
-           output logic done,
 		   output logic datastream);
 
 	logic [161:0] orientation;
 
 	// our spi is currently not working as expected, so the communication between 
 	// these modules is very minimal at this time.
-	rubiks_spi spi(sck, sdi, sdo, load, orientation);
-	rubiks_core core(clk, reset, orientation, done, datastream);
+	rubiks_spi spi(sck, sdi, load, orientation);
+	rubiks_core core(clk, reset, orientation, datastream);
 
 endmodule
 
-
-
-/*
-Our spi module does not fully work at this point. We still need to debug using
-the logic analyzer to see what exactly is being passed through from the MC to the
-FPGA. Once we debug this, we will no longer need to hard code 'orientation' in our 
-makesquares module.
-*/
-
-// SPI module used to retrieve the current cube orientation from the MC and return
-// a DONE signal to the MC once the display has been illuminated
+// SPI module used to retrieve the current cube orientation from the MC
 module rubiks_spi(input  logic sck, 
 						input  logic sdi,
-						output logic sdo,
 						input  logic load,
 						output logic [161:0] orientation);
                
     // assert load
-    // apply 32 sclks to shift orientation starting with orientation[0]
+    // apply 162 sclks to shift orientation starting with orientation[0]
     always_ff @(posedge sck)
         if (load)  {orientation} = {orientation[160:0], sdi};
     
 endmodule
 
-
 // programs a rubiks face with colors given by orientation
 module rubiks_core(input logic clk, reset,
 					input logic [161:0] orientation,
-					output logic finished,
 					output logic datastream);
 		
-	typedef enum logic [1:0] {switching, sending, over, finish} statetype;
+	typedef enum logic [1:0] {switching, sending, over} statetype;
 	statetype state, nextstate;
 	
 	logic resetsb, done, red;
@@ -78,14 +63,12 @@ module rubiks_core(input logic clk, reset,
 			sending:   if (count == 9'd65) nextstate = over;
 						  else if (done)      nextstate = switching;
 						  else                nextstate = sending;
-			over: 	  nextstate = finish;
-			finish:    nextstate = finish;
-			default:	  nextstate = finish;
+			over: 	  nextstate = over;
+			default:	  nextstate = over;
 						  
 		endcase
 	
 	// control logic
-	assign finished = (state == finish);
 	assign resetsb = (state == switching);
 	
 	// get the 24-bit color data from make squares
@@ -229,7 +212,6 @@ module convert_orientation(input  logic  [2:0]  bit_value,
 									
 endmodule
 
-
 // takes in the current orientation as well as a one-hot encoding that 
 // allows us to illuminate the matrix properly
 module colormux(input logic  [9:0] colorcontrol,
@@ -265,8 +247,6 @@ module colormux(input logic  [9:0] colorcontrol,
 		endcase
 
 endmodule
-
-
 
 /////////////////////////////////////////////////////////////
 // Takes in 24-bit color data, outputs one bit that follows 
@@ -348,7 +328,6 @@ module make_data_stream(input logic clk, reset,
   countervalmux cntrvalmux(s, counterval); // mux chooses constants, depending on how long the pulse should be
 
 endmodule
-
 
 // mux for choosing counter value, depending on state
 module countervalmux(input  logic  [2:0] s,
