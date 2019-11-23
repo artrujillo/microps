@@ -1,12 +1,12 @@
 // top level module, contains spi and core modules
 module send_bytes(input  logic clk,
-				input logic reset,
-           input  logic sck, 
-           input  logic sdi,
-			  output logic sdo,
-           input  logic load,
-			  output logic done,
-		   output logic datastream);
+				  input  logic reset,
+                  input  logic sck, 
+                  input  logic sdi,
+			      output logic sdo,
+                  input  logic load,
+			      output logic done,
+		          output logic datastream);
 
 	logic [431:0] orientation;
 
@@ -19,10 +19,10 @@ endmodule
 
 // SPI module used to retrieve the current cube orientation from the MC
 module rubiks_spi(input  logic sck, 
-						input  logic sdi,
-						output logic sdo,
-						input  logic load,
-						output logic [431:0] orientation);
+				  input  logic sdi,
+				  output logic sdo,
+				  input  logic load,
+				  output logic [431:0] orientation);
                
     // assert load
     // apply 162 sclks to shift orientation starting with orientation[0]
@@ -33,9 +33,9 @@ endmodule
 
 // programs a rubiks face with colors given by orientation
 module rubiks_core(input logic clk, reset,
-					input logic [431:0] orientation,
-					output logic finished,
-					output logic datastream);
+				   input logic [431:0] orientation,
+				   output logic finished,
+				   output logic datastream);
 		
 	typedef enum logic [1:0] {switching, sending, over, finish} statetype;
 	statetype state, nextstate;
@@ -87,8 +87,8 @@ endmodule
 
 // outputs colors in correct order to display squares for rubiks cube
 module makesquares(input  logic clk, reset, switchcolor,
-						 input  logic [431:0] orientation,
-						 output logic [23:0] color);
+				   input  logic [431:0] orientation,
+				   output logic [23:0] color);
 			
 	logic [2:0] count;
 	logic [3:0] column, nextcolumn;
@@ -108,7 +108,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	logic color1, color2, color3, color4, color5, color6, color7, color8, color9, blank;
 	logic [9:0] controlcolors;
 	
-	assign blankface = 36'b0;
+	assign blankface = 72'b111111111111111111111111111111111111111111111111111111111111111111111111;
 	
 	always_ff @(posedge clk)
 		if (reset) begin
@@ -168,7 +168,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	always_comb
 		case(count)
 			3'b000:    current_color = redface;
-			3'b001: 	  current_color = orangeface;
+			3'b001:    current_color = orangeface;
 			3'b010:    current_color = yellowface;
 			3'b011:    current_color = greenface;
 			3'b100:    current_color = blueface;
@@ -213,7 +213,7 @@ endmodule
 // takes in 3 bits of current orientation and converts them to the 
 // corresponding HEX values that we need to illuminate the matrix
 module convert_orientation(input  logic  [7:0]  bit_value,
-									output logic  [23:0] hex_value);
+						   output logic  [23:0] hex_value);
 
 	always_comb
 		case (bit_value)
@@ -231,8 +231,8 @@ endmodule
 // takes in the current orientation as well as a one-hot encoding that 
 // allows us to illuminate the matrix properly
 module colormux(input logic  [9:0] colorcontrol,
-					 input logic  [71:0] orientation,
-					 output logic [23:0] color);
+				input logic  [71:0] orientation,
+				output logic [23:0] color);
 	logic [23:0] sqr1color, sqr2color, sqr3color, sqr4color, sqr5color, sqr6color, sqr7color, sqr8color, sqr9color;
 	
 	// convert each necessary piece of the orientation into the proper
