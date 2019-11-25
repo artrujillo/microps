@@ -4,10 +4,6 @@
 			"name" : "Top",
 			"pins" : [
 				{
-					"name" : "done",
-					"strict" : false
-				},
-				{
 					"name" : "datastream",
 					"strict" : false
 				},

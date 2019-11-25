@@ -22,30 +22,19 @@ Fall 2019
 #define LOAD_PIN PIO_PA29
 #define LOAD_COPY PIO_PA16
 #define FPGA_RESET PIO_PA15
-// Pins for user interface
-#define RED_FACE PIO_PA19
-#define ORANGE_FACE PIO_PA20
-#define YELLOW_FACE PIO_PA21
-#define GREEN_FACE PIO_PA22
-#define BLUE_FACE PIO_PA23
-#define PURPLE_FACE PIO_PA24
 
-#define red 0x0;
-#define orange 0x1;
-#define yellow 0x2;
-#define green 0x3;
-#define blue 0x4;
-#define purple 0x5;
+
 // hard-coded bits to be sent over spi
 char cwOrientation[4] = {0x00, 0x29, 0x89, 0x60};
 
+/*
 char starting_orientation[54] = {0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5,
 								 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4,
 								 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3,
 								 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2,
 								 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1,
 								 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
-
+*/
 
 ///////////////////////////
 // function prototypes
@@ -116,13 +105,14 @@ int main(void) {
 
 int user_interface_setup() {
 	// Setup Buttons
+	/*
 	pioPinMode(RED_FACE, PIO_INPUT);
 	pioPinMode(ORANGE_FACE, PIO_INPUT);
 	pioPinMode(YELLOW_FACE, PIO_INPUT);
 	pioPinMode(GREEN_FACE, PIO_INPUT);
 	pioPinMode(BLUE_FACE, PIO_INPUT);
 	pioPinMode(PURPLE_FACE, PIO_INPUT);
-
+	*/
 	// Rotary Encoder Setup
 	pioPinMode(pinCW, PIO_INPUT);
 	pioPinMode(pinCCW, PIO_INPUT);
@@ -136,7 +126,7 @@ void send_orientation(char* current_orientation){
 	int i;
 	pioDigitalWrite(LOAD_PIN, 1);
 	pioDigitalWrite(LOAD_COPY, 1); // used for logic analyzer
-	for (i = 0; i < 54; i++){
+	for (i = 0; i < 4; i++){
 		spiSendReceive(current_orientation[i]);
 	}
 	
