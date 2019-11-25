@@ -1,12 +1,12 @@
 // top level module, contains spi and core modules
 module send_bytes(input  logic clk,
-				  input  logic reset,
+                  input  logic reset,
                   input  logic sck, 
                   input  logic sdi,
-			      output logic sdo,
+                  output logic sdo,
                   input  logic load,
-			      output logic done,
-		          output logic datastream);
+                  output logic done,
+                  output logic datastream);
 
 	logic [431:0] orientation;
 
