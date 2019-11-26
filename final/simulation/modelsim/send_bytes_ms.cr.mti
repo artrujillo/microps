@@ -1,0 +1,22 @@
+C:/Users/atrujillo/Desktop/microps/final/testbench.sv {1 {vlog -work work -sv -stats=none C:/Users/atrujillo/Desktop/microps/final/testbench.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module testbench
+
+Top level modules:
+	testbench
+
+} {} {}} C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv {1 {vlog -work work -sv -stats=none C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module send_bytes
+-- Compiling module rubiks_spi
+-- Compiling module rubiks_core
+-- Compiling module makesquares
+-- Compiling module convert_orientation
+-- Compiling module colormux
+-- Compiling module make_data_stream
+-- Compiling module countervalmux
+
+Top level modules:
+	send_bytes
+
+} {} {}}

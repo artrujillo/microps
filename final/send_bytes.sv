@@ -7,7 +7,7 @@ module send_bytes(input  logic clk,
                   output logic datastream);
 
 	logic [31:0] orientation;
-
+	//assign hardcoded =  32'b00000000001010011000100101100000;
 	// our spi is currently not working as expected, so the communication between 
 	// these modules is very minimal at this time.
 	rubiks_spi spi(sck, sdi, load, orientation);
@@ -31,18 +31,18 @@ module rubiks_spi(input  logic sck,
                   input  logic load,
                   output logic [31:0] orientation);
  
- // assert load
- // apply 32 sclks to shift orientation starting with orientation[0]
- always_ff @(posedge sck)
- if (load) {orientation} = {orientation[30:0], sdi};
+   // assert load
+   // apply 32 sclks to shift orientation starting with orientation[0]
+   always_ff @(posedge sck)
+      if (load) {orientation} = {orientation[30:0], sdi};
  
 endmodule
 
 
 // programs a rubiks face with colors given by orientation
-module rubiks_core(input logic clk, reset,
-	input logic [31:0] orientation,
-	output logic datastream);
+module rubiks_core(input  logic clk, reset,
+                   input  logic [31:0] orientation,
+                   output logic datastream);
 	
 	typedef enum logic [1:0] {switching, sending, over} statetype;
 	statetype state, nextstate;
@@ -53,16 +53,16 @@ module rubiks_core(input logic clk, reset,
 	
 	// register for finite state machine, counter
 	always_ff @(posedge clk)
-	if (reset) begin
-	state <= switching;
-	red <= 0; // for easy testing/programming of LED matrix
-	count <= 0;
-	end
-	else begin
-	state <= nextstate;
-	if (state == sending) red <= ~red; // for testing
-	else count <= count+1; // counter for how many LEDs have been programmed
-	end
+	   if (reset) begin
+	                 state <= switching;
+	                 red <= 0; // for easy testing/programming of LED matrix
+	                 count <= 0;
+	              end
+	   else       begin
+	                 state <= nextstate;
+	                 if (state == sending) red <= ~red; // for testing
+	                 else                  count <= count+1; // counter for how many LEDs have been programmed
+	              end
 	
 	// next state logic for finite state machine
 	// sending: waits for make_data_stream to send 24 bits
@@ -98,7 +98,6 @@ module makesquares(input  logic clk, reset, switchcolor,
 	logic [3:0] count;
 	logic [3:0] column, nextcolumn;
 	logic [3:0] row, nextrow;
-	
 	logic switchcolumn, oddcol;
 	
 	// control logic for choosing correct color
@@ -106,12 +105,12 @@ module makesquares(input  logic clk, reset, switchcolor,
 	logic [9:0] controlcolors;
 	
 	always_ff @(posedge clk)
-	if      (reset) begin
-	                                        row <= 4'd9;
+	   if      (reset) begin
+	                                        row <= 4'd0; // Changing this to a 0 instead of a 9 fixed the odd alignment??
 	                                     column <= 4'd0;
-	                end
-	else if (switchcolumn & switchcolor) column <= nextcolumn;
-	else if (switchcolor)                   row <= nextrow;
+	                   end
+	   else if (switchcolumn & switchcolor) column <= nextcolumn;
+	   else if (switchcolor)                   row <= nextrow;
 	
 	
 	// two finite state machines, one switches cols, one switches rows
@@ -182,7 +181,6 @@ module makesquares(input  logic clk, reset, switchcolor,
 	assign color8 = ((row == 4'd2)|(row == 4'd3))&((column== 4'd4)|(column== 4'd5));
 	assign color9 = ((row == 4'd4)|(row == 4'd5))&((column== 4'd4)|(column== 4'd5));
 	*/
-	
 	// choose the color data based on the color mux
 	assign controlcolors = {blank, color9, color8, color7, color6, color5, color4, color3, color2, color1};
 	colormux cm(controlcolors, orientation, color);
@@ -191,17 +189,17 @@ endmodule
 
 // takes in 3 bits of current orientation and converts them to the 
 // corresponding HEX values that we need to illuminate the matrix
-module convert_orientation(input logic [2:0] bit_value,
-	output logic [23:0] hex_value);
+module convert_orientation(input  logic [2:0] bit_value,
+                           output logic [23:0] hex_value);
 
 	always_comb
 	case (bit_value)
-	3'b000: hex_value = 24'h00b000; // red
-	3'b001: hex_value = 24'h00f060; // orange
-	3'b010: hex_value = 24'h00b0b0; // yellow
-	3'b011: hex_value = 24'h0000b0; // green
-	3'b100: hex_value = 24'hb00000; // blue
-	3'b101: hex_value = 24'hb05000; // purple
+	3'b000: hex_value =  24'h00b000; // red
+	3'b001: hex_value =  24'h00f060; // orange
+	3'b010: hex_value =  24'h00b0b0; // yellow
+	3'b011: hex_value =  24'h0000b0; // green
+	3'b100: hex_value =  24'hb00000; // blue
+	3'b101: hex_value =  24'hb05000; // purple
 	default: hex_value = 24'h000000; // blank
 	endcase
 	
@@ -210,9 +208,9 @@ endmodule
 
 // takes in the current orientation as well as a one-hot encoding that 
 // allows us to illuminate the matrix properly
-module colormux(input logic [9:0] colorcontrol,
-	input logic [31:0] orientation,
-	output logic [23:0] color);
+module colormux(input  logic [9:0] colorcontrol,
+                input  logic [31:0] orientation,
+                output logic [23:0] color);
 	logic [23:0] sqr1color, sqr2color, sqr3color, sqr4color, sqr5color, sqr6color, sqr7color, sqr8color, sqr9color;
 	
 	// convert each necessary piece of the orientation into the proper
@@ -228,19 +226,19 @@ module colormux(input logic [9:0] colorcontrol,
 	convert_orientation color9(orientation[26:24], sqr9color);
 	
 	always_comb
-	case (colorcontrol)
-	10'b0000000001: color = sqr1color;
-	10'b0000000010: color = sqr2color;
-	10'b0000000100: color = sqr3color;
-	10'b0000001000: color = sqr4color;
-	10'b0000010000: color = sqr5color;
-	10'b0000100000: color = sqr6color;
-	10'b0001000000: color = sqr7color;
-	10'b0010000000: color = sqr8color;
-	10'b0100000000: color = sqr9color;
-	10'b1000000000: color = 24'h000000;
-	default: color = 24'h000000;
-	endcase
+	   case (colorcontrol)
+	      10'b0000000001: color = sqr1color;
+	      10'b0000000010: color = sqr2color;
+	      10'b0000000100: color = sqr3color;
+	      10'b0000001000: color = sqr4color;
+	      10'b0000010000: color = sqr5color;
+	      10'b0000100000: color = sqr6color;
+	      10'b0001000000: color = sqr7color;
+	      10'b0010000000: color = sqr8color;
+	      10'b0100000000: color = sqr9color;
+	      10'b1000000000: color = 24'h000000;
+	      default:        color = 24'h000000;
+	   endcase
 
 endmodule
 

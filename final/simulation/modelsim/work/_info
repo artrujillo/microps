@@ -1,0 +1,226 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dF:/intelFPGA_lite/18.0
+vcolormux
+Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z1 !s110 1574726109
+!i10b 1
+!s100 @EaZkljoHAfVl:C8iZG;Q1
+I<BNWK5[WEh=Ck[[5W38FH3
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 !s105 send_bytes_sv_unit
+S1
+Z4 dC:/Users/atrujillo/Desktop/microps/final/simulation/modelsim
+Z5 w1574725540
+Z6 8C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv
+Z7 FC:/Users/atrujillo/Desktop/microps/final/send_bytes.sv
+L0 213
+Z8 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z9 !s108 1574726108.000000
+Z10 !s107 C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv|
+Z11 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/atrujillo/Desktop/microps/final/send_bytes.sv|
+!i113 1
+Z12 o-work work -sv
+Z13 tCvgOpt 0
+vconvert_orientation
+R0
+R1
+!i10b 1
+!s100 ij:DU927S=hNOBNZ5^Eac3
+Iz8D6G05IHbgi_AJ6U7B>70
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 194
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vcountervalmux
+R0
+R1
+!i10b 1
+!s100 iF^9PU<zaB23_m[04m@<o0
+InHmX0P]m<fP5TM64][6<`3
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 332
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vmake_data_stream
+R0
+R1
+!i10b 1
+!s100 66?I`LIQ>KfEgZf>^ZXo62
+I9Lc?KX@Lgl8KH?QT`2=Ef3
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 255
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vmakesquares
+R0
+R1
+!i10b 1
+!s100 igW`6InV]TlSSPFKRH]ai2
+I4:?d<`zM8Z:=M;k?Fg3[V1
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 94
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vrubiks_core
+R0
+R1
+!i10b 1
+!s100 ed<`Hi1TeB_]TaIbn:[;;0
+IF<KG0?IfMG@;LZH>CRM6T0
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 43
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vrubiks_spi
+R0
+R1
+!i10b 1
+!s100 QOR?5kenf4A_XETif8m:61
+IZ9in6GeF4cX0gAVW4jKNm0
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 29
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vsend_bytes
+R0
+R1
+!i10b 1
+!s100 ]S>Lc7fV9FHj_n3NTj_RO1
+IRNMleHB>1COYXRWIaQS[J0
+R2
+R3
+S1
+R4
+R5
+R6
+R7
+L0 2
+R8
+r1
+!s85 0
+31
+R9
+R10
+R11
+!i113 1
+R12
+R13
+vtestbench
+R0
+R1
+!i10b 1
+!s100 JbJlJM;Y4?B3[YG;gOAj=2
+IcW@T>JRXGdEUV33JE5^?40
+R2
+!s105 testbench_sv_unit
+S1
+R4
+w1574721461
+8C:/Users/atrujillo/Desktop/microps/final/testbench.sv
+FC:/Users/atrujillo/Desktop/microps/final/testbench.sv
+L0 12
+R8
+r1
+!s85 0
+31
+!s108 1574726109.000000
+!s107 C:/Users/atrujillo/Desktop/microps/final/testbench.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/atrujillo/Desktop/microps/final/testbench.sv|
+!i113 1
+R12
+R13
