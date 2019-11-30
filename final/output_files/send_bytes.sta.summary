@@ -3,59 +3,59 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 85C Model Setup 'clk'
-Slack : -6.855
-TNS   : -190.346
+Slack : -7.690
+TNS   : -200.455
 
 Type  : Slow 1200mV 85C Model Setup 'sck'
-Slack : -1.111
-TNS   : -9.867
+Slack : -0.956
+TNS   : -20.578
 
 Type  : Slow 1200mV 85C Model Hold 'clk'
 Slack : 0.454
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'sck'
-Slack : 0.574
+Slack : 0.528
 TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'sck'
+Slack : -3.000
+TNS   : -110.064
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
 Slack : -3.000
 TNS   : -74.376
 
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'sck'
-Slack : -3.000
-TNS   : -43.149
-
 Type  : Slow 1200mV 0C Model Setup 'clk'
-Slack : -6.454
-TNS   : -176.687
+Slack : -7.313
+TNS   : -188.276
 
 Type  : Slow 1200mV 0C Model Setup 'sck'
-Slack : -0.980
-TNS   : -7.283
+Slack : -0.853
+TNS   : -15.071
 
 Type  : Slow 1200mV 0C Model Hold 'clk'
 Slack : 0.402
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'sck'
-Slack : 0.547
+Slack : 0.491
 TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'sck'
+Slack : -3.000
+TNS   : -110.540
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
 Slack : -3.000
 TNS   : -74.376
 
-Type  : Slow 1200mV 0C Model Minimum Pulse Width 'sck'
-Slack : -3.000
-TNS   : -43.314
-
 Type  : Fast 1200mV 0C Model Setup 'clk'
-Slack : -2.425
-TNS   : -54.194
+Slack : -2.743
+TNS   : -60.307
 
 Type  : Fast 1200mV 0C Model Setup 'sck'
-Slack : 0.110
+Slack : 0.180
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'clk'
@@ -63,15 +63,15 @@ Slack : 0.187
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'sck'
-Slack : 0.236
+Slack : 0.205
 TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
-Slack : -3.000
-TNS   : -54.195
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'sck'
 Slack : -3.000
-TNS   : -33.156
+TNS   : -83.092
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : -3.000
+TNS   : -54.175
 
 ------------------------------------------------------------

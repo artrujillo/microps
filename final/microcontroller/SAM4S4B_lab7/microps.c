@@ -27,6 +27,8 @@ Fall 2019
 // hard-coded bits to be sent over spi
 char cwOrientation[4] = {0x00, 0x29, 0x89, 0x60};
 
+char newOritentation[9] = {0x02, 0x00, 0x03, 0x04, 0x05, 0x00, 0x00, 0x00, 0x01};
+
 /*
 char starting_orientation[54] = {0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5,
 								 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4,
@@ -78,7 +80,7 @@ int main(void) {
 	pioDigitalWrite(ledCW, 0);
 	pioDigitalWrite(ledCCW, 0);
 	
-	send_orientation(cwOrientation);
+	send_orientation(newOritentation);
 
   while(1){
       rot = pioDigitalRead(pinCW);
@@ -126,7 +128,7 @@ void send_orientation(char* current_orientation){
 	int i;
 	pioDigitalWrite(LOAD_PIN, 1);
 	pioDigitalWrite(LOAD_COPY, 1); // used for logic analyzer
-	for (i = 0; i < 4; i++){
+	for (i = 0; i < 9; i++){
 		spiSendReceive(current_orientation[i]);
 	}
 	

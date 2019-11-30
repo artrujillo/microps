@@ -6,7 +6,7 @@ module send_bytes(input  logic clk,
                   input  logic load,
                   output logic datastream);
 
-	logic [31:0] orientation;
+	logic [71:0] orientation;
 	//assign hardcoded =  32'b00000000001010011000100101100000;
 	// our spi is currently not working as expected, so the communication between 
 	// these modules is very minimal at this time.
@@ -29,19 +29,19 @@ makesquares module.
 module rubiks_spi(input  logic sck, 
                   input  logic sdi,
                   input  logic load,
-                  output logic [31:0] orientation);
+                  output logic [71:0] orientation);
  
    // assert load
    // apply 32 sclks to shift orientation starting with orientation[0]
    always_ff @(posedge sck)
-      if (load) {orientation} = {orientation[30:0], sdi};
+      if (load) {orientation} = {orientation[70:0], sdi};
  
 endmodule
 
 
 // programs a rubiks face with colors given by orientation
 module rubiks_core(input  logic clk, reset,
-                   input  logic [31:0] orientation,
+                   input  logic [71:0] orientation,
                    output logic datastream);
 	
 	typedef enum logic [1:0] {switching, sending, over} statetype;
@@ -92,7 +92,7 @@ endmodule
 
 // outputs colors in correct order to display squares for rubiks cube
 module makesquares(input  logic clk, reset, switchcolor,
-                   input  logic [31:0] orientation,
+                   input  logic [71:0] orientation,
                    output logic [23:0] color);
 	
 	logic [3:0] count;
@@ -189,17 +189,17 @@ endmodule
 
 // takes in 3 bits of current orientation and converts them to the 
 // corresponding HEX values that we need to illuminate the matrix
-module convert_orientation(input  logic [2:0] bit_value,
+module convert_orientation(input  logic [7:0] bit_value,
                            output logic [23:0] hex_value);
 
 	always_comb
 	case (bit_value)
-	3'b000: hex_value =  24'h00b000; // red
-	3'b001: hex_value =  24'h00f060; // orange
-	3'b010: hex_value =  24'h00b0b0; // yellow
-	3'b011: hex_value =  24'h0000b0; // green
-	3'b100: hex_value =  24'hb00000; // blue
-	3'b101: hex_value =  24'hb05000; // purple
+	8'b00000000: hex_value =  24'h00b000; // red
+	8'b00000001: hex_value =  24'h00f060; // orange
+	8'b00000010: hex_value =  24'h00b0b0; // yellow
+	8'b00000011: hex_value =  24'h0000b0; // green
+	8'b00000100: hex_value =  24'hb00000; // blue
+	8'b00000101: hex_value =  24'hb05000; // purple
 	default: hex_value = 24'h000000; // blank
 	endcase
 	
@@ -209,21 +209,21 @@ endmodule
 // takes in the current orientation as well as a one-hot encoding that 
 // allows us to illuminate the matrix properly
 module colormux(input  logic [9:0] colorcontrol,
-                input  logic [31:0] orientation,
+                input  logic [71:0] orientation,
                 output logic [23:0] color);
 	logic [23:0] sqr1color, sqr2color, sqr3color, sqr4color, sqr5color, sqr6color, sqr7color, sqr8color, sqr9color;
 	
 	// convert each necessary piece of the orientation into the proper
 	// HEX value for the square that the color corresponds to
-	convert_orientation color1(orientation[2:0], sqr1color);
-	convert_orientation color2(orientation[5:3], sqr2color);
-	convert_orientation color3(orientation[8:6], sqr3color);
-	convert_orientation color4(orientation[11:9], sqr4color);
-	convert_orientation color5(orientation[14:12], sqr5color);
-	convert_orientation color6(orientation[17:15], sqr6color);
-	convert_orientation color7(orientation[20:18], sqr7color);
-	convert_orientation color8(orientation[23:21], sqr8color);
-	convert_orientation color9(orientation[26:24], sqr9color);
+	convert_orientation color1(orientation[7:0], sqr1color);
+	convert_orientation color2(orientation[15:8], sqr2color);
+	convert_orientation color3(orientation[23:16], sqr3color);
+	convert_orientation color4(orientation[31:24], sqr4color);
+	convert_orientation color5(orientation[39:32], sqr5color);
+	convert_orientation color6(orientation[47:40], sqr6color);
+	convert_orientation color7(orientation[55:48], sqr7color);
+	convert_orientation color8(orientation[63:56], sqr8color);
+	convert_orientation color9(orientation[71:64], sqr9color);
 	
 	always_comb
 	   case (colorcontrol)
