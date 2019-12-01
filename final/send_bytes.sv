@@ -7,22 +7,13 @@ module send_bytes(input  logic clk,
                   output logic datastream);
 
 	logic [71:0] orientation;
-	//assign hardcoded =  32'b00000000001010011000100101100000;
-	// our spi is currently not working as expected, so the communication between 
-	// these modules is very minimal at this time.
+
+	//assign hardcoded = 72'b000000010000000100000001000000010000000100000001000000010000000100000001;
+
 	rubiks_spi spi(sck, sdi, load, orientation);
 	rubiks_core core(clk, reset, orientation, datastream);
 
 endmodule
-
-
-
-/*
-Our spi module does not fully work at this point. We still need to debug using
-the logic analyzer to see what exactly is being passed through from the MC to the
-FPGA. Once we debug this, we will no longer need to hard code 'orientation' in our 
-makesquares module.
-*/
 
 // SPI module used to retrieve the current cube orientation from the MC and return
 // a DONE signal to the MC once the display has been illuminated
@@ -32,12 +23,11 @@ module rubiks_spi(input  logic sck,
                   output logic [71:0] orientation);
  
    // assert load
-   // apply 32 sclks to shift orientation starting with orientation[0]
+   // apply 72 sclks to shift orientation starting with orientation[0]
    always_ff @(posedge sck)
       if (load) {orientation} = {orientation[70:0], sdi};
  
 endmodule
-
 
 // programs a rubiks face with colors given by orientation
 module rubiks_core(input  logic clk, reset,
@@ -75,7 +65,7 @@ module rubiks_core(input  logic clk, reset,
 	               else if (done)           nextstate = switching;
 	               else                     nextstate = sending;
 	      over:                             nextstate = over;
-	      default:	                         nextstate = over;
+	      default:	                        nextstate = over;
 	
 	   endcase
 	
@@ -83,7 +73,7 @@ module rubiks_core(input  logic clk, reset,
 	assign resetsb = (state == switching);
 	
 	// get the 24-bit color data from make squares
-	makesquares ms(clk, reset, resetsb, orientation, data); // orientation is currently hardcoded because SPI isn't working 
+	makesquares ms(clk, reset, resetsb, orientation, data); 
 	
 	// make the datastream based on the 24 bits of color data
 	make_data_stream mds(clk, resetsb, data, datastream, done);
@@ -111,7 +101,6 @@ module makesquares(input  logic clk, reset, switchcolor,
 	                   end
 	   else if (switchcolumn & switchcolor) column <= nextcolumn;
 	   else if (switchcolor)                   row <= nextrow;
-	
 	
 	// two finite state machines, one switches cols, one switches rows
 	// goes through in a snakelike order, order in which LEDs are written
@@ -194,23 +183,23 @@ module convert_orientation(input  logic [7:0] bit_value,
 
 	always_comb
 	case (bit_value)
-	8'b00000000: hex_value =  24'h00b000; // red
-	8'b00000001: hex_value =  24'h00f060; // orange
-	8'b00000010: hex_value =  24'h00b0b0; // yellow
-	8'b00000011: hex_value =  24'h0000b0; // green
-	8'b00000100: hex_value =  24'hb00000; // blue
-	8'b00000101: hex_value =  24'hb05000; // purple
-	default: hex_value = 24'h000000; // blank
+		8'b00000000: hex_value =  24'h00b000; // red
+		8'b00000001: hex_value =  24'h00f060; // orange
+		8'b00000010: hex_value =  24'h00b0b0; // yellow
+		8'b00000011: hex_value =  24'h0000b0; // green
+		8'b00000100: hex_value =  24'hb00000; // blue
+		8'b00000101: hex_value =  24'hb05000; // purple
+		default:     hex_value = 24'h000000; // blank
 	endcase
 	
 endmodule
-
 
 // takes in the current orientation as well as a one-hot encoding that 
 // allows us to illuminate the matrix properly
 module colormux(input  logic [9:0] colorcontrol,
                 input  logic [71:0] orientation,
                 output logic [23:0] color);
+
 	logic [23:0] sqr1color, sqr2color, sqr3color, sqr4color, sqr5color, sqr6color, sqr7color, sqr8color, sqr9color;
 	
 	// convert each necessary piece of the orientation into the proper
@@ -241,8 +230,6 @@ module colormux(input  logic [9:0] colorcontrol,
 	   endcase
 
 endmodule
-
-
 
 /////////////////////////////////////////////////////////////
 // Takes in 24-bit color data, outputs one bit that follows 
@@ -294,23 +281,23 @@ module make_data_stream(input  logic clk, reset,
    // R: reset to indicate shift
    always_comb
       case (state)
-         T0H: if      (~reset_counter)      nextstate = T0H;
-              else                          nextstate = T0L;
-         T1H: if      (~reset_counter)      nextstate = T1H;
-              else                          nextstate = T1L;
-         T0L: if      (~reset_counter)      nextstate = T0L;
-              else if (nextbit)             nextstate = T1H;
-	           else if (bitcounter == 5'd23) nextstate = R;
-              else                          nextstate = T0H;
-         T1L: if      (~reset_counter)      nextstate = T1L;
-              else if (nextbit)             nextstate = T1H;
-              else if (bitcounter == 5'd23) nextstate = R;
-              else                          nextstate = T0H;
-         R:   if      (~reset_counter)      nextstate = R;
-              else if (bitcounter == 5'd24) nextstate = R;
-              else if (nextbit)             nextstate = T1H;
-              else                          nextstate = T0H;
-         default:                           nextstate = R;
+         T0H: if      (~reset_counter)       nextstate = T0H;
+              else                           nextstate = T0L;
+         T1H: if      (~reset_counter)       nextstate = T1H;
+              else                           nextstate = T1L;
+         T0L: if      (~reset_counter)       nextstate = T0L;
+              else if (nextbit)              nextstate = T1H;
+	          else if (bitcounter == 5'd23) nextstate = R;
+              else                           nextstate = T0H;
+         T1L: if      (~reset_counter)       nextstate = T1L;
+              else if (nextbit)              nextstate = T1H;
+              else if (bitcounter == 5'd23)  nextstate = R;
+              else                           nextstate = T0H;
+         R:   if      (~reset_counter)       nextstate = R;
+              else if (bitcounter == 5'd24)  nextstate = R;
+              else if (nextbit)              nextstate = T1H;
+              else                           nextstate = T0H;
+         default:                            nextstate = R;
       endcase
 
    // control signal logic 
@@ -324,7 +311,6 @@ module make_data_stream(input  logic clk, reset,
    countervalmux cntrvalmux(s, counterval); // mux chooses constants, depending on how long the pulse should be
 
 endmodule
-
 
 // mux for choosing counter value, depending on state
 module countervalmux(input logic [2:0] s,
