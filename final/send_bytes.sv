@@ -6,7 +6,7 @@ module send_bytes(input  logic clk,
                   input  logic load,
                   output logic datastream);
 
-	logic [71:0] orientation;
+	logic [431:0] orientation;
 
 	//assign hardcoded = 72'b000000010000000100000001000000010000000100000001000000010000000100000001;
 
@@ -20,35 +20,45 @@ endmodule
 module rubiks_spi(input  logic sck, 
                   input  logic sdi,
                   input  logic load,
-                  output logic [71:0] orientation);
+                  output logic [431:0] orientation);
  
    // assert load
    // apply 72 sclks to shift orientation starting with orientation[0]
    always_ff @(posedge sck)
-      if (load) {orientation} = {orientation[70:0], sdi};
+      if (load) {orientation} = {orientation[430:0], sdi};
  
 endmodule
 
 // programs a rubiks face with colors given by orientation
 module rubiks_core(input  logic clk, reset,
-                   input  logic [71:0] orientation,
+                   input  logic [431:0] orientation,
                    output logic datastream);
 	
-	typedef enum logic [1:0] {switching, sending, over} statetype;
+	typedef enum logic [1:0] {switching, sending, new_face, over} statetype;
 	statetype state, nextstate;
 	
-	logic resetsb, done, red;
+	logic resetsb, done, red, change_face;
+	logic [71:0] current_face_orientation;
 	logic [23:0] data;
 	logic [8:0] count;
-	
+	logic [2:0] face_count;
 	// register for finite state machine, counter
 	always_ff @(posedge clk)
 	   if (reset) begin
 	                 state <= switching;
 	                 red <= 0; // for easy testing/programming of LED matrix
 	                 count <= 0;
+					 face_count <= 0;
+					 change_face <= 0;
 	              end
+	   else if (state == new_face) begin
+                                      red <= 0; // for easy testing/programming of LED matrix
+	                                  count <= 0;
+									  face_count <= face_count + 1;
+                                      change_face <= 1;
+	                               end
 	   else       begin
+	                 change_face <= 0;
 	                 state <= nextstate;
 	                 if (state == sending) red <= ~red; // for testing
 	                 else                  count <= count+1; // counter for how many LEDs have been programmed
@@ -61,23 +71,62 @@ module rubiks_core(input  logic clk, reset,
 	always_comb 
       case (state)
 	      switching: nextstate = sending;
-	      sending: if      (count == 9'd65) nextstate = over;
-	               else if (done)           nextstate = switching;
-	               else                     nextstate = sending;
-	      over:                             nextstate = over;
-	      default:	                        nextstate = over;
+	      sending:  if      (count == 9'd65)       nextstate = new_face;
+	                else if (done)                 nextstate = switching;
+	                else                           nextstate = sending;
+		  new_face: if      (face_count == 3'b101) nextstate = over; // may need to make this 3'b110 -- will test
+		            else                           nextstate = switching;
+	      over:                                    nextstate = over;
+	      default:	                               nextstate = over;
 	
 	   endcase
 	
 	// control logic
 	assign resetsb = (state == switching);
+
+	// determine the current face orientation to be displayed
+	face_fsm get_face(clk, change_face, orientation[431:0], current_face_orientation);
 	
 	// get the 24-bit color data from make squares
-	makesquares ms(clk, reset, resetsb, orientation, data); 
+	makesquares ms(clk, reset, resetsb, current_face_orientation, data); 
 	
 	// make the datastream based on the 24 bits of color data
 	make_data_stream mds(clk, resetsb, data, datastream, done);
 	
+endmodule
+
+// finite state machine that determines which face we are currently lighting up
+module face_fsm(input  logic clk, reset, change_face,
+                input  logic [431:0] full_orientation,
+                output logic [71:0] current_face_orientation);
+
+    typedef enum logic [3:0] {red_face, orange_face, yellow_face, green_face, blue_face, purple_face, over} statetype;
+    statetype state, nextstate;
+
+	always_ff @(posedge clk)
+	   if (reset) state <= red_face;
+	   else       state <= nextstate;
+	
+	always_comb
+	   case(state)
+	      red_face:    if (change_face) nextstate = orange_face;
+		               else             nextstate = red_face;
+	      orange_face: if (change_face) nextstate = yellow_face;
+		               else             nextstate = orange_face;
+		  yellow_face: if (change_face) nextstate = green_face;
+		               else             nextstate = yellow_face;
+		  green_face:  if (change_face) nextstate = blue_face;
+		               else             nextstate = green_face;
+		  blue_face:   if (change_face) nextstate = purple_face;
+		               else             nextstate = blue_face;
+		  purple_face: if (change_face) nextstate = over;
+		               else             nextstate = purple_face;
+		  over:                         nextstate = over;
+		  default:                      nextstate = over;
+	   endcase
+	
+	// TODO -- add assignments using if statement structure
+
 endmodule
 
 // outputs colors in correct order to display squares for rubiks cube
@@ -137,7 +186,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	      4'd6: if      (oddcol)         nextrow = 4'd5;
 	            else                     nextrow = 4'd7;	
 	      4'd7: if      (oddcol)         nextrow = 4'd6;
-	            else	                   nextrow = 4'd7;
+	            else	                 nextrow = 4'd7;
 	      4'd8:                          nextrow = 4'd8;
 	      default:                       nextrow = 4'd8;
 	   endcase
@@ -287,7 +336,7 @@ module make_data_stream(input  logic clk, reset,
               else                           nextstate = T1L;
          T0L: if      (~reset_counter)       nextstate = T0L;
               else if (nextbit)              nextstate = T1H;
-	          else if (bitcounter == 5'd23) nextstate = R;
+	          else if (bitcounter == 5'd23)  nextstate = R;
               else                           nextstate = T0H;
          T1L: if      (~reset_counter)       nextstate = T1L;
               else if (nextbit)              nextstate = T1H;
