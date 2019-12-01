@@ -1,11 +1,19 @@
 
-State Machine - |send_bytes|state
+State Machine - |send_bytes|rubiks_core:core|state
 Name state.switching state.over state.sending 
 state.switching 0 0 0 
 state.sending 1 0 1 
 state.over 1 1 0 
 
-State Machine - |send_bytes|makesquares:ms|column
+State Machine - |send_bytes|rubiks_core:core|make_data_stream:mds|state
+Name state.T1L state.T0L state.T1H state.T0H state.R 
+state.T0H 0 0 0 0 0 
+state.T1H 0 0 1 1 0 
+state.T0L 0 1 0 1 0 
+state.T1L 1 0 0 1 0 
+state.R 0 0 0 1 1 
+
+State Machine - |send_bytes|rubiks_core:core|makesquares:ms|column
 Name column.0111 column.0110 column.0101 column.0100 column.0011 column.0010 column.0001 column.0000 column.1000 
 column.0000 0 0 0 0 0 0 0 0 0 
 column.0001 0 0 0 0 0 0 1 1 0 
@@ -17,9 +25,9 @@ column.0110 0 1 0 0 0 0 0 1 0
 column.0111 1 0 0 0 0 0 0 1 0 
 column.1000 0 0 0 0 0 0 0 1 1 
 
-State Machine - |send_bytes|makesquares:ms|row
-Name row.0000 row.1000 row.0111 row.0110 row.0101 row.0100 row.0011 row.0010 row.0001 row.1001 
-row.1001 0 0 0 0 0 0 0 0 0 0 
+State Machine - |send_bytes|rubiks_core:core|makesquares:ms|row
+Name row.1001 row.1000 row.0111 row.0110 row.0101 row.0100 row.0011 row.0010 row.0001 row.0000 
+row.0000 0 0 0 0 0 0 0 0 0 0 
 row.0001 0 0 0 0 0 0 0 0 1 1 
 row.0010 0 0 0 0 0 0 0 1 0 1 
 row.0011 0 0 0 0 0 0 1 0 0 1 
@@ -28,12 +36,4 @@ row.0101 0 0 0 0 1 0 0 0 0 1
 row.0110 0 0 0 1 0 0 0 0 0 1 
 row.0111 0 0 1 0 0 0 0 0 0 1 
 row.1000 0 1 0 0 0 0 0 0 0 1 
-row.0000 1 0 0 0 0 0 0 0 0 1 
-
-State Machine - |send_bytes|make_data_stream:mds|state
-Name state.T1L state.T0L state.T1H state.T0H state.R 
-state.T0H 0 0 0 0 0 
-state.T1H 0 0 1 1 0 
-state.T0L 0 1 0 1 0 
-state.T1L 1 0 0 1 0 
-state.R 0 0 0 1 1 
+row.1001 1 0 0 0 0 0 0 0 0 1 
