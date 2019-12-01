@@ -16,8 +16,8 @@ Section Cross References
     microps.o(i.main) refers to microps.o(i.pioInit) for pioInit
     microps.o(i.main) refers to microps.o(i.spiInit) for spiInit
     microps.o(i.main) refers to microps.o(i.pioPinMode) for pioPinMode
-    microps.o(i.main) refers to microps.o(i.user_interface_setup) for user_interface_setup
     microps.o(i.main) refers to microps.o(i.pioDigitalWrite) for pioDigitalWrite
+    microps.o(i.main) refers to microps.o(i.user_interface_setup) for user_interface_setup
     microps.o(i.main) refers to microps.o(i.send_orientation) for send_orientation
     microps.o(i.main) refers to microps.o(i.pioDigitalRead) for pioDigitalRead
     microps.o(i.main) refers to microps.o(.data) for newOritentation
@@ -201,8 +201,8 @@ Removing Unused input sections from the image.
     Removing microps.o(i.adcChannelInit), (220 bytes).
     Removing microps.o(i.adcInit), (48 bytes).
     Removing microps.o(i.adcRead), (128 bytes).
-    Removing microps.o(i.clockwise_turn), (4 bytes).
-    Removing microps.o(i.counter_clockwise_turn), (4 bytes).
+    Removing microps.o(i.clockwise_turn), (6 bytes).
+    Removing microps.o(i.counter_clockwise_turn), (6 bytes).
     Removing microps.o(i.pioPinResistor), (122 bytes).
     Removing microps.o(i.pioTogglePin), (30 bytes).
     Removing microps.o(i.pmcCheckMasterClk), (28 bytes).
@@ -245,7 +245,7 @@ Removing Unused input sections from the image.
     Removing system_sam4s.o(i.SystemCoreClockUpdate), (388 bytes).
     Removing system_sam4s.o(.data), (4 bytes).
 
-46 unused section(s) (total 2500 bytes) removed from the image.
+46 unused section(s) (total 2504 bytes) removed from the image.
 
 ==============================================================================
 
@@ -375,22 +375,22 @@ Image Symbol Table
     .text                                    0x00400222   Section        0  indicate_semi.o(.text)
     i.SystemInit                             0x00400224   Section        0  system_sam4s.o(i.SystemInit)
     i.main                                   0x00400250   Section        0  microps.o(i.main)
-    i.pioDigitalRead                         0x004002e8   Section        0  microps.o(i.pioDigitalRead)
-    i.pioDigitalWrite                        0x0040030c   Section        0  microps.o(i.pioDigitalWrite)
-    i.pioInit                                0x00400342   Section        0  microps.o(i.pioInit)
-    i.pioPinMode                             0x00400352   Section        0  microps.o(i.pioPinMode)
-    i.pioPinToBase                           0x0040042c   Section        0  microps.o(i.pioPinToBase)
-    i.pioPinToPort                           0x0040043e   Section        0  microps.o(i.pioPinToPort)
-    i.pioPortToBase                          0x00400444   Section        0  microps.o(i.pioPortToBase)
-    i.pmcDisableWriteProtection              0x00400458   Section        0  microps.o(i.pmcDisableWriteProtection)
-    i.pmcEnablePeriph                        0x00400468   Section        0  microps.o(i.pmcEnablePeriph)
-    i.pmcMainClkBypass                       0x00400478   Section        0  microps.o(i.pmcMainClkBypass)
-    i.samInit                                0x004004b4   Section        0  microps.o(i.samInit)
-    i.send_orientation                       0x004004c4   Section        0  microps.o(i.send_orientation)
-    i.spiInit                                0x0040050c   Section        0  microps.o(i.spiInit)
-    i.spiSendReceive                         0x0040057c   Section        0  microps.o(i.spiSendReceive)
-    i.user_interface_setup                   0x004005a4   Section        0  microps.o(i.user_interface_setup)
-    i.wdtDisable                             0x004005c0   Section        0  microps.o(i.wdtDisable)
+    i.pioDigitalRead                         0x004002f8   Section        0  microps.o(i.pioDigitalRead)
+    i.pioDigitalWrite                        0x0040031c   Section        0  microps.o(i.pioDigitalWrite)
+    i.pioInit                                0x00400352   Section        0  microps.o(i.pioInit)
+    i.pioPinMode                             0x00400362   Section        0  microps.o(i.pioPinMode)
+    i.pioPinToBase                           0x0040043c   Section        0  microps.o(i.pioPinToBase)
+    i.pioPinToPort                           0x0040044e   Section        0  microps.o(i.pioPinToPort)
+    i.pioPortToBase                          0x00400454   Section        0  microps.o(i.pioPortToBase)
+    i.pmcDisableWriteProtection              0x00400468   Section        0  microps.o(i.pmcDisableWriteProtection)
+    i.pmcEnablePeriph                        0x00400478   Section        0  microps.o(i.pmcEnablePeriph)
+    i.pmcMainClkBypass                       0x00400488   Section        0  microps.o(i.pmcMainClkBypass)
+    i.samInit                                0x004004c4   Section        0  microps.o(i.samInit)
+    i.send_orientation                       0x004004d4   Section        0  microps.o(i.send_orientation)
+    i.spiInit                                0x0040051c   Section        0  microps.o(i.spiInit)
+    i.spiSendReceive                         0x0040058c   Section        0  microps.o(i.spiSendReceive)
+    i.user_interface_setup                   0x004005b4   Section        0  microps.o(i.user_interface_setup)
+    i.wdtDisable                             0x004005d0   Section        0  microps.o(i.wdtDisable)
     .data                                    0x20000000   Section       13  microps.o(.data)
     .bss                                     0x20000010   Section       96  libspace.o(.bss)
     HEAP                                     0x20000070   Section      512  startup_sam4s.o(HEAP)
@@ -540,25 +540,25 @@ Image Symbol Table
     __use_no_semihosting_swi                 0x00400221   Thumb Code     2  use_no_semi.o(.text)
     __semihosting_library_function           0x00400223   Thumb Code     0  indicate_semi.o(.text)
     SystemInit                               0x00400225   Thumb Code    28  system_sam4s.o(i.SystemInit)
-    main                                     0x00400251   Thumb Code   148  microps.o(i.main)
-    pioDigitalRead                           0x004002e9   Thumb Code    36  microps.o(i.pioDigitalRead)
-    pioDigitalWrite                          0x0040030d   Thumb Code    54  microps.o(i.pioDigitalWrite)
-    pioInit                                  0x00400343   Thumb Code    16  microps.o(i.pioInit)
-    pioPinMode                               0x00400353   Thumb Code   218  microps.o(i.pioPinMode)
-    pioPinToBase                             0x0040042d   Thumb Code    18  microps.o(i.pioPinToBase)
-    pioPinToPort                             0x0040043f   Thumb Code     6  microps.o(i.pioPinToPort)
-    pioPortToBase                            0x00400445   Thumb Code    12  microps.o(i.pioPortToBase)
-    pmcDisableWriteProtection                0x00400459   Thumb Code     8  microps.o(i.pmcDisableWriteProtection)
-    pmcEnablePeriph                          0x00400469   Thumb Code    10  microps.o(i.pmcEnablePeriph)
-    pmcMainClkBypass                         0x00400479   Thumb Code    52  microps.o(i.pmcMainClkBypass)
-    samInit                                  0x004004b5   Thumb Code    16  microps.o(i.samInit)
-    send_orientation                         0x004004c5   Thumb Code    70  microps.o(i.send_orientation)
-    spiInit                                  0x0040050d   Thumb Code   108  microps.o(i.spiInit)
-    spiSendReceive                           0x0040057d   Thumb Code    36  microps.o(i.spiSendReceive)
-    user_interface_setup                     0x004005a5   Thumb Code    26  microps.o(i.user_interface_setup)
-    wdtDisable                               0x004005c1   Thumb Code    18  microps.o(i.wdtDisable)
-    Region$$Table$$Base                      0x004005d8   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x004005f8   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x00400251   Thumb Code   164  microps.o(i.main)
+    pioDigitalRead                           0x004002f9   Thumb Code    36  microps.o(i.pioDigitalRead)
+    pioDigitalWrite                          0x0040031d   Thumb Code    54  microps.o(i.pioDigitalWrite)
+    pioInit                                  0x00400353   Thumb Code    16  microps.o(i.pioInit)
+    pioPinMode                               0x00400363   Thumb Code   218  microps.o(i.pioPinMode)
+    pioPinToBase                             0x0040043d   Thumb Code    18  microps.o(i.pioPinToBase)
+    pioPinToPort                             0x0040044f   Thumb Code     6  microps.o(i.pioPinToPort)
+    pioPortToBase                            0x00400455   Thumb Code    12  microps.o(i.pioPortToBase)
+    pmcDisableWriteProtection                0x00400469   Thumb Code     8  microps.o(i.pmcDisableWriteProtection)
+    pmcEnablePeriph                          0x00400479   Thumb Code    10  microps.o(i.pmcEnablePeriph)
+    pmcMainClkBypass                         0x00400489   Thumb Code    52  microps.o(i.pmcMainClkBypass)
+    samInit                                  0x004004c5   Thumb Code    16  microps.o(i.samInit)
+    send_orientation                         0x004004d5   Thumb Code    70  microps.o(i.send_orientation)
+    spiInit                                  0x0040051d   Thumb Code   108  microps.o(i.spiInit)
+    spiSendReceive                           0x0040058d   Thumb Code    36  microps.o(i.spiSendReceive)
+    user_interface_setup                     0x004005b5   Thumb Code    26  microps.o(i.user_interface_setup)
+    wdtDisable                               0x004005d1   Thumb Code    18  microps.o(i.wdtDisable)
+    Region$$Table$$Base                      0x004005e8   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00400608   Number         0  anon$$obj.o(Region$$Table)
     cwOrientation                            0x20000000   Data           4  microps.o(.data)
     newOritentation                          0x20000004   Data           9  microps.o(.data)
     __libspace_start                         0x20000010   Data          96  libspace.o(.bss)
@@ -572,9 +572,9 @@ Memory Map of the image
 
   Image Entry point : 0x00400169
 
-  Load Region LR_1 (Base: 0x00400000, Size: 0x00000608, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00400000, Size: 0x00000618, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x00400000, Load base: 0x00400000, Size: 0x000005f8, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00400000, Load base: 0x00400000, Size: 0x00000608, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -637,36 +637,36 @@ Memory Map of the image
     0x00400222   0x00400222   0x00000000   Code   RO          762    .text               c_w.l(indicate_semi.o)
     0x00400222   0x00400222   0x00000002   PAD
     0x00400224   0x00400224   0x0000002c   Code   RO          413    i.SystemInit        system_sam4s.o
-    0x00400250   0x00400250   0x00000098   Code   RO            6    i.main              microps.o
-    0x004002e8   0x004002e8   0x00000024   Code   RO            7    i.pioDigitalRead    microps.o
-    0x0040030c   0x0040030c   0x00000036   Code   RO            8    i.pioDigitalWrite   microps.o
-    0x00400342   0x00400342   0x00000010   Code   RO            9    i.pioInit           microps.o
-    0x00400352   0x00400352   0x000000da   Code   RO           10    i.pioPinMode        microps.o
-    0x0040042c   0x0040042c   0x00000012   Code   RO           12    i.pioPinToBase      microps.o
-    0x0040043e   0x0040043e   0x00000006   Code   RO           13    i.pioPinToPort      microps.o
-    0x00400444   0x00400444   0x00000014   Code   RO           14    i.pioPortToBase     microps.o
-    0x00400458   0x00400458   0x00000010   Code   RO           17    i.pmcDisableWriteProtection  microps.o
-    0x00400468   0x00400468   0x00000010   Code   RO           18    i.pmcEnablePeriph   microps.o
-    0x00400478   0x00400478   0x0000003c   Code   RO           20    i.pmcMainClkBypass  microps.o
-    0x004004b4   0x004004b4   0x00000010   Code   RO           34    i.samInit           microps.o
-    0x004004c4   0x004004c4   0x00000046   Code   RO           35    i.send_orientation  microps.o
-    0x0040050a   0x0040050a   0x00000002   PAD
-    0x0040050c   0x0040050c   0x00000070   Code   RO           36    i.spiInit           microps.o
-    0x0040057c   0x0040057c   0x00000028   Code   RO           37    i.spiSendReceive    microps.o
-    0x004005a4   0x004005a4   0x0000001a   Code   RO           56    i.user_interface_setup  microps.o
-    0x004005be   0x004005be   0x00000002   PAD
-    0x004005c0   0x004005c0   0x00000018   Code   RO           57    i.wdtDisable        microps.o
-    0x004005d8   0x004005d8   0x00000020   Data   RO          815    Region$$Table       anon$$obj.o
+    0x00400250   0x00400250   0x000000a8   Code   RO            6    i.main              microps.o
+    0x004002f8   0x004002f8   0x00000024   Code   RO            7    i.pioDigitalRead    microps.o
+    0x0040031c   0x0040031c   0x00000036   Code   RO            8    i.pioDigitalWrite   microps.o
+    0x00400352   0x00400352   0x00000010   Code   RO            9    i.pioInit           microps.o
+    0x00400362   0x00400362   0x000000da   Code   RO           10    i.pioPinMode        microps.o
+    0x0040043c   0x0040043c   0x00000012   Code   RO           12    i.pioPinToBase      microps.o
+    0x0040044e   0x0040044e   0x00000006   Code   RO           13    i.pioPinToPort      microps.o
+    0x00400454   0x00400454   0x00000014   Code   RO           14    i.pioPortToBase     microps.o
+    0x00400468   0x00400468   0x00000010   Code   RO           17    i.pmcDisableWriteProtection  microps.o
+    0x00400478   0x00400478   0x00000010   Code   RO           18    i.pmcEnablePeriph   microps.o
+    0x00400488   0x00400488   0x0000003c   Code   RO           20    i.pmcMainClkBypass  microps.o
+    0x004004c4   0x004004c4   0x00000010   Code   RO           34    i.samInit           microps.o
+    0x004004d4   0x004004d4   0x00000046   Code   RO           35    i.send_orientation  microps.o
+    0x0040051a   0x0040051a   0x00000002   PAD
+    0x0040051c   0x0040051c   0x00000070   Code   RO           36    i.spiInit           microps.o
+    0x0040058c   0x0040058c   0x00000028   Code   RO           37    i.spiSendReceive    microps.o
+    0x004005b4   0x004005b4   0x0000001a   Code   RO           56    i.user_interface_setup  microps.o
+    0x004005ce   0x004005ce   0x00000002   PAD
+    0x004005d0   0x004005d0   0x00000018   Code   RO           57    i.wdtDisable        microps.o
+    0x004005e8   0x004005e8   0x00000020   Data   RO          815    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x004005f8, Size: 0x00000010, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00400608, Size: 0x00000010, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x004005f8   0x0000000d   Data   RW           59    .data               microps.o
+    0x20000000   0x00400608   0x0000000d   Data   RW           59    .data               microps.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000010, Load base: 0x00400608, Size: 0x00000460, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000010, Load base: 0x00400618, Size: 0x00000460, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -682,12 +682,12 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       900         54          0         13          0      16940   microps.o
+       916         54          0         13          0      17132   microps.o
         64         26        204          0       1024        852   startup_sam4s.o
         44         16          0          0          0        473   system_sam4s.o
 
     ----------------------------------------------------------------------
-      1012         96        236         16       1024      18265   Object Totals
+      1028         96        236         16       1024      18457   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          4          0          0          3          0          0   (incl. Padding)
 
@@ -736,15 +736,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1292        112        236         16       1120      17909   Grand Totals
-      1292        112        236         16       1120      17909   ELF Image Totals
-      1292        112        236         16          0          0   ROM Totals
+      1308        112        236         16       1120      18101   Grand Totals
+      1308        112        236         16       1120      18101   ELF Image Totals
+      1308        112        236         16          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 1528 (   1.49kB)
+    Total RO  Size (Code + RO Data)                 1544 (   1.51kB)
     Total RW  Size (RW Data + ZI Data)              1136 (   1.11kB)
-    Total ROM Size (Code + RO Data + RW Data)       1544 (   1.51kB)
+    Total ROM Size (Code + RO Data + RW Data)       1560 (   1.52kB)
 
 ==============================================================================
 

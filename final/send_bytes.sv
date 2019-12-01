@@ -6,12 +6,12 @@ module send_bytes(input  logic clk,
                   input  logic load,
                   output logic datastream);
 
-	logic [71:0] orientation;
+	logic [71:0] orientation, hardcoded;
 
-	//assign hardcoded = 72'b000000010000000100000001000000010000000100000001000000010000000100000001;
+	assign hardcoded = 72'b000000010000000100000001000000010000000100000001000000010000000100000001;
 
 	rubiks_spi spi(sck, sdi, load, orientation);
-	rubiks_core core(clk, reset, orientation, datastream);
+	rubiks_core core(clk, reset, hardcoded, datastream);
 
 endmodule
 

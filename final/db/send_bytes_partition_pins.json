@@ -14,18 +14,6 @@
 				{
 					"name" : "clk",
 					"strict" : false
-				},
-				{
-					"name" : "sck",
-					"strict" : false
-				},
-				{
-					"name" : "load",
-					"strict" : false
-				},
-				{
-					"name" : "sdi",
-					"strict" : false
 				}
 			]
 		}

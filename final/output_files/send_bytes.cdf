@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE6E22) Path("C:/Users/atrujillo/Desktop/microps/final/output_files/") File("send_bytes.sof") MfrSpec(OpMask(1));
+		Device PartName(EP4CE6E22) Path("C:/Users/atrujillo/Documents/GitHub/microps/final/output_files/") File("send_bytes.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 

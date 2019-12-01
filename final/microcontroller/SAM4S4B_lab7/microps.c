@@ -21,13 +21,13 @@ Fall 2019
 // SPI Pins
 #define LOAD_PIN PIO_PA29
 #define LOAD_COPY PIO_PA16
-#define FPGA_RESET PIO_PA15
+#define FPGA_RESET PIO_PA5
 
 
 // hard-coded bits to be sent over spi
 char cwOrientation[4] = {0x00, 0x29, 0x89, 0x60};
 
-char newOritentation[9] = {0x02, 0x00, 0x03, 0x04, 0x05, 0x00, 0x00, 0x00, 0x01};
+char newOritentation[9] = {0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01};
 
 /*
 char starting_orientation[54] = {0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5,
@@ -70,7 +70,8 @@ int main(void) {
 	
 	pioPinMode(LOAD_PIN, PIO_OUTPUT);
 	pioPinMode(LOAD_COPY, PIO_OUTPUT);
-	
+	pioDigitalWrite(LOAD_PIN, 0);
+	pioDigitalWrite(LOAD_COPY, 0);
   	pinCWLast = user_interface_setup();
 	
 	// PIO setup for rot. encoder demo
@@ -126,9 +127,10 @@ int user_interface_setup() {
 
 void send_orientation(char* current_orientation){
 	int i;
+
 	pioDigitalWrite(LOAD_PIN, 1);
 	pioDigitalWrite(LOAD_COPY, 1); // used for logic analyzer
-	for (i = 0; i < 9; i++){
+	for (i = 0; i < 3; i++){
 		spiSendReceive(current_orientation[i]);
 	}
 	
@@ -140,9 +142,9 @@ void send_orientation(char* current_orientation){
 }
 
 char* clockwise_turn(char* current_orientation){
-
+ return 0;
 }
 
 char* counter_clockwise_turn(char* current_orientation){
-
+	return 0;
 }
