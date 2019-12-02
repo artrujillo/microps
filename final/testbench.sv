@@ -10,10 +10,10 @@
 /////////////////////////////////////////////
 
 module testbench();
-    logic clk, reset, datastream;
+    logic clk, reset, sck, sdi, load, datastream;
     
     // device under test
-    send_bytes dut(clk, reset, datastream);
+    send_bytes dut(clk, reset, sck, sdi, load, datastream);
 
     
     // generate clock and load signals

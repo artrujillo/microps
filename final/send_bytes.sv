@@ -6,12 +6,12 @@ module send_bytes(input  logic clk,
                   input  logic load,
                   output logic datastream);
 
-	logic [431:0] orientation;
+	logic [431:0] orientation, hardcoded;
 
-	//assign hardcoded = 72'b000000010000000100000001000000010000000100000001000000010000000100000001;
+	assign hardcoded = 432'b000001010000010100000101000001010000010100000101000001010000010100000101000001000000010000000100000001000000010000000100000001000000010000000100000000110000001100000011000000110000001100000011000000110000001100000011000000100000001000000010000000100000001000000010000000100000001000000010000000010000000100000001000000010000000100000001000000010000000100000001000000000000000000000000000000000000000000000000000000000000000000000000;
 
 	rubiks_spi spi(sck, sdi, load, orientation);
-	rubiks_core core(clk, reset, orientation, datastream);
+	rubiks_core core(clk, reset, hardcoded, datastream);
 
 endmodule
 
@@ -37,31 +37,32 @@ module rubiks_core(input  logic clk, reset,
 	typedef enum logic [1:0] {switching, sending, new_face, over} statetype;
 	statetype state, nextstate;
 	
-	logic resetsb, done, red, change_face;
+	logic resetsb, done, red, change_face, face_reset;
 	logic [71:0] current_face_orientation;
 	logic [23:0] data;
 	logic [8:0] count;
 	logic [2:0] face_count;
+	
+	assign face_reset = reset ^ change_face;
 	// register for finite state machine, counter
 	always_ff @(posedge clk)
-	   if (reset) begin
+	   if (face_reset) begin
 	                 state <= switching;
 	                 red <= 0; // for easy testing/programming of LED matrix
 	                 count <= 0;
-					 face_count <= 0;
-					 change_face <= 0;
+					     face_count <= 0;
 	              end
 	   else if (state == new_face) begin
-                                      red <= 0; // for easy testing/programming of LED matrix
-	                                  count <= 0;
-									  face_count <= face_count + 1;
-                                      change_face <= 1;
-	                               end
+			face_count <= face_count + 1;
+			count <= 9'd0;
+			state <= nextstate;
+		end	
 	   else       begin
-	                 change_face <= 0;
 	                 state <= nextstate;
+						  face_count <= face_count;
 	                 if (state == sending) red <= ~red; // for testing
-	                 else                  count <= count+1; // counter for how many LEDs have been programmed
+	                 else
+						  count <= count+1; // counter for how many LEDs have been programmed
 	              end
 	
 	// next state logic for finite state machine
@@ -74,18 +75,18 @@ module rubiks_core(input  logic clk, reset,
 	      sending:  if      (count == 9'd65)       nextstate = new_face;
 	                else if (done)                 nextstate = switching;
 	                else                           nextstate = sending;
-		  new_face: if      (face_count == 3'b101) nextstate = over; // may need to make this 3'b110 -- will test
-		            else                           nextstate = switching;
+		   new_face: if      (face_count == 3'b101) nextstate = over; // may need to make this 3'b110 -- will test
+		             else                           nextstate = switching;													  
 	      over:                                    nextstate = over;
-	      default:	                               nextstate = over;
+	      default:	                                nextstate = over;
 	
 	   endcase
-	
+	assign change_face = (state == new_face);
 	// control logic
 	assign resetsb = (state == switching);
 
 	// determine the current face orientation to be displayed
-	face_fsm get_face(clk, change_face, orientation[431:0], current_face_orientation);
+	face_fsm get_face(clk, reset, change_face, orientation, current_face_orientation);
 	
 	// get the 24-bit color data from make squares
 	makesquares ms(clk, reset, resetsb, current_face_orientation, data); 
@@ -99,9 +100,13 @@ endmodule
 module face_fsm(input  logic clk, reset, change_face,
                 input  logic [431:0] full_orientation,
                 output logic [71:0] current_face_orientation);
-
-    typedef enum logic [3:0] {red_face, orange_face, yellow_face, green_face, blue_face, purple_face, over} statetype;
-    statetype state, nextstate;
+	
+   logic [71:0] blank_face;
+	
+	assign blank_face = 72'b0;
+   typedef enum logic [3:0] {red_face, orange_face, yellow_face, green_face, blue_face, purple_face, over} statetype;
+   
+	statetype state, nextstate;
 
 	always_ff @(posedge clk)
 	   if (reset) state <= red_face;
@@ -109,24 +114,61 @@ module face_fsm(input  logic clk, reset, change_face,
 	
 	always_comb
 	   case(state)
-	      red_face:    if (change_face) nextstate = orange_face;
-		               else             nextstate = red_face;
-	      orange_face: if (change_face) nextstate = yellow_face;
-		               else             nextstate = orange_face;
-		  yellow_face: if (change_face) nextstate = green_face;
-		               else             nextstate = yellow_face;
-		  green_face:  if (change_face) nextstate = blue_face;
-		               else             nextstate = green_face;
-		  blue_face:   if (change_face) nextstate = purple_face;
-		               else             nextstate = blue_face;
-		  purple_face: if (change_face) nextstate = over;
-		               else             nextstate = purple_face;
-		  over:                         nextstate = over;
+	     red_face:    if (change_face) begin
+		                                   nextstate = orange_face;
+													  current_face_orientation = blank_face;
+												  end
+		               else begin            
+							                 nextstate = red_face;
+												  current_face_orientation = full_orientation[71:0];
+								  end
+	     orange_face: if (change_face) begin
+		                                   nextstate = yellow_face;
+													  current_face_orientation = blank_face;
+												  end
+		               else begin            
+							                 nextstate = orange_face;
+												  current_face_orientation = full_orientation[143:72];
+								  end
+		  yellow_face: if (change_face) begin
+		                                   nextstate = green_face;
+													  current_face_orientation = blank_face;
+												  end
+		               else begin            
+							                 nextstate = yellow_face;
+												  current_face_orientation = full_orientation[215:144];
+								  end
+		  green_face:  if (change_face) begin
+		                                   nextstate = blue_face;
+													  current_face_orientation = blank_face;
+												  end
+		               else begin            
+							                 nextstate = green_face;
+												  current_face_orientation = full_orientation[287:216];
+								  end
+		  blue_face:   if (change_face) begin
+		                                   nextstate = purple_face;
+													  current_face_orientation = blank_face;
+												  end
+		               else begin            
+							                 nextstate = blue_face;
+												  current_face_orientation = full_orientation[359:288];
+								  end
+		  purple_face: if (change_face) begin
+		                                   nextstate = over;
+													  current_face_orientation = blank_face;
+												  end
+		               else begin           
+							                 nextstate = purple_face;
+												  current_face_orientation = full_orientation[431:360];
+								  end
+		  over:             begin       
+		                                nextstate = over;
+		                                current_face_orientation = blank_face;
+								  end
 		  default:                      nextstate = over;
 	   endcase
 	
-	// TODO -- add assignments using if statement structure
-
 endmodule
 
 // outputs colors in correct order to display squares for rubiks cube
@@ -186,7 +228,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	      4'd6: if      (oddcol)         nextrow = 4'd5;
 	            else                     nextrow = 4'd7;	
 	      4'd7: if      (oddcol)         nextrow = 4'd6;
-	            else	                 nextrow = 4'd7;
+	            else	                   nextrow = 4'd7;
 	      4'd8:                          nextrow = 4'd8;
 	      default:                       nextrow = 4'd8;
 	   endcase
@@ -375,4 +417,9 @@ module countervalmux(input logic [2:0] s,
 	      default: out = 11'd2000; // R
       endcase
 
+endmodule
+
+module mux2 (input  logic d0, d1, s,
+				 output logic y);
+	assign y = s ? d1 : d0;
 endmodule

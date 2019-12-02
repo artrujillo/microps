@@ -1,9 +1,10 @@
 
 State Machine - |send_bytes|rubiks_core:core|state
-Name state.switching state.over state.sending 
-state.switching 0 0 0 
-state.sending 1 0 1 
-state.over 1 1 0 
+Name state.over state.new_face state.sending state.switching 
+state.switching 0 0 0 0 
+state.sending 0 0 1 1 
+state.new_face 0 1 0 1 
+state.over 1 0 0 1 
 
 State Machine - |send_bytes|rubiks_core:core|make_data_stream:mds|state
 Name state.T1L state.T0L state.T1H state.T0H state.R 
@@ -37,3 +38,13 @@ row.0110 0 0 0 1 0 0 0 0 0 1
 row.0111 0 0 1 0 0 0 0 0 0 1 
 row.1000 0 1 0 0 0 0 0 0 0 1 
 row.1001 1 0 0 0 0 0 0 0 0 1 
+
+State Machine - |send_bytes|rubiks_core:core|face_fsm:get_face|state
+Name state.over state.purple_face state.blue_face state.green_face state.yellow_face state.orange_face state.red_face 
+state.red_face 0 0 0 0 0 0 0 
+state.orange_face 0 0 0 0 0 1 1 
+state.yellow_face 0 0 0 0 1 0 1 
+state.green_face 0 0 0 1 0 0 1 
+state.blue_face 0 0 1 0 0 0 1 
+state.purple_face 0 1 0 0 0 0 1 
+state.over 1 0 0 0 0 0 1 
