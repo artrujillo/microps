@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Objects\rubiks.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\rubiks.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Nov 30 14:39:29 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Dec 02 14:09:55 2019
 <BR><P>
-<H3>Maximum Stack Usage =         40 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =         48 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 __rt_entry_main &rArr; main &rArr; spiInit &rArr; pioPinMode &rArr; pioPinToBase
 <P>
@@ -192,7 +192,7 @@ Global Symbols
 <P><STRONG><a name="[73]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[3a]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 48 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; spiInit &rArr; pioPinMode &rArr; pioPinToBase
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -394,8 +394,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
 <LI>Call Chain = __user_setup_stackheap
 </UL>
-<BR>[Calls]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_initial_stackheap
-<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perproc_libspace
+<BR>[Calls]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perproc_libspace
+<LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_initial_stackheap
 </UL>
 <BR>[Called By]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_sh
 </UL>
@@ -430,8 +430,8 @@ Global Symbols
 <P><STRONG><a name="[2d]"></a>SystemInit</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, system_sam4s.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_sam4s.o(.text)
 </UL>
-<P><STRONG><a name="[3b]"></a>main</STRONG> (Thumb, 148 bytes, Stack size 0 bytes, microps.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = main &rArr; spiInit &rArr; pioPinMode &rArr; pioPinToBase
+<P><STRONG><a name="[3b]"></a>main</STRONG> (Thumb, 92 bytes, Stack size 8 bytes, microps.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = main &rArr; spiInit &rArr; pioPinMode &rArr; pioPinToBase
 </UL>
 <BR>[Calls]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;user_interface_setup
 <LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spiInit
@@ -440,7 +440,6 @@ Global Symbols
 <LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinMode
 <LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioInit
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioDigitalWrite
-<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioDigitalRead
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
@@ -451,7 +450,6 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinToBase
 </UL>
 <BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;user_interface_setup
-<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[48]"></a>pioDigitalWrite</STRONG> (Thumb, 54 bytes, Stack size 20 bytes, microps.o(i.pioDigitalWrite))
@@ -479,6 +477,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;user_interface_setup
 <LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spiInit
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_orientation
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -524,10 +523,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[49]"></a>send_orientation</STRONG> (Thumb, 70 bytes, Stack size 12 bytes, microps.o(i.send_orientation))
-<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = send_orientation &rArr; pioDigitalWrite &rArr; pioPinToBase
+<P><STRONG><a name="[49]"></a>send_orientation</STRONG> (Thumb, 86 bytes, Stack size 12 bytes, microps.o(i.send_orientation))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = send_orientation &rArr; pioPinMode &rArr; pioPinToBase
 </UL>
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spiSendReceive
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinMode
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioDigitalWrite
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main

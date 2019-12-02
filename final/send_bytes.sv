@@ -48,7 +48,6 @@ module rubiks_core(input  logic clk, reset,
 	always_ff @(posedge clk)
 	   if (face_reset) begin
 	                 state <= switching;
-	                 red <= 0; // for easy testing/programming of LED matrix
 	                 count <= 0;
 					     face_count <= 0;
 	              end
@@ -85,7 +84,7 @@ module rubiks_core(input  logic clk, reset,
 	face_fsm get_face(clk, reset, change_face, orientation, current_face_orientation);
 	
 	// get the 24-bit color data from make squares
-	makesquares ms(clk, reset, resetsb, current_face_orientation, data); 
+	makesquares ms(clk, face_reset, resetsb, current_face_orientation, data); 
 	
 	// make the datastream based on the 24 bits of color data
 	make_data_stream mds(clk, resetsb, data, datastream, done);

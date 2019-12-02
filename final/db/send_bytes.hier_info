@@ -1309,7 +1309,7 @@ orientation[431] <= orientation[431]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 
 |send_bytes|rubiks_core:core
 clk => clk.IN3
-reset => reset.IN2
+reset => reset.IN1
 orientation[0] => orientation[0].IN1
 orientation[1] => orientation[1].IN1
 orientation[2] => orientation[2].IN1

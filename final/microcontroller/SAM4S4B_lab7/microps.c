@@ -81,7 +81,7 @@ int main(void) {
 	pioDigitalWrite(ledCCW, 0);
 	
 	send_orientation(starting_orientation);
-
+	/*
   while(1){
       rot = pioDigitalRead(pinCW);
       if (rot != pinCWLast){ // Means the knob is rotating
@@ -99,6 +99,7 @@ int main(void) {
         }
 			pinCWLast = rot;
     }
+	*/
 }
 
 ///////////////////////////
@@ -126,8 +127,12 @@ int user_interface_setup() {
 
 void send_orientation(char* current_orientation){
 	int i;
+	pioPinMode(LOAD_PIN, PIO_OUTPUT);
+	pioPinMode(LOAD_COPY, PIO_OUTPUT);
+	
 	pioDigitalWrite(LOAD_PIN, 1);
 	pioDigitalWrite(LOAD_COPY, 1); // used for logic analyzer
+	
 	for (i = 0; i < 54; i++){
 		spiSendReceive(current_orientation[i]);
 	}
@@ -138,7 +143,7 @@ void send_orientation(char* current_orientation){
 	pioDigitalWrite(FPGA_RESET, 1);
 	pioDigitalWrite(FPGA_RESET, 0);
 }
-
+/*
 char* clockwise_turn(char* current_orientation){
 
 }
@@ -146,3 +151,4 @@ char* clockwise_turn(char* current_orientation){
 char* counter_clockwise_turn(char* current_orientation){
 
 }
+*/
