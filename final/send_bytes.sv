@@ -52,11 +52,7 @@ module rubiks_core(input  logic clk, reset,
 	                 count <= 0;
 					     face_count <= 0;
 	              end
-	   else if (state == new_face) begin
-			face_count <= face_count + 1;
-			count <= 9'd0;
-			state <= nextstate;
-		end	
+	   else if (state == new_face) face_count <= face_count + 1;	
 	   else       begin
 	                 state <= nextstate;
 						  face_count <= face_count;
