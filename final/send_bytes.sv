@@ -34,7 +34,7 @@ module rubiks_core(input  logic clk, reset,
                    input  logic [431:0] orientation,
                    output logic datastream);
 	
-	typedef enum logic [1:0] {switching, sending, new_face, over} statetype;
+	typedef enum logic [2:0] {switching, sending, new_face,load, over} statetype;
 	statetype state, nextstate;
 	
 	logic resetsb, done, red, change_face, face_reset;
@@ -46,16 +46,22 @@ module rubiks_core(input  logic clk, reset,
 	assign face_reset = reset ^ change_face;
 	// register for finite state machine, counter
 	always_ff @(posedge clk)
-	   if (face_reset) begin
+	   if (reset) begin
 	                 state <= switching;
 	                 count <= 0;
 					 face_count <= 0;
 					 change_face <= 0;
 	              end
+		else if (state == load) begin
+										   count <= 0;
+										   change_face <= 0;
+											state <= nextstate;
+									   end
 	   else if (state == new_face) begin
                                       face_count <= face_count + 1;
 									  state <= nextstate;
 									  change_face <= 1;
+									  count <= 0;
 								   end
 	   else       begin
 	                 state <= nextstate;
@@ -76,10 +82,11 @@ module rubiks_core(input  logic clk, reset,
 	      sending:  if      (count == 9'd65)       nextstate = new_face;
 	                else if (done)                 nextstate = switching;
 	                else                           nextstate = sending;
-		  new_face: if      (face_count == 3'b101) nextstate = over; // may need to make this 3'b110 -- will test
-		            else                           nextstate = switching;													  
+		   new_face: if      (face_count == 3'b101) nextstate = over; // may need to make this 3'b110 -- will test
+		             else                           nextstate = load;
+         load:                                    nextstate = switching;						
 	      over:                                    nextstate = over;
-	      default:	                               nextstate = over;
+	      default:	                                nextstate = over;
 	
 	   endcase
 

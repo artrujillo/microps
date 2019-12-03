@@ -1,10 +1,11 @@
 
 State Machine - |send_bytes|rubiks_core:core|state
-Name state.over state.new_face state.sending state.switching 
-state.switching 0 0 0 0 
-state.sending 0 0 1 1 
-state.new_face 0 1 0 1 
-state.over 1 0 0 1 
+Name state.load state.new_face state.sending state.switching state.over 
+state.switching 0 0 0 0 0 
+state.sending 0 0 1 1 0 
+state.new_face 0 1 0 1 0 
+state.load 1 0 0 1 0 
+state.over 0 0 0 1 1 
 
 State Machine - |send_bytes|rubiks_core:core|make_data_stream:mds|state
 Name state.T1L state.T0L state.T1H state.T0H state.R 
