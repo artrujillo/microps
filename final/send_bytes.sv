@@ -49,11 +49,17 @@ module rubiks_core(input  logic clk, reset,
 	   if (face_reset) begin
 	                 state <= switching;
 	                 count <= 0;
-					     face_count <= 0;
+					 face_count <= 0;
+					 change_face <= 0;
 	              end
-	   else if (state == new_face) face_count <= face_count + 1;	
+	   else if (state == new_face) begin
+                                      face_count <= face_count + 1;
+									  state <= nextstate;
+									  change_face <= 1;
+								   end
 	   else       begin
 	                 state <= nextstate;
+					 change_face <= 0;
 						  face_count <= face_count;
 	                 if (state == sending) red <= ~red; // for testing
 	                 else
@@ -70,13 +76,13 @@ module rubiks_core(input  logic clk, reset,
 	      sending:  if      (count == 9'd65)       nextstate = new_face;
 	                else if (done)                 nextstate = switching;
 	                else                           nextstate = sending;
-		   new_face: if      (face_count == 3'b101) nextstate = over; // may need to make this 3'b110 -- will test
-		             else                           nextstate = switching;													  
+		  new_face: if      (face_count == 3'b101) nextstate = over; // may need to make this 3'b110 -- will test
+		            else                           nextstate = switching;													  
 	      over:                                    nextstate = over;
-	      default:	                                nextstate = over;
+	      default:	                               nextstate = over;
 	
 	   endcase
-	assign change_face = (state == new_face);
+
 	// control logic
 	assign resetsb = (state == switching);
 
