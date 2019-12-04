@@ -11,7 +11,7 @@ module send_bytes(input  logic clk,
 	assign hardcoded = 432'b000001010000010100000101000001010000010100000101000001010000010100000101000001000000010000000100000001000000010000000100000001000000010000000100000000110000001100000011000000110000001100000011000000110000001100000011000000100000001000000010000000100000001000000010000000100000001000000010000000010000000100000001000000010000000100000001000000010000000100000001000000000000000000000000000000000000000000000000000000000000000000000000;
 
 	rubiks_spi spi(sck, sdi, load, orientation);
-	rubiks_core core(clk, reset, hardcoded, datastream);
+	rubiks_core core(clk, reset, orientation, datastream);
 
 endmodule
 
@@ -38,38 +38,29 @@ module rubiks_core(input  logic clk, reset,
 	statetype state, nextstate;
 	
 	logic resetsb, done, red, change_face, face_reset;
-	logic [71:0] current_face_orientation;
+	logic [71:0] current_face_orientation, blank_face;
 	logic [23:0] data;
 	logic [8:0] count;
 	logic [2:0] face_count;
 	
-	assign face_reset = reset ^ change_face;
+	assign blank_face = 72'b0;
+	
 	// register for finite state machine, counter
 	always_ff @(posedge clk)
 	   if (reset) begin
 	                 state <= switching;
 	                 count <= 0;
-					 face_count <= 0;
-					 change_face <= 0;
+					     face_count <= 0;
 	              end
-		else if (state == load) begin
-										   count <= 0;
-										   change_face <= 0;
-											state <= nextstate;
-									   end
 	   else if (state == new_face) begin
-                                      face_count <= face_count + 1;
-									  state <= nextstate;
-									  change_face <= 1;
-									  count <= 0;
-								   end
+                                     face_count <= face_count + 1;
+									          state <= nextstate;
+									          count <= 0;
+								          end
 	   else       begin
 	                 state <= nextstate;
-					 change_face <= 0;
 						  face_count <= face_count;
-	                 if (state == sending) red <= ~red; // for testing
-	                 else
-						  count <= count+1; // counter for how many LEDs have been programmed
+	                 if (state == switching) count <= count+1;
 	              end
 	
 	// next state logic for finite state machine
@@ -83,19 +74,29 @@ module rubiks_core(input  logic clk, reset,
 	                else if (done)                 nextstate = switching;
 	                else                           nextstate = sending;
 		   new_face: if      (face_count == 3'b101) nextstate = over; // may need to make this 3'b110 -- will test
-		             else                           nextstate = load;
-         load:                                    nextstate = switching;						
+		             else                           nextstate = switching;					
 	      over:                                    nextstate = over;
 	      default:	                                nextstate = over;
 	
 	   endcase
+		
+	always_comb
+	   case (face_count)
+		   3'b000:    current_face_orientation = orientation[71:0];
+			3'b001:    current_face_orientation = orientation[143:72];
+			3'b010:    current_face_orientation = orientation[215:144];
+			3'b011:    current_face_orientation = orientation[287:216];
+			3'b100:    current_face_orientation = orientation[359:288];
+			3'b101:    current_face_orientation = orientation[431:360];
+			default:   current_face_orientation = blank_face;
+		endcase
 
 	// control logic
 	assign resetsb = (state == switching);
-
-	// determine the current face orientation to be displayed
-	face_fsm get_face(clk, reset, change_face, orientation, current_face_orientation);
 	
+	assign face_reset = (count == 9'd65) | reset;
+	
+	assign change_face = (state == new_face);
 	// get the 24-bit color data from make squares
 	makesquares ms(clk, face_reset, resetsb, current_face_orientation, data); 
 	
@@ -104,87 +105,11 @@ module rubiks_core(input  logic clk, reset,
 	
 endmodule
 
-// finite state machine that determines which face we are currently lighting up
-module face_fsm(input  logic clk, reset, change_face,
-                input  logic [431:0] full_orientation,
-                output logic [71:0] current_face_orientation);
-	
-   logic [71:0] blank_face;
-	
-	assign blank_face = 72'b0;
-   typedef enum logic [3:0] {red_face, orange_face, yellow_face, green_face, blue_face, purple_face, over} statetype;
-   
-	statetype state, nextstate;
-
-	always_ff @(posedge clk)
-	   if (reset) state <= red_face;
-	   else       state <= nextstate;
-	
-	always_comb
-	   case(state)
-	     red_face:    if (change_face) begin
-		                                   nextstate = orange_face;
-													  current_face_orientation = blank_face;
-												  end
-		               else begin            
-							                 nextstate = red_face;
-												  current_face_orientation = full_orientation[71:0];
-								  end
-	     orange_face: if (change_face) begin
-		                                   nextstate = yellow_face;
-													  current_face_orientation = blank_face;
-												  end
-		               else begin            
-							                 nextstate = orange_face;
-												  current_face_orientation = full_orientation[143:72];
-								  end
-		  yellow_face: if (change_face) begin
-		                                   nextstate = green_face;
-													  current_face_orientation = blank_face;
-												  end
-		               else begin            
-							                 nextstate = yellow_face;
-												  current_face_orientation = full_orientation[215:144];
-								  end
-		  green_face:  if (change_face) begin
-		                                   nextstate = blue_face;
-													  current_face_orientation = blank_face;
-												  end
-		               else begin            
-							                 nextstate = green_face;
-												  current_face_orientation = full_orientation[287:216];
-								  end
-		  blue_face:   if (change_face) begin
-		                                   nextstate = purple_face;
-													  current_face_orientation = blank_face;
-												  end
-		               else begin            
-							                 nextstate = blue_face;
-												  current_face_orientation = full_orientation[359:288];
-								  end
-		  purple_face: if (change_face) begin
-		                                   nextstate = over;
-													  current_face_orientation = blank_face;
-												  end
-		               else begin           
-							                 nextstate = purple_face;
-												  current_face_orientation = full_orientation[431:360];
-								  end
-		  over:             begin       
-		                                nextstate = over;
-		                                current_face_orientation = blank_face;
-								  end
-		  default:                      nextstate = over;
-	   endcase
-	
-endmodule
-
 // outputs colors in correct order to display squares for rubiks cube
 module makesquares(input  logic clk, reset, switchcolor,
                    input  logic [71:0] orientation,
                    output logic [23:0] color);
 	
-	logic [3:0] count;
 	logic [3:0] column, nextcolumn;
 	logic [3:0] row, nextrow;
 	logic switchcolumn, oddcol;
@@ -195,7 +120,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	
 	always_ff @(posedge clk)
 	   if      (reset) begin
-	                                        row <= 4'd0; // Changing this to a 0 instead of a 9 fixed the odd alignment??
+	                                        row <= 4'd9; // Changing this to a 0 instead of a 9 fixed the odd alignment??
 	                                     column <= 4'd0;
 	                   end
 	   else if (switchcolumn & switchcolor) column <= nextcolumn;
@@ -257,18 +182,6 @@ module makesquares(input  logic clk, reset, switchcolor,
 	assign color8 = ((row == 4'd3)|(row == 4'd4))&((column== 4'd6)|(column== 4'd7));
 	assign color9 = ((row == 4'd6)|(row == 4'd7))&((column== 4'd6)|(column== 4'd7));
 	
-	/* experimenting with another way we could display a face
-	assign blank = (row == 4'd7)|(column == 4'd7)|(row == 4'd6)|(column == 4'd6);
-	assign color1 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd0)|(column== 4'd1));
-	assign color2 = ((row == 4'd2)|(row == 4'd3))&((column== 4'd0)|(column== 4'd1));
-	assign color3 = ((row == 4'd4)|(row == 4'd5))&((column== 4'd0)|(column== 4'd1));
-	assign color4 = ((row == 4'd4)|(row == 4'd5))&((column== 4'd2)|(column== 4'd3));
-	assign color5 = ((row == 4'd2)|(row == 4'd3))&((column== 4'd2)|(column== 4'd3));
-	assign color6 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd2)|(column== 4'd3));
-	assign color7 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd4)|(column== 4'd5));
-	assign color8 = ((row == 4'd2)|(row == 4'd3))&((column== 4'd4)|(column== 4'd5));
-	assign color9 = ((row == 4'd4)|(row == 4'd5))&((column== 4'd4)|(column== 4'd5));
-	*/
 	// choose the color data based on the color mux
 	assign controlcolors = {blank, color9, color8, color7, color6, color5, color4, color3, color2, color1};
 	colormux cm(controlcolors, orientation, color);
