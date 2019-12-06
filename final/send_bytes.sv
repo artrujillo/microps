@@ -1,32 +1,51 @@
 // top level module, contains spi and core modules
 module send_bytes(input  logic clk,
-                  input  logic reset,
                   input  logic sck, 
                   input  logic sdi,
+						//input  logic reset,
                   input  logic load,
-                  output logic datastream);
+                  output logic datastream,
+						output logic [7:0] leds);
 
-	logic [431:0] orientation, hardcoded;
+	logic [7:0] orientation; 
+	logic [431:0] hardcoded;
+	logic reset;
+	
+	level_to_pulse rst(clk, load, reset);
 
 	assign hardcoded = 432'b000001010000010100000101000001010000010100000101000001010000010100000101000001000000010000000100000001000000010000000100000001000000010000000100000000110000001100000011000000110000001100000011000000110000001100000011000000100000001000000010000000100000001000000010000000100000001000000010000000010000000100000001000000010000000100000001000000010000000100000001000000000000000000000000000000000000000000000000000000000000000000000000;
 
-	rubiks_spi spi(sck, sdi, load, orientation);
-	rubiks_core core(clk, reset, orientation, datastream);
+	//rubiks_spi spi(sck, clk, sdi, load, orientation, hardcoded, leds);
+	rubiks_core core(clk, reset, hardcoded, datastream);
 
 endmodule
 
 // SPI module used to retrieve the current cube orientation from the MC and return
 // a DONE signal to the MC once the display has been illuminated
 module rubiks_spi(input  logic sck, 
+						input  logic clk,
                   input  logic sdi,
                   input  logic load,
-                  output logic [431:0] orientation);
- 
+                  output logic [7:0] orientation,
+						output logic [431:0] hardcoded,
+						output logic [7:0] leds);
+						
    // assert load
    // apply 72 sclks to shift orientation starting with orientation[0]
    always_ff @(posedge sck)
-      if (load) {orientation} = {orientation[430:0], sdi};
- 
+      if (load) {orientation} = {orientation[6:0], sdi};
+	
+	
+	assign leds = orientation[7:0];
+	assign hardcoded = {orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
+							  orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
+							  orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
+							  orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
+							  orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
+							  orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation};
+	//mux2 get_orientation(blank_face, hardcoded, ready, finalori); //{orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
+							    //orientation, orientation, orientation, orientation, orientation[15:0]};
+
 endmodule
 
 // programs a rubiks face with colors given by orientation
@@ -34,10 +53,10 @@ module rubiks_core(input  logic clk, reset,
                    input  logic [431:0] orientation,
                    output logic datastream);
 	
-	typedef enum logic [2:0] {switching, sending, new_face,load, over} statetype;
+	typedef enum logic [2:0] {switching, sending, new_face,load, over, delay} statetype;
 	statetype state, nextstate;
 	
-	logic resetsb, done, red, change_face, face_reset;
+	logic resetsb, done, red, face_reset;
 	logic [71:0] current_face_orientation, blank_face;
 	logic [23:0] data;
 	logic [8:0] count;
@@ -74,7 +93,8 @@ module rubiks_core(input  logic clk, reset,
 	                else if (done)                 nextstate = switching;
 	                else                           nextstate = sending;
 		   new_face: if      (face_count == 3'b101) nextstate = over; // may need to make this 3'b110 -- will test
-		             else                           nextstate = switching;					
+		             else                           nextstate = switching;
+			delay:                                   nextstate = sending;
 	      over:                                    nextstate = over;
 	      default:	                                nextstate = over;
 	
@@ -92,11 +112,10 @@ module rubiks_core(input  logic clk, reset,
 		endcase
 
 	// control logic
-	assign resetsb = (state == switching);
+	assign resetsb = (state == delay) | (state == switching);
 	
-	assign face_reset = (count == 9'd65) | reset;
+	assign face_reset = (state == new_face) | reset;
 	
-	assign change_face = (state == new_face);
 	// get the 24-bit color data from make squares
 	makesquares ms(clk, face_reset, resetsb, current_face_orientation, data); 
 	
@@ -120,7 +139,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	
 	always_ff @(posedge clk)
 	   if      (reset) begin
-	                                        row <= 4'd9; // Changing this to a 0 instead of a 9 fixed the odd alignment??
+	                                        row <= 4'd0; // Changing this to a 0 instead of a 9 fixed the odd alignment??
 	                                     column <= 4'd0;
 	                   end
 	   else if (switchcolumn & switchcolor) column <= nextcolumn;
@@ -194,7 +213,7 @@ module convert_orientation(input  logic [7:0] bit_value,
                            output logic [23:0] hex_value);
 
 	always_comb
-	case (bit_value)
+	casex (bit_value) 
 		8'b00000000: hex_value =  24'h00b000; // red
 		8'b00000001: hex_value =  24'h00f060; // orange
 		8'b00000010: hex_value =  24'h00b0b0; // yellow
@@ -202,6 +221,18 @@ module convert_orientation(input  logic [7:0] bit_value,
 		8'b00000100: hex_value =  24'hb00000; // blue
 		8'b00000101: hex_value =  24'hb05000; // purple
 		default:     hex_value = 24'h000000; // blank
+		/*
+		8'b11111111: hex_value = 24'h00b000;
+		8'b10000000: hex_value =  24'h00b000; // red
+		8'b11xxxxxx: hex_value =  24'h00f060; // orange
+		8'b101xxxxx: hex_value =  24'h00b0b0; // yellow
+		8'b1001xxxx: hex_value =  24'h0000b0; // green
+		8'b10001xxx: hex_value =  24'hb00000; // blue
+		8'b100001xx: hex_value =  24'hb05000; // purple
+		8'b1000001x: hex_value =  24'hb05000; // red
+		8'b10000001: hex_value =  24'h00f060; // orange
+		default:     hex_value = 24'h00b0b0; // yellow
+		*/
 	endcase
 	
 endmodule
@@ -340,7 +371,38 @@ module countervalmux(input logic [2:0] s,
 
 endmodule
 
-module mux2 (input  logic d0, d1, s,
-				 output logic y);
+module mux2 #(parameter WIDTH = 432)
+             (input logic [WIDTH-1:0] d0, d1,
+				 input  logic s,
+				 output logic [WIDTH-1:0] y);
 	assign y = s ? d1 : d0;
 endmodule
+
+// this module is used for when a button is held for longer than
+// one clock cycle
+module level_to_pulse(input logic clk,
+							 input logic load,
+							 output logic reset);
+								 
+	typedef enum logic [1:0] {s0, s1, s2, s3} statetype;
+	statetype state, nextstate;
+	
+	// state register
+	always_ff@(posedge clk)
+      state <= nextstate;
+		
+	// nextstate logic
+	always_comb
+		case(state)
+			s0:		if (~load) nextstate = s1;
+						else      nextstate = s0;
+			s1:      if (~load) nextstate = s2;
+						else      nextstate = s0;
+			s2:      if (~load) nextstate = s2;
+						else      nextstate = s0;
+			default:           nextstate = s0;
+		endcase
+	// output logic	
+	assign reset = (state == s1);
+endmodule
+

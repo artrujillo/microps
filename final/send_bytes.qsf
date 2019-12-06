@@ -56,8 +56,16 @@ set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name SYSTEMVERILOG_FILE testbench.sv
 set_location_assignment PIN_88 -to clk
 set_location_assignment PIN_50 -to datastream
-set_location_assignment PIN_71 -to load
-set_location_assignment PIN_113 -to sck
-set_location_assignment PIN_65 -to sdi
+set_location_assignment PIN_52 -to load
+set_location_assignment PIN_49 -to sck
+set_location_assignment PIN_46 -to sdi
 set_location_assignment PIN_53 -to reset
+set_location_assignment PIN_68 -to leds[0]
+set_location_assignment PIN_69 -to leds[1]
+set_location_assignment PIN_70 -to leds[2]
+set_location_assignment PIN_71 -to leds[3]
+set_location_assignment PIN_72 -to leds[4]
+set_location_assignment PIN_73 -to leds[5]
+set_location_assignment PIN_74 -to leds[6]
+set_location_assignment PIN_75 -to leds[7]
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

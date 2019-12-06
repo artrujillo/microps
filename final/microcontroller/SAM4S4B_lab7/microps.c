@@ -19,7 +19,7 @@ Fall 2019
 #define ledCW PIO_PA17
 #define ledCCW PIO_PA18
 // SPI Pins
-#define LOAD_PIN PIO_PA29
+//#define LOAD_PIN PIO_PA29
 #define LOAD_COPY PIO_PA16
 #define FPGA_RESET PIO_PA15
 
@@ -30,12 +30,12 @@ char cwOrientation[4] = {0x00, 0x29, 0x89, 0x60};
 char newOritentation[9] = {0x02, 0x00, 0x03, 0x04, 0x05, 0x00, 0x00, 0x00, 0x01};
 
 
-char starting_orientation[54] = {0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05,
-								 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04,
-								 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03,
-								 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02,
-								 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
-								 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+char starting_orientation[54] = {0x01, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05,
+																 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04,
+																 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03,
+																 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02,
+																 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+																 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 
 ///////////////////////////
@@ -66,9 +66,10 @@ int main(void) {
 	uint16_t rot; // used to read a current rot position 
 	samInit();
 	pioInit();
-	spiInit(MCK_FREQ/244000, 0, 1);
+	tcDelayInit();
+	spiInit(MCK_FREQ/244000, 0, 1); // 244000
 	
-	pioPinMode(LOAD_PIN, PIO_OUTPUT);
+	//pioPinMode(LOAD_PIN, PIO_OUTPUT);
 	pioPinMode(LOAD_COPY, PIO_OUTPUT);
 	
   	pinCWLast = user_interface_setup();
@@ -77,6 +78,7 @@ int main(void) {
 	pioPinMode(ledCW, PIO_OUTPUT);
 	pioPinMode(ledCCW, PIO_OUTPUT);
 	pioPinMode(FPGA_RESET, PIO_OUTPUT);
+	pioDigitalWrite(FPGA_RESET, 0);
 	pioDigitalWrite(ledCW, 0);
 	pioDigitalWrite(ledCCW, 0);
 	
@@ -127,19 +129,43 @@ int user_interface_setup() {
 
 void send_orientation(char* current_orientation){
 	int i;
-	pioPinMode(LOAD_PIN, PIO_OUTPUT);
-	pioPinMode(LOAD_COPY, PIO_OUTPUT);
+	//pioPinMode(LOAD_PIN, PIO_OUTPUT);
+  pioPinMode(LOAD_COPY, PIO_OUTPUT);
 	
-	pioDigitalWrite(LOAD_PIN, 1);
-	pioDigitalWrite(LOAD_COPY, 1); // used for logic analyzer
+	//pioDigitalWrite(LOAD_PIN, 1);
+	// used for logic analyzer
+	pioDigitalWrite(LOAD_COPY, 1);
 	
-	for (i = 0; i < 54; i++){
+	for (i = 0; i < 1; i++){
+		spiSendReceive(current_orientation[i]);
+	}
+
+	pioDigitalWrite(LOAD_COPY, 0);
+	/*
+	//tcDelayMicroseconds(10);
+	
+	pioDigitalWrite(LOAD_COPY, 1);
+	
+	for (i = 18; i < 36; i++){
 		spiSendReceive(current_orientation[i]);
 	}
 	
-	pioDigitalWrite(LOAD_PIN, 0);
 	pioDigitalWrite(LOAD_COPY, 0);
+
+	//tcDelayMicroseconds(10);
 	
+	pioDigitalWrite(LOAD_COPY, 1);
+	
+	for (i = 36; i < 54; i++){
+		spiSendReceive(current_orientation[i]);
+	}
+	
+	pioDigitalWrite(LOAD_COPY, 0);
+
+	//pioDigitalWrite(LOAD_PIN, 0);
+
+	tcDelayMicroseconds(50);
+	*/
 	pioDigitalWrite(FPGA_RESET, 1);
 	pioDigitalWrite(FPGA_RESET, 0);
 }
