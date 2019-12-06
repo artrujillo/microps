@@ -1,5 +1,5 @@
 Fitter report for send_bytes
-Thu Dec 05 20:41:55 2019
+Fri Dec 06 08:41:29 2019
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -38,8 +38,10 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
  30. I/O Rules Matrix
  31. Fitter Device Options
  32. Operating Settings and Conditions
- 33. Fitter Messages
- 34. Fitter Suppressed Messages
+ 33. Estimated Delay Added for Hold Timing Summary
+ 34. Estimated Delay Added for Hold Timing Details
+ 35. Fitter Messages
+ 36. Fitter Suppressed Messages
 
 
 
@@ -65,18 +67,18 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                   ;
 +------------------------------------+---------------------------------------------+
-; Fitter Status                      ; Successful - Thu Dec 05 20:41:55 2019       ;
+; Fitter Status                      ; Successful - Fri Dec 06 08:41:29 2019       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; send_bytes                                  ;
 ; Top-level Entity Name              ; send_bytes                                  ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE6E22C8                                 ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 138 / 6,272 ( 2 % )                         ;
-;     Total combinational functions  ; 138 / 6,272 ( 2 % )                         ;
-;     Dedicated logic registers      ; 54 / 6,272 ( < 1 % )                        ;
-; Total registers                    ; 54                                          ;
-; Total pins                         ; 13 / 92 ( 14 % )                            ;
+; Total logic elements               ; 785 / 6,272 ( 13 % )                        ;
+;     Total combinational functions  ; 639 / 6,272 ( 10 % )                        ;
+;     Dedicated logic registers      ; 484 / 6,272 ( 8 % )                         ;
+; Total registers                    ; 484                                         ;
+; Total pins                         ; 14 / 92 ( 15 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0 / 276,480 ( 0 % )                         ;
 ; Embedded Multiplier 9-bit elements ; 0 / 30 ( 0 % )                              ;
@@ -152,28 +154,28 @@ refer to the applicable agreement for further details.
 ; Number detected on machine ; 4           ;
 ; Maximum allowed            ; 2           ;
 ;                            ;             ;
-; Average used               ; 1.01        ;
+; Average used               ; 1.03        ;
 ; Maximum used               ; 2           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.8%      ;
+;     Processor 2            ;   3.3%      ;
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------+
-; Incremental Compilation Preservation Summary                                                     ;
-+---------------------+--------------------+----------------------------+--------------------------+
-; Type                ; Total [A + B]      ; From Design Partitions [A] ; From Rapid Recompile [B] ;
-+---------------------+--------------------+----------------------------+--------------------------+
-; Placement (by node) ;                    ;                            ;                          ;
-;     -- Requested    ; 0.00 % ( 0 / 230 ) ; 0.00 % ( 0 / 230 )         ; 0.00 % ( 0 / 230 )       ;
-;     -- Achieved     ; 0.00 % ( 0 / 230 ) ; 0.00 % ( 0 / 230 )         ; 0.00 % ( 0 / 230 )       ;
-;                     ;                    ;                            ;                          ;
-; Routing (by net)    ;                    ;                            ;                          ;
-;     -- Requested    ; 0.00 % ( 0 / 0 )   ; 0.00 % ( 0 / 0 )           ; 0.00 % ( 0 / 0 )         ;
-;     -- Achieved     ; 0.00 % ( 0 / 0 )   ; 0.00 % ( 0 / 0 )           ; 0.00 % ( 0 / 0 )         ;
-+---------------------+--------------------+----------------------------+--------------------------+
++---------------------------------------------------------------------------------------------------+
+; Incremental Compilation Preservation Summary                                                      ;
++---------------------+---------------------+----------------------------+--------------------------+
+; Type                ; Total [A + B]       ; From Design Partitions [A] ; From Rapid Recompile [B] ;
++---------------------+---------------------+----------------------------+--------------------------+
+; Placement (by node) ;                     ;                            ;                          ;
+;     -- Requested    ; 0.00 % ( 0 / 1163 ) ; 0.00 % ( 0 / 1163 )        ; 0.00 % ( 0 / 1163 )      ;
+;     -- Achieved     ; 0.00 % ( 0 / 1163 ) ; 0.00 % ( 0 / 1163 )        ; 0.00 % ( 0 / 1163 )      ;
+;                     ;                     ;                            ;                          ;
+; Routing (by net)    ;                     ;                            ;                          ;
+;     -- Requested    ; 0.00 % ( 0 / 0 )    ; 0.00 % ( 0 / 0 )           ; 0.00 % ( 0 / 0 )         ;
+;     -- Achieved     ; 0.00 % ( 0 / 0 )    ; 0.00 % ( 0 / 0 )           ; 0.00 % ( 0 / 0 )         ;
++---------------------+---------------------+----------------------------+--------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -191,7 +193,7 @@ refer to the applicable agreement for further details.
 +--------------------------------+-----------------------+-------------------------+-------------------+---------------------+-------+
 ; Partition Name                 ; Preservation Achieved ; Preservation Level Used ; Netlist Type Used ; Preservation Method ; Notes ;
 +--------------------------------+-----------------------+-------------------------+-------------------+---------------------+-------+
-; Top                            ; 0.00 % ( 0 / 220 )    ; N/A                     ; Source File       ; N/A                 ;       ;
+; Top                            ; 0.00 % ( 0 / 1153 )   ; N/A                     ; Source File       ; N/A                 ;       ;
 ; hard_block:auto_generated_inst ; 0.00 % ( 0 / 10 )     ; N/A                     ; Source File       ; N/A                 ;       ;
 +--------------------------------+-----------------------+-------------------------+-------------------+---------------------+-------+
 
@@ -199,58 +201,58 @@ refer to the applicable agreement for further details.
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/Users/atrujillo/Documents/GitHub/microps/final/output_files/send_bytes.pin.
+The pin-out file can be found in C:/Users/atrujillo/Desktop/repo/microps/final/output_files/send_bytes.pin.
 
 
-+--------------------------------------------------------------------+
-; Fitter Resource Usage Summary                                      ;
-+---------------------------------------------+----------------------+
-; Resource                                    ; Usage                ;
-+---------------------------------------------+----------------------+
-; Total logic elements                        ; 138 / 6,272 ( 2 % )  ;
-;     -- Combinational with no register       ; 84                   ;
-;     -- Register only                        ; 0                    ;
-;     -- Combinational with a register        ; 54                   ;
-;                                             ;                      ;
-; Logic element usage by number of LUT inputs ;                      ;
-;     -- 4 input functions                    ; 79                   ;
-;     -- 3 input functions                    ; 22                   ;
-;     -- <=2 input functions                  ; 37                   ;
-;     -- Register only                        ; 0                    ;
-;                                             ;                      ;
-; Logic elements by mode                      ;                      ;
-;     -- normal mode                          ; 116                  ;
-;     -- arithmetic mode                      ; 22                   ;
-;                                             ;                      ;
-; Total registers*                            ; 54 / 6,684 ( < 1 % ) ;
-;     -- Dedicated logic registers            ; 54 / 6,272 ( < 1 % ) ;
-;     -- I/O registers                        ; 0 / 412 ( 0 % )      ;
-;                                             ;                      ;
-; Total LABs:  partially or completely used   ; 10 / 392 ( 3 % )     ;
-; Virtual pins                                ; 0                    ;
-; I/O pins                                    ; 13 / 92 ( 14 % )     ;
-;     -- Clock pins                           ; 1 / 3 ( 33 % )       ;
-;     -- Dedicated input pins                 ; 0 / 9 ( 0 % )        ;
-;                                             ;                      ;
-; M9Ks                                        ; 0 / 30 ( 0 % )       ;
-; Total block memory bits                     ; 0 / 276,480 ( 0 % )  ;
-; Total block memory implementation bits      ; 0 / 276,480 ( 0 % )  ;
-; Embedded Multiplier 9-bit elements          ; 0 / 30 ( 0 % )       ;
-; PLLs                                        ; 0 / 2 ( 0 % )        ;
-; Global signals                              ; 1                    ;
-;     -- Global clocks                        ; 1 / 10 ( 10 % )      ;
-; JTAGs                                       ; 0 / 1 ( 0 % )        ;
-; CRC blocks                                  ; 0 / 1 ( 0 % )        ;
-; ASMI blocks                                 ; 0 / 1 ( 0 % )        ;
-; Oscillator blocks                           ; 0 / 1 ( 0 % )        ;
-; Impedance control blocks                    ; 0 / 4 ( 0 % )        ;
-; Average interconnect usage (total/H/V)      ; 0.2% / 0.2% / 0.1%   ;
-; Peak interconnect usage (total/H/V)         ; 0.8% / 1.0% / 0.6%   ;
-; Maximum fan-out                             ; 54                   ;
-; Highest non-global fan-out                  ; 22                   ;
-; Total fan-out                               ; 639                  ;
-; Average fan-out                             ; 2.79                 ;
-+---------------------------------------------+----------------------+
++---------------------------------------------------------------------+
+; Fitter Resource Usage Summary                                       ;
++---------------------------------------------+-----------------------+
+; Resource                                    ; Usage                 ;
++---------------------------------------------+-----------------------+
+; Total logic elements                        ; 785 / 6,272 ( 13 % )  ;
+;     -- Combinational with no register       ; 301                   ;
+;     -- Register only                        ; 146                   ;
+;     -- Combinational with a register        ; 338                   ;
+;                                             ;                       ;
+; Logic element usage by number of LUT inputs ;                       ;
+;     -- 4 input functions                    ; 374                   ;
+;     -- 3 input functions                    ; 156                   ;
+;     -- <=2 input functions                  ; 109                   ;
+;     -- Register only                        ; 146                   ;
+;                                             ;                       ;
+; Logic elements by mode                      ;                       ;
+;     -- normal mode                          ; 617                   ;
+;     -- arithmetic mode                      ; 22                    ;
+;                                             ;                       ;
+; Total registers*                            ; 484 / 6,684 ( 7 % )   ;
+;     -- Dedicated logic registers            ; 484 / 6,272 ( 8 % )   ;
+;     -- I/O registers                        ; 0 / 412 ( 0 % )       ;
+;                                             ;                       ;
+; Total LABs:  partially or completely used   ; 55 / 392 ( 14 % )     ;
+; Virtual pins                                ; 0                     ;
+; I/O pins                                    ; 14 / 92 ( 15 % )      ;
+;     -- Clock pins                           ; 1 / 3 ( 33 % )        ;
+;     -- Dedicated input pins                 ; 0 / 9 ( 0 % )         ;
+;                                             ;                       ;
+; M9Ks                                        ; 0 / 30 ( 0 % )        ;
+; Total block memory bits                     ; 0 / 276,480 ( 0 % )   ;
+; Total block memory implementation bits      ; 0 / 276,480 ( 0 % )   ;
+; Embedded Multiplier 9-bit elements          ; 0 / 30 ( 0 % )        ;
+; PLLs                                        ; 0 / 2 ( 0 % )         ;
+; Global signals                              ; 1                     ;
+;     -- Global clocks                        ; 1 / 10 ( 10 % )       ;
+; JTAGs                                       ; 0 / 1 ( 0 % )         ;
+; CRC blocks                                  ; 0 / 1 ( 0 % )         ;
+; ASMI blocks                                 ; 0 / 1 ( 0 % )         ;
+; Oscillator blocks                           ; 0 / 1 ( 0 % )         ;
+; Impedance control blocks                    ; 0 / 4 ( 0 % )         ;
+; Average interconnect usage (total/H/V)      ; 2.4% / 2.5% / 2.2%    ;
+; Peak interconnect usage (total/H/V)         ; 13.2% / 13.2% / 13.1% ;
+; Maximum fan-out                             ; 432                   ;
+; Highest non-global fan-out                  ; 432                   ;
+; Total fan-out                               ; 3815                  ;
+; Average fan-out                             ; 2.92                  ;
++---------------------------------------------+-----------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
 
 
@@ -262,29 +264,29 @@ The pin-out file can be found in C:/Users/atrujillo/Documents/GitHub/microps/fin
 +---------------------------------------------+---------------------+--------------------------------+
 ; Difficulty Clustering Region                ; Low                 ; Low                            ;
 ;                                             ;                     ;                                ;
-; Total logic elements                        ; 138 / 6272 ( 2 % )  ; 0 / 6272 ( 0 % )               ;
-;     -- Combinational with no register       ; 84                  ; 0                              ;
-;     -- Register only                        ; 0                   ; 0                              ;
-;     -- Combinational with a register        ; 54                  ; 0                              ;
+; Total logic elements                        ; 785 / 6272 ( 13 % ) ; 0 / 6272 ( 0 % )               ;
+;     -- Combinational with no register       ; 301                 ; 0                              ;
+;     -- Register only                        ; 146                 ; 0                              ;
+;     -- Combinational with a register        ; 338                 ; 0                              ;
 ;                                             ;                     ;                                ;
 ; Logic element usage by number of LUT inputs ;                     ;                                ;
-;     -- 4 input functions                    ; 79                  ; 0                              ;
-;     -- 3 input functions                    ; 22                  ; 0                              ;
-;     -- <=2 input functions                  ; 37                  ; 0                              ;
-;     -- Register only                        ; 0                   ; 0                              ;
+;     -- 4 input functions                    ; 374                 ; 0                              ;
+;     -- 3 input functions                    ; 156                 ; 0                              ;
+;     -- <=2 input functions                  ; 109                 ; 0                              ;
+;     -- Register only                        ; 146                 ; 0                              ;
 ;                                             ;                     ;                                ;
 ; Logic elements by mode                      ;                     ;                                ;
-;     -- normal mode                          ; 116                 ; 0                              ;
+;     -- normal mode                          ; 617                 ; 0                              ;
 ;     -- arithmetic mode                      ; 22                  ; 0                              ;
 ;                                             ;                     ;                                ;
-; Total registers                             ; 54                  ; 0                              ;
-;     -- Dedicated logic registers            ; 54 / 6272 ( < 1 % ) ; 0 / 6272 ( 0 % )               ;
+; Total registers                             ; 484                 ; 0                              ;
+;     -- Dedicated logic registers            ; 484 / 6272 ( 8 % )  ; 0 / 6272 ( 0 % )               ;
 ;     -- I/O registers                        ; 0                   ; 0                              ;
 ;                                             ;                     ;                                ;
-; Total LABs:  partially or completely used   ; 10 / 392 ( 3 % )    ; 0 / 392 ( 0 % )                ;
+; Total LABs:  partially or completely used   ; 55 / 392 ( 14 % )   ; 0 / 392 ( 0 % )                ;
 ;                                             ;                     ;                                ;
 ; Virtual pins                                ; 0                   ; 0                              ;
-; I/O pins                                    ; 13                  ; 0                              ;
+; I/O pins                                    ; 14                  ; 0                              ;
 ; Embedded Multiplier 9-bit elements          ; 0 / 30 ( 0 % )      ; 0 / 30 ( 0 % )                 ;
 ; Total memory bits                           ; 0                   ; 0                              ;
 ; Total RAM block bits                        ; 0                   ; 0                              ;
@@ -297,15 +299,15 @@ The pin-out file can be found in C:/Users/atrujillo/Documents/GitHub/microps/fin
 ;     -- Registered Output Connections        ; 0                   ; 0                              ;
 ;                                             ;                     ;                                ;
 ; Internal Connections                        ;                     ;                                ;
-;     -- Total Connections                    ; 634                 ; 5                              ;
-;     -- Registered Connections               ; 254                 ; 0                              ;
+;     -- Total Connections                    ; 3810                ; 5                              ;
+;     -- Registered Connections               ; 1436                ; 0                              ;
 ;                                             ;                     ;                                ;
 ; External Connections                        ;                     ;                                ;
 ;     -- Top                                  ; 0                   ; 0                              ;
 ;     -- hard_block:auto_generated_inst       ; 0                   ; 0                              ;
 ;                                             ;                     ;                                ;
 ; Partition Interface                         ;                     ;                                ;
-;     -- Input Ports                          ; 4                   ; 0                              ;
+;     -- Input Ports                          ; 5                   ; 0                              ;
 ;     -- Output Ports                         ; 9                   ; 0                              ;
 ;     -- Bidir Ports                          ; 0                   ; 0                              ;
 ;                                             ;                     ;                                ;
@@ -325,16 +327,17 @@ The pin-out file can be found in C:/Users/atrujillo/Documents/GitHub/microps/fin
 +---------------------------------------------+---------------------+--------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Input Pins                                                                                                                                                                                                                                                                            ;
-+------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+-----------+
-; Name ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Z coordinate ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Termination Control Block ; Location assigned by ; Slew Rate ;
-+------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+-----------+
-; clk  ; 88    ; 5        ; 34           ; 12           ; 21           ; 54                    ; 0                  ; yes    ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
-; load ; 52    ; 3        ; 16           ; 0            ; 7            ; 2                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
-; sck  ; 49    ; 3        ; 13           ; 0            ; 14           ; 0                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
-; sdi  ; 46    ; 3        ; 7            ; 0            ; 0            ; 0                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
-+------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+-----------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Input Pins                                                                                                                                                                                                                                                                             ;
++-------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+-----------+
+; Name  ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Z coordinate ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Termination Control Block ; Location assigned by ; Slew Rate ;
++-------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+-----------+
+; clk   ; 88    ; 5        ; 34           ; 12           ; 21           ; 52                    ; 0                  ; yes    ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
+; load  ; 52    ; 3        ; 16           ; 0            ; 7            ; 432                   ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
+; reset ; 53    ; 3        ; 16           ; 0            ; 0            ; 162                   ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
+; sck   ; 49    ; 3        ; 13           ; 0            ; 14           ; 432                   ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
+; sdi   ; 46    ; 3        ; 7            ; 0            ; 0            ; 1                     ; 0                  ; no     ; no             ; no            ; yes             ; no       ; Off          ; 2.5 V        ; --                        ; User                 ; no        ;
++-------+-------+----------+--------------+--------------+--------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+---------------------------+----------------------+-----------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -382,7 +385,7 @@ The pin-out file can be found in C:/Users/atrujillo/Documents/GitHub/microps/fin
 +----------+-----------------+---------------+--------------+
 ; 1        ; 4 / 11 ( 36 % ) ; 2.5V          ; --           ;
 ; 2        ; 0 / 8 ( 0 % )   ; 2.5V          ; --           ;
-; 3        ; 4 / 11 ( 36 % ) ; 2.5V          ; --           ;
+; 3        ; 5 / 11 ( 45 % ) ; 2.5V          ; --           ;
 ; 4        ; 5 / 14 ( 36 % ) ; 2.5V          ; --           ;
 ; 5        ; 4 / 13 ( 31 % ) ; 2.5V          ; --           ;
 ; 6        ; 1 / 10 ( 10 % ) ; 2.5V          ; --           ;
@@ -448,7 +451,7 @@ The pin-out file can be found in C:/Users/atrujillo/Documents/GitHub/microps/fin
 ; 50       ; 69         ; 3        ; datastream                                                ; output ; 2.5 V        ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 51       ; 70         ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; 52       ; 72         ; 3        ; load                                                      ; input  ; 2.5 V        ;         ; Column I/O ; Y               ; no       ; Off          ;
-; 53       ; 73         ; 3        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
+; 53       ; 73         ; 3        ; reset                                                     ; input  ; 2.5 V        ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 54       ; 74         ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; 55       ; 75         ; 4        ; RESERVED_INPUT_WITH_WEAK_PULLUP                           ;        ;              ;         ; Column I/O ;                 ; no       ; On           ;
 ; 56       ;            ; 4        ; VCCIO4                                                    ; power  ;              ; 2.5V    ; --         ;                 ; --       ; --           ;
@@ -551,8 +554,6 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 +------------+-------------------------------+
 ; Pin Name   ; Reason                        ;
 +------------+-------------------------------+
-; sck        ; Incomplete set of assignments ;
-; sdi        ; Incomplete set of assignments ;
 ; datastream ; Incomplete set of assignments ;
 ; leds[0]    ; Incomplete set of assignments ;
 ; leds[1]    ; Incomplete set of assignments ;
@@ -562,7 +563,10 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 ; leds[5]    ; Incomplete set of assignments ;
 ; leds[6]    ; Incomplete set of assignments ;
 ; leds[7]    ; Incomplete set of assignments ;
+; reset      ; Incomplete set of assignments ;
 ; clk        ; Incomplete set of assignments ;
+; sdi        ; Incomplete set of assignments ;
+; sck        ; Incomplete set of assignments ;
 ; load       ; Incomplete set of assignments ;
 +------------+-------------------------------+
 
@@ -572,13 +576,21 @@ Note: Pin directions (input, output or bidir) are based on device operating in u
 +------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------------------------------------------------------------------------------+---------------------+--------------+
 ; Compilation Hierarchy Node               ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M9Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                                                                ; Entity Name         ; Library Name ;
 +------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------------------------------------------------------------------------------+---------------------+--------------+
-; |send_bytes                              ; 138 (0)     ; 54 (0)                    ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 13   ; 0            ; 84 (0)       ; 0 (0)             ; 54 (0)           ; |send_bytes                                                                        ; send_bytes          ; work         ;
-;    |level_to_pulse:rst|                  ; 2 (2)       ; 2 (2)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 2 (2)            ; |send_bytes|level_to_pulse:rst                                                     ; level_to_pulse      ; work         ;
-;    |rubiks_core:core|                    ; 136 (23)    ; 52 (15)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 84 (8)       ; 0 (0)             ; 52 (15)          ; |send_bytes|rubiks_core:core                                                       ; rubiks_core         ; work         ;
-;       |make_data_stream:mds|             ; 61 (61)     ; 21 (21)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 40 (40)      ; 0 (0)             ; 21 (21)          ; |send_bytes|rubiks_core:core|make_data_stream:mds                                  ; make_data_stream    ; work         ;
-;       |makesquares:ms|                   ; 52 (34)     ; 16 (16)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 36 (18)      ; 0 (0)             ; 16 (15)          ; |send_bytes|rubiks_core:core|makesquares:ms                                        ; makesquares         ; work         ;
-;          |colormux:cm|                   ; 19 (18)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 18 (17)      ; 0 (0)             ; 1 (1)            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm                            ; colormux            ; work         ;
-;             |convert_orientation:color1| ; 1 (1)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 1 (1)        ; 0 (0)             ; 0 (0)            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color1 ; convert_orientation ; work         ;
+; |send_bytes                              ; 785 (0)     ; 484 (0)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 14   ; 0            ; 301 (0)      ; 146 (0)           ; 338 (0)          ; |send_bytes                                                                        ; send_bytes          ; work         ;
+;    |rubiks_core:core|                    ; 639 (388)   ; 52 (15)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 301 (102)    ; 0 (0)             ; 338 (286)        ; |send_bytes|rubiks_core:core                                                       ; rubiks_core         ; work         ;
+;       |make_data_stream:mds|             ; 134 (134)   ; 21 (21)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 97 (97)      ; 0 (0)             ; 37 (37)          ; |send_bytes|rubiks_core:core|make_data_stream:mds                                  ; make_data_stream    ; work         ;
+;       |makesquares:ms|                   ; 118 (28)    ; 16 (16)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 102 (12)     ; 0 (0)             ; 16 (16)          ; |send_bytes|rubiks_core:core|makesquares:ms                                        ; makesquares         ; work         ;
+;          |colormux:cm|                   ; 90 (63)     ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 90 (63)      ; 0 (0)             ; 0 (0)            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm                            ; colormux            ; work         ;
+;             |convert_orientation:color1| ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color1 ; convert_orientation ; work         ;
+;             |convert_orientation:color2| ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color2 ; convert_orientation ; work         ;
+;             |convert_orientation:color3| ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color3 ; convert_orientation ; work         ;
+;             |convert_orientation:color4| ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color4 ; convert_orientation ; work         ;
+;             |convert_orientation:color5| ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color5 ; convert_orientation ; work         ;
+;             |convert_orientation:color6| ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color6 ; convert_orientation ; work         ;
+;             |convert_orientation:color7| ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color7 ; convert_orientation ; work         ;
+;             |convert_orientation:color8| ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color8 ; convert_orientation ; work         ;
+;             |convert_orientation:color9| ; 3 (3)       ; 0 (0)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 3 (3)        ; 0 (0)             ; 0 (0)            ; |send_bytes|rubiks_core:core|makesquares:ms|colormux:cm|convert_orientation:color9 ; convert_orientation ; work         ;
+;    |rubiks_spi:spi|                      ; 432 (432)   ; 432 (432)                 ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 146 (146)         ; 286 (286)        ; |send_bytes|rubiks_spi:spi                                                         ; rubiks_spi          ; work         ;
 +------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------------------------------------------------------------------------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -588,8 +600,6 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------------+----------+---------------+---------------+-----------------------+-----+------+
 ; Name       ; Pin Type ; Pad to Core 0 ; Pad to Core 1 ; Pad to Input Register ; TCO ; TCOE ;
 +------------+----------+---------------+---------------+-----------------------+-----+------+
-; sck        ; Input    ; --            ; --            ; --                    ; --  ; --   ;
-; sdi        ; Input    ; --            ; --            ; --                    ; --  ; --   ;
 ; datastream ; Output   ; --            ; --            ; --                    ; --  ; --   ;
 ; leds[0]    ; Output   ; --            ; --            ; --                    ; --  ; --   ;
 ; leds[1]    ; Output   ; --            ; --            ; --                    ; --  ; --   ;
@@ -599,23 +609,1052 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; leds[5]    ; Output   ; --            ; --            ; --                    ; --  ; --   ;
 ; leds[6]    ; Output   ; --            ; --            ; --                    ; --  ; --   ;
 ; leds[7]    ; Output   ; --            ; --            ; --                    ; --  ; --   ;
+; reset      ; Input    ; (6) 1314 ps   ; --            ; --                    ; --  ; --   ;
 ; clk        ; Input    ; (0) 0 ps      ; --            ; --                    ; --  ; --   ;
+; sdi        ; Input    ; (6) 1314 ps   ; --            ; --                    ; --  ; --   ;
+; sck        ; Input    ; (0) 0 ps      ; (0) 0 ps      ; --                    ; --  ; --   ;
 ; load       ; Input    ; (6) 1314 ps   ; --            ; --                    ; --  ; --   ;
 +------------+----------+---------------+---------------+-----------------------+-----+------+
 
 
-+------------------------------------------------------------------------+
-; Pad To Core Delay Chain Fanout                                         ;
-+------------------------------------------+-------------------+---------+
-; Source Pin / Fanout                      ; Pad To Core Index ; Setting ;
-+------------------------------------------+-------------------+---------+
-; sck                                      ;                   ;         ;
-; sdi                                      ;                   ;         ;
-; clk                                      ;                   ;         ;
-; load                                     ;                   ;         ;
-;      - level_to_pulse:rst|nextstate.s1~0 ; 0                 ; 6       ;
-;      - level_to_pulse:rst|state.s0~0     ; 0                 ; 6       ;
-+------------------------------------------+-------------------+---------+
++------------------------------------------------------------------------------------+
+; Pad To Core Delay Chain Fanout                                                     ;
++------------------------------------------------------+-------------------+---------+
+; Source Pin / Fanout                                  ; Pad To Core Index ; Setting ;
++------------------------------------------------------+-------------------+---------+
+; reset                                                ;                   ;         ;
+;      - rubiks_core:core|face_count[1]                ; 0                 ; 6       ;
+;      - rubiks_core:core|face_count[2]                ; 0                 ; 6       ;
+;      - rubiks_core:core|state.sending                ; 0                 ; 6       ;
+;      - rubiks_core:core|state~10                     ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux7~0                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux22~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux8~0                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux22~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux19~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux19~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux18~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux18~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux17~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux17~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux16~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux16~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux21~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux21~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux20~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux20~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux54~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux54~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux51~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux51~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux50~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux50~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux49~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux49~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux48~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux48~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux53~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux53~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux52~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux52~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux5~1                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux5~3                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux4~1                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux4~3                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux3~0                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux3~2                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux2~0                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux2~2                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux1~0                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux1~2                       ; 0                 ; 6       ;
+;      - rubiks_core:core|make_data_stream:mds|Mux1~28 ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux6~1                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux6~3                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux14~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux14~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux11~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux11~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux10~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux10~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux9~0                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux9~2                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux8~1                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux8~3                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux13~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux13~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux12~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux12~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux38~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux38~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux35~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux35~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux34~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux34~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux33~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux33~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux32~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux32~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux37~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux37~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux36~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux36~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux46~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux46~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux43~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux43~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux42~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux42~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux41~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux41~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux40~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux40~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux45~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux45~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux44~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux44~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux30~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux30~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux27~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux27~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux26~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux26~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux25~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux25~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux24~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux24~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux29~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux29~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux28~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux28~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux70~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux70~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux67~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux67~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux66~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux66~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux65~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux65~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux64~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux64~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux69~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux69~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux68~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux68~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux62~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux62~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux59~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|make_data_stream:mds|Mux1~65 ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux56~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux56~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux58~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux58~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux57~0                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux57~2                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux61~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux61~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux60~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux60~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux7~2                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux7~4                       ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux71~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux71~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux31~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux31~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux39~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux39~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux15~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux15~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux55~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux55~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux47~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux47~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux23~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux23~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux63~1                      ; 0                 ; 6       ;
+;      - rubiks_core:core|Mux63~3                      ; 0                 ; 6       ;
+;      - rubiks_core:core|state~11                     ; 0                 ; 6       ;
+;      - rubiks_core:core|face_reset~0                 ; 0                 ; 6       ;
+;      - rubiks_core:core|face_count[0]~1              ; 0                 ; 6       ;
+;      - rubiks_core:core|count[2]~28                  ; 0                 ; 6       ;
+;      - rubiks_core:core|makesquares:ms|column~25     ; 0                 ; 6       ;
+;      - rubiks_core:core|makesquares:ms|column~26     ; 0                 ; 6       ;
+;      - rubiks_core:core|makesquares:ms|column~27     ; 0                 ; 6       ;
+;      - rubiks_core:core|makesquares:ms|column~28     ; 0                 ; 6       ;
+;      - rubiks_core:core|makesquares:ms|column~29     ; 0                 ; 6       ;
+;      - rubiks_core:core|makesquares:ms|column~30     ; 0                 ; 6       ;
+;      - rubiks_core:core|makesquares:ms|column~31     ; 0                 ; 6       ;
+;      - rubiks_core:core|makesquares:ms|column~32     ; 0                 ; 6       ;
+;      - rubiks_core:core|makesquares:ms|row~38        ; 0                 ; 6       ;
+; clk                                                  ;                   ;         ;
+; sdi                                                  ;                   ;         ;
+;      - rubiks_spi:spi|orientation[0]                 ; 0                 ; 6       ;
+; sck                                                  ;                   ;         ;
+;      - rubiks_spi:spi|orientation[0]                 ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[1]                 ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[2]                 ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[3]                 ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[4]                 ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[5]                 ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[6]                 ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[7]                 ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[8]                 ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[9]                 ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[10]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[11]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[12]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[13]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[14]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[15]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[16]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[17]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[18]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[19]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[20]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[21]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[22]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[23]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[24]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[25]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[26]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[27]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[28]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[29]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[30]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[31]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[32]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[33]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[34]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[35]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[36]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[37]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[38]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[39]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[40]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[41]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[42]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[43]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[44]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[45]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[46]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[47]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[48]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[49]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[50]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[51]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[52]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[53]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[54]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[55]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[56]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[57]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[58]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[59]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[60]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[61]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[62]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[63]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[64]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[65]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[66]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[67]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[68]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[69]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[70]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[71]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[72]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[73]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[74]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[75]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[76]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[77]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[78]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[79]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[80]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[81]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[82]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[83]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[84]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[85]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[86]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[87]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[88]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[89]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[90]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[91]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[92]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[93]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[94]                ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[95]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[96]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[97]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[98]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[99]                ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[100]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[101]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[102]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[103]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[104]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[105]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[106]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[107]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[108]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[109]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[110]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[111]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[112]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[113]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[114]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[115]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[116]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[117]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[118]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[119]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[120]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[121]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[122]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[123]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[124]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[125]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[126]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[127]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[128]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[129]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[130]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[131]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[132]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[133]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[134]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[135]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[136]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[137]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[138]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[139]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[140]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[141]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[142]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[143]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[144]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[145]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[146]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[147]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[148]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[149]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[150]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[151]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[152]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[153]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[154]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[155]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[156]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[157]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[158]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[159]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[160]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[161]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[162]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[163]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[164]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[165]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[166]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[167]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[168]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[169]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[170]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[171]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[172]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[173]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[174]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[175]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[176]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[177]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[178]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[179]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[180]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[181]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[182]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[183]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[184]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[185]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[186]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[187]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[188]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[189]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[190]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[191]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[192]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[193]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[194]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[195]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[196]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[197]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[198]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[199]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[200]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[201]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[202]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[203]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[204]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[205]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[206]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[207]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[208]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[209]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[210]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[211]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[212]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[213]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[214]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[215]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[216]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[217]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[218]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[219]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[220]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[221]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[222]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[223]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[224]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[225]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[226]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[227]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[228]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[229]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[230]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[231]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[232]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[233]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[234]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[235]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[236]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[237]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[238]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[239]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[240]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[241]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[242]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[243]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[244]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[245]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[246]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[247]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[248]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[249]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[250]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[251]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[252]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[253]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[254]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[255]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[256]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[257]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[258]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[259]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[260]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[261]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[262]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[263]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[264]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[265]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[266]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[267]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[268]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[269]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[270]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[271]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[272]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[273]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[274]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[275]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[276]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[277]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[278]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[279]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[280]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[281]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[282]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[283]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[284]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[285]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[286]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[287]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[288]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[289]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[290]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[291]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[292]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[293]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[294]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[295]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[296]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[297]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[298]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[299]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[300]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[301]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[302]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[303]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[304]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[305]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[306]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[307]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[308]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[309]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[310]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[311]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[312]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[313]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[314]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[315]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[316]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[317]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[318]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[319]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[320]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[321]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[322]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[323]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[324]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[325]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[326]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[327]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[328]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[329]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[330]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[331]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[332]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[333]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[334]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[335]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[336]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[337]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[338]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[339]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[340]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[341]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[342]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[343]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[344]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[345]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[346]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[347]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[348]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[349]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[350]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[351]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[352]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[353]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[354]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[355]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[356]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[357]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[358]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[359]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[360]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[361]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[362]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[363]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[364]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[365]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[366]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[367]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[368]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[369]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[370]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[371]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[372]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[373]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[374]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[375]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[376]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[377]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[378]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[379]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[380]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[381]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[382]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[383]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[384]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[385]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[386]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[387]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[388]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[389]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[390]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[391]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[392]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[393]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[394]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[395]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[396]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[397]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[398]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[399]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[400]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[401]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[402]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[403]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[404]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[405]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[406]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[407]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[408]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[409]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[410]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[411]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[412]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[413]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[414]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[415]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[416]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[417]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[418]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[419]               ; 1                 ; 0       ;
+;      - rubiks_spi:spi|orientation[420]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[421]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[422]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[423]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[424]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[425]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[426]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[427]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[428]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[429]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[430]               ; 0                 ; 0       ;
+;      - rubiks_spi:spi|orientation[431]               ; 0                 ; 0       ;
+; load                                                 ;                   ;         ;
+;      - rubiks_spi:spi|orientation[108]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[107]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[106]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[105]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[104]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[103]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[102]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[101]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[100]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[99]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[98]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[97]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[96]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[95]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[94]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[93]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[92]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[91]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[90]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[89]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[88]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[87]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[86]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[85]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[84]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[83]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[82]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[81]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[80]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[79]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[78]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[77]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[76]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[75]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[74]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[73]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[72]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[71]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[70]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[69]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[68]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[67]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[66]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[65]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[64]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[63]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[62]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[61]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[60]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[59]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[58]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[57]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[56]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[55]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[54]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[53]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[52]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[51]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[50]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[49]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[48]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[47]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[46]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[45]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[44]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[43]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[42]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[41]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[40]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[39]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[38]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[37]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[36]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[35]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[34]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[33]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[32]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[31]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[30]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[29]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[28]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[27]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[26]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[25]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[24]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[23]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[22]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[21]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[20]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[19]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[18]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[17]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[16]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[15]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[14]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[13]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[12]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[11]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[10]                ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[9]                 ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[8]                 ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[7]                 ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[6]                 ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[5]                 ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[4]                 ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[3]                 ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[2]                 ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[1]                 ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[0]                 ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[109]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[110]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[111]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[112]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[113]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[114]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[115]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[116]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[117]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[118]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[119]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[120]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[121]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[122]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[123]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[124]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[125]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[126]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[127]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[128]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[129]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[130]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[131]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[132]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[133]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[134]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[135]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[136]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[137]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[138]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[139]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[140]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[141]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[142]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[143]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[144]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[145]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[146]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[147]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[148]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[149]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[150]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[151]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[152]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[153]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[154]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[155]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[156]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[157]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[158]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[159]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[160]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[161]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[162]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[163]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[164]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[165]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[166]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[167]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[168]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[169]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[170]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[171]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[172]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[173]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[174]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[175]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[176]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[177]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[178]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[179]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[180]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[181]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[182]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[183]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[184]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[185]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[186]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[187]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[188]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[189]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[190]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[191]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[192]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[193]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[194]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[195]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[196]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[197]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[198]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[199]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[200]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[201]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[202]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[203]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[204]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[205]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[206]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[207]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[208]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[209]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[210]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[211]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[212]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[213]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[214]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[215]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[216]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[217]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[218]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[219]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[220]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[221]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[222]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[223]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[224]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[225]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[226]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[227]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[228]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[229]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[230]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[231]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[232]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[233]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[234]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[235]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[236]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[237]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[238]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[239]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[240]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[241]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[242]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[243]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[244]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[245]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[246]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[247]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[248]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[249]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[250]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[251]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[252]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[253]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[254]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[255]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[256]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[257]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[258]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[259]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[260]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[261]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[262]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[263]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[264]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[265]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[266]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[267]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[268]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[269]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[270]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[271]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[272]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[273]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[274]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[275]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[276]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[277]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[278]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[279]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[280]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[281]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[282]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[283]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[284]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[285]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[286]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[287]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[288]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[289]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[290]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[291]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[292]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[293]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[294]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[295]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[296]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[297]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[298]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[299]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[300]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[301]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[302]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[303]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[304]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[305]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[306]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[307]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[308]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[309]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[310]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[311]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[312]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[313]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[314]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[315]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[316]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[317]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[318]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[319]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[320]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[321]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[322]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[323]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[324]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[325]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[326]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[327]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[328]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[329]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[330]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[331]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[332]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[333]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[334]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[335]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[336]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[337]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[338]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[339]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[340]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[341]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[342]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[343]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[344]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[345]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[346]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[347]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[348]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[349]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[350]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[351]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[352]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[353]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[354]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[355]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[356]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[357]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[358]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[359]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[360]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[361]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[362]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[363]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[364]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[365]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[366]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[367]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[368]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[369]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[370]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[371]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[372]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[373]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[374]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[375]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[376]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[377]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[378]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[379]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[380]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[381]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[382]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[383]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[384]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[385]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[386]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[387]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[388]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[389]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[390]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[391]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[392]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[393]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[394]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[395]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[396]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[397]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[398]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[399]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[400]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[401]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[402]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[403]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[404]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[405]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[406]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[407]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[408]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[409]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[410]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[411]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[412]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[413]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[414]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[415]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[416]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[417]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[418]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[419]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[420]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[421]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[422]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[423]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[424]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[425]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[426]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[427]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[428]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[429]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[430]               ; 0                 ; 6       ;
+;      - rubiks_spi:spi|orientation[431]               ; 0                 ; 6       ;
++------------------------------------------------------+-------------------+---------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -623,14 +1662,17 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------------------------------------------+-------------------+---------+---------------------------+--------+----------------------+------------------+---------------------------+
 ; Name                                                   ; Location          ; Fan-Out ; Usage                     ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +--------------------------------------------------------+-------------------+---------+---------------------------+--------+----------------------+------------------+---------------------------+
-; clk                                                    ; PIN_88            ; 54      ; Clock                     ; yes    ; Global Clock         ; GCLK8            ; --                        ;
-; rubiks_core:core|count[0]~28                           ; LCCOMB_X21_Y3_N24 ; 9       ; Clock enable              ; no     ; --                   ; --               ; --                        ;
-; rubiks_core:core|face_reset~0                          ; LCCOMB_X19_Y4_N2  ; 22      ; Clock enable, Sync. clear ; no     ; --                   ; --               ; --                        ;
-; rubiks_core:core|make_data_stream:mds|bitcounter[0]~15 ; LCCOMB_X21_Y4_N28 ; 5       ; Clock enable              ; no     ; --                   ; --               ; --                        ;
-; rubiks_core:core|make_data_stream:mds|state~13         ; LCCOMB_X19_Y5_N30 ; 13      ; Clock enable, Sync. clear ; no     ; --                   ; --               ; --                        ;
-; rubiks_core:core|makesquares:ms|column~32              ; LCCOMB_X23_Y4_N28 ; 8       ; Clock enable              ; no     ; --                   ; --               ; --                        ;
-; rubiks_core:core|makesquares:ms|row~38                 ; LCCOMB_X23_Y4_N24 ; 6       ; Clock enable              ; no     ; --                   ; --               ; --                        ;
-; rubiks_core:core|state.switching                       ; FF_X19_Y3_N1      ; 19      ; Sync. clear               ; no     ; --                   ; --               ; --                        ;
+; clk                                                    ; PIN_88            ; 52      ; Clock                     ; yes    ; Global Clock         ; GCLK8            ; --                        ;
+; load                                                   ; PIN_52            ; 432     ; Clock enable              ; no     ; --                   ; --               ; --                        ;
+; reset                                                  ; PIN_53            ; 162     ; Sync. clear               ; no     ; --                   ; --               ; --                        ;
+; rubiks_core:core|count[2]~28                           ; LCCOMB_X22_Y4_N6  ; 9       ; Clock enable              ; no     ; --                   ; --               ; --                        ;
+; rubiks_core:core|face_reset~0                          ; LCCOMB_X22_Y4_N0  ; 21      ; Clock enable, Sync. clear ; no     ; --                   ; --               ; --                        ;
+; rubiks_core:core|make_data_stream:mds|bitcounter[4]~15 ; LCCOMB_X16_Y7_N30 ; 5       ; Clock enable              ; no     ; --                   ; --               ; --                        ;
+; rubiks_core:core|make_data_stream:mds|state~13         ; LCCOMB_X21_Y3_N16 ; 13      ; Clock enable, Sync. clear ; no     ; --                   ; --               ; --                        ;
+; rubiks_core:core|makesquares:ms|column~32              ; LCCOMB_X22_Y4_N4  ; 8       ; Clock enable              ; no     ; --                   ; --               ; --                        ;
+; rubiks_core:core|makesquares:ms|row~38                 ; LCCOMB_X21_Y6_N10 ; 6       ; Clock enable              ; no     ; --                   ; --               ; --                        ;
+; rubiks_core:core|state.switching                       ; FF_X22_Y4_N11     ; 19      ; Sync. clear               ; no     ; --                   ; --               ; --                        ;
+; sck                                                    ; PIN_49            ; 432     ; Clock                     ; no     ; --                   ; --               ; --                        ;
 +--------------------------------------------------------+-------------------+---------+---------------------------+--------+----------------------+------------------+---------------------------+
 
 
@@ -639,7 +1681,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------+----------+---------+--------------------------------------+----------------------+------------------+---------------------------+
 ; Name ; Location ; Fan-Out ; Fan-Out Using Intentional Clock Skew ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
 +------+----------+---------+--------------------------------------+----------------------+------------------+---------------------------+
-; clk  ; PIN_88   ; 54      ; 0                                    ; Global Clock         ; GCLK8            ; --                        ;
+; clk  ; PIN_88   ; 52      ; 9                                    ; Global Clock         ; GCLK8            ; --                        ;
 +------+----------+---------+--------------------------------------+----------------------+------------------+---------------------------+
 
 
@@ -648,148 +1690,164 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+------------------------+
 ; Routing Resource Type ; Usage                  ;
 +-----------------------+------------------------+
-; Block interconnects   ; 151 / 32,401 ( < 1 % ) ;
-; C16 interconnects     ; 0 / 1,326 ( 0 % )      ;
-; C4 interconnects      ; 23 / 21,816 ( < 1 % )  ;
-; Direct links          ; 64 / 32,401 ( < 1 % )  ;
+; Block interconnects   ; 1,159 / 32,401 ( 4 % ) ;
+; C16 interconnects     ; 9 / 1,326 ( < 1 % )    ;
+; C4 interconnects      ; 504 / 21,816 ( 2 % )   ;
+; Direct links          ; 249 / 32,401 ( < 1 % ) ;
 ; Global clocks         ; 1 / 10 ( 10 % )        ;
-; Local interconnects   ; 102 / 10,320 ( < 1 % ) ;
-; R24 interconnects     ; 0 / 1,289 ( 0 % )      ;
-; R4 interconnects      ; 70 / 28,186 ( < 1 % )  ;
+; Local interconnects   ; 596 / 10,320 ( 6 % )   ;
+; R24 interconnects     ; 6 / 1,289 ( < 1 % )    ;
+; R4 interconnects      ; 735 / 28,186 ( 3 % )   ;
 +-----------------------+------------------------+
 
 
 +----------------------------------------------------------------------------+
 ; LAB Logic Elements                                                         ;
 +---------------------------------------------+------------------------------+
-; Number of Logic Elements  (Average = 13.80) ; Number of LABs  (Total = 10) ;
+; Number of Logic Elements  (Average = 14.27) ; Number of LABs  (Total = 55) ;
 +---------------------------------------------+------------------------------+
-; 1                                           ; 0                            ;
-; 2                                           ; 0                            ;
-; 3                                           ; 1                            ;
-; 4                                           ; 0                            ;
+; 1                                           ; 1                            ;
+; 2                                           ; 1                            ;
+; 3                                           ; 0                            ;
+; 4                                           ; 1                            ;
 ; 5                                           ; 0                            ;
-; 6                                           ; 0                            ;
-; 7                                           ; 0                            ;
+; 6                                           ; 1                            ;
+; 7                                           ; 1                            ;
 ; 8                                           ; 0                            ;
-; 9                                           ; 0                            ;
-; 10                                          ; 1                            ;
-; 11                                          ; 0                            ;
-; 12                                          ; 0                            ;
-; 13                                          ; 0                            ;
-; 14                                          ; 1                            ;
-; 15                                          ; 1                            ;
-; 16                                          ; 6                            ;
+; 9                                           ; 2                            ;
+; 10                                          ; 0                            ;
+; 11                                          ; 1                            ;
+; 12                                          ; 1                            ;
+; 13                                          ; 2                            ;
+; 14                                          ; 3                            ;
+; 15                                          ; 0                            ;
+; 16                                          ; 41                           ;
 +---------------------------------------------+------------------------------+
 
 
 +-------------------------------------------------------------------+
 ; LAB-wide Signals                                                  ;
 +------------------------------------+------------------------------+
-; LAB-wide Signals  (Average = 1.60) ; Number of LABs  (Total = 10) ;
+; LAB-wide Signals  (Average = 1.78) ; Number of LABs  (Total = 55) ;
 +------------------------------------+------------------------------+
-; 1 Clock                            ; 10                           ;
-; 1 Clock enable                     ; 4                            ;
-; 1 Sync. clear                      ; 1                            ;
+; 1 Clock                            ; 49                           ;
+; 1 Clock enable                     ; 44                           ;
+; 1 Sync. clear                      ; 2                            ;
 ; 2 Clock enables                    ; 1                            ;
+; 2 Clocks                           ; 2                            ;
 +------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Signals Sourced                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Signals Sourced  (Average = 19.20) ; Number of LABs  (Total = 10) ;
+; Number of Signals Sourced  (Average = 23.07) ; Number of LABs  (Total = 55) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
 ; 1                                            ; 0                            ;
-; 2                                            ; 0                            ;
+; 2                                            ; 2                            ;
 ; 3                                            ; 0                            ;
 ; 4                                            ; 0                            ;
-; 5                                            ; 1                            ;
-; 6                                            ; 0                            ;
-; 7                                            ; 0                            ;
+; 5                                            ; 0                            ;
+; 6                                            ; 1                            ;
+; 7                                            ; 1                            ;
 ; 8                                            ; 0                            ;
 ; 9                                            ; 0                            ;
-; 10                                           ; 0                            ;
+; 10                                           ; 1                            ;
 ; 11                                           ; 0                            ;
 ; 12                                           ; 0                            ;
 ; 13                                           ; 0                            ;
 ; 14                                           ; 1                            ;
-; 15                                           ; 0                            ;
-; 16                                           ; 0                            ;
-; 17                                           ; 1                            ;
-; 18                                           ; 0                            ;
-; 19                                           ; 2                            ;
+; 15                                           ; 1                            ;
+; 16                                           ; 4                            ;
+; 17                                           ; 2                            ;
+; 18                                           ; 3                            ;
+; 19                                           ; 1                            ;
 ; 20                                           ; 1                            ;
 ; 21                                           ; 1                            ;
-; 22                                           ; 1                            ;
-; 23                                           ; 0                            ;
-; 24                                           ; 0                            ;
-; 25                                           ; 0                            ;
-; 26                                           ; 0                            ;
+; 22                                           ; 2                            ;
+; 23                                           ; 3                            ;
+; 24                                           ; 2                            ;
+; 25                                           ; 1                            ;
+; 26                                           ; 3                            ;
 ; 27                                           ; 1                            ;
-; 28                                           ; 1                            ;
+; 28                                           ; 7                            ;
+; 29                                           ; 9                            ;
+; 30                                           ; 1                            ;
+; 31                                           ; 1                            ;
+; 32                                           ; 6                            ;
 +----------------------------------------------+------------------------------+
 
 
 +--------------------------------------------------------------------------------+
 ; LAB Signals Sourced Out                                                        ;
 +-------------------------------------------------+------------------------------+
-; Number of Signals Sourced Out  (Average = 7.80) ; Number of LABs  (Total = 10) ;
+; Number of Signals Sourced Out  (Average = 8.93) ; Number of LABs  (Total = 55) ;
 +-------------------------------------------------+------------------------------+
 ; 0                                               ; 0                            ;
-; 1                                               ; 0                            ;
+; 1                                               ; 1                            ;
 ; 2                                               ; 2                            ;
-; 3                                               ; 0                            ;
-; 4                                               ; 1                            ;
-; 5                                               ; 1                            ;
-; 6                                               ; 0                            ;
-; 7                                               ; 1                            ;
-; 8                                               ; 0                            ;
-; 9                                               ; 1                            ;
-; 10                                              ; 1                            ;
-; 11                                              ; 1                            ;
-; 12                                              ; 1                            ;
-; 13                                              ; 0                            ;
-; 14                                              ; 0                            ;
-; 15                                              ; 0                            ;
+; 3                                               ; 1                            ;
+; 4                                               ; 4                            ;
+; 5                                               ; 3                            ;
+; 6                                               ; 4                            ;
+; 7                                               ; 5                            ;
+; 8                                               ; 6                            ;
+; 9                                               ; 5                            ;
+; 10                                              ; 4                            ;
+; 11                                              ; 6                            ;
+; 12                                              ; 3                            ;
+; 13                                              ; 2                            ;
+; 14                                              ; 6                            ;
+; 15                                              ; 1                            ;
 ; 16                                              ; 1                            ;
+; 17                                              ; 1                            ;
 +-------------------------------------------------+------------------------------+
 
 
 +-----------------------------------------------------------------------------+
 ; LAB Distinct Inputs                                                         ;
 +----------------------------------------------+------------------------------+
-; Number of Distinct Inputs  (Average = 13.20) ; Number of LABs  (Total = 10) ;
+; Number of Distinct Inputs  (Average = 15.75) ; Number of LABs  (Total = 55) ;
 +----------------------------------------------+------------------------------+
 ; 0                                            ; 0                            ;
 ; 1                                            ; 0                            ;
 ; 2                                            ; 0                            ;
-; 3                                            ; 0                            ;
-; 4                                            ; 1                            ;
-; 5                                            ; 0                            ;
-; 6                                            ; 2                            ;
-; 7                                            ; 0                            ;
-; 8                                            ; 0                            ;
-; 9                                            ; 0                            ;
+; 3                                            ; 1                            ;
+; 4                                            ; 0                            ;
+; 5                                            ; 4                            ;
+; 6                                            ; 5                            ;
+; 7                                            ; 1                            ;
+; 8                                            ; 2                            ;
+; 9                                            ; 1                            ;
 ; 10                                           ; 2                            ;
-; 11                                           ; 0                            ;
-; 12                                           ; 0                            ;
-; 13                                           ; 1                            ;
-; 14                                           ; 1                            ;
-; 15                                           ; 0                            ;
-; 16                                           ; 0                            ;
-; 17                                           ; 0                            ;
-; 18                                           ; 0                            ;
-; 19                                           ; 1                            ;
+; 11                                           ; 2                            ;
+; 12                                           ; 3                            ;
+; 13                                           ; 4                            ;
+; 14                                           ; 4                            ;
+; 15                                           ; 3                            ;
+; 16                                           ; 3                            ;
+; 17                                           ; 1                            ;
+; 18                                           ; 3                            ;
+; 19                                           ; 0                            ;
 ; 20                                           ; 0                            ;
-; 21                                           ; 0                            ;
-; 22                                           ; 0                            ;
-; 23                                           ; 1                            ;
+; 21                                           ; 5                            ;
+; 22                                           ; 2                            ;
+; 23                                           ; 0                            ;
 ; 24                                           ; 0                            ;
 ; 25                                           ; 0                            ;
-; 26                                           ; 0                            ;
-; 27                                           ; 1                            ;
+; 26                                           ; 3                            ;
+; 27                                           ; 0                            ;
+; 28                                           ; 0                            ;
+; 29                                           ; 0                            ;
+; 30                                           ; 1                            ;
+; 31                                           ; 0                            ;
+; 32                                           ; 0                            ;
+; 33                                           ; 1                            ;
+; 34                                           ; 2                            ;
+; 35                                           ; 0                            ;
+; 36                                           ; 1                            ;
+; 37                                           ; 1                            ;
 +----------------------------------------------+------------------------------+
 
 
@@ -850,12 +1908,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+--------------+-----------+--------------+--------------+-----------+-----------+--------------+-----------+-----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+
 ; Pin/Rules          ; IO_000001 ; IO_000002    ; IO_000003 ; IO_000004    ; IO_000005    ; IO_000006 ; IO_000007 ; IO_000008    ; IO_000009 ; IO_000010 ; IO_000011    ; IO_000012    ; IO_000013    ; IO_000014    ; IO_000015    ; IO_000018    ; IO_000019    ; IO_000020    ; IO_000021    ; IO_000022    ; IO_000023    ; IO_000024    ; IO_000026    ; IO_000027    ; IO_000045    ; IO_000046    ; IO_000047    ; IO_000033 ; IO_000034    ; IO_000042    ;
 +--------------------+-----------+--------------+-----------+--------------+--------------+-----------+-----------+--------------+-----------+-----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+
-; Total Pass         ; 13        ; 0            ; 13        ; 0            ; 0            ; 13        ; 13        ; 0            ; 13        ; 13        ; 0            ; 9            ; 0            ; 0            ; 4            ; 0            ; 9            ; 4            ; 0            ; 0            ; 0            ; 9            ; 0            ; 0            ; 0            ; 0            ; 0            ; 13        ; 0            ; 0            ;
+; Total Pass         ; 14        ; 0            ; 14        ; 0            ; 0            ; 14        ; 14        ; 0            ; 14        ; 14        ; 0            ; 9            ; 0            ; 0            ; 5            ; 0            ; 9            ; 5            ; 0            ; 0            ; 0            ; 9            ; 0            ; 0            ; 0            ; 0            ; 0            ; 14        ; 0            ; 0            ;
 ; Total Unchecked    ; 0         ; 0            ; 0         ; 0            ; 0            ; 0         ; 0         ; 0            ; 0         ; 0         ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0         ; 0            ; 0            ;
-; Total Inapplicable ; 0         ; 13           ; 0         ; 13           ; 13           ; 0         ; 0         ; 13           ; 0         ; 0         ; 13           ; 4            ; 13           ; 13           ; 9            ; 13           ; 4            ; 9            ; 13           ; 13           ; 13           ; 4            ; 13           ; 13           ; 13           ; 13           ; 13           ; 0         ; 13           ; 13           ;
+; Total Inapplicable ; 0         ; 14           ; 0         ; 14           ; 14           ; 0         ; 0         ; 14           ; 0         ; 0         ; 14           ; 5            ; 14           ; 14           ; 9            ; 14           ; 5            ; 9            ; 14           ; 14           ; 14           ; 5            ; 14           ; 14           ; 14           ; 14           ; 14           ; 0         ; 14           ; 14           ;
 ; Total Fail         ; 0         ; 0            ; 0         ; 0            ; 0            ; 0         ; 0         ; 0            ; 0         ; 0         ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0            ; 0         ; 0            ; 0            ;
-; sck                ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
-; sdi                ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 ; datastream         ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 ; leds[0]            ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 ; leds[1]            ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
@@ -865,7 +1921,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; leds[5]            ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 ; leds[6]            ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 ; leds[7]            ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; reset              ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 ; clk                ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; sdi                ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
+; sck                ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 ; load               ; Pass      ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Pass      ; Pass      ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Pass         ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Inapplicable ; Pass      ; Inapplicable ; Inapplicable ;
 +--------------------+-----------+--------------+-----------+--------------+--------------+-----------+-----------+--------------+-----------+-----------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+--------------+-----------+--------------+--------------+
 
@@ -906,6 +1965,28 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------+--------+
 
 
++------------------------------------------------------------+
+; Estimated Delay Added for Hold Timing Summary              ;
++-----------------+----------------------+-------------------+
+; Source Clock(s) ; Destination Clock(s) ; Delay Added in ns ;
++-----------------+----------------------+-------------------+
+; I/O             ; sck                  ; 11.2              ;
++-----------------+----------------------+-------------------+
+Note: For more information on problematic transfers, consider running the Fitter again with the Optimize hold timing option (Settings Menu) turned off.
+This will disable optimization of problematic paths and expose them for further analysis using the Timing Analyzer.
+
+
++---------------------------------------------------------------------------------------------------------+
+; Estimated Delay Added for Hold Timing Details                                                           ;
++------------------------------------------+------------------------------------------+-------------------+
+; Source Register                          ; Destination Register                     ; Delay Added in ns ;
++------------------------------------------+------------------------------------------+-------------------+
+; sck                                      ; rubiks_spi:spi|orientation[38]           ; 0.752             ;
+; rubiks_core:core|makesquares:ms|row.0111 ; rubiks_core:core|makesquares:ms|row.0110 ; 0.076             ;
++------------------------------------------+------------------------------------------+-------------------+
+Note: This table only shows the top 2 path(s) that have the largest delay added for hold.
+
+
 +-----------------+
 ; Fitter Messages ;
 +-----------------+
@@ -930,43 +2011,43 @@ Warning (15714): Some pins have incomplete I/O assignments. Refer to the I/O Ass
 Critical Warning (332012): Synopsys Design Constraints File file not found: 'send_bytes.sdc'. A Synopsys Design Constraints File is required by the Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
 Info (332144): No user constrained base clocks found in the design
 Info (332143): No user constrained clock uncertainty found in the design. Calling "derive_clock_uncertainty"
-Info (332154): The derive_clock_uncertainty command did not apply clock uncertainty to any clock-to-clock transfers.
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
 Info (332130): Timing requirements not specified -- quality metrics such as performance may be sacrificed to reduce compilation time.
-Info (176353): Automatically promoted node clk~input (placed in PIN 88 (CLK7, DIFFCLK_3n)) File: C:/Users/atrujillo/Documents/GitHub/microps/final/send_bytes.sv Line: 2
+Info (176353): Automatically promoted node clk~input (placed in PIN 88 (CLK7, DIFFCLK_3n)) File: C:/Users/atrujillo/Desktop/repo/microps/final/send_bytes.sv Line: 2
     Info (176355): Automatically promoted destinations to use location or clock signal Global Clock CLKCTRL_G8
 Info (176233): Starting register packing
 Info (176235): Finished register packing
     Extra Info (176219): No registers were packed into other blocks
-Info (171121): Fitter preparation operations ending: elapsed time is 00:00:00
+Info (171121): Fitter preparation operations ending: elapsed time is 00:00:01
 Info (14896): Fitter has disabled Advanced Physical Optimization because it is not supported for the current family.
 Info (170189): Fitter placement preparation operations beginning
 Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info (170191): Fitter placement operations beginning
 Info (170137): Fitter placement was successful
-Info (170192): Fitter placement operations ending: elapsed time is 00:00:00
+Info (170192): Fitter placement operations ending: elapsed time is 00:00:01
 Info (170193): Fitter routing operations beginning
-Info (170195): Router estimated average interconnect usage is 0% of the available device resources
-    Info (170196): Router estimated peak interconnect usage is 0% of the available device resources in the region that extends from location X11_Y0 to location X22_Y11
+Info (170195): Router estimated average interconnect usage is 1% of the available device resources
+    Info (170196): Router estimated peak interconnect usage is 8% of the available device resources in the region that extends from location X11_Y0 to location X22_Y11
 Info (170199): The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info (170201): Optimizations that may affect the design's routability were skipped
-Info (170194): Fitter routing operations ending: elapsed time is 00:00:00
-Info (11888): Total time spent on timing analysis during the Fitter is 0.10 seconds.
+Info (170194): Fitter routing operations ending: elapsed time is 00:00:03
+Info (11888): Total time spent on timing analysis during the Fitter is 0.64 seconds.
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
 Info (334003): Started post-fitting delay annotation
 Info (334004): Delay annotation completed successfully
-Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:01
-Info (144001): Generated suppressed messages file C:/Users/atrujillo/Documents/GitHub/microps/final/output_files/send_bytes.fit.smsg
+Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
+Info (144001): Generated suppressed messages file C:/Users/atrujillo/Desktop/repo/microps/final/output_files/send_bytes.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 4 warnings
-    Info: Peak virtual memory: 5236 megabytes
-    Info: Processing ended: Thu Dec 05 20:41:55 2019
-    Info: Elapsed time: 00:00:04
-    Info: Total CPU time (on all processors): 00:00:05
+    Info: Peak virtual memory: 5246 megabytes
+    Info: Processing ended: Fri Dec 06 08:41:29 2019
+    Info: Elapsed time: 00:00:11
+    Info: Total CPU time (on all processors): 00:00:10
 
 
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in C:/Users/atrujillo/Documents/GitHub/microps/final/output_files/send_bytes.fit.smsg.
+The suppressed messages can be found in C:/Users/atrujillo/Desktop/repo/microps/final/output_files/send_bytes.fit.smsg.
 
 

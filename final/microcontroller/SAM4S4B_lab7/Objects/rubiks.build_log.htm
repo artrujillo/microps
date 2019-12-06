@@ -21,13 +21,27 @@ Target DLL:      Segger\JL2CM3.dll V2.99.29.0
 Dialog DLL:      TCM.DLL V1.35.1.0
  
 <h2>Project:</h2>
-C:\Users\atrujillo\Documents\GitHub\microps\final\microcontroller\SAM4S4B_lab7\rubiks.uvprojx
-Project File Date:  11/15/2019
+C:\Users\atrujillo\Desktop\repo\microps\final\microcontroller\SAM4S4B_lab7\rubiks.uvprojx
+Project File Date:  12/06/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'f:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'Target 1'
-".\Objects\rubiks.axf" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling microps.c...
+microps.c(48): warning:  #1295-D: Deprecated declaration user_interface_setup - give arg types
+  int user_interface_setup();
+microps.c(67): warning:  #550-D: variable "pinCWLast"  was set but never used
+  	uint16_t pinCWLast; // used to track the most recent rot. encoder position
+microps.c(68): warning:  #177-D: variable "rot"  was declared but never referenced
+  	uint16_t rot; // used to read a current rot position 
+microps.c(194): warning:  #1-D: last line of file ends without a newline
+  */
+microps.c: 4 warnings, 0 errors
+assembling startup_SAM4S.s...
+compiling system_SAM4S.c...
+linking...
+Program Size: Code=1520 RO-data=236 RW-data=68 ZI-data=1124  
+".\Objects\rubiks.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -53,10 +67,10 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.1.1
 
    * Component: Keil::Device:Startup:1.1.2
-      Source file:   Device\Source\ARM\SAM4xGPNVM.s
       Source file:   Device\Source\ARM\startup_SAM4S.s
       Source file:   Device\Source\system_SAM4S.c
-Build Time Elapsed:  00:00:00
+      Source file:   Device\Source\ARM\SAM4xGPNVM.s
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

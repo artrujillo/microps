@@ -2,20 +2,20 @@
 module send_bytes(input  logic clk,
                   input  logic sck, 
                   input  logic sdi,
-						//input  logic reset,
+						input  logic reset,
                   input  logic load,
                   output logic datastream,
 						output logic [7:0] leds);
 
 	logic [7:0] orientation; 
 	logic [431:0] hardcoded;
-	logic reset;
+	//logic reset;
 	
-	level_to_pulse rst(clk, load, reset);
+	//level_to_pulse rst(clk, load, reset);
 
-	assign hardcoded = 432'b000001010000010100000101000001010000010100000101000001010000010100000101000001000000010000000100000001000000010000000100000001000000010000000100000000110000001100000011000000110000001100000011000000110000001100000011000000100000001000000010000000100000001000000010000000100000001000000010000000010000000100000001000000010000000100000001000000010000000100000001000000000000000000000000000000000000000000000000000000000000000000000000;
+	//assign hardcoded = 432'b000001010000010100000101000001010000010100000101000001010000010100000101000001000000010000000100000001000000010000000100000001000000010000000100000000110000001100000011000000110000001100000011000000110000001100000011000000100000001000000010000000100000001000000010000000100000001000000010000000010000000100000001000000010000000100000001000000010000000100000001000000000000000000000000000000000000000000000000000000000000000000000000;
 
-	//rubiks_spi spi(sck, clk, sdi, load, orientation, hardcoded, leds);
+	rubiks_spi spi(sck, clk, sdi, load,reset, orientation, hardcoded, leds);
 	rubiks_core core(clk, reset, hardcoded, datastream);
 
 endmodule
@@ -26,24 +26,26 @@ module rubiks_spi(input  logic sck,
 						input  logic clk,
                   input  logic sdi,
                   input  logic load,
-                  output logic [7:0] orientation,
+						input  logic ready,
+                  output logic [431:0] orientation,
 						output logic [431:0] hardcoded,
 						output logic [7:0] leds);
 						
    // assert load
    // apply 72 sclks to shift orientation starting with orientation[0]
    always_ff @(posedge sck)
-      if (load) {orientation} = {orientation[6:0], sdi};
+      if (load) {orientation} = {orientation[431:0], sdi};
 	
 	
 	assign leds = orientation[7:0];
-	assign hardcoded = {orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
+	/*assign hardcoded = {orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
 							  orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
 							  orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
 							  orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
 							  orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
 							  orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation};
-	//mux2 get_orientation(blank_face, hardcoded, ready, finalori); //{orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
+							  */
+	mux2 get_orientation(blank_face, orientation, ready, hardcoded); //{orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
 							    //orientation, orientation, orientation, orientation, orientation[15:0]};
 
 endmodule

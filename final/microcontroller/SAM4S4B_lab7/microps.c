@@ -37,7 +37,7 @@ char starting_orientation[54] = {0x01, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05,
 																 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
 																 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-
+char* shifted_orientation[21];
 ///////////////////////////
 // function prototypes
 ///////////////////////////
@@ -50,7 +50,9 @@ int user_interface_setup();
 // spi communication for microcontroller
 // takes in an array of bytes that are then sent over 
 // using spiSendRecieve and then waits for a DONE signal
-void send_orientation(char*);
+void send_orientation_1(char*);
+void send_orientation_2(char*);
+void send_orientation_3(char*);
 
 // these functions are used to determine the new orientation
 // of the cube based off the rotation of the rotary encoder
@@ -82,7 +84,9 @@ int main(void) {
 	pioDigitalWrite(ledCW, 0);
 	pioDigitalWrite(ledCCW, 0);
 	
-	send_orientation(starting_orientation);
+	send_orientation_1(starting_orientation);
+	send_orientation_2(starting_orientation);
+	send_orientation_3(starting_orientation);
 	/*
   while(1){
       rot = pioDigitalRead(pinCW);
@@ -127,7 +131,7 @@ int user_interface_setup() {
 	return pioDigitalRead(pinCW);
 }
 
-void send_orientation(char* current_orientation){
+void send_orientation_1(char* current_orientation){
 	int i;
 	//pioPinMode(LOAD_PIN, PIO_OUTPUT);
   pioPinMode(LOAD_COPY, PIO_OUTPUT);
@@ -136,38 +140,63 @@ void send_orientation(char* current_orientation){
 	// used for logic analyzer
 	pioDigitalWrite(LOAD_COPY, 1);
 	
-	for (i = 0; i < 1; i++){
+	for (i = 0; i < 18; i++){
 		spiSendReceive(current_orientation[i]);
 	}
 
 	pioDigitalWrite(LOAD_COPY, 0);
-	/*
-	//tcDelayMicroseconds(10);
+
+}
+
+void send_orientation_2(char* current_orientation){
+	int i;
+	//pioPinMode(LOAD_PIN, PIO_OUTPUT);
+  pioPinMode(LOAD_COPY, PIO_OUTPUT);
 	
+	//pioDigitalWrite(LOAD_PIN, 1);
+	// used for logic analyzer
 	pioDigitalWrite(LOAD_COPY, 1);
 	
 	for (i = 18; i < 36; i++){
 		spiSendReceive(current_orientation[i]);
 	}
-	
+
 	pioDigitalWrite(LOAD_COPY, 0);
 
-	//tcDelayMicroseconds(10);
+}
+
+void send_orientation_3(char* current_orientation){
+	int i;
+	//pioPinMode(LOAD_PIN, PIO_OUTPUT);
+  pioPinMode(LOAD_COPY, PIO_OUTPUT);
 	
+	//pioDigitalWrite(LOAD_PIN, 1);
+	// used for logic analyzer
 	pioDigitalWrite(LOAD_COPY, 1);
 	
 	for (i = 36; i < 54; i++){
 		spiSendReceive(current_orientation[i]);
 	}
-	
+
 	pioDigitalWrite(LOAD_COPY, 0);
 
-	//pioDigitalWrite(LOAD_PIN, 0);
-
-	tcDelayMicroseconds(50);
-	*/
 	pioDigitalWrite(FPGA_RESET, 1);
 	pioDigitalWrite(FPGA_RESET, 0);
+}
+
+char* shift_orientation(char* current_orientation){
+	int i;
+	int j = 27;
+	int shift = 0;
+	
+	for(i = 53; i >= 0; i--){
+		if (i % 2 == 0){
+			j--;
+			shift = 0;
+		} else {
+			shift = 3;
+		}
+	}
 }
 /*
 char* clockwise_turn(char* current_orientation){

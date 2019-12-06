@@ -120,7 +120,7 @@ sck                          : 49        : input  : 2.5 V             :         
 datastream                   : 50        : output : 2.5 V             :         : 3         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 51        :        :                   :         : 3         :                
 load                         : 52        : input  : 2.5 V             :         : 3         : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : 53        :        :                   :         : 3         :                
+reset                        : 53        : input  : 2.5 V             :         : 3         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 54        :        :                   :         : 4         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 55        :        :                   :         : 4         :                
 VCCIO4                       : 56        : power  :                   : 2.5V    : 4         :                
