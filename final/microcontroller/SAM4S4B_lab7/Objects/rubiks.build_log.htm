@@ -21,27 +21,29 @@ Target DLL:      Segger\JL2CM3.dll V2.99.29.0
 Dialog DLL:      TCM.DLL V1.35.1.0
  
 <h2>Project:</h2>
-C:\Users\atrujillo\Desktop\repo\microps\final\microcontroller\SAM4S4B_lab7\rubiks.uvprojx
+C:\Users\pking\Desktop\microps\final\microcontroller\SAM4S4B_lab7\rubiks.uvprojx
 Project File Date:  12/06/2019
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'f:\Keil_v5\ARM\ARMCC\Bin'
-Rebuild target 'Target 1'
+Build target 'Target 1'
 compiling microps.c...
-microps.c(48): warning:  #1295-D: Deprecated declaration user_interface_setup - give arg types
+microps.c(51): warning:  #1295-D: Deprecated declaration user_interface_setup - give arg types
   int user_interface_setup();
-microps.c(67): warning:  #550-D: variable "pinCWLast"  was set but never used
+microps.c(70): warning:  #550-D: variable "pinCWLast"  was set but never used
   	uint16_t pinCWLast; // used to track the most recent rot. encoder position
-microps.c(68): warning:  #177-D: variable "rot"  was declared but never referenced
+microps.c(71): warning:  #177-D: variable "rot"  was declared but never referenced
   	uint16_t rot; // used to read a current rot position 
-microps.c(194): warning:  #1-D: last line of file ends without a newline
+microps.c(202): warning:  #940-D: missing return statement at end of non-void function "shift_orientation" 
+  }
+microps.c(192): warning:  #550-D: variable "shift"  was set but never used
+  	int shift = 0;
+microps.c(211): warning:  #1-D: last line of file ends without a newline
   */
-microps.c: 4 warnings, 0 errors
-assembling startup_SAM4S.s...
-compiling system_SAM4S.c...
+microps.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=1520 RO-data=236 RW-data=68 ZI-data=1124  
-".\Objects\rubiks.axf" - 0 Error(s), 4 Warning(s).
+Program Size: Code=1392 RO-data=236 RW-data=32 ZI-data=1120  
+".\Objects\rubiks.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -67,10 +69,10 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.1.1
 
    * Component: Keil::Device:Startup:1.1.2
+      Source file:   Device\Source\ARM\SAM4xGPNVM.s
       Source file:   Device\Source\ARM\startup_SAM4S.s
       Source file:   Device\Source\system_SAM4S.c
-      Source file:   Device\Source\ARM\SAM4xGPNVM.s
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

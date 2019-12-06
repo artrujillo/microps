@@ -8,14 +8,14 @@ module send_bytes(input  logic clk,
 						output logic [7:0] leds);
 
 	logic [7:0] orientation; 
-	logic [431:0] hardcoded;
+	logic [161:0] hardcoded;
 	//logic reset;
 	
 	//level_to_pulse rst(clk, load, reset);
 
 	//assign hardcoded = 432'b000001010000010100000101000001010000010100000101000001010000010100000101000001000000010000000100000001000000010000000100000001000000010000000100000000110000001100000011000000110000001100000011000000110000001100000011000000100000001000000010000000100000001000000010000000100000001000000010000000010000000100000001000000010000000100000001000000010000000100000001000000000000000000000000000000000000000000000000000000000000000000000000;
 
-	rubiks_spi spi(sck, clk, sdi, load,reset, orientation, hardcoded, leds);
+	rubiks_spi spi(sck, clk, sdi, load, reset, orientation, hardcoded, leds);
 	rubiks_core core(clk, reset, hardcoded, datastream);
 
 endmodule
@@ -26,15 +26,20 @@ module rubiks_spi(input  logic sck,
 						input  logic clk,
                   input  logic sdi,
                   input  logic load,
-						input  logic ready,
-                  output logic [431:0] orientation,
-						output logic [431:0] hardcoded,
+						input  logic reset,
+                  output logic [161:0] orientation,
+						output logic [161:0] hardcoded,
 						output logic [7:0] leds);
 						
+	logic [7:0] counter;
    // assert load
    // apply 72 sclks to shift orientation starting with orientation[0]
    always_ff @(posedge sck)
-      if (load) {orientation} = {orientation[431:0], sdi};
+		if (!load) counter <= 0;
+      else if (load & counter != 8'd162) begin
+			{orientation} = {orientation[160:0], sdi};
+			counter = counter+1;
+		end
 	
 	
 	assign leds = orientation[7:0];
@@ -45,26 +50,28 @@ module rubiks_spi(input  logic sck,
 							  orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
 							  orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation};
 							  */
-	mux2 get_orientation(blank_face, orientation, ready, hardcoded); //{orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
+	
+	assign hardcoded = orientation;
+	//mux2 get_orientation(blank_face, orientation, ready, hardcoded); //{orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation, orientation,
 							    //orientation, orientation, orientation, orientation, orientation[15:0]};
 
 endmodule
 
 // programs a rubiks face with colors given by orientation
 module rubiks_core(input  logic clk, reset,
-                   input  logic [431:0] orientation,
+                   input  logic [162:0] orientation,
                    output logic datastream);
 	
 	typedef enum logic [2:0] {switching, sending, new_face,load, over, delay} statetype;
 	statetype state, nextstate;
 	
 	logic resetsb, done, red, face_reset;
-	logic [71:0] current_face_orientation, blank_face;
+	logic [26:0] current_face_orientation, blank_face;
 	logic [23:0] data;
 	logic [8:0] count;
 	logic [2:0] face_count;
 	
-	assign blank_face = 72'b0;
+	assign blank_face = 27'b0;
 	
 	// register for finite state machine, counter
 	always_ff @(posedge clk)
@@ -104,12 +111,12 @@ module rubiks_core(input  logic clk, reset,
 		
 	always_comb
 	   case (face_count)
-		   3'b000:    current_face_orientation = orientation[71:0];
-			3'b001:    current_face_orientation = orientation[143:72];
-			3'b010:    current_face_orientation = orientation[215:144];
-			3'b011:    current_face_orientation = orientation[287:216];
-			3'b100:    current_face_orientation = orientation[359:288];
-			3'b101:    current_face_orientation = orientation[431:360];
+		   3'b000:    current_face_orientation = orientation[26:0];
+			3'b001:    current_face_orientation = orientation[53:27];
+			3'b010:    current_face_orientation = orientation[80:54];
+			3'b011:    current_face_orientation = orientation[107:81];
+			3'b100:    current_face_orientation = orientation[134:108];
+			3'b101:    current_face_orientation = orientation[161:135];
 			default:   current_face_orientation = blank_face;
 		endcase
 
@@ -128,7 +135,7 @@ endmodule
 
 // outputs colors in correct order to display squares for rubiks cube
 module makesquares(input  logic clk, reset, switchcolor,
-                   input  logic [71:0] orientation,
+                   input  logic [26:0] orientation,
                    output logic [23:0] color);
 	
 	logic [3:0] column, nextcolumn;
@@ -141,7 +148,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	
 	always_ff @(posedge clk)
 	   if      (reset) begin
-	                                        row <= 4'd0; // Changing this to a 0 instead of a 9 fixed the odd alignment??
+	                                        row <= 4'd9; // Changing this to a 0 instead of a 9 fixed the odd alignment??
 	                                     column <= 4'd0;
 	                   end
 	   else if (switchcolumn & switchcolor) column <= nextcolumn;
@@ -211,17 +218,17 @@ endmodule
 
 // takes in 3 bits of current orientation and converts them to the 
 // corresponding HEX values that we need to illuminate the matrix
-module convert_orientation(input  logic [7:0] bit_value,
+module convert_orientation(input  logic [2:0] bit_value,
                            output logic [23:0] hex_value);
 
 	always_comb
 	casex (bit_value) 
-		8'b00000000: hex_value =  24'h00b000; // red
-		8'b00000001: hex_value =  24'h00f060; // orange
-		8'b00000010: hex_value =  24'h00b0b0; // yellow
-		8'b00000011: hex_value =  24'h0000b0; // green
-		8'b00000100: hex_value =  24'hb00000; // blue
-		8'b00000101: hex_value =  24'hb05000; // purple
+		3'b000: hex_value =  24'h00b000; // red
+		3'b001: hex_value =  24'h00f060; // orange
+		3'b010: hex_value =  24'h00b0b0; // yellow
+		3'b011: hex_value =  24'h0000b0; // green
+		3'b100: hex_value =  24'hb00000; // blue
+		3'b101: hex_value =  24'hb05000; // purple
 		default:     hex_value = 24'h000000; // blank
 		/*
 		8'b11111111: hex_value = 24'h00b000;
@@ -242,22 +249,22 @@ endmodule
 // takes in the current orientation as well as a one-hot encoding that 
 // allows us to illuminate the matrix properly
 module colormux(input  logic [9:0] colorcontrol,
-                input  logic [71:0] orientation,
+                input  logic [26:0] orientation,
                 output logic [23:0] color);
 
 	logic [23:0] sqr1color, sqr2color, sqr3color, sqr4color, sqr5color, sqr6color, sqr7color, sqr8color, sqr9color;
 	
 	// convert each necessary piece of the orientation into the proper
 	// HEX value for the square that the color corresponds to
-	convert_orientation color1(orientation[7:0], sqr1color);
-	convert_orientation color2(orientation[15:8], sqr2color);
-	convert_orientation color3(orientation[23:16], sqr3color);
-	convert_orientation color4(orientation[31:24], sqr4color);
-	convert_orientation color5(orientation[39:32], sqr5color);
-	convert_orientation color6(orientation[47:40], sqr6color);
-	convert_orientation color7(orientation[55:48], sqr7color);
-	convert_orientation color8(orientation[63:56], sqr8color);
-	convert_orientation color9(orientation[71:64], sqr9color);
+	convert_orientation color1(orientation[2:0], sqr1color);
+	convert_orientation color2(orientation[5:3], sqr2color);
+	convert_orientation color3(orientation[8:6], sqr3color);
+	convert_orientation color4(orientation[11:9], sqr4color);
+	convert_orientation color5(orientation[14:12], sqr5color);
+	convert_orientation color6(orientation[17:15], sqr6color);
+	convert_orientation color7(orientation[20:18], sqr7color);
+	convert_orientation color8(orientation[23:21], sqr8color);
+	convert_orientation color9(orientation[26:24], sqr9color);
 	
 	always_comb
 	   case (colorcontrol)
