@@ -36,7 +36,7 @@ Fall 2019
 char cwOrientation[4] = {0x00, 0x29, 0x89, 0x60};
 
 char newOritentation[9] = {0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01};
-
+char shifted[21];
 /*char starting_orientation[54] = {0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5,
 																 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4,
 								                 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3,
@@ -68,6 +68,9 @@ void clockwise_turn(char*, char);
 void scramble_cube(char*);
 void rotate_cube(char*, char*);
 
+void shift_helper(char*, int, int, int);
+void final_shift_helper(char*);
+void shift_orientation(char*);
 
 
 //////////////////////////
@@ -183,7 +186,7 @@ void read_input(char* user_input) {
 		if      (red)     user_input[0] = 0x0;
 		else if (orange)  user_input[0] = 0x1;
 		else if (yellow)  user_input[0] = 0x2;
-	  else if (green)   user_input[0] = 0x3;
+	  	else if (green)   user_input[0] = 0x3;
 		else if (blue)    user_input[0] = 0x4;
 		else if (purple)  user_input[0] = 0x5;
 		else if (reset) 	user_input[0] = 0x6;
@@ -572,4 +575,42 @@ void counter_clockwise_turn(char* current_orientation, char color){
 	for (int i = 0; i < 54; i++) {
 	  current_orientation[i] = temp[i];
 	}
+}
+
+void shift_orientation(char* current_orientation){
+	shift_helper(current_orientation, 18, 19, 20, 53, 52, 51, 50, 49, 48, 47, 46);
+	shift_helper(current_orientation, 15, 16, 17, 45, 44, 43, 42, 41, 40, 39, 38);
+	shift_helper(current_orientation, 12, 13, 14, 37, 36, 35, 34, 33, 32, 31, 30);
+	shift_helper(current_orientation, 9, 10, 11, 29, 28, 27, 26, 25, 24, 23, 22);
+	shift_helper(current_orientation, 6, 7, 8, 21, 20, 19, 18, 17, 16, 15, 14);
+	shift_helper(current_orientation, 3, 4, 5, 13, 12, 11, 10, 9, 8, 7, 6);
+	final_shift_helper(current_orientation);
+}
+
+void shift_helper(char* current_orientation, int shift_byte0, int shift_byte1, int shift_byte2, int ori_byte0, int ori_byte1, int ori_byte2, int ori_byte3, int ori_byte4, int ori_byte5, int ori_byte6, int ori_byte7) {
+    char byte0;
+    char byte1;
+    char byte2;
+  
+    byte2 = (current_orientation[ori_byte2] << 6) | (current_orientation[ori_byte1] << 3) | current_orientation[ori_byte0];
+    byte1 = (current_orientation[ori_byte5] << 7) | (current_orientation[ori_byte4] << 4) |  (current_orientation[ori_byte3] << 1) | (current_orientation[ori_byte2] >> 2);
+    byte0 = (current_orientation[ori_byte7] << 5) | (current_orientation[ori_byte6] << 2) | (current_orientation[ori_byte5] >> 1);
+  
+    shifted[shift_byte0] = byte0;
+    shifted[shift_byte1] = byte1;
+    shifted[shift_byte2] = byte2;
+}
+
+void final_shift_helper(char* current_orientation){
+    char byte0;
+    char byte1;
+    char byte2;
+
+    byte2 = (current_orientation[3] << 6) | (current_orientation[4] << 3) | current_orientation[5];
+    byte1 = (current_orientation[0] << 7) | (current_orientation[1] << 4) |  (current_orientation[2] << 1) | (current_orientation[3] >> 2);
+    byte0 = (current_orientation[0] >> 1);
+
+	shifted[0] = byte0;
+    shifted[1] = byte1;
+    shifted[2] = byte2;
 }
