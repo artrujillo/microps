@@ -28,16 +28,20 @@ Project File Date:  12/06/2019
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'f:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
 compiling microps.c...
-microps.c(55): warning:  #1295-D: Deprecated declaration user_interface_setup - give arg types
+microps.c(63): warning:  #1295-D: Deprecated declaration user_interface_setup - give arg types
   void user_interface_setup();
-microps.c(78): warning:  #177-D: variable "pinCWLast"  was declared but never referenced
+microps.c(89): warning:  #177-D: variable "pinCWLast"  was declared but never referenced
   	uint16_t pinCWLast; // used to track the most recent rot. encoder position
-microps.c(79): warning:  #177-D: variable "rot"  was declared but never referenced
+microps.c(90): warning:  #177-D: variable "rot"  was declared but never referenced
   	uint16_t rot; // used to read a current rot position 
-microps.c: 3 warnings, 0 errors
+microps.c(100): warning:  #550-D: variable "user_input"  was set but never used
+  	char user_input[2]; // first char is the color, second char is the rotation direction
+microps.c(621): warning:  #1-D: last line of file ends without a newline
+  }
+microps.c: 5 warnings, 0 errors
 linking...
-Program Size: Code=1288 RO-data=236 RW-data=36 ZI-data=1124  
-".\Objects\rubiks.axf" - 0 Error(s), 3 Warning(s).
+Program Size: Code=1792 RO-data=236 RW-data=68 ZI-data=1148  
+".\Objects\rubiks.axf" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -66,7 +70,7 @@ Package Vendor: Keil
       Source file:   Device\Source\ARM\SAM4xGPNVM.s
       Source file:   Device\Source\ARM\startup_SAM4S.s
       Source file:   Device\Source\system_SAM4S.c
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

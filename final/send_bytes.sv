@@ -7,12 +7,15 @@ module send_bytes(input  logic clk,
                   output logic datastream);
 
 	logic [161:0] orientation; 
+	logic [161:0] hardcoded;
 	//logic reset;
 	
 	//level_to_pulse rst(clk, load, reset);
 
 	//assign hardcoded = 432'b000001010000010100000101000001010000010100000101000001010000010100000101000001000000010000000100000001000000010000000100000001000000010000000100000000110000001100000011000000110000001100000011000000110000001100000011000000100000001000000010000000100000001000000010000000100000001000000010000000010000000100000001000000010000000100000001000000010000000100000001000000000000000000000000000000000000000000000000000000000000000000000000;
 
+	assign hardcoded = 162'b101101101101101101101101101100100100100100100100100100011011011011011011011011011010010010010010010010010010001001001001001001001001001000000000000000000000000000;
+	
 	rubiks_spi spi(sck, clk, sdi, load, orientation);
 	rubiks_core core(clk, reset, orientation, datastream);
 
@@ -27,16 +30,17 @@ module rubiks_spi(input  logic sck,
                   output logic [161:0] orientation);
 						
 	logic [7:0] counter;
-	logic [161:0] value;
+	logic [165:0] value;
    // assert load
    // apply 72 sclks to shift orientation starting with orientation[0]
    always_ff @(posedge sck)
 		if (!load) counter <= 0;
-      else if (load & counter != 8'd161) begin
-			{orientation} = {orientation[160:0], sdi};
+      else if (load & counter != 8'd165) begin
+			{value} = {value[164:0], sdi};
 			counter = counter+1;
 		end
 
+	assign orientation = value[165:4];
 endmodule
 
 // programs a rubiks face with colors given by orientation
@@ -238,15 +242,15 @@ module colormux(input  logic [9:0] colorcontrol,
 	
 	// convert each necessary piece of the orientation into the proper
 	// HEX value for the square that the color corresponds to
-	convert_orientation color1(orientation[2:0], sqr9color);
-	convert_orientation color2(orientation[5:3], sqr8color);
-	convert_orientation color3(orientation[8:6], sqr7color);
-	convert_orientation color4(orientation[11:9], sqr6color);
+	convert_orientation color1(orientation[2:0], sqr1color);
+	convert_orientation color2(orientation[5:3], sqr2color);
+	convert_orientation color3(orientation[8:6], sqr3color);
+	convert_orientation color4(orientation[11:9], sqr4color);
 	convert_orientation color5(orientation[14:12], sqr5color);
-	convert_orientation color6(orientation[17:15], sqr4color);
-	convert_orientation color7(orientation[20:18], sqr3color);
-	convert_orientation color8(orientation[23:21], sqr2color);
-	convert_orientation color9(orientation[26:24], sqr1color);
+	convert_orientation color6(orientation[17:15], sqr6color);
+	convert_orientation color7(orientation[20:18], sqr7color);
+	convert_orientation color8(orientation[23:21], sqr8color);
+	convert_orientation color9(orientation[26:24], sqr9color);
 	
 	always_comb
 	   case (colorcontrol)
