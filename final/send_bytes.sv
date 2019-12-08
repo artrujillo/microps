@@ -2,21 +2,20 @@
 module send_bytes(input  logic clk,
                   input  logic sck, 
                   input  logic sdi,
-						input  logic reset,
+						//input  logic reset,
                   input  logic load,
                   output logic datastream);
 
 	logic [161:0] orientation; 
 	logic [161:0] hardcoded;
-	//logic reset;
+	logic reset;
 	
-	//level_to_pulse rst(clk, load, reset);
 
 	//assign hardcoded = 432'b000001010000010100000101000001010000010100000101000001010000010100000101000001000000010000000100000001000000010000000100000001000000010000000100000000110000001100000011000000110000001100000011000000110000001100000011000000100000001000000010000000100000001000000010000000100000001000000010000000010000000100000001000000010000000100000001000000010000000100000001000000000000000000000000000000000000000000000000000000000000000000000000;
 
 	assign hardcoded = 162'b101101101101101101101101101100100100100100100100100100011011011011011011011011011010010010010010010010010010001001001001001001001001001000000000000000000000000000;
 	
-	rubiks_spi spi(sck, clk, sdi, load, orientation);
+	rubiks_spi spi(sck, clk, sdi, load, reset, orientation);
 	rubiks_core core(clk, reset, orientation, datastream);
 
 endmodule
@@ -27,20 +26,24 @@ module rubiks_spi(input  logic sck,
 						input  logic clk,
                   input  logic sdi,
                   input  logic load,
+						output logic reset,
                   output logic [161:0] orientation);
 						
 	logic [7:0] counter;
-	logic [165:0] value;
+	logic [161:0] value;
    // assert load
    // apply 72 sclks to shift orientation starting with orientation[0]
    always_ff @(posedge sck)
 		if (!load) counter <= 0;
-      else if (load & counter != 8'd165) begin
-			{value} = {value[164:0], sdi};
+      else if (load & counter != 8'd162) begin
+			{value} = {value[160:0], sdi};
 			counter = counter+1;
 		end
 
-	assign orientation = value[165:4];
+		
+	level_to_pulse rst(clk, (counter == 8'd162), reset);
+		
+	assign orientation = value[161:0];
 endmodule
 
 // programs a rubiks face with colors given by orientation
@@ -66,7 +69,7 @@ module rubiks_core(input  logic clk, reset,
 	                 count <= 0;
 					     face_count <= 0;
 	              end
-	   else if (state == new_face) begin
+	   else if (nextstate == new_face) begin
                                      face_count <= face_count + 1;
 									          state <= nextstate;
 									          count <= 0;
@@ -87,7 +90,7 @@ module rubiks_core(input  logic clk, reset,
 	      sending:  if      (count == 9'd65)       nextstate = new_face;
 	                else if (done)                 nextstate = switching;
 	                else                           nextstate = sending;
-		   new_face: if      (face_count == 3'b101) nextstate = over; // may need to make this 3'b110 -- will test
+		   new_face: if      (face_count == 3'b110) nextstate = over; // may need to make this 3'b110 -- will test
 		             else                           nextstate = switching;
 			delay:                                   nextstate = sending;
 	      over:                                    nextstate = over;
@@ -107,7 +110,7 @@ module rubiks_core(input  logic clk, reset,
 		endcase
 
 	// control logic
-	assign resetsb = (state == delay) | (state == switching);
+	assign resetsb = (nextstate == new_face) | (state == switching);
 	
 	assign face_reset = (state == new_face) | reset;
 	
@@ -389,11 +392,11 @@ module level_to_pulse(input logic clk,
 	// nextstate logic
 	always_comb
 		case(state)
-			s0:		if (~load) nextstate = s1;
+			s0:		if (load) nextstate = s1;
 						else      nextstate = s0;
-			s1:      if (~load) nextstate = s2;
+			s1:      if (load) nextstate = s2;
 						else      nextstate = s0;
-			s2:      if (~load) nextstate = s2;
+			s2:      if (load) nextstate = s2;
 						else      nextstate = s0;
 			default:           nextstate = s0;
 		endcase

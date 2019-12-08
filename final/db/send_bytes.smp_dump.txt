@@ -39,3 +39,9 @@ row.0110 0 0 0 1 0 0 0 0 0 1
 row.0111 0 0 1 0 0 0 0 0 0 1 
 row.1000 0 1 0 0 0 0 0 0 0 1 
 row.0000 1 0 0 0 0 0 0 0 0 1 
+
+State Machine - |send_bytes|rubiks_spi:spi|level_to_pulse:rst|state
+Name state.s0 state.s2 state.s1 
+state.s0 0 0 0 
+state.s1 1 0 1 
+state.s2 1 1 0 

@@ -36,12 +36,18 @@ Fall 2019
 char cwOrientation[4] = {0x00, 0x29, 0x89, 0x60};
 
 char newOritentation[9] = {0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01};
-char starting_orientation[54] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
+char starting_orientation[54] = {0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5,
 																 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4, 0x4,
 								                 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3,
 								                 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2,
 								                 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1,
-								                 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
+								                 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};  
+/*char starting_orientation[54] = {0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 
+	0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1,
+	0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1,
+	0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1,
+	0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1,
+	0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1}; */
 
 char shifted[21];
 
@@ -96,13 +102,23 @@ int main(void) {
 	pioPinMode(LOAD_PIN, PIO_OUTPUT);
 	pioPinMode(FPGA_RESET, PIO_OUTPUT);
 	pioDigitalWrite(FPGA_RESET, 0);
+	//pioDigitalWrite(LOAD_PIN, 0);
+
 	
-	char user_input[2]; // first char is the color, second char is the rotation direction
-	user_input[0] = 0x7;
+	srand(time(NULL));
+	int x = time(NULL);
+	char user_input[2] = {0,0}; // first char is the color, second char is the rotation direction
+	//user_input[0] = 0x7;
 	
-	//char orientation[54];
-	//scramble_cube(orientation);
-	shift_orientation(starting_orientation);
+	char orientation[54];
+	
+	for (int i = 0; i < 54; i++) {
+			orientation[i] = starting_orientation[i];
+	}
+	//rotate_cube(orientation, user_input);
+	scramble_cube(orientation);
+	shift_orientation(orientation);
+	send_orientation(shifted);
 	send_orientation(shifted);
 	//send_orientation(starting_orientation);
 	/*
@@ -146,7 +162,6 @@ void scramble_cube(char* orientation) {
 			orientation[i] = starting_orientation[i];
 		}
 		for (int i = 0; i < SCRAMBLE_NUM; i++) {
-			srand(time(NULL));
 			user_input[0] = rand()%6;
 			user_input[1] = rand()%2;
 			rotate_cube(orientation, user_input);
@@ -157,9 +172,7 @@ void scramble_cube(char* orientation) {
 // sends a new orientation over SPI
 void send_orientation(char* current_orientation){
 	int i;
-	//pioPinMode(LOAD_PIN, PIO_OUTPUT);
 	
-	//pioDigitalWrite(LOAD_PIN, 1);
 	// used for logic analyzer
 	pioDigitalWrite(LOAD_PIN, 1);
 	
@@ -168,6 +181,10 @@ void send_orientation(char* current_orientation){
 	}
 
 	pioDigitalWrite(LOAD_PIN, 0);
+	
+
+	//pioDigitalWrite(FPGA_RESET, 1);
+	//pioDigitalWrite(FPGA_RESET, 0);
 }
 
 
@@ -587,12 +604,12 @@ void counter_clockwise_turn(char* current_orientation, char color){
 }
 
 void shift_orientation(char* current_orientation){
-	shift_helper(current_orientation, 16, 17, 18, 49,48,47,46,45,44,43,42);
-	shift_helper(current_orientation, 13, 14, 15, 41,40,39,38,37,36,35,34);
-	shift_helper(current_orientation, 10, 11, 12, 33,32,31,30,29,28,27,26);
-	shift_helper(current_orientation, 7, 8, 9, 25,24,23,22,21,20,19,18);
-	shift_helper(current_orientation, 4, 5, 6, 17,16,15,14,13,12,11,10);
-	shift_helper(current_orientation, 1, 2, 3, 9,8,7,6,5,4,3,2);
+	shift_helper(current_orientation, 15, 16, 17, 47,46,45,44,43,42,41,40);
+	shift_helper(current_orientation, 12, 13, 14 ,39,38,37,36,35,34,33,32);
+	shift_helper(current_orientation, 9, 10, 11, 31,30,29,28,27,26,25,24);
+	shift_helper(current_orientation, 6, 7, 8, 23,22,21,20,19,18,17,16);
+	shift_helper(current_orientation, 3, 4, 5, 15,14,13,12,11,10,9,8);
+	shift_helper(current_orientation, 0, 1, 2, 7,6,5,4,3,2,1,0);
 	final_shift_helper(current_orientation);
 }
 
@@ -612,10 +629,8 @@ void shift_helper(char* current_orientation, int shift_byte0, int shift_byte1, i
 
 void final_shift_helper(char* current_orientation){
 
-
-    shifted[0] = (0x0) | (current_orientation[0] << 3) | (current_orientation[1]);
-    shifted[19] = (current_orientation[50] << 5) | (current_orientation[51] << 2) | (current_orientation[52] >> 1);
-    shifted[20] = (current_orientation[52] << 7) | (current_orientation[53] << 4) |  0x0;
-
+    shifted[18] = (current_orientation[48] << 5) | (current_orientation[49] << 2) | (current_orientation[50] >> 1);
+    shifted[19] = (current_orientation[50] << 7) | (current_orientation[51] << 4) |  (current_orientation[52] << 1) | (current_orientation[53] >> 2);
+    shifted[20] = (current_orientation[53] << 6) | (0 << 3) | 0;
 
 }
