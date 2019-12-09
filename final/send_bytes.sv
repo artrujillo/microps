@@ -217,7 +217,7 @@ module convert_orientation(input  logic [2:0] bit_value,
 		3'b010: hex_value =  24'h00b0b0; // yellow
 		3'b011: hex_value =  24'h0000b0; // green
 		3'b100: hex_value =  24'hb00000; // blue
-		3'b101: hex_value =  24'hb05000; // purple
+		3'b101: hex_value =  24'h909090; // purple
 		default:     hex_value = 24'h000000; // blank
 		/*
 		8'b11111111: hex_value = 24'h00b000;
@@ -245,15 +245,15 @@ module colormux(input  logic [9:0] colorcontrol,
 	
 	// convert each necessary piece of the orientation into the proper
 	// HEX value for the square that the color corresponds to
-	convert_orientation color1(orientation[2:0], sqr1color);
+	convert_orientation color1(orientation[8:6], sqr1color);
 	convert_orientation color2(orientation[5:3], sqr2color);
-	convert_orientation color3(orientation[8:6], sqr3color);
+	convert_orientation color3(orientation[2:0], sqr3color);
 	convert_orientation color4(orientation[11:9], sqr4color);
 	convert_orientation color5(orientation[14:12], sqr5color);
 	convert_orientation color6(orientation[17:15], sqr6color);
-	convert_orientation color7(orientation[20:18], sqr7color);
+	convert_orientation color7(orientation[26:24], sqr7color);
 	convert_orientation color8(orientation[23:21], sqr8color);
-	convert_orientation color9(orientation[26:24], sqr9color);
+	convert_orientation color9(orientation[20:18], sqr9color);
 	
 	always_comb
 	   case (colorcontrol)

@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Sun Dec 08 17:05:06 2019
+Analysis & Synthesis Status : Successful - Mon Dec 09 00:26:06 2019
 Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 Revision Name : send_bytes
 Top-level Entity Name : send_bytes
 Family : Cyclone IV E
-Total logic elements : 500
-    Total combinational functions : 337
+Total logic elements : 496
+    Total combinational functions : 333
     Dedicated logic registers : 225
 Total registers : 225
 Total pins : 5

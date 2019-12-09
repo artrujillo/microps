@@ -13,22 +13,22 @@ Fall 2019
 #include <time.h>
 
 // Rot Encoder Pins
-#define pinCCW PIO_PA9 // Connected to DT on KY­040
-#define pinCW PIO_PA10 // Connected to CLK on KY­040
+#define pinCCW PIO_PA19 // Connected to DT on KY­040
+#define pinCW PIO_PA20 // Connected to CLK on KY­040
 // Testing Rot Encoder Pins
-#define ledCW PIO_PA17
-#define ledCCW PIO_PA18
+#define ledCW PIO_PA22
+#define ledCCW PIO_PA24
 // SPI Pins
 #define LOAD_PIN PIO_PA16
 #define FPGA_RESET PIO_PA15
 // Buttin Pins
-#define RED_FACE PIO_PA19
-#define ORANGE_FACE PIO_PA20
-#define YELLOW_FACE PIO_PA21
-#define GREEN_FACE PIO_PA22
-#define BLUE_FACE PIO_PA23
-#define PURPLE_FACE PIO_PA24
-#define RESET_BUTTON PIO_PA25
+#define RED_FACE PIO_PA21
+#define ORANGE_FACE PIO_PA22
+#define YELLOW_FACE PIO_PA23
+#define GREEN_FACE PIO_PA24
+#define BLUE_FACE PIO_PA25
+#define PURPLE_FACE PIO_PA26
+#define RESET_BUTTON PIO_PA27
 
 #define SCRAMBLE_NUM 10
 
@@ -66,7 +66,7 @@ uint16_t SEED = 0;
 
 // these functions do basic PIO setup for the rotary encoder and buttons
 // and read the user input
-void user_interface_setup();
+int user_interface_setup();
 void read_input(char*);
 
 // spi communication for microcontroller
@@ -92,8 +92,8 @@ void seed_generator();
 //////////////////////////
 
 int main(void) {
-	uint16_t pinCWLast; // used to track the most recent rot. encoder position
-	uint16_t rot; // used to read a current rot position 
+	int pinCWLast; // used to track the most recent rot. encoder position
+	int rot; // used to read a current rot position 
 	samInit();
 	pioInit();
 	tcDelayInit();
@@ -107,7 +107,8 @@ int main(void) {
 	
 	//srand(time(NULL));
 	//int x = time(NULL);
-	char user_input[2] = {0,0}; // first char is the color, second char is the rotation direction
+	char user_input[2];
+	user_input[0] = 0x7;// = {1,1}; // first char is the color, second char is the rotation direction
 	//user_input[0] = 0x7;
 	
 	char orientation[54];
@@ -115,31 +116,34 @@ int main(void) {
 	for (int i = 0; i < 54; i++) {
 			orientation[i] = starting_orientation[i];
 	}
-	// rotate_cube(orientation, user_input);
-	//scramble_cube(orientation);
+	//rotate_cube(orientation, user_input);
+	scramble_cube(orientation);
 	shift_orientation(orientation);
 	send_orientation(shifted);
-	send_orientation(shifted);
 	//send_orientation(starting_orientation);
-	/*
+	//pinCWLast = user_interface_setup();
+	
 	while (1) {
 		
 		read_input(user_input);
 		
 		if (user_input[0] == 0x6) scramble_cube(orientation); // RESET
-		else rotate_cube(orientation, user_input); // ROTATE
+		else { 
+			rotate_cube(orientation, user_input); // ROTATE
 
-		send_orientation(orientation);		
+			shift_orientation(orientation);
+			send_orientation(shifted);
+		}
+	
+  
 	}
-  */
 }
-
 ///////////////////////////
 // helper functions
 ///////////////////////////
 
 
-void user_interface_setup() {
+int user_interface_setup() {
 	// Setup Buttons
 	pioPinMode(RED_FACE, PIO_INPUT);
 	pioPinMode(ORANGE_FACE, PIO_INPUT);
@@ -153,6 +157,8 @@ void user_interface_setup() {
 	// Rotary Encoder Setup
 	pioPinMode(pinCW, PIO_INPUT);
 	pioPinMode(pinCCW, PIO_INPUT);
+	
+	return pioDigitalRead(pinCW);
 }
 
 // scrambles the cube
@@ -212,12 +218,16 @@ void read_input(char* user_input) {
 		if      (red)     user_input[0] = 0x0;
 		else if (orange)  user_input[0] = 0x1;
 		else if (yellow)  user_input[0] = 0x2;
-	  	else if (green)   user_input[0] = 0x3;
+	  else if (green)   user_input[0] = 0x3;
 		else if (blue)    user_input[0] = 0x4;
 		else if (purple)  user_input[0] = 0x5;
 		else if (reset) 	user_input[0] = 0x6;
 		else if (user_input[0] == 0x7) continue;
+		else continue;
 			
+		break;
+  }
+	while (1) {
 		// read rotary encoder
     rot = pioDigitalRead(pinCW);
     if (rot != pinCWLast){ // Means the knob is rotating
@@ -225,19 +235,15 @@ void read_input(char* user_input) {
       // We do that by reading pin B.
       if (pioDigitalRead(pinCCW) != rot) { // Means pin A Changed first ­ We're Rotating Clockwise
 				// used for testing rot encoder
-				pioDigitalWrite(ledCW, 1);
-				pioDigitalWrite(ledCCW, 0);
 				user_input[1] = 0x0;
       } else { // Otherwise B changed first and we're moving CCW
 				// used for testing rot encoder
-        pioDigitalWrite(ledCW, 0);
-				pioDigitalWrite(ledCCW, 1);
 				user_input[1] = 0x1;
       }
 			break;
     }
-		pinCWLast = rot;		
-  }
+		pinCWLast = rot;	
+	}
 	
 }
 
