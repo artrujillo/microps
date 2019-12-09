@@ -102,6 +102,14 @@ int main(void) {
 	pioPinMode(LOAD_PIN, PIO_OUTPUT);
 	pioPinMode(FPGA_RESET, PIO_OUTPUT);
 	pioDigitalWrite(FPGA_RESET, 0);
+	
+	pioPinMode(RED_FACE, PIO_INPUT);
+	pioPinMode(ORANGE_FACE, PIO_INPUT);
+	pioPinMode(YELLOW_FACE, PIO_INPUT);
+	pioPinMode(GREEN_FACE, PIO_INPUT);
+	pioPinMode(BLUE_FACE, PIO_INPUT);
+	pioPinMode(PURPLE_FACE, PIO_INPUT);
+	pioPinMode(RESET_BUTTON, PIO_INPUT);
 	//pioDigitalWrite(LOAD_PIN, 0);
 
 	
@@ -124,7 +132,7 @@ int main(void) {
 	//pinCWLast = user_interface_setup();
 	
 	while (1) {
-		
+		/*
 		read_input(user_input);
 		
 		if (user_input[0] == 0x6) scramble_cube(orientation); // RESET
@@ -135,7 +143,13 @@ int main(void) {
 			send_orientation(shifted);
 		}
 	
-  
+  */
+		
+		if (pioDigitalRead(RED_FACE)){
+			pioPinMode(PIO_PA28, PIO_OUTPUT);
+			pioDigitalWrite(PIO_PA28, 1);
+			
+		}
 	}
 }
 ///////////////////////////
