@@ -16,7 +16,7 @@
 // PROGRAM "Quartus Prime"
 // VERSION "Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition"
 
-// DATE "12/07/2019 15:49:58"
+// DATE "12/08/2019 17:05:23"
 
 // 
 // Device: Altera EP4CE6E22C8 Package TQFP144
@@ -34,11 +34,11 @@ module send_bytes (
 	sdi,
 	load,
 	datastream);
-input 	logic clk ;
-input 	logic sck ;
-input 	logic sdi ;
-input 	logic load ;
-output 	logic datastream ;
+input 	clk;
+input 	sck;
+input 	sdi;
+input 	load;
+output 	datastream;
 
 // Design Ports Information
 // datastream	=>  Location: PIN_50,	 I/O Standard: 2.5 V,	 Current Strength: Default

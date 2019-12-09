@@ -50,7 +50,7 @@ char starting_orientation[54] = {0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5,
 	0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1}; */
 
 char shifted[21];
-
+uint16_t SEED = 0;
 //char starting_orientation[21] = {0x01, 0x4E, 0x50, 0x50, 0x29, 0xCA, 0x0A, 0x05, 0x39, 0x41, 0x40, 0xA7, 0x28, 0x28, 0x14, 0xE5, 0x05, 0x02, 0x9C, 0xA0, 0xA0};
 //char starting_orientation[21] = {0x03, 0x6D, 0xB6, 0xD8, 0x6D, 0xB6, 0xDB, 0x0D, 0xB6, 0xDB, 0x61, 0xB6, 0xDB, 0x6C, 0x36, 0xDB, 0x6D, 0x86, 0xDB, 0x6D, 0xB0};	
 //char starting_orientation[21] = {0x28, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0xA0, 0x00, 0x00, 0x14, 0x00, 0x00, 0x02, 0x80, 0x00, 0x00, 0x50, 0x00, 0x00, 0x00};
@@ -86,7 +86,7 @@ void shift_helper(char*, int, int, int, int, int, int, int, int, int, int, int);
 void final_shift_helper(char*);
 void shift_orientation(char*);
 
-
+void seed_generator();
 //////////////////////////
 // main
 //////////////////////////
@@ -105,8 +105,8 @@ int main(void) {
 	//pioDigitalWrite(LOAD_PIN, 0);
 
 	
-	srand(time(NULL));
-	int x = time(NULL);
+	//srand(time(NULL));
+	//int x = time(NULL);
 	char user_input[2] = {0,0}; // first char is the color, second char is the rotation direction
 	//user_input[0] = 0x7;
 	
@@ -115,8 +115,8 @@ int main(void) {
 	for (int i = 0; i < 54; i++) {
 			orientation[i] = starting_orientation[i];
 	}
-	//rotate_cube(orientation, user_input);
-	scramble_cube(orientation);
+	// rotate_cube(orientation, user_input);
+	//scramble_cube(orientation);
 	shift_orientation(orientation);
 	send_orientation(shifted);
 	send_orientation(shifted);
@@ -250,6 +250,11 @@ void rotate_cube(char* current_orientation, char* user_input) {
 	}
 }
 
+void seed_generator() {
+	while(pioDigitalRead(RESET_BUTTON)){
+		SEED++;
+	}
+}
 
 
 void clockwise_turn(char* current_orientation, char color){

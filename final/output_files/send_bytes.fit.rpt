@@ -1,5 +1,5 @@
 Fitter report for send_bytes
-Sat Dec 07 15:49:52 2019
+Sun Dec 08 17:05:15 2019
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -68,7 +68,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                   ;
 +------------------------------------+---------------------------------------------+
-; Fitter Status                      ; Successful - Sat Dec 07 15:49:52 2019       ;
+; Fitter Status                      ; Successful - Sun Dec 08 17:05:15 2019       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; send_bytes                                  ;
 ; Top-level Entity Name              ; send_bytes                                  ;
@@ -160,7 +160,7 @@ refer to the applicable agreement for further details.
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   2.2%      ;
+;     Processor 2            ;   1.8%      ;
 +----------------------------+-------------+
 
 
@@ -1179,9 +1179,9 @@ Info (11218): Fitter post-fit operations ending: elapsed time is 00:00:00
 Warning (171167): Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
 Info (144001): Generated suppressed messages file C:/Users/pking/Desktop/microps/final/output_files/send_bytes.fit.smsg
 Info: Quartus Prime Fitter was successful. 0 errors, 10 warnings
-    Info: Peak virtual memory: 5247 megabytes
-    Info: Processing ended: Sat Dec 07 15:49:52 2019
-    Info: Elapsed time: 00:00:06
+    Info: Peak virtual memory: 5243 megabytes
+    Info: Processing ended: Sun Dec 08 17:05:15 2019
+    Info: Elapsed time: 00:00:08
     Info: Total CPU time (on all processors): 00:00:07
 
 

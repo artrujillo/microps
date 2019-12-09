@@ -3,7 +3,7 @@ clk => clk.IN2
 sck => sck.IN1
 sdi => sdi.IN1
 load => load.IN1
-datastream <= rubiks_core:core.port3
+datastream << rubiks_core:core.port3
 
 
 |send_bytes|rubiks_spi:spi
