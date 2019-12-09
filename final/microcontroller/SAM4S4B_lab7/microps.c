@@ -22,7 +22,7 @@ Fall 2019
 #define LOAD_PIN PIO_PA16
 #define FPGA_RESET PIO_PA15
 // Buttin Pins
-#define RED_FACE PIO_PA21
+#define RED_FACE PIO_PA17
 #define ORANGE_FACE PIO_PA22
 #define YELLOW_FACE PIO_PA23
 #define GREEN_FACE PIO_PA24
@@ -103,7 +103,9 @@ int main(void) {
 	pioPinMode(FPGA_RESET, PIO_OUTPUT);
 	pioDigitalWrite(FPGA_RESET, 0);
 	
-	pioPinMode(RED_FACE, PIO_INPUT);
+	pioPinMode(RED_FACE, PIO_OUTPUT);
+	pioDigitalWrite(RED_FACE, 0);
+	//pioPinMode(RED_FACE, PIO_INPUT);
 	pioPinMode(ORANGE_FACE, PIO_INPUT);
 	pioPinMode(YELLOW_FACE, PIO_INPUT);
 	pioPinMode(GREEN_FACE, PIO_INPUT);
