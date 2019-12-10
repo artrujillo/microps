@@ -70,52 +70,50 @@ uint16_t SEED = 0;
 // and read the user input
 void user_interface_setup();
 void read_input(char*);
+void determine_direction(char* );
 
 // spi communication for microcontroller
 // takes in an array of bytes that are then sent over 
 // using spiSendRecieve and then waits for a DONE signal
 void send_orientation(char*);
 
+// these functions are used to change the orientation of the cube 
+void scramble_cube(char*);
+void rotate_cube(char*, char*);
+
 // these functions are used to determine the new orientation
 // of the cube based off the rotation of the rotary encoder
 void counter_clockwise_turn(char*, char);
 void clockwise_turn(char*, char);
 
-void scramble_cube(char*);
-void rotate_cube(char*, char*);
-
+// these functions are used to perform the shifting necessary to
+// be able to send our orientation over spi
 void shift_helper(char*, int, int, int, int, int, int, int, int, int, int, int);
 void final_shift_helper(char*);
 void shift_orientation(char*);
 
+// we use this function to create a psuedorandom seed to get a shuffled cube.
 void seed_generator();
+
 //////////////////////////
 // main
 //////////////////////////
 
 int main(void) {
-	int pinCWLast; // used to track the most recent rot. encoder position
-	int rot; // used to read a current rot position 
+	// initialize header files
 	samInit();
 	pioInit();
 	tcDelayInit();
 	spiInit(MCK_FREQ/244000, 0, 1); // 244000
 	
+	user_interface_setup();
+
 	pioPinMode(LOAD_PIN, PIO_OUTPUT);
-	
 	pioPinMode(RESET_BUTTON, PIO_INPUT);
-	pioPinMode(PIO_PA28, PIO_OUTPUT);
-	pioPinMode(PIO_PA3, PIO_OUTPUT);
 
-	//pioPinMode(RED_FACE, PIO_INPUT);
-	//pioDigitalWrite(LOAD_PIN, 0);
 
-	
-	//srand(time(NULL));
-	//int x = time(NULL);
-	char user_input[2];
-	user_input[0] = 0x7;// = {1,1}; // first char is the color, second char is the rotation direction
-	//user_input[0] = 0x7;
+	char user_input[2]; // first char is the face, second char is the rotation direction
+	user_input[0] = 0x7; // start in a state where user chooses first face
 	
 	char orientation[54];
 	
@@ -124,12 +122,6 @@ int main(void) {
 	}
 	shift_orientation(orientation);
 	send_orientation(shifted);
-
-	//send_orientation(starting_orientation);
-	user_interface_setup();
-	int turned_once = 0;
-	pinCWLast = pioDigitalRead(pinCW);
-	
 	
 	while (1) { 
 		
@@ -139,7 +131,7 @@ int main(void) {
 			
 			continue;
 			
-		} else if (user_input[0] == 0x6) {
+		} else if (user_input[0] == 0x6) { // Scramble the cube
 			
 			scramble_cube(orientation); // RESET
 			shift_orientation(orientation);
@@ -147,31 +139,11 @@ int main(void) {
 			
 		} else { // user has chosen a face
 			
-			rot = pioDigitalRead(pinCW);
-			
-			if (rot != pinCWLast) {
-				if (pioDigitalRead(pinCCW) != rot) {
-					
-					user_input[1] = 0x0;
-					pioDigitalWrite(PIO_PA3,1);
-					pioDigitalWrite(PIO_PA28,0);
-					
-				} else {
-					
-					user_input[1] = 0x1;
-					pioDigitalWrite(PIO_PA3,0);
-					pioDigitalWrite(PIO_PA28,1);
-					
-				}
-				
-				rotate_cube(orientation, user_input); // ROTATE
-				shift_orientation(orientation);
-				send_orientation(shifted);
-				
-			}
-			
-			pinCWLast = rot;
-			
+			determine_direction(user_input);
+			rotate_cube(orientation, user_input); 
+			shift_orientation(orientation);
+			send_orientation(shifted);
+
 		} 
 
 	} 
@@ -198,16 +170,22 @@ void user_interface_setup() {
 }
 
 void determine_direction(char* user_input) {
-	if (user_input[0] == 0x7) {
-		return;
-	} else if (user_input[0] == 0x6) {
-		// TODO -- make the scramble / reset work
-	} else {
-		while(1) {
-			
-		}
+	int rot;
+	int pinCWLast;
+	pinCWLast = pioDigitalRead(pinCW);
+	while(1) {
+		rot = pioDigitalRead(pinCW);
+			if (rot != pinCWLast) { // rotary encoder has been turned
+				if (pioDigitalRead(pinCCW) != rot) { // clockwise turn
+					user_input[1] = 0x0;
+					return;
+				} else { // counter clockwise turn
+					user_input[1] = 0x1;
+					return;
+				}
+			}
+		pinCWLast = rot;
 	}
-	
 }
 
 // scrambles the cube
@@ -227,25 +205,17 @@ void scramble_cube(char* orientation) {
 // sends a new orientation over SPI
 void send_orientation(char* current_orientation){
 	int i;
-	tcDelayMillis(37);
-	// used for logic analyzer
+	tcDelayMillis(37); // enough time to avoid reading in the wrong data on the FPGA
 	pioDigitalWrite(LOAD_PIN, 1);
-	
 	for (i = 0; i < 21; i++){
 		spiSendReceive(current_orientation[i]);
 	}
-
 	pioDigitalWrite(LOAD_PIN, 0);
 	spiSendReceive(0);
-
-	//pioDigitalWrite(FPGA_RESET, 1);
-	//pioDigitalWrite(FPGA_RESET, 0);
 }
 
 
 // reads the user input and outputs an array of two chars
-// the first char indicates the color (reset or a face color)
-// the second char indicates the rotation direction (0 = CW, 1 = CCW)
 void read_input(char* user_input) {
 	
 	char red, orange, yellow, green, blue, purple, reset;
@@ -635,6 +605,7 @@ void counter_clockwise_turn(char* current_orientation, char color){
 	}
 }
 
+// takes in a 54-byte array and condenses it down to 21 bytes by removing the 5 most significant bits
 void shift_orientation(char* current_orientation){
 	shift_helper(current_orientation, 15, 16, 17, 47,46,45,44,43,42,41,40);
 	shift_helper(current_orientation, 12, 13, 14 ,39,38,37,36,35,34,33,32);
@@ -645,6 +616,8 @@ void shift_orientation(char* current_orientation){
 	final_shift_helper(current_orientation);
 }
 
+// takes in 8 bytes and condenses them into 3 bytes by removing the 5 most significant bits and 
+// shifting and or'ing the remaining bits together.
 void shift_helper(char* current_orientation, int shift_byte0, int shift_byte1, int shift_byte2, int ori_byte0, int ori_byte1, int ori_byte2, int ori_byte3, int ori_byte4, int ori_byte5, int ori_byte6, int ori_byte7) {
     char byte0;
     char byte1;
@@ -659,8 +632,8 @@ void shift_helper(char* current_orientation, int shift_byte0, int shift_byte1, i
     shifted[shift_byte2] = byte2;
 }
 
+// Since 54 is not divisible by 8, we needed a special helper function for the final elements of the array
 void final_shift_helper(char* current_orientation){
-
     shifted[18] = (current_orientation[48] << 5) | (current_orientation[49] << 2) | (current_orientation[50] >> 1);
     shifted[19] = (current_orientation[50] << 7) | (current_orientation[51] << 4) |  (current_orientation[52] << 1) | (current_orientation[53] >> 2);
     shifted[20] = (current_orientation[53] << 6) | (0 << 3) | 0;
