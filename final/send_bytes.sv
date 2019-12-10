@@ -2,21 +2,18 @@
 module send_bytes(input  logic clk,
                   input  logic sck, 
                   input  logic sdi,
-						//input  logic reset,
                   input  logic load,
-                  output logic datastream);
+                  output logic datastream,
+						output logic megaR);
 
 	logic [161:0] orientation; 
 	logic [161:0] hardcoded;
 	logic reset;
 	
 
-	//assign hardcoded = 432'b000001010000010100000101000001010000010100000101000001010000010100000101000001000000010000000100000001000000010000000100000001000000010000000100000000110000001100000011000000110000001100000011000000110000001100000011000000100000001000000010000000100000001000000010000000100000001000000010000000010000000100000001000000010000000100000001000000010000000100000001000000000000000000000000000000000000000000000000000000000000000000000000;
-
-	assign hardcoded = 162'b101101101101101101101101101100100100100100100100100100011011011011011011011011011010010010010010010010010010001001001001001001001001001000000000000000000000000000;
 	
 	rubiks_spi spi(sck, clk, sdi, load, reset, orientation);
-	rubiks_core core(clk, reset, orientation, datastream);
+	rubiks_core core(clk, reset, orientation, datastream, megaR);
 
 endmodule
 
@@ -34,11 +31,14 @@ module rubiks_spi(input  logic sck,
    // assert load
    // apply 72 sclks to shift orientation starting with orientation[0]
    always_ff @(posedge sck)
-		if (!load) counter <= 0;
+		if (!load) begin
+			counter <= 0;
+		end
       else if (load & counter != 8'd162) begin
 			{value} = {value[160:0], sdi};
 			counter = counter+1;
 		end
+		
 
 		
 	level_to_pulse rst(clk, (counter == 8'd162), reset);
@@ -49,11 +49,12 @@ endmodule
 // programs a rubiks face with colors given by orientation
 module rubiks_core(input  logic clk, reset,
                    input  logic [162:0] orientation,
-                   output logic datastream);
+                   output logic datastream, 
+						 output logic megaR);
 	
 	typedef enum logic [2:0] {switching, sending, new_face,load, over, delay} statetype;
 	statetype state, nextstate;
-	
+
 	logic resetsb, done, red, face_reset;
 	logic [26:0] current_face_orientation, blank_face;
 	logic [23:0] data;
@@ -117,8 +118,9 @@ module rubiks_core(input  logic clk, reset,
 	// get the 24-bit color data from make squares
 	makesquares ms(clk, face_reset, resetsb, current_face_orientation, data); 
 	
+	
 	// make the datastream based on the 24 bits of color data
-	make_data_stream mds(clk, resetsb, data, datastream, done);
+	make_data_stream mds(clk, resetsb, reset, data, datastream, done, megaR);
 	
 endmodule
 
@@ -278,9 +280,9 @@ endmodule
 // https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
 // for 1s and 0s. Assumes a 40 MHz clock.
 /////////////////////////////////////////////////////////////
-module make_data_stream(input  logic clk, reset,
+module make_data_stream(input  logic clk, reset, globalreset,
                         input  logic [23:0] data,
-                        output logic datastream, done);
+                        output logic datastream, done, megaRout);
 
    // counter logic
    logic [10:0] counterval;
@@ -293,22 +295,23 @@ module make_data_stream(input  logic clk, reset,
    logic reset_counter, incbitcounter;
 
    // state type
-   typedef enum logic [2:0] {T0H, T1H, T0L, T1L, R} statetype;
+   typedef enum logic [2:0] {T0H, T1H, T0L, T1L, R, megaR} statetype;
    statetype state, nextstate;
-
+	
    // register for main counter
    always_ff @(posedge clk)
-      if      (reset | reset_counter) count <= 0;
+      if      (reset | reset_counter | globalreset) count <= 0;
       else if (~done)                 count <= count+1;
 
    // register for bitcounter
    always_ff @(posedge clk)
-      if      (reset)                                 bitcounter <= 0;
+      if      (reset | globalreset)                                 bitcounter <= 0;
       else if (reset_counter & incbitcounter & ~done) bitcounter <= bitcounter+1;
 
    // register for FSM
    always_ff @(posedge clk)
-      if (reset) begin
+		if (globalreset)   state <= megaR;
+      else if (reset & (state!=megaR)) begin
          if (currentbit) state <= T1H;
          else            state <= T0H;
       end
@@ -328,7 +331,7 @@ module make_data_stream(input  logic clk, reset,
               else                           nextstate = T1L;
          T0L: if      (~reset_counter)       nextstate = T0L;
               else if (nextbit)              nextstate = T1H;
-	          else if (bitcounter == 5'd23)  nextstate = R;
+	          else if (bitcounter == 5'd23)   nextstate = R;
               else                           nextstate = T0H;
          T1L: if      (~reset_counter)       nextstate = T1L;
               else if (nextbit)              nextstate = T1H;
@@ -338,6 +341,9 @@ module make_data_stream(input  logic clk, reset,
               else if (bitcounter == 5'd24)  nextstate = R;
               else if (nextbit)              nextstate = T1H;
               else                           nextstate = T0H;
+			megaR: if (~reset_counter)				nextstate = megaR;
+					 else if (nextbit)            nextstate = T1H;
+                else                         nextstate = T0H;
          default:                            nextstate = R;
       endcase
 
@@ -348,9 +354,9 @@ module make_data_stream(input  logic clk, reset,
    assign reset_counter = (count == counterval); // switch to next state, and reset counter
    assign incbitcounter = (state == T0L)|(state==T1L); // when the bit counter should be updated, which is low pulse
    assign datastream = ((state == T1H)|(state == T0H))&(~reset); // data stream is high when we are in high pulse states
-   assign s = {{state==R},(state==T0L)|(state==T1L), (state==T1H)|(state==T1L)}; // input to mux to choose constants
+   assign s = {(state==R)|(state==megaR),(state==T0L)|(state==T1L), (state==T1H)|(state==T1L)|(state==megaR)}; // input to mux to choose constants
    countervalmux cntrvalmux(s, counterval); // mux chooses constants, depending on how long the pulse should be
-
+	assign megaRout = (state == megaR);
 endmodule
 
 // mux for choosing counter value, depending on state
@@ -363,7 +369,8 @@ module countervalmux(input logic [2:0] s,
          3'b001:  out = 11'd32; // T1H
          3'b010:  out = 11'd34; // T0L
          3'b011:  out = 11'd18; // T1L
-         3'b100:  out = 11'd2000; // R
+         3'b100:  out = 11'd1; // R
+			3'b101:  out = 11'd2000; 
 	      default: out = 11'd2000; // R
       endcase
 

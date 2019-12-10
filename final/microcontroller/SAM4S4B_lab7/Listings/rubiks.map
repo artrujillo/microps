@@ -18,11 +18,14 @@ Section Cross References
     microps.o(i.main) refers to microps.o(i.tcDelayInit) for tcDelayInit
     microps.o(i.main) refers to microps.o(i.spiInit) for spiInit
     microps.o(i.main) refers to microps.o(i.pioPinMode) for pioPinMode
-    microps.o(i.main) refers to microps.o(i.pioDigitalWrite) for pioDigitalWrite
-    microps.o(i.main) refers to microps.o(i.scramble_cube) for scramble_cube
     microps.o(i.main) refers to microps.o(i.shift_orientation) for shift_orientation
     microps.o(i.main) refers to microps.o(i.send_orientation) for send_orientation
+    microps.o(i.main) refers to microps.o(i.user_interface_setup) for user_interface_setup
     microps.o(i.main) refers to microps.o(i.pioDigitalRead) for pioDigitalRead
+    microps.o(i.main) refers to microps.o(i.read_input) for read_input
+    microps.o(i.main) refers to microps.o(i.scramble_cube) for scramble_cube
+    microps.o(i.main) refers to microps.o(i.pioDigitalWrite) for pioDigitalWrite
+    microps.o(i.main) refers to microps.o(i.rotate_cube) for rotate_cube
     microps.o(i.main) refers to microps.o(.data) for starting_orientation
     microps.o(i.main) refers to microps.o(.bss) for shifted
     microps.o(i.pioDigitalRead) refers to microps.o(i.pioPinToBase) for pioPinToBase
@@ -50,6 +53,7 @@ Section Cross References
     microps.o(i.scramble_cube) refers to microps.o(.data) for starting_orientation
     microps.o(i.seed_generator) refers to microps.o(i.pioDigitalRead) for pioDigitalRead
     microps.o(i.seed_generator) refers to microps.o(.data) for SEED
+    microps.o(i.send_orientation) refers to microps.o(i.tcDelayMillis) for tcDelayMillis
     microps.o(i.send_orientation) refers to microps.o(i.pioDigitalWrite) for pioDigitalWrite
     microps.o(i.send_orientation) refers to microps.o(i.spiSendReceive) for spiSendReceive
     microps.o(i.shift_helper) refers to microps.o(.bss) for shifted
@@ -76,7 +80,6 @@ Section Cross References
     microps.o(i.uartInit) refers to microps.o(i.pioPinMode) for pioPinMode
     microps.o(i.uartRx) refers to microps.o(i.uartRxReady) for uartRxReady
     microps.o(i.user_interface_setup) refers to microps.o(i.pioPinMode) for pioPinMode
-    microps.o(i.user_interface_setup) refers to microps.o(i.pioDigitalRead) for pioDigitalRead
     startup_sam4s.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_sam4s.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
     startup_sam4s.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
@@ -228,7 +231,6 @@ Removing Unused input sections from the image.
     Removing microps.o(i.pmcCheckMasterClk), (28 bytes).
     Removing microps.o(i.pmcEnableWriteProtection), (16 bytes).
     Removing microps.o(i.pwmInit), (280 bytes).
-    Removing microps.o(i.read_input), (222 bytes).
     Removing microps.o(i.rtcInit), (20 bytes).
     Removing microps.o(i.rtcReadAmPm), (16 bytes).
     Removing microps.o(i.rtcReadCent), (28 bytes).
@@ -244,8 +246,6 @@ Removing Unused input sections from the image.
     Removing microps.o(i.seed_generator), (32 bytes).
     Removing microps.o(i.spiSendReceive16), (28 bytes).
     Removing microps.o(i.tcCheckRC_compare), (34 bytes).
-    Removing microps.o(i.tcDelayMicroseconds), (44 bytes).
-    Removing microps.o(i.tcDelayMillis), (24 bytes).
     Removing microps.o(i.tcDelaySeconds), (24 bytes).
     Removing microps.o(i.tcReadChannel), (30 bytes).
     Removing microps.o(i.tcResetChannel), (42 bytes).
@@ -254,7 +254,6 @@ Removing Unused input sections from the image.
     Removing microps.o(i.uartRx), (24 bytes).
     Removing microps.o(i.uartRxReady), (16 bytes).
     Removing microps.o(i.uartTx), (28 bytes).
-    Removing microps.o(i.user_interface_setup), (82 bytes).
     Removing microps.o(.constdata), (44 bytes).
     Removing system_sam4s.o(.rev16_text), (4 bytes).
     Removing system_sam4s.o(.revsh_text), (4 bytes).
@@ -262,7 +261,7 @@ Removing Unused input sections from the image.
     Removing system_sam4s.o(i.SystemCoreClockUpdate), (388 bytes).
     Removing system_sam4s.o(.data), (4 bytes).
 
-41 unused section(s) (total 2644 bytes) removed from the image.
+37 unused section(s) (total 2272 bytes) removed from the image.
 
 ==============================================================================
 
@@ -273,16 +272,16 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
-    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
     ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
     ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
     ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
-    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
     ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
     ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
     ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
@@ -290,37 +289,37 @@ Image Symbol Table
     ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
     ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
     ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
-    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
-    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
     ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
     ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
     ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
-    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
     ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
     ../clib/memcpset.s                       0x00000000   Number         0  rt_memcpy_w.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
     ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
-    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
     ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
-    ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  rand.o ABSOLUTE
+    ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../clib/stdlib.c                         0x00000000   Number         0  rand.o ABSOLUTE
     ../fplib/d2f.s                           0x00000000   Number         0  d2f.o ABSOLUTE
     ../fplib/dmul.s                          0x00000000   Number         0  dmul.o ABSOLUTE
@@ -400,40 +399,44 @@ Image Symbol Table
     i.counter_clockwise_turn                 0x0040062c   Section        0  microps.o(i.counter_clockwise_turn)
     i.final_shift_helper                     0x00400994   Section        0  microps.o(i.final_shift_helper)
     i.main                                   0x004009d8   Section        0  microps.o(i.main)
-    i.pioDigitalRead                         0x00400a98   Section        0  microps.o(i.pioDigitalRead)
-    i.pioDigitalWrite                        0x00400abc   Section        0  microps.o(i.pioDigitalWrite)
-    i.pioInit                                0x00400af2   Section        0  microps.o(i.pioInit)
-    i.pioPinMode                             0x00400b02   Section        0  microps.o(i.pioPinMode)
-    i.pioPinToBase                           0x00400bdc   Section        0  microps.o(i.pioPinToBase)
-    i.pioPinToPort                           0x00400bee   Section        0  microps.o(i.pioPinToPort)
-    i.pioPortToBase                          0x00400bf4   Section        0  microps.o(i.pioPortToBase)
-    i.pmcDisableWriteProtection              0x00400c08   Section        0  microps.o(i.pmcDisableWriteProtection)
-    i.pmcEnablePeriph                        0x00400c18   Section        0  microps.o(i.pmcEnablePeriph)
-    i.pmcMainClkBypass                       0x00400c28   Section        0  microps.o(i.pmcMainClkBypass)
-    i.rotate_cube                            0x00400c64   Section        0  microps.o(i.rotate_cube)
-    i.samInit                                0x00400c82   Section        0  microps.o(i.samInit)
-    i.scramble_cube                          0x00400c94   Section        0  microps.o(i.scramble_cube)
-    i.send_orientation                       0x00400cec   Section        0  microps.o(i.send_orientation)
-    i.shift_helper                           0x00400d14   Section        0  microps.o(i.shift_helper)
-    i.shift_orientation                      0x00400da4   Section        0  microps.o(i.shift_orientation)
-    i.spiInit                                0x00400ebc   Section        0  microps.o(i.spiInit)
-    i.spiSendReceive                         0x00400f2c   Section        0  microps.o(i.spiSendReceive)
-    i.tcBlockToBlockBase                     0x00400f54   Section        0  microps.o(i.tcBlockToBlockBase)
-    i.tcChannelInit                          0x00400f68   Section        0  microps.o(i.tcChannelInit)
-    i.tcChannelToBlock                       0x00400fce   Section        0  microps.o(i.tcChannelToBlock)
-    i.tcChannelToBlockBase                   0x00400fd8   Section        0  microps.o(i.tcChannelToBlockBase)
-    i.tcDelayInit                            0x00400fea   Section        0  microps.o(i.tcDelayInit)
-    i.tcInit                                 0x00400ffc   Section        0  microps.o(i.tcInit)
-    i.wdtDisable                             0x0040100c   Section        0  microps.o(i.wdtDisable)
-    .data                                    0x20000000   Section       70  microps.o(.data)
-    .bss                                     0x20000048   Section       21  microps.o(.bss)
-    .bss                                     0x20000060   Section      228  rand.o(.bss)
-    .bss                                     0x20000144   Section       96  libspace.o(.bss)
-    HEAP                                     0x200001a8   Section      512  startup_sam4s.o(HEAP)
-    Heap_Mem                                 0x200001a8   Data         512  startup_sam4s.o(HEAP)
-    STACK                                    0x200003a8   Section      512  startup_sam4s.o(STACK)
-    Stack_Mem                                0x200003a8   Data         512  startup_sam4s.o(STACK)
-    __initial_sp                             0x200005a8   Data           0  startup_sam4s.o(STACK)
+    i.pioDigitalRead                         0x00400ad8   Section        0  microps.o(i.pioDigitalRead)
+    i.pioDigitalWrite                        0x00400afc   Section        0  microps.o(i.pioDigitalWrite)
+    i.pioInit                                0x00400b32   Section        0  microps.o(i.pioInit)
+    i.pioPinMode                             0x00400b42   Section        0  microps.o(i.pioPinMode)
+    i.pioPinToBase                           0x00400c1c   Section        0  microps.o(i.pioPinToBase)
+    i.pioPinToPort                           0x00400c2e   Section        0  microps.o(i.pioPinToPort)
+    i.pioPortToBase                          0x00400c34   Section        0  microps.o(i.pioPortToBase)
+    i.pmcDisableWriteProtection              0x00400c48   Section        0  microps.o(i.pmcDisableWriteProtection)
+    i.pmcEnablePeriph                        0x00400c58   Section        0  microps.o(i.pmcEnablePeriph)
+    i.pmcMainClkBypass                       0x00400c68   Section        0  microps.o(i.pmcMainClkBypass)
+    i.read_input                             0x00400ca4   Section        0  microps.o(i.read_input)
+    i.rotate_cube                            0x00400d34   Section        0  microps.o(i.rotate_cube)
+    i.samInit                                0x00400d52   Section        0  microps.o(i.samInit)
+    i.scramble_cube                          0x00400d64   Section        0  microps.o(i.scramble_cube)
+    i.send_orientation                       0x00400dbc   Section        0  microps.o(i.send_orientation)
+    i.shift_helper                           0x00400df0   Section        0  microps.o(i.shift_helper)
+    i.shift_orientation                      0x00400e80   Section        0  microps.o(i.shift_orientation)
+    i.spiInit                                0x00400f98   Section        0  microps.o(i.spiInit)
+    i.spiSendReceive                         0x00401008   Section        0  microps.o(i.spiSendReceive)
+    i.tcBlockToBlockBase                     0x00401030   Section        0  microps.o(i.tcBlockToBlockBase)
+    i.tcChannelInit                          0x00401044   Section        0  microps.o(i.tcChannelInit)
+    i.tcChannelToBlock                       0x004010aa   Section        0  microps.o(i.tcChannelToBlock)
+    i.tcChannelToBlockBase                   0x004010b4   Section        0  microps.o(i.tcChannelToBlockBase)
+    i.tcDelayInit                            0x004010c6   Section        0  microps.o(i.tcDelayInit)
+    i.tcDelayMicroseconds                    0x004010d8   Section        0  microps.o(i.tcDelayMicroseconds)
+    i.tcDelayMillis                          0x00401104   Section        0  microps.o(i.tcDelayMillis)
+    i.tcInit                                 0x0040111c   Section        0  microps.o(i.tcInit)
+    i.user_interface_setup                   0x0040112c   Section        0  microps.o(i.user_interface_setup)
+    i.wdtDisable                             0x00401178   Section        0  microps.o(i.wdtDisable)
+    .data                                    0x20000000   Section      124  microps.o(.data)
+    .bss                                     0x2000007c   Section       21  microps.o(.bss)
+    .bss                                     0x20000094   Section      228  rand.o(.bss)
+    .bss                                     0x20000178   Section       96  libspace.o(.bss)
+    HEAP                                     0x200001d8   Section      512  startup_sam4s.o(HEAP)
+    Heap_Mem                                 0x200001d8   Data         512  startup_sam4s.o(HEAP)
+    STACK                                    0x200003d8   Section      512  startup_sam4s.o(STACK)
+    Stack_Mem                                0x200003d8   Data         512  startup_sam4s.o(STACK)
+    __initial_sp                             0x200005d8   Data           0  startup_sam4s.o(STACK)
 
     Global Symbols
 
@@ -582,42 +585,47 @@ Image Symbol Table
     clockwise_turn                           0x004002c5   Thumb Code   872  microps.o(i.clockwise_turn)
     counter_clockwise_turn                   0x0040062d   Thumb Code   872  microps.o(i.counter_clockwise_turn)
     final_shift_helper                       0x00400995   Thumb Code    64  microps.o(i.final_shift_helper)
-    main                                     0x004009d9   Thumb Code   182  microps.o(i.main)
-    pioDigitalRead                           0x00400a99   Thumb Code    36  microps.o(i.pioDigitalRead)
-    pioDigitalWrite                          0x00400abd   Thumb Code    54  microps.o(i.pioDigitalWrite)
-    pioInit                                  0x00400af3   Thumb Code    16  microps.o(i.pioInit)
-    pioPinMode                               0x00400b03   Thumb Code   218  microps.o(i.pioPinMode)
-    pioPinToBase                             0x00400bdd   Thumb Code    18  microps.o(i.pioPinToBase)
-    pioPinToPort                             0x00400bef   Thumb Code     6  microps.o(i.pioPinToPort)
-    pioPortToBase                            0x00400bf5   Thumb Code    12  microps.o(i.pioPortToBase)
-    pmcDisableWriteProtection                0x00400c09   Thumb Code     8  microps.o(i.pmcDisableWriteProtection)
-    pmcEnablePeriph                          0x00400c19   Thumb Code    10  microps.o(i.pmcEnablePeriph)
-    pmcMainClkBypass                         0x00400c29   Thumb Code    52  microps.o(i.pmcMainClkBypass)
-    rotate_cube                              0x00400c65   Thumb Code    30  microps.o(i.rotate_cube)
-    samInit                                  0x00400c83   Thumb Code    16  microps.o(i.samInit)
-    scramble_cube                            0x00400c95   Thumb Code    82  microps.o(i.scramble_cube)
-    send_orientation                         0x00400ced   Thumb Code    38  microps.o(i.send_orientation)
-    shift_helper                             0x00400d15   Thumb Code   138  microps.o(i.shift_helper)
-    shift_orientation                        0x00400da5   Thumb Code   280  microps.o(i.shift_orientation)
-    spiInit                                  0x00400ebd   Thumb Code   108  microps.o(i.spiInit)
-    spiSendReceive                           0x00400f2d   Thumb Code    36  microps.o(i.spiSendReceive)
-    tcBlockToBlockBase                       0x00400f55   Thumb Code    12  microps.o(i.tcBlockToBlockBase)
-    tcChannelInit                            0x00400f69   Thumb Code   102  microps.o(i.tcChannelInit)
-    tcChannelToBlock                         0x00400fcf   Thumb Code    10  microps.o(i.tcChannelToBlock)
-    tcChannelToBlockBase                     0x00400fd9   Thumb Code    18  microps.o(i.tcChannelToBlockBase)
-    tcDelayInit                              0x00400feb   Thumb Code    18  microps.o(i.tcDelayInit)
-    tcInit                                   0x00400ffd   Thumb Code    16  microps.o(i.tcInit)
-    wdtDisable                               0x0040100d   Thumb Code    18  microps.o(i.wdtDisable)
-    Region$$Table$$Base                      0x00401024   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00401044   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x004009d9   Thumb Code   246  microps.o(i.main)
+    pioDigitalRead                           0x00400ad9   Thumb Code    36  microps.o(i.pioDigitalRead)
+    pioDigitalWrite                          0x00400afd   Thumb Code    54  microps.o(i.pioDigitalWrite)
+    pioInit                                  0x00400b33   Thumb Code    16  microps.o(i.pioInit)
+    pioPinMode                               0x00400b43   Thumb Code   218  microps.o(i.pioPinMode)
+    pioPinToBase                             0x00400c1d   Thumb Code    18  microps.o(i.pioPinToBase)
+    pioPinToPort                             0x00400c2f   Thumb Code     6  microps.o(i.pioPinToPort)
+    pioPortToBase                            0x00400c35   Thumb Code    12  microps.o(i.pioPortToBase)
+    pmcDisableWriteProtection                0x00400c49   Thumb Code     8  microps.o(i.pmcDisableWriteProtection)
+    pmcEnablePeriph                          0x00400c59   Thumb Code    10  microps.o(i.pmcEnablePeriph)
+    pmcMainClkBypass                         0x00400c69   Thumb Code    52  microps.o(i.pmcMainClkBypass)
+    read_input                               0x00400ca5   Thumb Code   144  microps.o(i.read_input)
+    rotate_cube                              0x00400d35   Thumb Code    30  microps.o(i.rotate_cube)
+    samInit                                  0x00400d53   Thumb Code    16  microps.o(i.samInit)
+    scramble_cube                            0x00400d65   Thumb Code    82  microps.o(i.scramble_cube)
+    send_orientation                         0x00400dbd   Thumb Code    50  microps.o(i.send_orientation)
+    shift_helper                             0x00400df1   Thumb Code   138  microps.o(i.shift_helper)
+    shift_orientation                        0x00400e81   Thumb Code   280  microps.o(i.shift_orientation)
+    spiInit                                  0x00400f99   Thumb Code   108  microps.o(i.spiInit)
+    spiSendReceive                           0x00401009   Thumb Code    36  microps.o(i.spiSendReceive)
+    tcBlockToBlockBase                       0x00401031   Thumb Code    12  microps.o(i.tcBlockToBlockBase)
+    tcChannelInit                            0x00401045   Thumb Code   102  microps.o(i.tcChannelInit)
+    tcChannelToBlock                         0x004010ab   Thumb Code    10  microps.o(i.tcChannelToBlock)
+    tcChannelToBlockBase                     0x004010b5   Thumb Code    18  microps.o(i.tcChannelToBlockBase)
+    tcDelayInit                              0x004010c7   Thumb Code    18  microps.o(i.tcDelayInit)
+    tcDelayMicroseconds                      0x004010d9   Thumb Code    38  microps.o(i.tcDelayMicroseconds)
+    tcDelayMillis                            0x00401105   Thumb Code    24  microps.o(i.tcDelayMillis)
+    tcInit                                   0x0040111d   Thumb Code    16  microps.o(i.tcInit)
+    user_interface_setup                     0x0040112d   Thumb Code    76  microps.o(i.user_interface_setup)
+    wdtDisable                               0x00401179   Thumb Code    18  microps.o(i.wdtDisable)
+    Region$$Table$$Base                      0x00401190   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x004011b0   Number         0  anon$$obj.o(Region$$Table)
     cwOrientation                            0x20000000   Data           4  microps.o(.data)
     newOritentation                          0x20000004   Data           9  microps.o(.data)
     starting_orientation                     0x2000000d   Data          54  microps.o(.data)
-    SEED                                     0x20000044   Data           2  microps.o(.data)
-    shifted                                  0x20000048   Data          21  microps.o(.bss)
-    _random_number_data                      0x20000060   Data         228  rand.o(.bss)
-    __libspace_start                         0x20000144   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x200001a4   Data           0  libspace.o(.bss)
+    blank_orientation                        0x20000043   Data          54  microps.o(.data)
+    SEED                                     0x2000007a   Data           2  microps.o(.data)
+    shifted                                  0x2000007c   Data          21  microps.o(.bss)
+    _random_number_data                      0x20000094   Data         228  rand.o(.bss)
+    __libspace_start                         0x20000178   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x200001d8   Data           0  libspace.o(.bss)
 
 
 
@@ -627,9 +635,9 @@ Memory Map of the image
 
   Image Entry point : 0x004001a1
 
-  Load Region LR_1 (Base: 0x00400000, Size: 0x0000108c, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00400000, Size: 0x0000122c, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x00400000, Load base: 0x00400000, Size: 0x00001044, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00400000, Load base: 0x00400000, Size: 0x000011b0, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -698,55 +706,58 @@ Memory Map of the image
     0x004002c4   0x004002c4   0x00000368   Code   RO            4    i.clockwise_turn    microps.o
     0x0040062c   0x0040062c   0x00000368   Code   RO            5    i.counter_clockwise_turn  microps.o
     0x00400994   0x00400994   0x00000044   Code   RO            6    i.final_shift_helper  microps.o
-    0x004009d8   0x004009d8   0x000000c0   Code   RO            7    i.main              microps.o
-    0x00400a98   0x00400a98   0x00000024   Code   RO            8    i.pioDigitalRead    microps.o
-    0x00400abc   0x00400abc   0x00000036   Code   RO            9    i.pioDigitalWrite   microps.o
-    0x00400af2   0x00400af2   0x00000010   Code   RO           10    i.pioInit           microps.o
-    0x00400b02   0x00400b02   0x000000da   Code   RO           11    i.pioPinMode        microps.o
-    0x00400bdc   0x00400bdc   0x00000012   Code   RO           13    i.pioPinToBase      microps.o
-    0x00400bee   0x00400bee   0x00000006   Code   RO           14    i.pioPinToPort      microps.o
-    0x00400bf4   0x00400bf4   0x00000014   Code   RO           15    i.pioPortToBase     microps.o
-    0x00400c08   0x00400c08   0x00000010   Code   RO           18    i.pmcDisableWriteProtection  microps.o
-    0x00400c18   0x00400c18   0x00000010   Code   RO           19    i.pmcEnablePeriph   microps.o
-    0x00400c28   0x00400c28   0x0000003c   Code   RO           21    i.pmcMainClkBypass  microps.o
-    0x00400c64   0x00400c64   0x0000001e   Code   RO           24    i.rotate_cube       microps.o
-    0x00400c82   0x00400c82   0x00000010   Code   RO           37    i.samInit           microps.o
-    0x00400c92   0x00400c92   0x00000002   PAD
-    0x00400c94   0x00400c94   0x00000058   Code   RO           38    i.scramble_cube     microps.o
-    0x00400cec   0x00400cec   0x00000026   Code   RO           40    i.send_orientation  microps.o
-    0x00400d12   0x00400d12   0x00000002   PAD
-    0x00400d14   0x00400d14   0x00000090   Code   RO           41    i.shift_helper      microps.o
-    0x00400da4   0x00400da4   0x00000118   Code   RO           42    i.shift_orientation  microps.o
-    0x00400ebc   0x00400ebc   0x00000070   Code   RO           43    i.spiInit           microps.o
-    0x00400f2c   0x00400f2c   0x00000028   Code   RO           44    i.spiSendReceive    microps.o
-    0x00400f54   0x00400f54   0x00000014   Code   RO           46    i.tcBlockToBlockBase  microps.o
-    0x00400f68   0x00400f68   0x00000066   Code   RO           47    i.tcChannelInit     microps.o
-    0x00400fce   0x00400fce   0x0000000a   Code   RO           48    i.tcChannelToBlock  microps.o
-    0x00400fd8   0x00400fd8   0x00000012   Code   RO           49    i.tcChannelToBlockBase  microps.o
-    0x00400fea   0x00400fea   0x00000012   Code   RO           51    i.tcDelayInit       microps.o
-    0x00400ffc   0x00400ffc   0x00000010   Code   RO           55    i.tcInit            microps.o
-    0x0040100c   0x0040100c   0x00000018   Code   RO           64    i.wdtDisable        microps.o
-    0x00401024   0x00401024   0x00000020   Data   RO          866    Region$$Table       anon$$obj.o
+    0x004009d8   0x004009d8   0x00000100   Code   RO            7    i.main              microps.o
+    0x00400ad8   0x00400ad8   0x00000024   Code   RO            8    i.pioDigitalRead    microps.o
+    0x00400afc   0x00400afc   0x00000036   Code   RO            9    i.pioDigitalWrite   microps.o
+    0x00400b32   0x00400b32   0x00000010   Code   RO           10    i.pioInit           microps.o
+    0x00400b42   0x00400b42   0x000000da   Code   RO           11    i.pioPinMode        microps.o
+    0x00400c1c   0x00400c1c   0x00000012   Code   RO           13    i.pioPinToBase      microps.o
+    0x00400c2e   0x00400c2e   0x00000006   Code   RO           14    i.pioPinToPort      microps.o
+    0x00400c34   0x00400c34   0x00000014   Code   RO           15    i.pioPortToBase     microps.o
+    0x00400c48   0x00400c48   0x00000010   Code   RO           18    i.pmcDisableWriteProtection  microps.o
+    0x00400c58   0x00400c58   0x00000010   Code   RO           19    i.pmcEnablePeriph   microps.o
+    0x00400c68   0x00400c68   0x0000003c   Code   RO           21    i.pmcMainClkBypass  microps.o
+    0x00400ca4   0x00400ca4   0x00000090   Code   RO           23    i.read_input        microps.o
+    0x00400d34   0x00400d34   0x0000001e   Code   RO           24    i.rotate_cube       microps.o
+    0x00400d52   0x00400d52   0x00000010   Code   RO           37    i.samInit           microps.o
+    0x00400d62   0x00400d62   0x00000002   PAD
+    0x00400d64   0x00400d64   0x00000058   Code   RO           38    i.scramble_cube     microps.o
+    0x00400dbc   0x00400dbc   0x00000032   Code   RO           40    i.send_orientation  microps.o
+    0x00400dee   0x00400dee   0x00000002   PAD
+    0x00400df0   0x00400df0   0x00000090   Code   RO           41    i.shift_helper      microps.o
+    0x00400e80   0x00400e80   0x00000118   Code   RO           42    i.shift_orientation  microps.o
+    0x00400f98   0x00400f98   0x00000070   Code   RO           43    i.spiInit           microps.o
+    0x00401008   0x00401008   0x00000028   Code   RO           44    i.spiSendReceive    microps.o
+    0x00401030   0x00401030   0x00000014   Code   RO           46    i.tcBlockToBlockBase  microps.o
+    0x00401044   0x00401044   0x00000066   Code   RO           47    i.tcChannelInit     microps.o
+    0x004010aa   0x004010aa   0x0000000a   Code   RO           48    i.tcChannelToBlock  microps.o
+    0x004010b4   0x004010b4   0x00000012   Code   RO           49    i.tcChannelToBlockBase  microps.o
+    0x004010c6   0x004010c6   0x00000012   Code   RO           51    i.tcDelayInit       microps.o
+    0x004010d8   0x004010d8   0x0000002c   Code   RO           52    i.tcDelayMicroseconds  microps.o
+    0x00401104   0x00401104   0x00000018   Code   RO           53    i.tcDelayMillis     microps.o
+    0x0040111c   0x0040111c   0x00000010   Code   RO           55    i.tcInit            microps.o
+    0x0040112c   0x0040112c   0x0000004c   Code   RO           63    i.user_interface_setup  microps.o
+    0x00401178   0x00401178   0x00000018   Code   RO           64    i.wdtDisable        microps.o
+    0x00401190   0x00401190   0x00000020   Data   RO          866    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00401044, Size: 0x00000048, Max: 0xffffffff, ABSOLUTE)
-
-    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
-
-    0x20000000   0x00401044   0x00000046   Data   RW           67    .data               microps.o
-
-
-    Execution Region ER_ZI (Exec base: 0x20000048, Load base: 0x0040108c, Size: 0x00000560, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x004011b0, Size: 0x0000007c, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000048        -       0x00000015   Zero   RW           65    .bss                microps.o
-    0x2000005d   0x0040108c   0x00000003   PAD
-    0x20000060        -       0x000000e4   Zero   RW          679    .bss                c_w.l(rand.o)
-    0x20000144        -       0x00000060   Zero   RW          795    .bss                c_w.l(libspace.o)
-    0x200001a4   0x0040108c   0x00000004   PAD
-    0x200001a8        -       0x00000200   Zero   RW          448    HEAP                startup_sam4s.o
-    0x200003a8        -       0x00000200   Zero   RW          447    STACK               startup_sam4s.o
+    0x20000000   0x004011b0   0x0000007c   Data   RW           67    .data               microps.o
+
+
+    Execution Region ER_ZI (Exec base: 0x2000007c, Load base: 0x0040122c, Size: 0x0000055c, Max: 0xffffffff, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x2000007c        -       0x00000015   Zero   RW           65    .bss                microps.o
+    0x20000091   0x0040122c   0x00000003   PAD
+    0x20000094        -       0x000000e4   Zero   RW          679    .bss                c_w.l(rand.o)
+    0x20000178        -       0x00000060   Zero   RW          795    .bss                c_w.l(libspace.o)
+    0x200001d8        -       0x00000200   Zero   RW          448    HEAP                startup_sam4s.o
+    0x200003d8        -       0x00000200   Zero   RW          447    STACK               startup_sam4s.o
 
 
 ==============================================================================
@@ -756,14 +767,14 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-      3420         84          0         70         21      27661   microps.o
+      3784         90          0        124         21      29957   microps.o
         64         26        204          0       1024        856   startup_sam4s.o
         44         16          0          0          0        477   system_sam4s.o
 
     ----------------------------------------------------------------------
-      3532        126        236         72       1048      28994   Object Totals
+      3896        132        236        124       1048      31290   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         4          0          0          2          3          0   (incl. Padding)
+         4          0          0          0          3          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -792,8 +803,8 @@ Image component sizes
          2          0          0          0          0         68   use_no_semi.o
 
     ----------------------------------------------------------------------
-       396         34          0          0        328        744   Library Totals
-         8          0          0          0          4          0   (incl. Padding)
+       396         34          0          0        324        744   Library Totals
+         8          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -802,7 +813,7 @@ Image component sizes
        388         34          0          0        324        744   c_w.l
 
     ----------------------------------------------------------------------
-       396         34          0          0        328        744   Library Totals
+       396         34          0          0        324        744   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -811,15 +822,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      3928        160        236         72       1376      28070   Grand Totals
-      3928        160        236         72       1376      28070   ELF Image Totals
-      3928        160        236         72          0          0   ROM Totals
+      4292        166        236        124       1372      30158   Grand Totals
+      4292        166        236        124       1372      30158   ELF Image Totals
+      4292        166        236        124          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 4164 (   4.07kB)
-    Total RW  Size (RW Data + ZI Data)              1448 (   1.41kB)
-    Total ROM Size (Code + RO Data + RW Data)       4236 (   4.14kB)
+    Total RO  Size (Code + RO Data)                 4528 (   4.42kB)
+    Total RW  Size (RW Data + ZI Data)              1496 (   1.46kB)
+    Total ROM Size (Code + RO Data + RW Data)       4652 (   4.54kB)
 
 ==============================================================================
 

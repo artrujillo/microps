@@ -10,10 +10,16 @@
 /////////////////////////////////////////////
 
 module testbench();
-    logic clk, sck, sdi, load, datastream;
+    logic clk, reset, datastream, s, megaR;
+	 logic [161:0] orientation1,orientation2,orientation;
+	 
+	 assign orientation1 = 162'h12492492492492492492492492492492492492492;
+	 assign orientation2 = 162'h24924924924924924924924924924924924924924;
     
+	 assign orientation = s ? orientation1 : orientation2;
+	 
     // device under test
-    send_bytes dut(clk, sck, sdi, load, datastream);
+    rubiks_core dut(clk, reset, orientation, datastream, megaR);
 
     
     // generate clock and load signals
@@ -24,8 +30,46 @@ module testbench();
         end
         
     initial begin
-		load = 1'b1; #50000;
-		load = 1'b0;
+		reset = 1'b1; #50000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+		reset = 1'b0; #1000000000;
+
+		reset = 1'b1;
+		s = 1'b1;	  #50000;
+		reset = 1'b0;
     end 
   
     

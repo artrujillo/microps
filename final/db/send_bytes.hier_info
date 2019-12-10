@@ -3,7 +3,8 @@ clk => clk.IN2
 sck => sck.IN1
 sdi => sdi.IN1
 load => load.IN1
-datastream <= rubiks_core:core.port3
+datastream << rubiks_core:core.port3
+megaR << rubiks_core:core.port4
 
 
 |send_bytes|rubiks_spi:spi
@@ -525,23 +526,7 @@ reset <= reset.DB_MAX_OUTPUT_PORT_TYPE
 
 |send_bytes|rubiks_core:core
 clk => clk.IN2
-reset => state.OUTPUTSELECT
-reset => state.OUTPUTSELECT
-reset => state.OUTPUTSELECT
-reset => state.OUTPUTSELECT
-reset => count.OUTPUTSELECT
-reset => count.OUTPUTSELECT
-reset => count.OUTPUTSELECT
-reset => count.OUTPUTSELECT
-reset => count.OUTPUTSELECT
-reset => count.OUTPUTSELECT
-reset => count.OUTPUTSELECT
-reset => count.OUTPUTSELECT
-reset => count.OUTPUTSELECT
-reset => face_count.OUTPUTSELECT
-reset => face_count.OUTPUTSELECT
-reset => face_count.OUTPUTSELECT
-reset => face_reset.IN0
+reset => reset.IN1
 orientation[0] => Mux26.IN7
 orientation[1] => Mux25.IN7
 orientation[2] => Mux24.IN7
@@ -705,7 +690,8 @@ orientation[159] => Mux2.IN2
 orientation[160] => Mux1.IN2
 orientation[161] => Mux0.IN2
 orientation[162] => ~NO_FANOUT~
-datastream <= make_data_stream:mds.port3
+datastream <= make_data_stream:mds.port4
+megaR <= make_data_stream:mds.port6
 
 
 |send_bytes|rubiks_core:core|makesquares:ms
@@ -1255,17 +1241,17 @@ clk => count[9].CLK
 clk => count[10].CLK
 clk => state~1.DATAIN
 reset => always0.IN1
-reset => bitcounter.OUTPUTSELECT
-reset => bitcounter.OUTPUTSELECT
-reset => bitcounter.OUTPUTSELECT
-reset => bitcounter.OUTPUTSELECT
-reset => bitcounter.OUTPUTSELECT
-reset => state.OUTPUTSELECT
-reset => state.OUTPUTSELECT
-reset => state.OUTPUTSELECT
-reset => state.OUTPUTSELECT
-reset => state.OUTPUTSELECT
+reset => always1.IN0
+reset => always2.IN0
 reset => datastream.IN1
+globalreset => always0.IN1
+globalreset => always1.IN1
+globalreset => state.OUTPUTSELECT
+globalreset => state.OUTPUTSELECT
+globalreset => state.OUTPUTSELECT
+globalreset => state.OUTPUTSELECT
+globalreset => state.OUTPUTSELECT
+globalreset => state.OUTPUTSELECT
 data[0] => Mux0.IN31
 data[0] => Mux1.IN36
 data[1] => Mux0.IN30
@@ -1316,6 +1302,7 @@ data[23] => Mux0.IN8
 data[23] => Mux1.IN13
 datastream <= datastream.DB_MAX_OUTPUT_PORT_TYPE
 done <= done.DB_MAX_OUTPUT_PORT_TYPE
+megaRout <= megaRout.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |send_bytes|rubiks_core:core|make_data_stream:mds|countervalmux:cntrvalmux
@@ -1324,21 +1311,16 @@ s[1] => Decoder0.IN1
 s[1] => Decoder1.IN1
 s[2] => Decoder0.IN0
 s[2] => Decoder1.IN0
-s[2] => out[10].DATAIN
-s[2] => out[9].DATAIN
-s[2] => out[8].DATAIN
-s[2] => out[7].DATAIN
-s[2] => out[6].DATAIN
-out[0] <= <GND>
+out[0] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
 out[1] <= Decoder1.DB_MAX_OUTPUT_PORT_TYPE
 out[2] <= <GND>
 out[3] <= <GND>
-out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[4] <= WideOr1.DB_MAX_OUTPUT_PORT_TYPE
 out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[6] <= s[2].DB_MAX_OUTPUT_PORT_TYPE
-out[7] <= s[2].DB_MAX_OUTPUT_PORT_TYPE
-out[8] <= s[2].DB_MAX_OUTPUT_PORT_TYPE
-out[9] <= s[2].DB_MAX_OUTPUT_PORT_TYPE
-out[10] <= s[2].DB_MAX_OUTPUT_PORT_TYPE
+out[6] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+out[7] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+out[8] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+out[9] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+out[10] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
 
 

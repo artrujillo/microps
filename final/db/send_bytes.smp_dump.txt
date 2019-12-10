@@ -8,12 +8,13 @@ state.over 0 1 0 1 0
 state.delay 1 0 0 1 0 
 
 State Machine - |send_bytes|rubiks_core:core|make_data_stream:mds|state
-Name state.T1L state.T0L state.T1H state.T0H state.R 
-state.T0H 0 0 0 0 0 
-state.T1H 0 0 1 1 0 
-state.T0L 0 1 0 1 0 
-state.T1L 1 0 0 1 0 
-state.R 0 0 0 1 1 
+Name state.T0H state.R state.T1L state.T0L state.T1H state.megaR 
+state.megaR 0 0 0 0 0 0 
+state.T1H 0 0 0 0 1 1 
+state.T0L 0 0 0 1 0 1 
+state.T1L 0 0 1 0 0 1 
+state.R 0 1 0 0 0 1 
+state.T0H 1 0 0 0 0 1 
 
 State Machine - |send_bytes|rubiks_core:core|makesquares:ms|column
 Name column.0111 column.0110 column.0101 column.0100 column.0011 column.0010 column.0001 column.0000 column.1000 

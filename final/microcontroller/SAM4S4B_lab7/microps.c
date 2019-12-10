@@ -13,22 +13,18 @@ Fall 2019
 #include <time.h>
 
 // Rot Encoder Pins
-#define pinCCW PIO_PA19 // Connected to DT on KY­040
-#define pinCW PIO_PA20 // Connected to CLK on KY­040
-// Testing Rot Encoder Pins
-#define ledCW PIO_PA22
-#define ledCCW PIO_PA24
+#define pinCCW PIO_PA17 // Connected to DT on KY­040
+#define pinCW PIO_PA18 // Connected to CLK on KY­040
 // SPI Pins
 #define LOAD_PIN PIO_PA16
-#define FPGA_RESET PIO_PA15
 // Buttin Pins
-#define RED_FACE PIO_PA17
-#define ORANGE_FACE PIO_PA22
-#define YELLOW_FACE PIO_PA23
-#define GREEN_FACE PIO_PA24
-#define BLUE_FACE PIO_PA25
-#define PURPLE_FACE PIO_PA26
-#define RESET_BUTTON PIO_PA27
+#define RED_FACE PIO_PA19
+#define ORANGE_FACE PIO_PA20
+#define YELLOW_FACE PIO_PA21
+#define GREEN_FACE PIO_PA22
+#define BLUE_FACE PIO_PA23
+#define PURPLE_FACE PIO_PA24
+#define RESET_BUTTON PIO_PA25
 
 #define SCRAMBLE_NUM 10
 
@@ -41,7 +37,12 @@ char starting_orientation[54] = {0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5,
 								                 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3,
 								                 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2,
 								                 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1,
-								                 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};  
+								                 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
+char blank_orientation[54] = {0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2,
+																 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2,
+								                 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2,
+								                 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2,
+	0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2,0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2, 0x2};  
 /*char starting_orientation[54] = {0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 
 	0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1,
 	0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1,
@@ -101,11 +102,11 @@ int main(void) {
 	spiInit(MCK_FREQ/244000, 0, 1); // 244000
 	
 	pioPinMode(LOAD_PIN, PIO_OUTPUT);
-	pioPinMode(FPGA_RESET, PIO_OUTPUT);
-	pioDigitalWrite(FPGA_RESET, 0);
 	
-	pioPinMode(RED_FACE, PIO_OUTPUT);
-	pioDigitalWrite(RED_FACE, 0);
+	pioPinMode(RESET_BUTTON, PIO_INPUT);
+	pioPinMode(PIO_PA28, PIO_OUTPUT);
+	pioPinMode(PIO_PA3, PIO_OUTPUT);
+
 	//pioPinMode(RED_FACE, PIO_INPUT);
 	//pioDigitalWrite(LOAD_PIN, 0);
 
@@ -121,34 +122,59 @@ int main(void) {
 	for (int i = 0; i < 54; i++) {
 			orientation[i] = starting_orientation[i];
 	}
-	//rotate_cube(orientation, user_input);
-	scramble_cube(orientation);
 	shift_orientation(orientation);
 	send_orientation(shifted);
+
 	//send_orientation(starting_orientation);
 	user_interface_setup();
-
+	int turned_once = 0;
 	pinCWLast = pioDigitalRead(pinCW);
-	while (1) {
+	
+	
+	while (1) { 
+		
 		read_input(user_input);
+		
 		if (user_input[0] == 0x7) { // user has never picked a face
+			
 			continue;
-		} else if (user_input[0] == 0x6) scramble_cube(orientation); // RESET
-		else { // user has chosen a face
+			
+		} else if (user_input[0] == 0x6) {
+			
+			scramble_cube(orientation); // RESET
+			shift_orientation(orientation);
+			send_orientation(shifted);
+			
+		} else { // user has chosen a face
+			
 			rot = pioDigitalRead(pinCW);
+			
 			if (rot != pinCWLast) {
 				if (pioDigitalRead(pinCCW) != rot) {
+					
 					user_input[1] = 0x0;
+					pioDigitalWrite(PIO_PA3,1);
+					pioDigitalWrite(PIO_PA28,0);
+					
 				} else {
+					
 					user_input[1] = 0x1;
+					pioDigitalWrite(PIO_PA3,0);
+					pioDigitalWrite(PIO_PA28,1);
+					
 				}
+				
 				rotate_cube(orientation, user_input); // ROTATE
 				shift_orientation(orientation);
 				send_orientation(shifted);
+				
 			}
+			
 			pinCWLast = rot;
-		}
-	}
+			
+		} 
+
+	} 
 }
 ///////////////////////////
 // helper functions
@@ -188,7 +214,7 @@ void scramble_cube(char* orientation) {
 // sends a new orientation over SPI
 void send_orientation(char* current_orientation){
 	int i;
-	
+	tcDelayMillis(37);
 	// used for logic analyzer
 	pioDigitalWrite(LOAD_PIN, 1);
 	
@@ -197,7 +223,7 @@ void send_orientation(char* current_orientation){
 	}
 
 	pioDigitalWrite(LOAD_PIN, 0);
-	
+	spiSendReceive(0);
 
 	//pioDigitalWrite(FPGA_RESET, 1);
 	//pioDigitalWrite(FPGA_RESET, 0);
