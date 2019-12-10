@@ -50,6 +50,7 @@ char starting_orientation[54] = {0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5, 0x5,
 	0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1, 0x1}; */
 
 char shifted[21];
+
 uint16_t SEED = 0;
 //char starting_orientation[21] = {0x01, 0x4E, 0x50, 0x50, 0x29, 0xCA, 0x0A, 0x05, 0x39, 0x41, 0x40, 0xA7, 0x28, 0x28, 0x14, 0xE5, 0x05, 0x02, 0x9C, 0xA0, 0xA0};
 //char starting_orientation[21] = {0x03, 0x6D, 0xB6, 0xD8, 0x6D, 0xB6, 0xDB, 0x0D, 0xB6, 0xDB, 0x61, 0xB6, 0xDB, 0x6C, 0x36, 0xDB, 0x6D, 0x86, 0xDB, 0x6D, 0xB0};	
@@ -66,7 +67,7 @@ uint16_t SEED = 0;
 
 // these functions do basic PIO setup for the rotary encoder and buttons
 // and read the user input
-int user_interface_setup();
+void user_interface_setup();
 void read_input(char*);
 
 // spi communication for microcontroller
@@ -106,12 +107,6 @@ int main(void) {
 	pioPinMode(RED_FACE, PIO_OUTPUT);
 	pioDigitalWrite(RED_FACE, 0);
 	//pioPinMode(RED_FACE, PIO_INPUT);
-	pioPinMode(ORANGE_FACE, PIO_INPUT);
-	pioPinMode(YELLOW_FACE, PIO_INPUT);
-	pioPinMode(GREEN_FACE, PIO_INPUT);
-	pioPinMode(BLUE_FACE, PIO_INPUT);
-	pioPinMode(PURPLE_FACE, PIO_INPUT);
-	pioPinMode(RESET_BUTTON, PIO_INPUT);
 	//pioDigitalWrite(LOAD_PIN, 0);
 
 	
@@ -131,26 +126,27 @@ int main(void) {
 	shift_orientation(orientation);
 	send_orientation(shifted);
 	//send_orientation(starting_orientation);
-	//pinCWLast = user_interface_setup();
-	
-	while (1) {
-		/*
-		read_input(user_input);
-		
-		if (user_input[0] == 0x6) scramble_cube(orientation); // RESET
-		else { 
-			rotate_cube(orientation, user_input); // ROTATE
+	user_interface_setup();
 
-			shift_orientation(orientation);
-			send_orientation(shifted);
-		}
-	
-  */
-		
-		if (pioDigitalRead(RED_FACE)){
-			pioPinMode(PIO_PA28, PIO_OUTPUT);
-			pioDigitalWrite(PIO_PA28, 1);
-			
+	pinCWLast = pioDigitalRead(pinCW);
+	while (1) {
+		read_input(user_input);
+		if (user_input[0] == 0x7) { // user has never picked a face
+			continue;
+		} else if (user_input[0] == 0x6) scramble_cube(orientation); // RESET
+		else { // user has chosen a face
+			rot = pioDigitalRead(pinCW);
+			if (rot != pinCWLast) {
+				if (pioDigitalRead(pinCCW) != rot) {
+					user_input[1] = 0x0;
+				} else {
+					user_input[1] = 0x1;
+				}
+				rotate_cube(orientation, user_input); // ROTATE
+				shift_orientation(orientation);
+				send_orientation(shifted);
+			}
+			pinCWLast = rot;
 		}
 	}
 }
@@ -159,7 +155,7 @@ int main(void) {
 ///////////////////////////
 
 
-int user_interface_setup() {
+void user_interface_setup() {
 	// Setup Buttons
 	pioPinMode(RED_FACE, PIO_INPUT);
 	pioPinMode(ORANGE_FACE, PIO_INPUT);
@@ -173,8 +169,6 @@ int user_interface_setup() {
 	// Rotary Encoder Setup
 	pioPinMode(pinCW, PIO_INPUT);
 	pioPinMode(pinCCW, PIO_INPUT);
-	
-	return pioDigitalRead(pinCW);
 }
 
 // scrambles the cube
@@ -215,51 +209,23 @@ void send_orientation(char* current_orientation){
 // the second char indicates the rotation direction (0 = CW, 1 = CCW)
 void read_input(char* user_input) {
 	
-	uint16_t pinCWLast; // used to track the most recent rot. encoder position
-	uint16_t rot; // used to read a current rot position 
 	char red, orange, yellow, green, blue, purple, reset;
 	
-	pinCWLast = pioDigitalRead(pinCW);
-	
-	while(1){
-		
-		// read buttons
-		red = pioDigitalRead(RED_FACE);
-		orange = pioDigitalRead(ORANGE_FACE);
-		yellow = pioDigitalRead(YELLOW_FACE);
-		green = pioDigitalRead(GREEN_FACE);
-		blue = pioDigitalRead(BLUE_FACE);
-		purple = pioDigitalRead(PURPLE_FACE);
-	  reset = pioDigitalRead(RESET_BUTTON);
-		if      (red)     user_input[0] = 0x0;
-		else if (orange)  user_input[0] = 0x1;
-		else if (yellow)  user_input[0] = 0x2;
-	  else if (green)   user_input[0] = 0x3;
-		else if (blue)    user_input[0] = 0x4;
-		else if (purple)  user_input[0] = 0x5;
-		else if (reset) 	user_input[0] = 0x6;
-		else if (user_input[0] == 0x7) continue;
-		else continue;
-			
-		break;
-  }
-	while (1) {
-		// read rotary encoder
-    rot = pioDigitalRead(pinCW);
-    if (rot != pinCWLast){ // Means the knob is rotating
-			// if the knob is rotating, we need to determine direction
-      // We do that by reading pin B.
-      if (pioDigitalRead(pinCCW) != rot) { // Means pin A Changed first ­ We're Rotating Clockwise
-				// used for testing rot encoder
-				user_input[1] = 0x0;
-      } else { // Otherwise B changed first and we're moving CCW
-				// used for testing rot encoder
-				user_input[1] = 0x1;
-      }
-			break;
-    }
-		pinCWLast = rot;	
-	}
+	// read buttons
+	red = pioDigitalRead(RED_FACE);
+	orange = pioDigitalRead(ORANGE_FACE);
+	yellow = pioDigitalRead(YELLOW_FACE);
+	green = pioDigitalRead(GREEN_FACE);
+	blue = pioDigitalRead(BLUE_FACE);
+	purple = pioDigitalRead(PURPLE_FACE);
+	reset = pioDigitalRead(RESET_BUTTON);
+	if      (red)     user_input[0] = 0x0;
+	else if (orange)  user_input[0] = 0x1;
+	else if (yellow)  user_input[0] = 0x2;
+	else if (green)   user_input[0] = 0x3;
+	else if (blue)    user_input[0] = 0x4;
+	else if (purple)  user_input[0] = 0x5;
+	else if (reset)   user_input[0] = 0x6;
 	
 }
 
