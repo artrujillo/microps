@@ -99,53 +99,88 @@ void seed_generator();
 // main
 //////////////////////////
 
+	
 int main(void) {
-	// initialize header files
+
+	int pinCWLast; // used to track the most recent rot. encoder position
+	int rot; // used to read a current rot position 
 	samInit();
 	pioInit();
 	tcDelayInit();
 	spiInit(MCK_FREQ/244000, 0, 1); // 244000
-	
-	user_interface_setup();
-
 	pioPinMode(LOAD_PIN, PIO_OUTPUT);
 	pioPinMode(RESET_BUTTON, PIO_INPUT);
+	pioPinMode(PIO_PA28, PIO_OUTPUT);
+	pioPinMode(PIO_PA3, PIO_OUTPUT);
+	//pioPinMode(RED_FACE, PIO_INPUT);
+	//pioDigitalWrite(LOAD_PIN, 0);
 
+	//srand(time(NULL));
+	//int x = time(NULL);
+	char user_input[2];
+	char rotations[2];
+	rotations[0] = 0x3;
+	rotations[1] = 0x3;
+	user_input[0] = 0x7;// = {1,1}; // first char is the color, second char is the rotation direction
+	//user_input[0] = 0x7;
 
-	char user_input[2]; // first char is the face, second char is the rotation direction
-	user_input[0] = 0x7; // start in a state where user chooses first face
-	
 	char orientation[54];
-	
+
 	for (int i = 0; i < 54; i++) {
 			orientation[i] = starting_orientation[i];
 	}
 	shift_orientation(orientation);
 	send_orientation(shifted);
-	
+
+	//send_orientation(starting_orientation);
+	user_interface_setup();
+	int turned_once = 0;
+	pinCWLast = pioDigitalRead(pinCW);
 	while (1) { 
-		
 		read_input(user_input);
-		
 		if (user_input[0] == 0x7) { // user has never picked a face
-			
 			continue;
-			
-		} else if (user_input[0] == 0x6) { // Scramble the cube
-			
+		} else if (user_input[0] == 0x6) {
 			scramble_cube(orientation); // RESET
 			shift_orientation(orientation);
 			send_orientation(shifted);
-			
+			//tcDelayMillis(30);
 		} else { // user has chosen a face
-			
-			determine_direction(user_input);
-			rotate_cube(orientation, user_input); 
-			shift_orientation(orientation);
-			send_orientation(shifted);
-
+			rot = pioDigitalRead(pinCW);
+			if (rot != pinCWLast) {
+				if (pioDigitalRead(pinCCW) != rot) {
+					if (rotations[0] != 0x3) rotations[1] = 0x0;
+					else rotations[0] = 0x0;
+					//pioDigitalWrite(PIO_PA3,1);
+					//pioDigitalWrite(PIO_PA28,0);
+				} else {
+					if (rotations[0] != 0x3) rotations[1] = 0x1;
+					else rotations[0] = 0x1;
+					//pioDigitalWrite(PIO_PA3,0);
+					//pioDigitalWrite(PIO_PA28,1);
+				}
+				if ((rotations[1] == 0x0) & (rotations[0] == 0x0)) {
+					user_input[1] = 0x0;
+					rotate_cube(orientation, user_input); // ROTATE
+					shift_orientation(orientation);
+					send_orientation(shifted);
+					rotations[1] = 0x3;
+					rotations[0] = 0x3;
+					pinCWLast = pioDigitalRead(pinCW);
+				}
+				else if ((rotations[1] == 0x1) & (rotations[0] == 0x1)) {
+					user_input[1] = 0x1;
+					//tcDelayMillis(20);
+					rotate_cube(orientation, user_input); // ROTATE
+					shift_orientation(orientation);
+					send_orientation(shifted);
+					rotations[1] = 0x3;
+					rotations[0] = 0x3;
+					pinCWLast = pioDigitalRead(pinCW);
+				}
+			}
+			pinCWLast = rot;
 		} 
-
 	} 
 }
 ///////////////////////////
@@ -205,12 +240,12 @@ void scramble_cube(char* orientation) {
 // sends a new orientation over SPI
 void send_orientation(char* current_orientation){
 	int i;
-	tcDelayMillis(37); // enough time to avoid reading in the wrong data on the FPGA
 	pioDigitalWrite(LOAD_PIN, 1);
 	for (i = 0; i < 21; i++){
 		spiSendReceive(current_orientation[i]);
 	}
 	pioDigitalWrite(LOAD_PIN, 0);
+	tcDelayMillis(13);
 	spiSendReceive(0);
 }
 
