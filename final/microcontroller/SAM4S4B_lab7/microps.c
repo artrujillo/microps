@@ -197,6 +197,19 @@ void user_interface_setup() {
 	pioPinMode(pinCCW, PIO_INPUT);
 }
 
+void determine_direction(char* user_input) {
+	if (user_input[0] == 0x7) {
+		return;
+	} else if (user_input[0] == 0x6) {
+		// TODO -- make the scramble / reset work
+	} else {
+		while(1) {
+			
+		}
+	}
+	
+}
+
 // scrambles the cube
 void scramble_cube(char* orientation) {
 		char user_input[2];
