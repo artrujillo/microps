@@ -111,7 +111,7 @@ module rubiks_core(input  logic clk, reset,
 	makesquares ms(clk, face_reset, resetsb, current_face_orientation, data); 
 	
 	// make the datastream based on the 24 bits of color data
-	make_data_stream mds(clk, resetsb, reset, data, datastream, done);
+	make_data_stream mds(clk, resetsb, reset, data, datastream, done, megaR);
 	
 endmodule
 
@@ -310,7 +310,7 @@ module make_data_stream(input  logic clk, reset, globalreset,
               else                           nextstate = T1L;
          T0L: if      (~reset_counter)       nextstate = T0L;
               else if (nextbit)              nextstate = T1H;
-	          else if (bitcounter == 5'd23)  nextstate = R;
+	          else if (bitcounter == 5'd23)   nextstate = R;
               else                           nextstate = T0H;
          T1L: if      (~reset_counter)       nextstate = T1L;
               else if (nextbit)              nextstate = T1H;
@@ -320,6 +320,9 @@ module make_data_stream(input  logic clk, reset, globalreset,
               else if (bitcounter == 5'd24)  nextstate = R;
               else if (nextbit)              nextstate = T1H;
               else                           nextstate = T0H;
+			megaR: if (~reset_counter)				nextstate = megaR;
+					 else if (nextbit)            nextstate = T1H;
+                else                         nextstate = T0H;
          default:                            nextstate = R;
       endcase
 
@@ -332,6 +335,7 @@ module make_data_stream(input  logic clk, reset, globalreset,
    assign datastream = ((state == T1H)|(state == T0H))&(~reset); // data stream is high when we are in high pulse states
    assign s = {(state==R)|(state==megaR),(state==T0L)|(state==T1L), (state==T1H)|(state==T1L)|(state==megaR)}; // input to mux to choose constants
    countervalmux cntrvalmux(s, counterval); // mux chooses constants, depending on how long the pulse should be
+
 endmodule
 
 // mux for choosing counter value, depending on state
@@ -375,7 +379,6 @@ module level_to_pulse(input logic clk,
 						else      nextstate = s0;
 			default:           nextstate = s0;
 		endcase
-
 	// output logic	
 	assign reset = (state == s1);
 endmodule
