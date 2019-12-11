@@ -111,7 +111,7 @@ module rubiks_core(input  logic clk, reset,
 	makesquares ms(clk, face_reset, resetsb, current_face_orientation, data); 
 	
 	// make the datastream based on the 24 bits of color data
-	make_data_stream mds(clk, resetsb, reset, data, datastream, done, megaR);
+	make_data_stream mds(clk, resetsb, reset, data, datastream, done);
 	
 endmodule
 
@@ -310,7 +310,7 @@ module make_data_stream(input  logic clk, reset, globalreset,
               else                           nextstate = T1L;
          T0L: if      (~reset_counter)       nextstate = T0L;
               else if (nextbit)              nextstate = T1H;
-	          else if (bitcounter == 5'd23)   nextstate = R;
+	          else if (bitcounter == 5'd23)  nextstate = R;
               else                           nextstate = T0H;
          T1L: if      (~reset_counter)       nextstate = T1L;
               else if (nextbit)              nextstate = T1H;
@@ -320,8 +320,8 @@ module make_data_stream(input  logic clk, reset, globalreset,
               else if (bitcounter == 5'd24)  nextstate = R;
               else if (nextbit)              nextstate = T1H;
               else                           nextstate = T0H;
-			megaR: if (~reset_counter)				nextstate = megaR;
-					 else if (nextbit)            nextstate = T1H;
+		 megaR: if (~reset_counter)			 nextstate = megaR;
+					 else if (nextbit)       nextstate = T1H;
                 else                         nextstate = T0H;
          default:                            nextstate = R;
       endcase
@@ -349,7 +349,7 @@ module countervalmux(input logic [2:0] s,
          3'b010:  out = 11'd34; // T0L
          3'b011:  out = 11'd18; // T1L
          3'b100:  out = 11'd1; // R
-			3'b101:  out = 11'd2000; 
+		 3'b101:  out = 11'd2000; 
 	      default: out = 11'd2000; // R
       endcase
 
