@@ -46,34 +46,30 @@ module rubiks_core(input  logic clk, reset,
                    input  logic [162:0] orientation,
                    output logic datastream);
 	
-	typedef enum logic [2:0] {switching, sending, new_face,load, over} statetype;
+	typedef enum logic [2:0] {switching, sending, new_face, load, over} statetype;
 	statetype state, nextstate;
 
-	logic resetsb, done, red, face_reset;
+	logic resetsb, done, face_reset;
 	logic [26:0] current_face_orientation, blank_face;
 	logic [23:0] data;
 	logic [8:0] count;
 	logic [2:0] face_count;
-	
-	assign blank_face = 27'b0;
-	
+		
 	// register for finite state machine and counter
 	always_ff @(posedge clk)
 	   if (reset) begin
-	                 state <= switching;
-	                 count <= 0;
-					 face_count <= 0;
-	              end
+			state <= switching;
+	      count <= 0;
+			face_count <= 0;
+	   end
 	   else if (nextstate == new_face) begin
-                                          face_count <= face_count + 1;
-									      state <= nextstate;
-									      count <= 0;
-								       end
-	   else       begin
-	                 state <= nextstate;
-					 face_count <= face_count;
-	                 if (state == switching) count <= count+1;
-	              end
+			face_count <= face_count + 1;
+			state <= nextstate;
+			count <= 0;
+		end
+		else if (state == switching) count <= count+1;
+	   else state <= nextstate;
+
 	
 	// next state logic for finite state machine
 	// sending: waits for make_data_stream to send 24 bits
@@ -85,22 +81,23 @@ module rubiks_core(input  logic clk, reset,
 	      sending:  if      (count == 9'd65)       nextstate = new_face;
 	                else if (done)                 nextstate = switching;
 	                else                           nextstate = sending;
-		  new_face: if      (face_count == 3'b110) nextstate = over; // may need to make this 3'b110 -- will test
-		             else                          nextstate = switching;
+		   new_face: if      (face_count == 3'b110) nextstate = over; 
+		             else                           nextstate = switching;
 	      over:                                    nextstate = over;
-	      default:	                               nextstate = over;
+	      default:	                                nextstate = over;
 	
 	   endcase
 		
+	// choose which face to send over	
 	always_comb
 	   case (face_count)
-		    3'b000:    current_face_orientation = orientation[26:0];
+		   3'b000:    current_face_orientation = orientation[26:0];
 			3'b001:    current_face_orientation = orientation[53:27];
 			3'b010:    current_face_orientation = orientation[80:54];
 			3'b011:    current_face_orientation = orientation[107:81];
 			3'b100:    current_face_orientation = orientation[134:108];
 			3'b101:    current_face_orientation = orientation[161:135];
-			default:   current_face_orientation = blank_face;
+			default:   current_face_orientation = 27'b0;
 		endcase
 
 	// control logic
@@ -129,10 +126,10 @@ module makesquares(input  logic clk, reset, switchcolor,
 	logic [9:0] controlcolors;
 	
 	always_ff @(posedge clk)
-	   if      (reset) begin
-	                                        row <= 4'd9; // Changing this to a 0 instead of a 9 fixed the odd alignment??
-	                                     column <= 4'd0;
-	                   end
+	   if (reset) begin
+			row <= 4'd9; // Changing this to a 0 instead of a 9 fixed the odd alignment??
+	      column <= 4'd0;
+	   end
 	   else if (switchcolumn & switchcolor) column <= nextcolumn;
 	   else if (switchcolor)                   row <= nextrow;
 	
@@ -171,7 +168,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	      4'd6: if      (oddcol)         nextrow = 4'd5;
 	            else                     nextrow = 4'd7;	
 	      4'd7: if      (oddcol)         nextrow = 4'd6;
-	            else	                 nextrow = 4'd7;
+	            else	                   nextrow = 4'd7;
 	      4'd8:                          nextrow = 4'd8;
 	      default:                       nextrow = 4'd8;
 	   endcase
@@ -274,7 +271,7 @@ module make_data_stream(input  logic clk, reset, globalreset,
    logic reset_counter, incbitcounter;
 
    // state type
-   typedef enum logic [2:0] {T0H, T1H, T0L, T1L, R, megaR} statetype;
+   typedef enum logic [2:0] {T0H, T1H, T0L, T1L, R} statetype;
    statetype state, nextstate;
 	
    // register for main counter
@@ -289,8 +286,7 @@ module make_data_stream(input  logic clk, reset, globalreset,
 
    // register for FSM
    always_ff @(posedge clk)
-		if (globalreset)   state <= megaR;
-      else if (reset & (state!=megaR)) begin
+      if (reset) begin
          if (currentbit) state <= T1H;
          else            state <= T0H;
       end
@@ -320,9 +316,6 @@ module make_data_stream(input  logic clk, reset, globalreset,
               else if (bitcounter == 5'd24)  nextstate = R;
               else if (nextbit)              nextstate = T1H;
               else                           nextstate = T0H;
-		   megaR: if (~reset_counter)			 nextstate = megaR;
-					 else if (nextbit)       nextstate = T1H;
-                else                         nextstate = T0H;
          default:                            nextstate = R;
       endcase
 
@@ -333,7 +326,7 @@ module make_data_stream(input  logic clk, reset, globalreset,
    assign reset_counter = (count == counterval); // switch to next state, and reset counter
    assign incbitcounter = (state == T0L)|(state==T1L); // when the bit counter should be updated, which is low pulse
    assign datastream = ((state == T1H)|(state == T0H))&(~reset); // data stream is high when we are in high pulse states
-   assign s = {(state==R)|(state==megaR),(state==T0L)|(state==T1L), (state==T1H)|(state==T1L)|(state==megaR)}; // input to mux to choose constants
+   assign s = {(state==R),(state==T0L)|(state==T1L), (state==T1H)|(state==T1L)}; // input to mux to choose constants
    countervalmux cntrvalmux(s, counterval); // mux chooses constants, depending on how long the pulse should be
 
 endmodule
@@ -348,9 +341,8 @@ module countervalmux(input logic [2:0] s,
          3'b001:  out = 11'd32; // T1H
          3'b010:  out = 11'd34; // T0L
          3'b011:  out = 11'd18; // T1L
-         3'b100:  out = 11'd1; // R
-		 3'b101:  out = 11'd2000; 
-	      default: out = 11'd2000; // R
+         3'b100:  out = 11'd1;  // R
+	      default: out = 11'd1;  // R
       endcase
 
 endmodule

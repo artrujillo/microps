@@ -132,11 +132,8 @@ int main(void) {
 					rotate_cube(orientation, user_input); // ROTATE
 					shift_orientation(orientation);
 					send_orientation(shifted);
-					pioDigitalWrite(PIO_PA3,0);
-					pioDigitalWrite(PIO_PA28,1);
 					rotations[1] = 0x3;
 					rotations[0] = 0x3;
-					tcDelayMillis(10);
 					pinCWLast = pioDigitalRead(pinCW);
 				}
 				else if ((rotations[0] == 0x1) & (rotations[1] == 0x1)) {
@@ -144,11 +141,8 @@ int main(void) {
 					rotate_cube(orientation, user_input); // ROTATE
 					shift_orientation(orientation);
 					send_orientation(shifted);
-					pioDigitalWrite(PIO_PA3,1);
-					pioDigitalWrite(PIO_PA28,0);
 					rotations[1] = 0x3;
 					rotations[0] = 0x3;
-					tcDelayMillis(10);
 					pinCWLast = pioDigitalRead(pinCW);
 				}
 				else if ((rotations[0] == 0x0) & (rotations[1] == 0x1)) {
@@ -156,11 +150,8 @@ int main(void) {
 					rotate_cube(orientation, user_input); // ROTATE
 					shift_orientation(orientation);
 					send_orientation(shifted);
-					//pioDigitalWrite(PIO_PA3,1);
-					//pioDigitalWrite(PIO_PA28,0);
 					rotations[1] = 0x3;
 					rotations[0] = 0x1;
-					tcDelayMillis(10);
 					pinCWLast = pioDigitalRead(pinCW);
 				}
 				else if ((rotations[0] == 0x1) & (rotations[1] == 0x0)) {
@@ -168,11 +159,8 @@ int main(void) {
 					rotate_cube(orientation, user_input); // ROTATE
 					shift_orientation(orientation);
 					send_orientation(shifted);
-					//pioDigitalWrite(PIO_PA3,0);
-					//pioDigitalWrite(PIO_PA28,1);
 					rotations[1] = 0x3;
 					rotations[0] = 0x0;
-					tcDelayMillis(10);
 					pinCWLast = pioDigitalRead(pinCW);
 				}
 			}

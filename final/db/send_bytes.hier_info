@@ -3,7 +3,7 @@ clk => clk.IN2
 sck => sck.IN1
 sdi => sdi.IN1
 load => load.IN1
-datastream <= rubiks_core:core.port3
+datastream << rubiks_core:core.port3
 
 
 |send_bytes|rubiks_spi:spi
@@ -1230,16 +1230,14 @@ clk => count[10].CLK
 clk => state~1.DATAIN
 reset => always0.IN1
 reset => always1.IN0
-reset => always2.IN0
+reset => state.OUTPUTSELECT
+reset => state.OUTPUTSELECT
+reset => state.OUTPUTSELECT
+reset => state.OUTPUTSELECT
+reset => state.OUTPUTSELECT
 reset => datastream.IN1
 globalreset => always0.IN1
 globalreset => always1.IN1
-globalreset => state.OUTPUTSELECT
-globalreset => state.OUTPUTSELECT
-globalreset => state.OUTPUTSELECT
-globalreset => state.OUTPUTSELECT
-globalreset => state.OUTPUTSELECT
-globalreset => state.OUTPUTSELECT
 data[0] => Mux0.IN31
 data[0] => Mux1.IN36
 data[1] => Mux0.IN30
@@ -1298,16 +1296,17 @@ s[1] => Decoder0.IN1
 s[1] => Decoder1.IN1
 s[2] => Decoder0.IN0
 s[2] => Decoder1.IN0
-out[0] <= Decoder0.DB_MAX_OUTPUT_PORT_TYPE
+s[2] => out[0].DATAIN
+out[0] <= s[2].DB_MAX_OUTPUT_PORT_TYPE
 out[1] <= Decoder1.DB_MAX_OUTPUT_PORT_TYPE
 out[2] <= <GND>
 out[3] <= <GND>
-out[4] <= WideOr1.DB_MAX_OUTPUT_PORT_TYPE
+out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
 out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
-out[6] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
-out[7] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
-out[8] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
-out[9] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
-out[10] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
+out[6] <= <GND>
+out[7] <= <GND>
+out[8] <= <GND>
+out[9] <= <GND>
+out[10] <= <GND>
 
 

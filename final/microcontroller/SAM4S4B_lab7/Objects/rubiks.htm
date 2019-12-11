@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\rubiks.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\rubiks.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Dec 11 00:28:21 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Dec 11 14:08:23 2019
 <BR><P>
 <H3>Maximum Stack Usage =        172 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -222,7 +222,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
 </UL>
 
-<P><STRONG><a name="[5d]"></a>rand</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, rand.o(.emb_text))
+<P><STRONG><a name="[5c]"></a>rand</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, rand.o(.emb_text))
 <BR><BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scramble_cube
 </UL>
 
@@ -455,13 +455,13 @@ Global Symbols
 <P><STRONG><a name="[2d]"></a>SystemInit</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, system_sam4s.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_sam4s.o(.text)
 </UL>
-<P><STRONG><a name="[58]"></a>clockwise_turn</STRONG> (Thumb, 872 bytes, Stack size 64 bytes, microps.o(i.clockwise_turn))
+<P><STRONG><a name="[57]"></a>clockwise_turn</STRONG> (Thumb, 872 bytes, Stack size 64 bytes, microps.o(i.clockwise_turn))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = clockwise_turn
 </UL>
 <BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rotate_cube
 </UL>
 
-<P><STRONG><a name="[59]"></a>counter_clockwise_turn</STRONG> (Thumb, 872 bytes, Stack size 64 bytes, microps.o(i.counter_clockwise_turn))
+<P><STRONG><a name="[58]"></a>counter_clockwise_turn</STRONG> (Thumb, 872 bytes, Stack size 64 bytes, microps.o(i.counter_clockwise_turn))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = counter_clockwise_turn
 </UL>
 <BR>[Called By]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rotate_cube
@@ -471,11 +471,10 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shift_orientation
 </UL>
 
-<P><STRONG><a name="[3d]"></a>main</STRONG> (Thumb, 588 bytes, Stack size 64 bytes, microps.o(i.main))
+<P><STRONG><a name="[3d]"></a>main</STRONG> (Thumb, 532 bytes, Stack size 64 bytes, microps.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 172<LI>Call Chain = main &rArr; scramble_cube &rArr; rotate_cube &rArr; counter_clockwise_turn
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;user_interface_setup
-<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tcDelayMillis
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tcDelayInit
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spiInit
 <LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;shift_orientation
@@ -486,7 +485,6 @@ Global Symbols
 <LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_input
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinMode
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioInit
-<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioDigitalWrite
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioDigitalRead
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
@@ -495,25 +493,24 @@ Global Symbols
 <P><STRONG><a name="[4e]"></a>pioDigitalRead</STRONG> (Thumb, 36 bytes, Stack size 16 bytes, microps.o(i.pioDigitalRead))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = pioDigitalRead &rArr; pioPinToBase
 </UL>
-<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinToBase
+<BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinToBase
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_input
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[52]"></a>pioDigitalWrite</STRONG> (Thumb, 54 bytes, Stack size 20 bytes, microps.o(i.pioDigitalWrite))
+<P><STRONG><a name="[53]"></a>pioDigitalWrite</STRONG> (Thumb, 54 bytes, Stack size 20 bytes, microps.o(i.pioDigitalWrite))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = pioDigitalWrite &rArr; pioPinToBase
 </UL>
-<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinToBase
+<BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinToBase
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_orientation
-<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[47]"></a>pioInit</STRONG> (Thumb, 16 bytes, Stack size 4 bytes, microps.o(i.pioInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = pioInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pmcEnablePeriph
+<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pmcEnablePeriph
 </UL>
 <BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spiInit
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -522,43 +519,43 @@ Global Symbols
 <P><STRONG><a name="[4a]"></a>pioPinMode</STRONG> (Thumb, 218 bytes, Stack size 20 bytes, microps.o(i.pioPinMode))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = pioPinMode &rArr; pioPinToBase
 </UL>
-<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinToBase
+<BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinToBase
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;user_interface_setup
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spiInit
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[54]"></a>pioPinToBase</STRONG> (Thumb, 18 bytes, Stack size 4 bytes, microps.o(i.pioPinToBase))
+<P><STRONG><a name="[52]"></a>pioPinToBase</STRONG> (Thumb, 18 bytes, Stack size 4 bytes, microps.o(i.pioPinToBase))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = pioPinToBase
 </UL>
-<BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPortToBase
-<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinToPort
+<BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPortToBase
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinToPort
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinMode
-<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioDigitalWrite
+<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioDigitalWrite
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioDigitalRead
 </UL>
 
-<P><STRONG><a name="[56]"></a>pioPinToPort</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, microps.o(i.pioPinToPort))
-<BR><BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinToBase
+<P><STRONG><a name="[55]"></a>pioPinToPort</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, microps.o(i.pioPinToPort))
+<BR><BR>[Called By]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinToBase
 </UL>
 
-<P><STRONG><a name="[57]"></a>pioPortToBase</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, microps.o(i.pioPortToBase))
-<BR><BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinToBase
+<P><STRONG><a name="[56]"></a>pioPortToBase</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, microps.o(i.pioPortToBase))
+<BR><BR>[Called By]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinToBase
 </UL>
 
-<P><STRONG><a name="[5b]"></a>pmcDisableWriteProtection</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, microps.o(i.pmcDisableWriteProtection))
+<P><STRONG><a name="[5a]"></a>pmcDisableWriteProtection</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, microps.o(i.pmcDisableWriteProtection))
 <BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;samInit
 </UL>
 
-<P><STRONG><a name="[55]"></a>pmcEnablePeriph</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, microps.o(i.pmcEnablePeriph))
+<P><STRONG><a name="[54]"></a>pmcEnablePeriph</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, microps.o(i.pmcEnablePeriph))
 <BR><BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tcInit
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spiInit
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioInit
 </UL>
 
-<P><STRONG><a name="[5c]"></a>pmcMainClkBypass</STRONG> (Thumb, 52 bytes, Stack size 0 bytes, microps.o(i.pmcMainClkBypass))
+<P><STRONG><a name="[5b]"></a>pmcMainClkBypass</STRONG> (Thumb, 52 bytes, Stack size 0 bytes, microps.o(i.pmcMainClkBypass))
 <BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;samInit
 </UL>
 
@@ -573,8 +570,8 @@ Global Symbols
 <P><STRONG><a name="[51]"></a>rotate_cube</STRONG> (Thumb, 30 bytes, Stack size 12 bytes, microps.o(i.rotate_cube))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = rotate_cube &rArr; counter_clockwise_turn
 </UL>
-<BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;counter_clockwise_turn
-<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clockwise_turn
+<BR>[Calls]<UL><LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;counter_clockwise_turn
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clockwise_turn
 </UL>
 <BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scramble_cube
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -583,9 +580,9 @@ Global Symbols
 <P><STRONG><a name="[46]"></a>samInit</STRONG> (Thumb, 16 bytes, Stack size 4 bytes, microps.o(i.samInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = samInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wdtDisable
-<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pmcMainClkBypass
-<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pmcDisableWriteProtection
+<BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;wdtDisable
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pmcMainClkBypass
+<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pmcDisableWriteProtection
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -593,7 +590,7 @@ Global Symbols
 <P><STRONG><a name="[50]"></a>scramble_cube</STRONG> (Thumb, 156 bytes, Stack size 32 bytes, microps.o(i.scramble_cube))
 <BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = scramble_cube &rArr; rotate_cube &rArr; counter_clockwise_turn
 </UL>
-<BR>[Calls]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rand
+<BR>[Calls]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rand
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rotate_cube
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -602,9 +599,9 @@ Global Symbols
 <P><STRONG><a name="[4c]"></a>send_orientation</STRONG> (Thumb, 50 bytes, Stack size 12 bytes, microps.o(i.send_orientation))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = send_orientation &rArr; pioDigitalWrite &rArr; pioPinToBase
 </UL>
-<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tcDelayMillis
-<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spiSendReceive
-<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioDigitalWrite
+<BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tcDelayMillis
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spiSendReceive
+<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioDigitalWrite
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -627,14 +624,14 @@ Global Symbols
 <P><STRONG><a name="[49]"></a>spiInit</STRONG> (Thumb, 108 bytes, Stack size 16 bytes, microps.o(i.spiInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = spiInit &rArr; pioPinMode &rArr; pioPinToBase
 </UL>
-<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pmcEnablePeriph
+<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pmcEnablePeriph
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioPinMode
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pioInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[5e]"></a>spiSendReceive</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, microps.o(i.spiSendReceive))
+<P><STRONG><a name="[5d]"></a>spiSendReceive</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, microps.o(i.spiSendReceive))
 <BR><BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_orientation
 </UL>
 
@@ -673,22 +670,21 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[66]"></a>tcDelayMicroseconds</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, microps.o(i.tcDelayMicroseconds))
-<BR><BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tcDelayMillis
+<BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tcDelayMillis
 </UL>
 
-<P><STRONG><a name="[53]"></a>tcDelayMillis</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, microps.o(i.tcDelayMillis))
+<P><STRONG><a name="[5e]"></a>tcDelayMillis</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, microps.o(i.tcDelayMillis))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = tcDelayMillis
 </UL>
 <BR>[Calls]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tcDelayMicroseconds
 </UL>
 <BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_orientation
-<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[65]"></a>tcInit</STRONG> (Thumb, 16 bytes, Stack size 4 bytes, microps.o(i.tcInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = tcInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pmcEnablePeriph
+<BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pmcEnablePeriph
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tcDelayInit
 </UL>
@@ -701,7 +697,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[5a]"></a>wdtDisable</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, microps.o(i.wdtDisable))
+<P><STRONG><a name="[59]"></a>wdtDisable</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, microps.o(i.wdtDisable))
 <BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;samInit
 </UL>
 <P>
