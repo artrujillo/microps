@@ -1,4 +1,4 @@
-Analysis & Synthesis Status : Successful - Tue Dec 10 19:40:53 2019
+Analysis & Synthesis Status : Successful - Wed Dec 11 01:54:35 2019
 Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 Revision Name : send_bytes
 Top-level Entity Name : send_bytes
@@ -7,7 +7,7 @@ Total logic elements : 513
     Total combinational functions : 350
     Dedicated logic registers : 226
 Total registers : 226
-Total pins : 6
+Total pins : 5
 Total virtual pins : 0
 Total memory bits : 0
 Embedded Multiplier 9-bit elements : 0

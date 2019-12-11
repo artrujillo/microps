@@ -23,7 +23,7 @@ Fall 2019
 #define YELLOW_FACE PIO_PA21
 #define GREEN_FACE PIO_PA22
 #define BLUE_FACE PIO_PA23
-#define PURPLE_FACE PIO_PA24
+#define WHITE_FACE PIO_PA24
 #define RESET_BUTTON PIO_PA25
 
 #define SCRAMBLE_NUM 15
@@ -192,7 +192,7 @@ void user_interface_setup() {
 	pioPinMode(YELLOW_FACE, PIO_INPUT);
 	pioPinMode(GREEN_FACE, PIO_INPUT);
 	pioPinMode(BLUE_FACE, PIO_INPUT);
-	pioPinMode(PURPLE_FACE, PIO_INPUT);
+	pioPinMode(WHITE_FACE, PIO_INPUT);
 	pioPinMode(RESET_BUTTON, PIO_INPUT);
 	
 	// Rotary Encoder Setup
@@ -234,7 +234,7 @@ void send_orientation(char* current_orientation){
 // reads the user input and outputs an array of two chars
 int read_input(char* user_input) {
 	
-	char red, orange, yellow, green, blue, purple, reset;
+	char red, orange, yellow, green, blue, white, reset;
 	int rand_seed = 0;
 	// read buttons
 	red = pioDigitalRead(RED_FACE);
@@ -242,14 +242,14 @@ int read_input(char* user_input) {
 	yellow = pioDigitalRead(YELLOW_FACE);
 	green = pioDigitalRead(GREEN_FACE);
 	blue = pioDigitalRead(BLUE_FACE);
-	purple = pioDigitalRead(PURPLE_FACE);
+	white = pioDigitalRead(WHITE_FACE);
 	reset = pioDigitalRead(RESET_BUTTON);
 	if      (red)     user_input[0] = 0x0;
 	else if (orange)  user_input[0] = 0x1;
 	else if (yellow)  user_input[0] = 0x2;
 	else if (green)   user_input[0] = 0x3;
 	else if (blue)    user_input[0] = 0x4;
-	else if (purple)  user_input[0] = 0x5;
+	else if (white)  user_input[0] = 0x5;
 	else if (reset)   user_input[0] = 0x6;
 	while (pioDigitalRead(RESET_BUTTON)) {
 		rand_seed++;
@@ -274,7 +274,7 @@ void clockwise_turn(char* current_orientation, char color){
 	for (int i = 0; i < 54; i++) {
 	  temp[i] = current_orientation[i];
 	}
-	// purple face starts at 0
+	// white face starts at 0
 	// blue face starts at 9
 	// green face starts at 18
 	// yellow face starts at 27
@@ -290,7 +290,7 @@ void clockwise_turn(char* current_orientation, char color){
 		temp[51] = current_orientation[45+8];
 		temp[52] = current_orientation[45+5];
 		temp[53] = current_orientation[45+2];
-		// fix purple face
+		// fix white face
 		temp[0+6] = current_orientation[18+8];
 		temp[0+7] = current_orientation[18+5];
 		temp[0+8] = current_orientation[18+2];
@@ -317,7 +317,7 @@ void clockwise_turn(char* current_orientation, char color){
 		temp[42] = current_orientation[36+8];
 		temp[43] = current_orientation[36+5];
 		temp[44] = current_orientation[36+2]; 
-		// fix purple face
+		// fix white face
 		temp[0] = current_orientation[9+2];
 		temp[1] = current_orientation[9+5];
 		temp[2] = current_orientation[9+8];
@@ -379,7 +379,7 @@ void clockwise_turn(char* current_orientation, char color){
 		temp[45+0] = current_orientation[0];
 		temp[45+3] = current_orientation[3];
 		temp[45+6] = current_orientation[6];
-		// fix purple face
+		// fix white face
 		temp[0] = current_orientation[36+8];
 		temp[3] = current_orientation[36+5];
 		temp[6] = current_orientation[36+2];
@@ -406,7 +406,7 @@ void clockwise_turn(char* current_orientation, char color){
 		temp[45+2] = current_orientation[27+2];
 		temp[45+5] = current_orientation[27+5];
 		temp[45+8] = current_orientation[27+8];
-		// fix purple face
+		// fix white face
 		temp[2] = current_orientation[45+2];
 		temp[5] = current_orientation[45+5];
 		temp[8] = current_orientation[45+8];
@@ -416,8 +416,8 @@ void clockwise_turn(char* current_orientation, char color){
 		temp[36+6] = current_orientation[2];
 
 	}
-	else if (color == 0x5) { // purple
-		// fix purple face
+	else if (color == 0x5) { // white
+		// fix white face
 		temp[0] = current_orientation[6];
 		temp[1] = current_orientation[3];
 		temp[2] = current_orientation[0];
@@ -463,7 +463,7 @@ void counter_clockwise_turn(char* current_orientation, char color){
 		temp[51] = current_orientation[45+0];
 		temp[52] = current_orientation[45+3];
 		temp[53] = current_orientation[45+6];
-		// fix purple face
+		// fix white face
 		temp[0+6] = current_orientation[9+0];
 		temp[0+7] = current_orientation[9+3];
 		temp[0+8] = current_orientation[9+6];
@@ -490,7 +490,7 @@ void counter_clockwise_turn(char* current_orientation, char color){
 		temp[42] = current_orientation[36+0];
 		temp[43] = current_orientation[36+3];
 		temp[44] = current_orientation[36+6];
-		// fix purple face
+		// fix white face
 		temp[0] = current_orientation[18+6];
 		temp[1] = current_orientation[18+3];
 		temp[2] = current_orientation[18+0];
@@ -552,7 +552,7 @@ void counter_clockwise_turn(char* current_orientation, char color){
 		temp[45+0] = current_orientation[27+0];
 		temp[45+3] = current_orientation[27+3];
 		temp[45+6] = current_orientation[27+6];
-		// fix purple face
+		// fix white face
 		temp[0] = current_orientation[45+0];
 		temp[3] = current_orientation[45+3];
 		temp[6] = current_orientation[45+6];
@@ -579,7 +579,7 @@ void counter_clockwise_turn(char* current_orientation, char color){
 		temp[45+2] = current_orientation[2];
 		temp[45+5] = current_orientation[5];
 		temp[45+8] = current_orientation[8];
-		// fix purple face
+		// fix white face
 		temp[2] = current_orientation[36+6];
 		temp[5] = current_orientation[36+3];
 		temp[8] = current_orientation[36+0];
@@ -588,8 +588,8 @@ void counter_clockwise_turn(char* current_orientation, char color){
 		temp[36+3] = current_orientation[27+5];
 		temp[36+6] = current_orientation[27+2];
 	}
-	else if (color == 0x5) { // purple
-		// fix purple face
+	else if (color == 0x5) { // white
+		// fix white face
 		temp[0] = current_orientation[2];
 		temp[1] = current_orientation[5];
 		temp[2] = current_orientation[8];

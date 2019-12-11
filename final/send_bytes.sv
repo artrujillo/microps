@@ -210,7 +210,7 @@ module convert_orientation(input  logic [2:0] bit_value,
 		3'b010:  hex_value = 24'h00b0b0; // yellow
 		3'b011:  hex_value = 24'h0000b0; // green
 		3'b100:  hex_value = 24'hb00000; // blue
-		3'b101:  hex_value = 24'h909090; // purple
+		3'b101:  hex_value = 24'h909090; // white
 		default: hex_value = 24'h000000; // blank
 	endcase
 	
@@ -320,7 +320,7 @@ module make_data_stream(input  logic clk, reset, globalreset,
               else if (bitcounter == 5'd24)  nextstate = R;
               else if (nextbit)              nextstate = T1H;
               else                           nextstate = T0H;
-		 megaR: if (~reset_counter)			 nextstate = megaR;
+		   megaR: if (~reset_counter)			 nextstate = megaR;
 					 else if (nextbit)       nextstate = T1H;
                 else                         nextstate = T0H;
          default:                            nextstate = R;

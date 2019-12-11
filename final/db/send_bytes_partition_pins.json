@@ -8,10 +8,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "megaR",
-					"strict" : false
-				},
-				{
 					"name" : "clk",
 					"strict" : false
 				},
