@@ -3,17 +3,13 @@ module send_bytes(input  logic clk,
                   input  logic sck, 
                   input  logic sdi,
                   input  logic load,
-                  output logic datastream,
-						output logic megaR);
+                  output logic datastream);
 
-	logic [161:0] orientation; 
-	logic [161:0] hardcoded;
+	logic [161:0] orientation;
 	logic reset;
 	
-
-	
 	rubiks_spi spi(sck, clk, sdi, load, reset, orientation);
-	rubiks_core core(clk, reset, orientation, datastream, megaR);
+	rubiks_core core(clk, reset, orientation, datastream);
 
 endmodule
 
@@ -29,7 +25,7 @@ module rubiks_spi(input  logic sck,
 	logic [7:0] counter;
 	logic [161:0] value;
    // assert load
-   // apply 72 sclks to shift orientation starting with orientation[0]
+   // apply 162 sclks to shift orientation starting with orientation[0]
    always_ff @(posedge sck)
 		if (!load) begin
 			counter <= 0;
@@ -39,20 +35,18 @@ module rubiks_spi(input  logic sck,
 			counter = counter+1;
 		end
 		
-
-		
+	// assert a reset signal once the orientation is loaded in
 	level_to_pulse rst(clk, (counter == 8'd162), reset);
-		
 	assign orientation = value[161:0];
+
 endmodule
 
 // programs a rubiks face with colors given by orientation
 module rubiks_core(input  logic clk, reset,
                    input  logic [162:0] orientation,
-                   output logic datastream, 
-						 output logic megaR);
+                   output logic datastream);
 	
-	typedef enum logic [2:0] {switching, sending, new_face,load, over, delay} statetype;
+	typedef enum logic [2:0] {switching, sending, new_face,load, over} statetype;
 	statetype state, nextstate;
 
 	logic resetsb, done, red, face_reset;
@@ -63,21 +57,21 @@ module rubiks_core(input  logic clk, reset,
 	
 	assign blank_face = 27'b0;
 	
-	// register for finite state machine, counter
+	// register for finite state machine and counter
 	always_ff @(posedge clk)
 	   if (reset) begin
 	                 state <= switching;
 	                 count <= 0;
-					     face_count <= 0;
+					 face_count <= 0;
 	              end
 	   else if (nextstate == new_face) begin
-                                     face_count <= face_count + 1;
-									          state <= nextstate;
-									          count <= 0;
-								          end
+                                          face_count <= face_count + 1;
+									      state <= nextstate;
+									      count <= 0;
+								       end
 	   else       begin
 	                 state <= nextstate;
-						  face_count <= face_count;
+					 face_count <= face_count;
 	                 if (state == switching) count <= count+1;
 	              end
 	
@@ -91,17 +85,16 @@ module rubiks_core(input  logic clk, reset,
 	      sending:  if      (count == 9'd65)       nextstate = new_face;
 	                else if (done)                 nextstate = switching;
 	                else                           nextstate = sending;
-		   new_face: if      (face_count == 3'b110) nextstate = over; // may need to make this 3'b110 -- will test
-		             else                           nextstate = switching;
-			delay:                                   nextstate = sending;
+		  new_face: if      (face_count == 3'b110) nextstate = over; // may need to make this 3'b110 -- will test
+		             else                          nextstate = switching;
 	      over:                                    nextstate = over;
-	      default:	                                nextstate = over;
+	      default:	                               nextstate = over;
 	
 	   endcase
 		
 	always_comb
 	   case (face_count)
-		   3'b000:    current_face_orientation = orientation[26:0];
+		    3'b000:    current_face_orientation = orientation[26:0];
 			3'b001:    current_face_orientation = orientation[53:27];
 			3'b010:    current_face_orientation = orientation[80:54];
 			3'b011:    current_face_orientation = orientation[107:81];
@@ -112,15 +105,13 @@ module rubiks_core(input  logic clk, reset,
 
 	// control logic
 	assign resetsb = (nextstate == new_face) | (state == switching);
-	
 	assign face_reset = (state == new_face) | reset;
 	
 	// get the 24-bit color data from make squares
 	makesquares ms(clk, face_reset, resetsb, current_face_orientation, data); 
 	
-	
 	// make the datastream based on the 24 bits of color data
-	make_data_stream mds(clk, resetsb, reset, data, datastream, done, megaR);
+	make_data_stream mds(clk, resetsb, reset, data, datastream, done);
 	
 endmodule
 
@@ -180,7 +171,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	      4'd6: if      (oddcol)         nextrow = 4'd5;
 	            else                     nextrow = 4'd7;	
 	      4'd7: if      (oddcol)         nextrow = 4'd6;
-	            else	                   nextrow = 4'd7;
+	            else	                 nextrow = 4'd7;
 	      4'd8:                          nextrow = 4'd8;
 	      default:                       nextrow = 4'd8;
 	   endcase
@@ -214,25 +205,13 @@ module convert_orientation(input  logic [2:0] bit_value,
 
 	always_comb
 	casex (bit_value) 
-		3'b000: hex_value =  24'h00b000; // red
-		3'b001: hex_value =  24'h00f060; // orange
-		3'b010: hex_value =  24'h00b0b0; // yellow
-		3'b011: hex_value =  24'h0000b0; // green
-		3'b100: hex_value =  24'hb00000; // blue
-		3'b101: hex_value =  24'h909090; // purple
-		default:     hex_value = 24'h000000; // blank
-		/*
-		8'b11111111: hex_value = 24'h00b000;
-		8'b10000000: hex_value =  24'h00b000; // red
-		8'b11xxxxxx: hex_value =  24'h00f060; // orange
-		8'b101xxxxx: hex_value =  24'h00b0b0; // yellow
-		8'b1001xxxx: hex_value =  24'h0000b0; // green
-		8'b10001xxx: hex_value =  24'hb00000; // blue
-		8'b100001xx: hex_value =  24'hb05000; // purple
-		8'b1000001x: hex_value =  24'hb05000; // red
-		8'b10000001: hex_value =  24'h00f060; // orange
-		default:     hex_value = 24'h00b0b0; // yellow
-		*/
+		3'b000:  hex_value = 24'h00b000; // red
+		3'b001:  hex_value = 24'h00f060; // orange
+		3'b010:  hex_value = 24'h00b0b0; // yellow
+		3'b011:  hex_value = 24'h0000b0; // green
+		3'b100:  hex_value = 24'hb00000; // blue
+		3'b101:  hex_value = 24'h909090; // purple
+		default: hex_value = 24'h000000; // blank
 	endcase
 	
 endmodule
@@ -257,6 +236,7 @@ module colormux(input  logic [9:0] colorcontrol,
 	convert_orientation color8(orientation[23:21], sqr8color);
 	convert_orientation color9(orientation[20:18], sqr9color);
 	
+	// use 1-Hot encoding to determine which square is currently being lit
 	always_comb
 	   case (colorcontrol)
 	      10'b0000000001: color = sqr1color;
@@ -268,7 +248,6 @@ module colormux(input  logic [9:0] colorcontrol,
 	      10'b0001000000: color = sqr7color;
 	      10'b0010000000: color = sqr8color;
 	      10'b0100000000: color = sqr9color;
-	      10'b1000000000: color = 24'h000000;
 	      default:        color = 24'h000000;
 	   endcase
 
@@ -282,7 +261,7 @@ endmodule
 /////////////////////////////////////////////////////////////
 module make_data_stream(input  logic clk, reset, globalreset,
                         input  logic [23:0] data,
-                        output logic datastream, done, megaRout);
+                        output logic datastream, done);
 
    // counter logic
    logic [10:0] counterval;
@@ -331,7 +310,7 @@ module make_data_stream(input  logic clk, reset, globalreset,
               else                           nextstate = T1L;
          T0L: if      (~reset_counter)       nextstate = T0L;
               else if (nextbit)              nextstate = T1H;
-	          else if (bitcounter == 5'd23)   nextstate = R;
+	          else if (bitcounter == 5'd23)  nextstate = R;
               else                           nextstate = T0H;
          T1L: if      (~reset_counter)       nextstate = T1L;
               else if (nextbit)              nextstate = T1H;
@@ -341,9 +320,6 @@ module make_data_stream(input  logic clk, reset, globalreset,
               else if (bitcounter == 5'd24)  nextstate = R;
               else if (nextbit)              nextstate = T1H;
               else                           nextstate = T0H;
-			megaR: if (~reset_counter)				nextstate = megaR;
-					 else if (nextbit)            nextstate = T1H;
-                else                         nextstate = T0H;
          default:                            nextstate = R;
       endcase
 
@@ -356,7 +332,6 @@ module make_data_stream(input  logic clk, reset, globalreset,
    assign datastream = ((state == T1H)|(state == T0H))&(~reset); // data stream is high when we are in high pulse states
    assign s = {(state==R)|(state==megaR),(state==T0L)|(state==T1L), (state==T1H)|(state==T1L)|(state==megaR)}; // input to mux to choose constants
    countervalmux cntrvalmux(s, counterval); // mux chooses constants, depending on how long the pulse should be
-	assign megaRout = (state == megaR);
 endmodule
 
 // mux for choosing counter value, depending on state
@@ -374,13 +349,6 @@ module countervalmux(input logic [2:0] s,
 	      default: out = 11'd2000; // R
       endcase
 
-endmodule
-
-module mux2 #(parameter WIDTH = 432)
-             (input logic [WIDTH-1:0] d0, d1,
-				 input  logic s,
-				 output logic [WIDTH-1:0] y);
-	assign y = s ? d1 : d0;
 endmodule
 
 // this module is used for when a button is held for longer than
@@ -407,6 +375,7 @@ module level_to_pulse(input logic clk,
 						else      nextstate = s0;
 			default:           nextstate = s0;
 		endcase
+
 	// output logic	
 	assign reset = (state == s1);
 endmodule
