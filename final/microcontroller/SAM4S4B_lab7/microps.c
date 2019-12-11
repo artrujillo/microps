@@ -1,9 +1,8 @@
 /*
 Aaron Trujillo & Pinky King
 atrujillo@g.hmc.edu pking@g.hmc.edu
+E155 Final Project: LED Rubik's Cube
 Fall 2019
-'user_interface_setup' and rotary encoder functionality was adapted from:
- http://eeshop.unl.edu/pdf/KEYES%20Rotary%20encoder%20module%20KY-040.pdf
 */
 
 #include "SAM4S4B.h"
@@ -41,11 +40,13 @@ char shifted[21];
 // function prototypes
 ///////////////////////////
 
-// these functions do basic PIO setup for the rotary encoder and buttons
-// and read the user input
-void user_interface_setup();
+// set up PIO pins for buttons and rot encoder
+void user_interface_setup(void);
+																 
+// reads in button presses from user
+// if reset button is pressed, returns random seed depending
+// on length of button press
 int read_input(char*);
-void determine_direction(char* );
 
 // spi communication for microcontroller
 // takes in an array of bytes that are then sent over 
@@ -67,9 +68,6 @@ void shift_helper(char*, int, int, int, int, int, int, int, int, int, int, int);
 void final_shift_helper(char*);
 void shift_orientation(char*);
 
-// we use this function to create a psuedorandom seed to get a shuffled cube.
-void seed_generator();
-
 //////////////////////////
 // main
 //////////////////////////
@@ -77,89 +75,125 @@ void seed_generator();
 	
 int main(void) {
 
-	int pinCWLast; // used to track the most recent rot. encoder position
-	int rot; // used to read a current rot position 
-	int rand_seed;
+	// initialize peripherals
 	samInit();
 	pioInit();
 	tcDelayInit();
+	// set up SPI and load pin
 	spiInit(MCK_FREQ/244000, 0, 1); // 244000
 	pioPinMode(LOAD_PIN, PIO_OUTPUT);
-	pioPinMode(PIO_PA28, PIO_OUTPUT);
-	pioPinMode(PIO_PA3, PIO_OUTPUT);
 
-	char user_input[2];
-	char rotations[2];
-	rotations[0] = 0x3;
-	rotations[1] = 0x3;
-	user_input[0] = 0x7;// = {1,1}; // first char is the color, second char is the rotation direction
-	//user_input[0] = 0x7;
-
+	// starting orientation is solved cube
 	char orientation[54];
-
 	for (int i = 0; i < 54; i++) {
 			orientation[i] = starting_orientation[i];
 	}
 	shift_orientation(orientation);
 	send_orientation(shifted);
-
-	//send_orientation(starting_orientation);
+	
+	// set up variables for reading user input
+	int pinCWLast; // used to track the most recent rot. encoder position
+	int rot; // used to read a current rot position 
+	int rand_seed;
+	char scramble = 1;
+	char user_input[2];
+	char rotations[2];
+	rotations[0] = 0x3;  // initialize rotary encoder  
+	rotations[1] = 0x3;  
+	user_input[0] = 0x7; // a button press of 7 indicates that the user has not yet pressed a button
+	
+	int reset = 0;
+	// set up user interface
 	user_interface_setup();
-	int turned_once = 0;
-	int counter = 0;
+	// perform initial read from rot encoder
 	pinCWLast = pioDigitalRead(pinCW);
 	while (1) { 
-		//pinCWLast = pioDigitalRead(pinCW);
+		
+		// read user input and get random seed
 		rand_seed = read_input(user_input);
+		
 		if (user_input[0] == 0x7) { // user has never picked a face
-			continue;
-		} else if (user_input[0] == 0x6) {
-			scramble_cube(orientation, rand_seed); // RESET
-			shift_orientation(orientation);
-			send_orientation(shifted);
+			reset = 0; // keeps track of whether cube has been reset
+			continue; // wait for them to choose a face
+			
+		} else if (user_input[0] == 0x6) { // user has reset cube
+			  if (reset == 0) {
+					// if cube is solved, scramble
+					// otherwise, reset to solved cube
+					scramble = 1;
+					for (int i = 0; i < 54; i++) {
+						if (orientation[i] != starting_orientation[i]) {
+							scramble = 0;
+							break;
+						}
+					}
+					if (scramble) { // cube is solved, so scramble 
+						scramble_cube(orientation, rand_seed); 
+						user_input[0] = 0x7;
+					}
+					else { // cube is scrambled, so solve
+						for (int i = 0; i < 54; i++) orientation[i] = starting_orientation[i];
+					}
+					shift_orientation(orientation);
+					send_orientation(shifted);	
+					// indicate that cube was just reset so that it isnt immediately reset again
+					reset = 1;
+				}
+				// change out of reset command
+				user_input[0] = 0x7;
+				
 		} else { // user has chosen a face
+			reset = 0;
+			// read the rotary encoder
 			rot = pioDigitalRead(pinCW);
-			if (rot != pinCWLast) {
+			if (rot != pinCWLast) { // rotation has occured 
 				if (pioDigitalRead(pinCCW) != rot) {
+					// a "3" indicates that the last rotation has not been read
+					// check that two rotations (indicated by click) have occured
 					if (rotations[0] != 0x3) rotations[1] = 0x0;
 					else rotations[0] = 0x0;
 				} else {
+					// check that two rotations (indicated by click) have occured
 					if (rotations[0] != 0x3) rotations[1] = 0x1;
 					else rotations[0] = 0x1;
 				}
+				// user is rotating clockwise
 				if ((rotations[0] == 0x0) & (rotations[1] == 0x0)) {
 					user_input[1] = 0x0;
 					rotate_cube(orientation, user_input); // ROTATE
 					shift_orientation(orientation);
 					send_orientation(shifted);
-					rotations[1] = 0x3;
+					rotations[1] = 0x3; // reset rotary encoder reading
 					rotations[0] = 0x3;
 					pinCWLast = pioDigitalRead(pinCW);
 				}
+				// user is rotating counterclockwise
 				else if ((rotations[0] == 0x1) & (rotations[1] == 0x1)) {
 					user_input[1] = 0x1;
 					rotate_cube(orientation, user_input); // ROTATE
 					shift_orientation(orientation);
 					send_orientation(shifted);
-					rotations[1] = 0x3;
+					rotations[1] = 0x3; // reset rotary encoder reading
 					rotations[0] = 0x3;
 					pinCWLast = pioDigitalRead(pinCW);
 				}
+				// user has switched from clockwise to counterclockwise
 				else if ((rotations[0] == 0x0) & (rotations[1] == 0x1)) {
 					user_input[1] = 0x1;
 					rotate_cube(orientation, user_input); // ROTATE
 					shift_orientation(orientation);
 					send_orientation(shifted);
-					rotations[1] = 0x3;
+					rotations[1] = 0x3; // partially rotary encoder reading
 					rotations[0] = 0x1;
 					pinCWLast = pioDigitalRead(pinCW);
 				}
+				// user has switched from counterclockwise to clockwise
 				else if ((rotations[0] == 0x1) & (rotations[1] == 0x0)) {
 					user_input[1] = 0x0;
 					rotate_cube(orientation, user_input); // ROTATE
 					shift_orientation(orientation);
 					send_orientation(shifted);
-					rotations[1] = 0x3;
+					rotations[1] = 0x3; // partially rotary encoder reading
 					rotations[0] = 0x0;
 					pinCWLast = pioDigitalRead(pinCW);
 				}
@@ -190,12 +224,16 @@ void user_interface_setup() {
 
 // scrambles the cube
 void scramble_cube(char* orientation, int rand_seed) {
-		char user_input[2];
-	  char range = rand_seed % 10;
+		char user_input[2]; 
+	  char range = rand_seed % 10; // determines how many moves will be performed
+		// first, set to starting orientation so that the resulting orientation is
+		// actually solvable
 		for (int i = 0; i < 54; i++) {
 			orientation[i] = starting_orientation[i];
 		}
+		// creates a number of random moves, then performs those rotations
 		for (int i = 0; i < SCRAMBLE_NUM + range; i++) {
+			// gets random moves with rand_seed
 			user_input[0] = rand()%6;
 			user_input[0] = (user_input[0]+rand_seed)%6;
 			user_input[1] = rand()%2;
@@ -205,21 +243,24 @@ void scramble_cube(char* orientation, int rand_seed) {
 		}
 }
 
-
 // sends a new orientation over SPI
 void send_orientation(char* current_orientation){
 	int i;
+	// assert load pin to begin SPI
 	pioDigitalWrite(LOAD_PIN, 1);
 	for (i = 0; i < 21; i++){
 		spiSendReceive(current_orientation[i]);
 	}
+	// deassert
 	pioDigitalWrite(LOAD_PIN, 0);
+	// give FPGA enough time to program cube
 	tcDelayMillis(13);
+	// get response from FPGA
 	spiSendReceive(0);
 }
 
 
-// reads the user input and outputs an array of two chars
+// reads the user input buttons and modifies the global array of user input
 int read_input(char* user_input) {
 	
 	char red, orange, yellow, green, blue, white, reset;
@@ -237,16 +278,21 @@ int read_input(char* user_input) {
 	else if (yellow)  user_input[0] = 0x2;
 	else if (green)   user_input[0] = 0x3;
 	else if (blue)    user_input[0] = 0x4;
-	else if (white)  user_input[0] = 0x5;
+	else if (white)   user_input[0] = 0x5;
 	else if (reset)   user_input[0] = 0x6;
+	
+	// creates random seed depending on how long
+	// the reset button was pressed for 
 	while (pioDigitalRead(RESET_BUTTON)) {
 		rand_seed++;
-		//tcDelayMicroseconds(100);
-	}
-	
+	}	
 	return rand_seed;
+	
 }
 
+// rotates the cube based on the face and direction selected by user
+// user_input[0] is face selection: red-orange-yellow-green-blue-white
+// user_input[1] is direction: clockwise-counterclockwise
 void rotate_cube(char* current_orientation, char* user_input) {
 	if (user_input[1] == 0) { // clockwise
 		clockwise_turn(current_orientation, user_input[0]);
@@ -256,7 +302,8 @@ void rotate_cube(char* current_orientation, char* user_input) {
 	}
 }
 
-
+// takes in 54 char color orientation, and a face to rotate
+// modifies the orientation to the clockwise rotated orientation
 void clockwise_turn(char* current_orientation, char color){
 	char temp[54];
 	for (int i = 0; i < 54; i++) {
@@ -436,6 +483,8 @@ void clockwise_turn(char* current_orientation, char color){
 	}
 }
 
+// takes in 54 char color orientation, and a face to rotate
+// modifies the orientation to the counterclockwise rotated orientation
 void counter_clockwise_turn(char* current_orientation, char color){
 	char temp[54];
 	for (int i = 0; i < 54; i++) {
@@ -608,7 +657,7 @@ void counter_clockwise_turn(char* current_orientation, char color){
 	}
 }
 
-// takes in a 54-byte array and condenses it down to 21 bytes by removing the 5 most significant bits
+// takes in a 54-byte array and condenses it down to 21 bytes
 void shift_orientation(char* current_orientation){
 	shift_helper(current_orientation, 15, 16, 17, 47,46,45,44,43,42,41,40);
 	shift_helper(current_orientation, 12, 13, 14 ,39,38,37,36,35,34,33,32);
