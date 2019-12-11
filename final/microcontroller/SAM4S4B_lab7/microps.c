@@ -16,7 +16,7 @@ Fall 2019
 #define pinCCW PIO_PA17 // Connected to DT on KY­040
 #define pinCW PIO_PA18 // Connected to CLK on KY­040
 // SPI Pins
-#define LOAD_PIN PIO_PA16
+#define LOAD_PIN PIO_PA29
 // Buttin Pins
 #define RED_FACE PIO_PA19
 #define ORANGE_FACE PIO_PA20
