@@ -88,7 +88,7 @@ module rubiks_core(input  logic clk, reset,
 	
 	   endcase
 		
-	// choose which face to send over	
+	// chooses which face to be making a datastream for
 	always_comb
 	   case (face_count)
 		   3'b000:    current_face_orientation = orientation[26:0];
@@ -125,9 +125,10 @@ module makesquares(input  logic clk, reset, switchcolor,
 	logic color1, color2, color3, color4, color5, color6, color7, color8, color9, blank;
 	logic [9:0] controlcolors;
 	
+	// register for updating the row and column of the current LED
 	always_ff @(posedge clk)
 	   if (reset) begin
-			row <= 4'd9; // Changing this to a 0 instead of a 9 fixed the odd alignment??
+			row <= 4'd9;
 	      column <= 4'd0;
 	   end
 	   else if (switchcolumn & switchcolor) column <= nextcolumn;
@@ -177,7 +178,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	assign switchcolumn = (oddcol & (row == 4'd0)) | ((~oddcol) & (row == 4'd7));
 	assign oddcol = (column == 4'd1)|(column == 4'd3)|(column == 4'd5)|(column == 4'd7);
 	
-	// color bit logic 
+	// color bit logic to determine which LEDs correspond to each square
 	assign blank = (row == 4'd2)|(row == 4'd5)|(column== 4'd5)|(column== 4'd2);
 	assign color1 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd0)|(column== 4'd1));
 	assign color2 = ((row == 4'd3)|(row == 4'd4))&((column== 4'd0)|(column== 4'd1));
