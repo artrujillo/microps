@@ -1,3 +1,10 @@
+/*
+Aaron Trujillo & Pinky King
+atrujillo@g.hmc.edu pking@g.hmc.edu
+E155 Final Project: LED Rubik's Cube
+Fall 2019
+*/
+
 // top level module, contains spi and core modules
 module send_bytes(input  logic clk,
                   input  logic sck, 
@@ -108,7 +115,7 @@ module rubiks_core(input  logic clk, reset,
 	makesquares ms(clk, face_reset, resetsb, current_face_orientation, data); 
 	
 	// make the datastream based on the 24 bits of color data
-	make_data_stream mds(clk, resetsb, reset, data, datastream, done);
+	make_data_stream mds(clk, resetsb, data, datastream, done);
 	
 endmodule
 
@@ -179,7 +186,7 @@ module makesquares(input  logic clk, reset, switchcolor,
 	assign oddcol = (column == 4'd1)|(column == 4'd3)|(column == 4'd5)|(column == 4'd7);
 	
 	// color bit logic to determine which LEDs correspond to each square
-	assign blank = (row == 4'd2)|(row == 4'd5)|(column== 4'd5)|(column== 4'd2);
+	assign blank  = (row == 4'd2)|(row == 4'd5)|(column== 4'd5)|(column== 4'd2);
 	assign color1 = ((row == 4'd0)|(row == 4'd1))&((column== 4'd0)|(column== 4'd1));
 	assign color2 = ((row == 4'd3)|(row == 4'd4))&((column== 4'd0)|(column== 4'd1));
 	assign color3 = ((row == 4'd6)|(row == 4'd7))&((column== 4'd0)|(column== 4'd1));
@@ -257,7 +264,7 @@ endmodule
 // https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
 // for 1s and 0s. Assumes a 40 MHz clock.
 /////////////////////////////////////////////////////////////
-module make_data_stream(input  logic clk, reset, globalreset,
+module make_data_stream(input  logic clk, reset,
                         input  logic [23:0] data,
                         output logic datastream, done);
 
@@ -277,12 +284,12 @@ module make_data_stream(input  logic clk, reset, globalreset,
 	
    // register for main counter
    always_ff @(posedge clk)
-      if      (reset | reset_counter | globalreset) count <= 0;
+      if      (reset | reset_counter) count <= 0;
       else if (~done)                 count <= count+1;
 
    // register for bitcounter
    always_ff @(posedge clk)
-      if      (reset | globalreset)                                 bitcounter <= 0;
+      if      (reset)                                 bitcounter <= 0;
       else if (reset_counter & incbitcounter & ~done) bitcounter <= bitcounter+1;
 
    // register for FSM
@@ -307,7 +314,7 @@ module make_data_stream(input  logic clk, reset, globalreset,
               else                           nextstate = T1L;
          T0L: if      (~reset_counter)       nextstate = T0L;
               else if (nextbit)              nextstate = T1H;
-	          else if (bitcounter == 5'd23)  nextstate = R;
+	           else if (bitcounter == 5'd23)  nextstate = R;
               else                           nextstate = T0H;
          T1L: if      (~reset_counter)       nextstate = T1L;
               else if (nextbit)              nextstate = T1H;
